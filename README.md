@@ -628,7 +628,7 @@ The site is static after generation: deploying new captions, images, or generate
 
 ## Follow-ups and TODOs
 
-Chapters 1 and 2 implementations are approved by the user; human assistive-technology follow-ups for Chapter 2 remain open. Chapter 3 is pending and awaits further instruction. Complete one chapter at a time, report the result, and wait for the user's green flag before committing or continuing. Record findings, fixes, and verification results in `PROJECT_MEMORY.md`.
+Chapters 1 and 2 implementations are approved by the user; human assistive-technology follow-ups for Chapter 2 remain open. Chapters 3–7 are pending and await further instruction. Complete one chapter at a time, report the result, and wait for the user's green flag before committing or continuing. Record findings, fixes, and verification results in `PROJECT_MEMORY.md`.
 
 1. **Page metadata and other missing supporting data**
    - [x] Audit gallery/species page metadata and miscellaneous missing data; provide factual metadata fallbacks and document source omissions in [the Chapter 1 report](docs/reviews/chapter-1-metadata.md).
@@ -645,6 +645,24 @@ Chapters 1 and 2 implementations are approved by the user; human assistive-techn
    - [ ] Run mobile and desktop Lighthouse audits against the production `/encyclopedia/` build for the gallery, a filtered collection, and representative species pages.
    - [ ] Save reports and record Performance, Accessibility, Best Practices, and SEO results with the tested URLs, build, and audit conditions.
    - [ ] Prioritize findings, implement improvements, and rerun the affected audits to confirm results.
+4. **Mycological characteristics: artwork and information review**
+   - [ ] Review the whole characteristics area for visual, informational, and interaction improvements. Replace the current chunky, unappealing glyphs with clearer, more polished schematic illustrations; evaluate raster schematic pictures where they work better.
+   - [ ] Represent spore-print colour with a simple filled coloured circle instead of the current image.
+   - [ ] Add better illustrations for blackening, deliquescence/turning to ink, guttation droplets, juice/latex exuded after cutting, and flesh turning blue.
+   - [ ] Add illustrations for fungi used as natural dyes.
+   - [ ] Explore a seasonal strip or infographic for recorded fruiting periods, such as summer to autumn.
+   - [ ] Keep trait, dye-use, and fruiting-period claims grounded in the latest source caption; leave unrecorded information unspecified and preserve accessible text alternatives.
+5. **Production bundle size and chunking**
+   - [ ] Investigate the Vite warning that some chunks exceed **500 kB after minification**; inspect bundle composition and identify useful splitting boundaries.
+   - [ ] Evaluate dynamic `import()` for application code splitting and [`build.rollupOptions.output.manualChunks`](https://rollupjs.org/configuration-options/#output-manualchunks) for more deliberate chunking.
+   - [ ] Review `build.chunkSizeWarningLimit` against an intentional, documented bundle-size budget. Measure before/after bundle sizes and loading behavior, and verify root and `/encyclopedia/` builds after changes.
+6. **Code coverage tooling and reporting**
+   - [ ] Add a code coverage tool and reproducible report generation; decide coverage scope for Node.js utilities and Vue/browser code.
+   - [ ] Consider a coverage summary or badge in the README and GitHub integration for reports, checks, or pull-request feedback.
+7. **GitHub continuous integration**
+   - [ ] Choose and configure a free-to-use GitHub-compatible CI service, with **GitHub Actions** as the first option to evaluate for the repository's visibility, plan, and runner choice.
+   - [ ] Automate appropriate tests, production builds, and coverage reports on pushes and pull requests, with visible GitHub check results.
+   - [ ] Plan reproducible CI fixtures/source assets for the locally ignored caption and media inputs while preserving the existing Git exclusions.
 
 ## Project memory and contributing
 

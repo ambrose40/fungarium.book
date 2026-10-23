@@ -108,7 +108,8 @@ starting the next chapter. Apply requested amendments to the active chapter firs
 Requested on 2026-10-23. Chapter 1 is implemented and approved by the user;
 verified source-content curation remains open. Chapter 2 implementation and
 browser verification are approved by the user for commit, with human assistive-technology
-checks still open. Chapter 3 remains pending. Keep this list and the README's
+checks still open. Chapters 3–7 remain pending. Chapters 4–7 were requested on
+2026-10-24 as follow-ups. Keep this list and the README's
 **Follow-ups and TODOs** section in sync as work progresses.
 
 1. **Page metadata and miscellaneous missing data**
@@ -141,8 +142,61 @@ checks still open. Chapter 3 remains pending. Keep this list and the README's
    - [ ] Save reports and record Performance, Accessibility, Best Practices,
      and SEO results, including URLs, build, and audit conditions.
    - [ ] Prioritize findings, implement improvements, and rerun affected audits.
+4. **Mycological characteristics: artwork and information review**
+   - [ ] Review the whole characteristics area for visual, informational, and
+     interaction improvements. The user finds current glyphs too chunky and
+     unappealing; replace them with clearer, polished schematic illustrations
+     and evaluate raster schematic pictures where they work better.
+   - [ ] Use a simple filled coloured circle for spore-print colour instead of
+     the current image.
+   - [ ] Add better illustrations for blackening, deliquescence/turning to ink,
+     guttation droplets, juice/latex exuded after cutting, and flesh turning blue.
+   - [ ] Add illustrations for fungi used as natural dyes.
+   - [ ] Explore a seasonal strip/infographic for recorded fruiting periods,
+     such as summer to autumn.
+   - [ ] Ground trait, dye-use, and fruiting-period claims in the latest source
+     caption; leave unrecorded information unspecified and keep accessible text
+     alternatives.
+5. **Production bundle size and chunking**
+   - [ ] Investigate Vite's warning about chunks larger than 500 kB after
+     minification; inspect composition and identify useful splitting boundaries.
+   - [ ] Evaluate dynamic `import()` code splitting and
+     `build.rollupOptions.output.manualChunks`:
+     https://rollupjs.org/configuration-options/#output-manualchunks.
+   - [ ] Review `build.chunkSizeWarningLimit` against an intentional, documented
+     bundle-size budget. Measure before/after sizes and loading behavior; verify
+     root and `/encyclopedia/` builds after changes.
+6. **Code coverage tooling and reporting**
+   - [ ] Add a coverage tool and reproducible reports; decide coverage scope for
+     Node.js utilities and Vue/browser code.
+   - [ ] Consider a README coverage summary/badge and GitHub integration for
+     reports, checks, or pull-request feedback.
+7. **GitHub continuous integration**
+   - [ ] Choose/configure a free-to-use GitHub-compatible CI service; evaluate
+     GitHub Actions first for the repository's visibility, plan, and runner choice.
+   - [ ] Automate appropriate tests, production builds, and coverage reports on
+     pushes/pull requests, with visible GitHub checks.
+   - [ ] Plan reproducible CI fixtures/source assets for ignored local captions
+     and media while preserving existing Git exclusions.
 
 ## Recent changesets
+
+### 2026-10-24 — Record artwork, bundle-size, coverage, and CI follow-ups
+
+- Added synchronized, unchecked chapters 4–7 to README and project memory:
+  characteristic-artwork/information redesign, production chunk-size review,
+  coverage tooling/reporting with possible README/GitHub integration, and free
+  GitHub-compatible CI.
+- Captured the user's preference for less chunky schematic/raster artwork,
+  simple spore-print circles, missing reaction/exudate/dye illustrations, and
+  seasonal fruiting-period graphics. Retain latest-caption evidence and accessible
+  text alternatives. Recorded all three Vite warning suggestions and evaluation
+  of GitHub Actions against applicable free-use conditions.
+- **Verification:** reviewed chapter numbering, unchecked status, and matching
+  scope across both documents; `git diff --check` passed. Runtime tests were not
+  rerun for this documentation-only changeset.
+- **Follow-up:** chapters 3–7 await instruction under the one-chapter-at-a-time
+  workflow. This changeset records the requested work for future implementation.
 
 ### 2026-10-24 — Chapter 2 approved for commit
 
