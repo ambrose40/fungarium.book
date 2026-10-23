@@ -8,6 +8,7 @@ async function openGroup(page, id) {
 
 test('mycological filters refine genus results, retain multiple values and survive reloads', async ({ page }) => {
   await page.goto('/#/?genus=Amanita')
+  await page.getByRole('button', { name: /^Filters/ }).click()
   await expect(page.locator('.characteristic-filter-group')).toHaveCount(12)
   await openGroup(page, 'spore-print')
   await page.getByRole('checkbox', { name: 'Spore print / mass colour: White', exact: true }).check()
@@ -20,6 +21,7 @@ test('mycological filters refine genus results, retain multiple values and survi
   await expect(page.locator('.species-card').first()).toBeVisible()
   for (const name of await page.locator('.card-caption em').allTextContents()) expect(name.startsWith('Amanita ')).toBe(true)
   await page.reload()
+  await page.getByRole('button', { name: /^Filters/ }).click()
   await openGroup(page, 'cap')
   await expect(page.getByRole('checkbox', { name: 'Cap shape: Convex', exact: true })).toBeChecked()
   await expect(page.getByRole('checkbox', { name: 'Cap shape: Flat', exact: true })).toBeChecked()
@@ -34,6 +36,7 @@ test('mycological filters refine genus results, retain multiple values and survi
 
 test('genus/family switching and the family dropdown are exclusive while retaining additive characteristics', async ({ page }) => {
   await page.goto('/#/?genus=Amanita&mc.spore-print=white')
+  await page.getByRole('button', { name: /^Filters/ }).click()
   await page.getByLabel('Find a family').fill('Boletaceae')
   await page.getByRole('link', { name: /^Show family Boletaceae \(/ }).click()
   await expect(page).toHaveURL(/family=Boletaceae/)
@@ -54,6 +57,7 @@ test('genus/family switching and the family dropdown are exclusive while retaini
 
 test('zero-count combinations show an empty state and can be cleared without losing genus', async ({ page }) => {
   await page.goto('/#/?genus=Agaricus')
+  await page.getByRole('button', { name: /^Filters/ }).click()
   await expect(page.locator('.species-card').first()).toBeVisible()
   const count = await page.locator('.species-card').count()
   await openGroup(page, 'spore-print')
@@ -69,6 +73,7 @@ test('zero-count combinations show an empty state and can be cleared without los
 test('clear all resets search, taxonomy, characteristics, list finders and URLs on mobile', async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 800 })
   await page.goto('/#/?genus=Amanita&q=amanita&scope=scientific&year=2026&mc.cap=convex&mc.spore-print=white')
+  await page.getByRole('button', { name: /^Filters/ }).click()
   await page.getByLabel('Find a genus').fill('Amanita')
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
   await page.getByRole('button', { name: 'Clear all filters', exact: true }).click()
@@ -84,6 +89,7 @@ test('clear all resets search, taxonomy, characteristics, list finders and URLs 
 
 test('legacy URLs containing both taxonomies normalize to one selection', async ({ page }) => {
   await page.goto('/#/?genus=Boletus&family=Amanitaceae&mc.cap=convex')
+  await page.getByRole('button', { name: /^Filters/ }).click()
   await expect(page).not.toHaveURL(/family=/)
   await expect(page.getByLabel('Filter by family')).toHaveValue('')
   await expect(page.locator('.species-card')).toHaveCount(2)

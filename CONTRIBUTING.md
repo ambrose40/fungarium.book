@@ -1,5 +1,17 @@
 # Contributing to Fungarium.INFO Encyclopedia
 
+## Project memory and documentation
+
+Read `PROJECT_MEMORY.md` before starting a changeset. Update it for **every
+changeset**, including documentation-only changes, with a dated summary of the
+changes, relevant decisions, verification actually performed, and unresolved
+follow-ups. Keep durable project context current and recent entries concise.
+
+Update `README.md` when user-visible behavior, setup, commands, source rules, or
+deployment instructions change. Include memory and applicable documentation
+updates in the same commit as the changes they describe. `AGENTS.md` records
+this standing workflow for coding agents.
+
 ## Commit message convention
 
 Use [Conventional Commits](https://www.conventionalcommits.org/):

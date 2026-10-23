@@ -2,12 +2,14 @@ import { test, expect } from '@playwright/test'
 
 test('dedicated scientific search and all-fields mode work with shareable URLs', async ({ page }) => {
   await page.goto('/')
+  await page.getByRole('button', { name: /^Filters/ }).click()
   await page.getByLabel('Search scope').selectOption('scientific')
   await page.getByRole('searchbox').fill('  BOLETUS   EDULIS ')
   await expect(page.locator('.species-card')).toHaveCount(1)
   await expect(page.locator('.card-caption em')).toHaveText('Boletus edulis')
   await expect(page).toHaveURL(/scope=scientific/)
   await page.reload()
+  await page.getByRole('button', { name: /^Filters/ }).click()
   await expect(page.getByLabel('Search scope')).toHaveValue('scientific')
   await expect(page.locator('.species-card')).toHaveCount(1)
   await page.getByRole('searchbox').fill('Punane kärbseseen')
@@ -19,6 +21,7 @@ test('dedicated scientific search and all-fields mode work with shareable URLs',
 
 test('genus and family quick links are exclusive, remain in sync and support back/forward', async ({ page }) => {
   await page.goto('/')
+  await page.getByRole('button', { name: /^Filters/ }).click()
   const genera = page.getByRole('navigation', { name: 'Genera quick filters' })
   const families = page.getByRole('navigation', { name: 'Families quick filters' })
   await expect(genera.getByRole('link').first()).toBeVisible()
@@ -42,6 +45,7 @@ test('genus and family quick links are exclusive, remain in sync and support bac
   await page.goForward()
   await expect(page.locator('.species-card')).toHaveCount(2)
   await page.reload()
+  await page.getByRole('button', { name: /^Filters/ }).click()
   await expect(page.getByRole('button', { name: 'Remove genus filter' })).toBeVisible()
   await expect(page.getByLabel('Filter by family')).toHaveValue('')
   await expect(page.locator('.species-card')).toHaveCount(2)
@@ -55,6 +59,7 @@ test('genus and family quick links are exclusive, remain in sync and support bac
 test('generated lists remain usable on mobile and provide local list searches and collapsible sections', async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 800 })
   await page.goto('/')
+  await page.getByRole('button', { name: /^Filters/ }).click()
   await page.getByLabel('Find a genus').fill('suillus')
   const genera = page.getByRole('navigation', { name: 'Genera quick filters' })
   await expect(genera.getByRole('link')).toHaveCount(1)

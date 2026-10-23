@@ -1,7 +1,7 @@
 <script setup>
-import { computed, ref, watch } from 'vue'
+import { computed, nextTick, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { ArrowDown, ArrowRight, Search, SlidersHorizontal, X, Leaf, Camera, BookOpen } from 'lucide-vue-next'
+import { ArrowDown, ArrowRight, ChevronDown, Search, SlidersHorizontal, X, Leaf, Camera, BookOpen } from 'lucide-vue-next'
 import { species, metadata, characteristicFilters } from '../data'
 import MediaFrame from '../components/MediaFrame.vue'
 import TaxonomyFilter from '../components/TaxonomyFilter.vue'
@@ -14,7 +14,13 @@ import { readCharacteristicSelections, setCharacteristicSelection, clearCharacte
 const route = useRoute()
 const router = useRouter()
 document.title = SITE_NAME
-function explore() { document.getElementById('collection')?.scrollIntoView({ behavior: 'smooth' }) }
+async function explore() {
+  await nextTick()
+  const photos = document.getElementById('collection-photos')
+  photos?.focus({ preventScroll: true })
+  photos?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' })
+}
+const filtersOpen = ref(false)
 const canonicalQuery = computed(() => normalizeTaxonomyQuery(route.query))
 watch(() => route.query, query => {
   if (query.genus && query.family) router.replace({ query: normalizeTaxonomyQuery(query) })
@@ -61,6 +67,7 @@ const filtered = computed(() => {
 })
 const visible = computed(() => filtered.value.slice(0, limit.value))
 const hasFilters = computed(() => search.value || scope.value !== 'all' || genus.value || family.value || year.value || letter.value || tag.value || activeCharacteristics.value.length)
+const filterCount = computed(() => [genus.value, family.value, year.value, letter.value, tag.value].filter(Boolean).length + activeCharacteristics.value.length)
 watch(() => route.fullPath, () => { limit.value = 36 })
 function reset() { resetVersion.value++; router.replace({ query: {} }) }
 function clearTaxonomy() {
@@ -82,7 +89,7 @@ function cover(item) { return item.observations.find(post => post.photos.length)
         <p class="eyebrow"><span class="status-dot"></span> A PHOTOGRAPHIC ENCYCLOPEDIA OF FUNGI</p>
         <h1 id="hero-title">A closer look at<br />the <em>fungal world.</em></h1>
         <p class="hero-description">Small wonders, carefully observed. A growing collection of fungi, field notes, and macro photography — one woodland encounter at a time.</p>
-        <a class="hero-explore" href="#collection" @click.prevent="explore">Explore the collection <ArrowDown :size="17" /></a>
+        <a class="hero-explore" href="#collection-photos" @click.prevent="explore">Explore the collection <ArrowDown :size="17" /></a>
         <div class="hero-stats">
           <div><strong>{{ metadata.speciesCount }}</strong><span><Leaf :size="13" /> species & taxa</span></div>
           <div><strong>{{ metadata.postCount }}</strong><span><BookOpen :size="13" /> field encounters</span></div>
@@ -102,18 +109,22 @@ function cover(item) { return item.observations.find(post => post.photos.length)
           <label class="sr-only" for="search-scope">Search scope</label>
           <select id="search-scope" v-model="scope" class="search-scope"><option value="all">All fields</option><option value="scientific">Scientific name</option></select>
         </div>
-        <div class="select-filters"><SlidersHorizontal :size="16" aria-hidden="true" /><label class="sr-only" for="family">Filter by family</label><select id="family" v-model="family"><option value="">All families</option><option v-for="item in families" :key="item">{{ item }}</option></select><label class="sr-only" for="year">Filter by observation year</label><select id="year" v-model="year"><option value="">All years</option><option v-for="item in years" :key="item">{{ item }}</option></select></div>
+        <button class="filter-toggle" type="button" :aria-expanded="filtersOpen" aria-controls="collection-filters" @click="filtersOpen = !filtersOpen"><SlidersHorizontal :size="16" aria-hidden="true" /> Filters <span v-if="filterCount" class="count">{{ filterCount }}</span><ChevronDown :size="15" aria-hidden="true" /></button>
       </div>
-      <div class="filter-reset-bar"><p>Choose a genus <em>or</em> a family, then add characteristics to refine your results.</p><button class="button button-outline filter-reset-button" type="button" :disabled="!hasFilters" @click="reset">Clear all filters <X :size="14" /></button></div>
-      <section class="taxonomy-browser" aria-labelledby="taxonomy-heading">
-        <div class="taxonomy-browser-heading"><h3 id="taxonomy-heading">Quick taxonomic filters</h3><div class="taxonomy-heading-actions"><p>Genus and family selections replace one another</p><button type="button" class="text-button" :disabled="!genus && !family" @click="clearTaxonomy">Clear taxonomy <X :size="12" /></button></div></div>
-        <div class="taxonomy-browser-sections">
-          <TaxonomyFilter :key="`genus-${resetVersion}`" field="genus" :entries="taxonomy.genera" :selected="genus" />
-          <TaxonomyFilter :key="`family-${resetVersion}`" field="family" :entries="taxonomy.families" :selected="family" />
-        </div>
-      </section>
-      <CharacteristicFilters :key="`characteristics-${resetVersion}`" :groups="characteristicFilters" :selections="characteristics" :counts="characteristicCounts" @change="changeCharacteristic" @clear="clearCharacteristics" />
-      <div class="alphabet" aria-label="Filter species by initial letter"><button :class="{ selected: !letter }" @click="letter = ''">All</button><button v-for="initial in letters" :key="initial" :class="{ selected: letter === initial }" :aria-pressed="letter === initial" @click="letter = initial">{{ initial }}</button></div>
+      <div id="collection-filters" v-show="filtersOpen" class="collection-filters">
+        <div class="select-filters"><label for="family">Family <select id="family" v-model="family" aria-label="Filter by family"><option value="">All families</option><option v-for="item in families" :key="item">{{ item }}</option></select></label><label for="year">Observation year <select id="year" v-model="year" aria-label="Filter by observation year"><option value="">All years</option><option v-for="item in years" :key="item">{{ item }}</option></select></label></div>
+        <div class="filter-reset-bar"><p>Choose a genus <em>or</em> a family, then add characteristics to refine your results.</p><button class="button button-outline filter-reset-button" type="button" :disabled="!hasFilters" @click="reset">Clear all filters <X :size="14" /></button></div>
+        <section class="taxonomy-browser" aria-labelledby="taxonomy-heading">
+          <div class="taxonomy-browser-heading"><h3 id="taxonomy-heading">Quick taxonomic filters</h3><div class="taxonomy-heading-actions"><p>Genus and family selections replace one another</p><button type="button" class="text-button" :disabled="!genus && !family" @click="clearTaxonomy">Clear taxonomy <X :size="12" /></button></div></div>
+          <div class="taxonomy-browser-sections">
+            <TaxonomyFilter :key="`genus-${resetVersion}`" field="genus" :entries="taxonomy.genera" :selected="genus" />
+            <TaxonomyFilter :key="`family-${resetVersion}`" field="family" :entries="taxonomy.families" :selected="family" />
+          </div>
+        </section>
+        <CharacteristicFilters :key="`characteristics-${resetVersion}`" :groups="characteristicFilters" :selections="characteristics" :counts="characteristicCounts" @change="changeCharacteristic" @clear="clearCharacteristics" />
+        <div class="alphabet" aria-label="Filter species by initial letter"><button :class="{ selected: !letter }" @click="letter = ''">All</button><button v-for="initial in letters" :key="initial" :class="{ selected: letter === initial }" :aria-pressed="letter === initial" @click="letter = initial">{{ initial }}</button></div>
+        <div class="filter-panel-footer"><button class="button button-dark" type="button" @click="filtersOpen = false; explore()">Show {{ filtered.length }} {{ filtered.length === 1 ? 'species' : 'species & taxa' }} <ArrowDown :size="16" /></button></div>
+      </div>
       <div class="results-bar">
         <p aria-live="polite">
           {{ filtered.length }} {{ filtered.length === 1 ? 'species' : 'species & taxa' }}
@@ -125,16 +136,18 @@ function cover(item) { return item.observations.find(post => post.photos.length)
         </p>
         <label>Sort by <select v-model="sort" aria-label="Sort species"><option value="name">Latin name, A–Z</option><option value="newest">Latest encounter</option><option value="observations">Most encounters</option></select></label>
       </div>
-      <div v-if="visible.length" class="species-grid">
-        <RouterLink v-for="item in visible" :key="item.id" :to="{ name: 'detail', params: { id: item.id } }" class="species-card" :aria-label="`${item.latinName}, ${item.observations.length} observations`">
-          <MediaFrame :photo="cover(item)" :name="item.latinName" :seed="item.id" thumbnail>
-            <span class="card-family">{{ item.family || 'Field discovery' }}</span>
-            <span v-if="item.observations.length > 1" class="card-count"><BookOpen :size="12" />{{ item.observations.length }}</span>
-            <div class="card-caption"><span><em>{{ item.latinName }}</em><small>{{ item.commonName || item.family || 'A closer look' }}</small></span><ArrowRight :size="17" /></div>
-          </MediaFrame>
-        </RouterLink>
+      <div id="collection-photos" class="collection-photos" tabindex="-1" role="region" aria-label="Collection photos">
+        <div v-if="visible.length" class="species-grid">
+          <RouterLink v-for="item in visible" :key="item.id" :to="{ name: 'detail', params: { id: item.id } }" class="species-card" :aria-label="`${item.latinName}, ${item.observations.length} observations`">
+            <MediaFrame :photo="cover(item)" :name="item.latinName" :seed="item.id" thumbnail>
+              <span class="card-family">{{ item.family || 'Field discovery' }}</span>
+              <span v-if="item.observations.length > 1" class="card-count"><BookOpen :size="12" />{{ item.observations.length }}</span>
+              <div class="card-caption"><span><em>{{ item.latinName }}</em><small>{{ item.commonName || item.family || 'A closer look' }}</small></span><ArrowRight :size="17" /></div>
+            </MediaFrame>
+          </RouterLink>
+        </div>
+        <div v-else class="empty-state"><Search :size="30" :stroke-width="1" /><h3>No discoveries here just yet.</h3><p>Try a different name, taxonomy, or characteristic combination.</p><button class="button button-dark" @click="reset">Reset filters</button></div>
       </div>
-      <div v-else class="empty-state"><Search :size="30" :stroke-width="1" /><h3>No discoveries here just yet.</h3><p>Try a different name, taxonomy, or characteristic combination.</p><button class="button button-dark" @click="reset">Reset filters</button></div>
       <div v-if="visible.length" class="collection-bottom"><p>Showing {{ visible.length }} of {{ filtered.length }} species</p><button v-if="visible.length < filtered.length" class="button button-outline" @click="limit += 36">More discoveries <ArrowDown :size="16" /></button><span v-else class="end-note">You’ve reached the edge of the collection.</span></div>
       <aside class="prototype-note"><Camera :size="18" /><p><strong>A growing encyclopedia.</strong> Original photographs, scientific descriptions, and field encounters — connected by curiosity. Profiles are drawn from the latest recorded captions.</p></aside>
     </section>

@@ -5,6 +5,7 @@ A Vue 3 + Vite photographic encyclopedia built from the original `*.txt` Instagr
 ## Features
 
 - Black/charcoal design and original **Fungarium.INFO Encyclopedia** branding.
+- Photo-first mobile introduction, full-width single-column species cards on phones, and optional advanced filters collapsed by default.
 - Home navigation to the parent site, a direct link to the main Fungarium.INFO website, and a footer linking to the author's other projects.
 - Auto-advancing TopNine photo slideshow for **2024, 2025, and 2026**, with year selection, previous/next controls, and pause/play.
 - **3:2 landscape** gallery cards, encounter thumbnails, photo-selection strips, and featured-photo frames; full-image viewing with keyboard navigation.
@@ -27,10 +28,13 @@ A Vue 3 + Vite photographic encyclopedia built from the original `*.txt` Instagr
 - [Account export and import](#account-export-and-import)
 - [Project structure and script reference](#project-structure-and-script-reference)
 - [Verification and deployment](#verification-and-deployment)
+- [Project memory and contributing](#project-memory-and-contributing)
 
 ## Design and branding
 
 The black/charcoal theme takes its direction from [fungarium.info](https://fungarium.info/), with the original red mushroom logo and browser/device icons supplied in `fungi-support/favicon_package_v0.16/`. `npm run content`, `dev`, and `build` copy the selected artwork into `public/branding/` and `public/icons/`. Theme colours are centralized in `src/dark-theme.css`; the device manifest uses the same site identity and dark background.
+
+The gallery prioritizes photography. On phones (up to 600 px wide), the TopNine slideshow appears before the introduction and species cards use one full-width column with larger captions. **Explore the collection** moves directly to the photo grid below the sticky header and respects reduced-motion preferences.
 
 Encounter coordinates link to Google Maps search URLs containing a numeric latitude/longitude, which pins the actual location. DMS, curly-prime, prefixed-hemisphere, and annotated-decimal formats are normalized by `src/lib/coordinates.mjs`; the original caption text is retained as the visible link. Unparseable coordinates stay plain text rather than linking to an unrelated place.
 
@@ -104,6 +108,8 @@ Do not edit generated JSON by hand: update the source captions and run `npm run 
 ## Search and taxonomic quick filters
 
 The collection has one main search field and a **Search scope** selector. **Scientific name** searches only the recorded Latin name and scientific identification/authorship; **All fields** also searches multilingual common names, places, families, genera, and hashtags. Search is case-insensitive, tolerates repeated spaces and diacritics, and supports partial names and multiple terms.
+
+Advanced controls are in the **Filters** panel beside search, collapsed by default on all screen sizes. Open it for family/year dropdowns, genus/family quick links, mycological characteristics, and the initial-letter selector. The button's badge counts selected taxonomy, year, letter, hashtag, and characteristic filters. Closing the panel preserves selections; results, active chips, sorting, and **Clear filters** remain outside it. **Show … species** closes the panel and moves directly to the matching photos. Filtering takes effect immediately.
 
 Two separate **Genera** and **Families** sections list all recorded taxa alphabetically. They are constructed from the species data, deduplicated, and show counts of distinct named taxa rather than photographs or observations. Each section has its own list finder, scrollable links, an “All” link, and a collapsible heading.
 
@@ -364,6 +370,9 @@ A **complete** account export becomes authoritative about published posts and ca
 
 ```text
 *.txt                         Original species/encounter captions
+AGENTS.md                     Persistent coding-agent guidance
+PROJECT_MEMORY.md             Durable decisions and changeset memory
+CONTRIBUTING.md               Changeset workflow and commit convention
 TopNine/                      Original 2024, 2025, and 2026 photo collages
 fungi-support/                Original logo and favicon artwork
 scripts/                      Content, audit, download, and import utilities
@@ -480,6 +489,12 @@ https://fungarium.info/encyclopedia/#/fungi/amanita-muscaria
 The server must serve `encyclopedia/index.html` as that directory's index and allow access to its static files. Because routes follow `#`, no Vue-specific rewrite rule is needed. Use the output of `build:encyclopedia` for this deployment so its compiled asset paths match the hosting folder.
 
 The site is static after generation: deploying new captions, images, or generated filter options requires a new build. The application does not need the Chrome profile, downloader state, or original caption files on the public web server.
+
+## Project memory and contributing
+
+Read [PROJECT_MEMORY.md](PROJECT_MEMORY.md) for current design decisions, user preferences, and recent changes. Update it with **every changeset**, including documentation-only changes, recording what changed, relevant decisions, verification actually performed, and unresolved follow-ups. Update this README whenever affected behavior or workflows change, and include the documentation with its implementation in the same commit.
+
+[CONTRIBUTING.md](CONTRIBUTING.md) describes the contribution workflow and agreed Conventional Commits format. [AGENTS.md](AGENTS.md) preserves the standing project guidance for coding agents.
 
 ## License
 
