@@ -1,0 +1,30 @@
+{
+  "name": "fungarium",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/build-content.mjs && vite --host 127.0.0.1",
+    "build": "node scripts/build-content.mjs && vite build",
+    "build:encyclopedia": "node scripts/build-content.mjs && vite build --base=/encyclopedia/",
+    "preview": "vite preview --host 127.0.0.1",
+    "preview:encyclopedia": "vite preview --host 127.0.0.1 --base=/encyclopedia/",
+    "content": "node scripts/build-content.mjs",
+    "import:instagram": "node scripts/import-instagram.mjs",
+    "photos:instagram": "node scripts/fetch-instagram-photos.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "test:ui": "playwright test",
+    "test:subpath": "npm run build:encyclopedia && playwright test --config=playwright.subpath.config.js"
+  },
+  "dependencies": {
+    "lucide-vue-next": "^0.468.0",
+    "vue": "^3.5.22",
+    "vue-router": "^4.5.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.64.1",
+    "@vitejs/plugin-vue": "^6.0.1",
+    "sharp": "^0.35.5",
+    "vite": "^7.1.9"
+  }
+}
