@@ -7,11 +7,11 @@
     "profilePostCount": null,
     "exportedPostCount": 0,
     "localPostCount": 388,
-    "unlinkedPosts": 1,
+    "unlinkedPosts": 0,
     "postCount": 388,
     "speciesCount": 327,
-    "photoCount": 1533,
-    "postsMissingPhotos": 53
+    "photoCount": 1641,
+    "postsMissingPhotos": 0
   },
   "species": [
     {
@@ -1042,7 +1042,28 @@
             "pavementmushroom"
           ],
           "caption": "👇 ...\r\n🆔 Agaricus bitorquis (Quél.) Sacc.\r\n🌐 https://www.gbif.org/species/5243374\r\n📖 Published in: Sacc. In: Syll. fung. (Abellini) 5: 998. (1887).\r\n🇺🇸 Pavement Mushroom\r\n🇩🇪 Stadt-Champignon\r\n🇪🇪 Linnašampinjon\r\n🇷🇺 Шампиньон тротуарный\r\n🇫🇷 Agaric des trottoirs\r\n🇪🇸 Champiñón de verano\r\n\r\n🗓️ 5/26/23, 5:41 PM\r\n🌎 Kadriorg, Tallinn, Estonia\r\n🛣️ Disturbed soil, under the asphalt, urban road\r\n🍄 Agaricaceae / Agaricomycetes\r\n\r\n ℹ️ gills on hymenium, free, dense, initially pinkish, turning brown and then dark chocolate brown as the mushroom matures\r\n ℹ️ cap is spherical to convex, flattening with age, white to cream, often developing brownish scales or patches, can sometimes have a double ring of tissue (hence 'bitorquis')\r\n ℹ️ hymenium is lamellar\r\n ℹ️ stipe is white, thick, and sturdy with a prominent double ring that can slide up and down\r\n🟤 spore print is brown\r\n🛣️ ecology is saprotrophic, often found in urban and disturbed habitats such as roadside verges and gardens, as well as grasslands\r\n🍴😋 one of the most highly prized and sought-after edible mushrooms\r\n📏 fruit body to 10-15 cm tall\r\n📐 cap to 8-15 cm\r\n🔤 Close relative of the common button mushroom (Agaricus bisporus), but it is generally larger and has a more robust stem. It gets its common name from its ability to push through asphalt and pavement, thanks to its sturdy stem and resilient fruiting bodies.\r\n\r\n📷 Sony α7 III (ILCE-7M3)\r\n🎞️ AF, ISO 1250, 1/30s, ƒ/16, 0 ev\r\n🔆 Partial overcast with sun, shaded spot\r\n🎨 24MP (RAW), fine tune Lightroom, 1:1 crop\r\n🔦 No flash\r\n\r\n🔭 Sony FE 50mm F2.8 Macro (SEL50M28)\r\n👋 Handheld, manual mode\r\n🔎 50mm (35mm), 50mm\r\n⏯️ Camera body button\r\n\r\n#️⃣ #fungi #photo #sony #agaricus #agaricusbitorquis #glisteninginkycap #stadtchampignon #linnašampinjon #macro #mushroom #photography #tallinn #mycology #naturephotography #fungilove #fungifanatic #estonia #pilz #eestiseened #eesti #seen #champignon #foto #fotografia #torq #pavementmushroom",
-          "photos": [],
+          "photos": [
+            {
+              "src": "/images/posts/CsuZIRCIzUj/01.jpg",
+              "thumb": "/thumbs/posts/CsuZIRCIzUj/01.webp",
+              "alt": "Agaricus bitorquis — 2023-05-26"
+            },
+            {
+              "src": "/images/posts/CsuZIRCIzUj/02.jpg",
+              "thumb": "/thumbs/posts/CsuZIRCIzUj/02.webp",
+              "alt": "Agaricus bitorquis — 2023-05-26"
+            },
+            {
+              "src": "/images/posts/CsuZIRCIzUj/03.jpg",
+              "thumb": "/thumbs/posts/CsuZIRCIzUj/03.webp",
+              "alt": "Agaricus bitorquis — 2023-05-26"
+            },
+            {
+              "src": "/images/posts/CsuZIRCIzUj/04.jpg",
+              "thumb": "/thumbs/posts/CsuZIRCIzUj/04.webp",
+              "alt": "Agaricus bitorquis — 2023-05-26"
+            }
+          ],
           "sourceFile": "agaricus-bitorquis_2023-05-26_CsuZIRCIzUj.txt",
           "source": "local-caption",
           "instagramUrl": "https://www.instagram.com/p/CsuZIRCIzUj/"
@@ -3273,7 +3294,13 @@
             "mushroomlove"
           ],
           "caption": "👇 ...\r\n🆔 Agrocybe pediades (Fr.) Fayod\r\n🌐 https://www.gbif.org/species/9050242\r\n📖 Published in: Fayod. In: Annls Sci. Nat., Bot., sér. 7 9: 358. (1889).\r\n🇺🇸 Common Fieldcap\r\n🇩🇪 Raustieliger Ackerling\r\n🇪🇪 Poolkerajas põldseen\r\n🇷🇺 Полёвка стоповидная\r\n\r\n🗓️ 27/07/23, 3:16 PM\r\n🌎 Tohisoo manor park, Kohila, Raplamaa\r\n☘️🌱 In grass lawn patch, partially open space\r\n🍄 Strophariaceae / Agaricomycetes\r\n\r\nℹ️ Hymenium: Gills close to moderately spaced; creamy-beige to pale yellow-brown when young, becoming grey-brown to rust-brown with maturity; edges often paler\r\nℹ️ Cap: Hemispherical to convex when young, later broadly convex to nearly flat; smooth, sometimes slightly greasy or sticky when fresh; honey-yellow, ochre-yellow to pale brownish-yellow, fading when dry; young margin may retain ephemeral white veil fragments\r\nℹ️ Hymenium Attachment: Adnexed to narrowly adnate, sometimes with a slight decurrent tooth\r\nℹ️ Stipe: Slender, cylindrical, whitish to pale ochre-yellow or cap-coloured; finely pruinose to fibrillose, solid when young and becoming hollow; ring absent, with white basal mycelium or fine rhizomorphs\r\n⚫🟤🟠 Spore print dark brown to dull cinnamon-brown\r\n🍀🍂 Saprobic in lawns, meadows, pastures, grassy parkland, roadside verges and dune grasslands; occasionally on compost, manure or woodchips; alone or gregariously; spring to autumn\r\n😒 Not recommended; insubstantial, easily confused\r\n📏 Fruit body small; stipe ~2–8 cm long and ~0.2–0.6 cm thick\r\n📐 Cap ∅ ~0.5–3.5 cm\r\n🔪 Whitish, thin, unchanging when cut\r\n🧪 KOH red to pink on cap surface\r\n👃 Faint to mealy\r\n👅 Mealy\r\n🔬 Spores ellipsoid, smooth, thick-walled, ~9.5–15(–18) × 7–10 µm, with a conspicuous germ pore; basidia 4-spored with basal clamps; cheilocystidia lageniform to ventricose, often capitate; pleurocystidia sparse or absent\r\n🔤 Small honey-yellow grassland fieldcap with no persistent ring\r\n\r\n📷 Sony α7 III (ILCE-7M3)\r\n🎞️ MF, ISO 640, 1/160s, ƒ/16, 0 ev\r\n🔆 Open space, sunny fair weather with some clouds, with nearby storms\r\n🎨 24MP (RAW), fine tunining Lightroom\r\n📚 8 photos, focus stacking Photoshop\r\n🔦 Flash not fired\r\n\r\n🔭 Sony FE 90mm F2.8 Macro G OSS (SEL90M28G)\r\n👋 Handheld, manual mode\r\n🔎 90mm (35mm), 90mm\r\n⏯️ Camera body button\r\n\r\n#️⃣ #fungi #photo #sony #agrocybe #agrocybepediades #commonfieldcap #raustieligerackerling #põldseen #fieldcap #poolkerajaspõldseen #macro #mushroom #photography #raplamaa #mycology #naturephotography #fungilove #fungifanatic #estonia #pilze #eestiseened #eestimaa #seen #seenpilt #pilzfoto #pilz #ackerling #foto #mushroomlove #fungilove",
-          "photos": [],
+          "photos": [
+            {
+              "src": "/images/posts/CvN78OCM68W/01.jpg",
+              "thumb": "/thumbs/posts/CvN78OCM68W/01.webp",
+              "alt": "Agrocybe pediades — 2023-07-27"
+            }
+          ],
           "sourceFile": "agrocybe-pediades_2023-07-27_CvN78OCM68W.txt",
           "source": "local-caption",
           "instagramUrl": "https://www.instagram.com/p/CvN78OCM68W/"
@@ -8318,7 +8345,13 @@
             "std"
           ],
           "caption": "👇 ...\r\n🆔 Antherospora scillae (Cif.) R.Bauer, M.Lutz, Begerow, Piątek & Vánky\r\n🌐 https://www.gbif.org/species/5897423\r\n📖 Published in: R. Bauer, M. Lutz, Begerow, Piątek & Vánky. In: Mycol. Res. 112(11): 1301. (2008).\r\n\r\n🗓️ 3/30/19, 4:14 PM\r\n🌎 Tallinna botaanikaaed, Tallinn, Estonia\r\n🌷 Host plant Scilla sp. Plant pathogen. Smut fungi.\r\n🍄 Floromycetaceae / Ustilaginomycetes\r\n\r\n🚫 hymenium is not applicable due to the nature of the organism, which is a rust fungus\r\n🚫 cap is not applicable, as rust fungi do not form traditional mushroom caps\r\n🚫 hymenium attachment is not applicable\r\n🚫 stipe is not applicable\r\n🟠 spore print is not typically obtained, but the spores are often orangish or rust-colored\r\n🌷 ecology is parasitic, typically found on the leaves, stems, and bulbs of Scilla species and other host plants\r\n🚫 edibility: not applicable, as rust fungi are not typically considered for consumption\r\n📏 size varies, but the fungal structures visible on the host plant are typically very small\r\n🔤 Rust fungus that infects members of the Scilla genus, a group of flowering plants commonly known as squills. It forms tiny, pustule-like structures on the surfaces of the host plants, which release spores to infect new hosts. The life cycle of rust fungi is complex and involves different types of spores that serve various purposes in the fungus's reproductive process.\r\n\r\n📷 Sony Cyber-shot DSC-HX90\r\n🎞️ AF, ISO 400, 1/250s, ƒ/3.5\r\n🔆 Sunny fine weather, partial shade, Manual WB\r\n🎨 18.2MP (JPG), no edit\r\n🔦 did not fire\r\n\r\n🔭 ZEISS Vario-Sonnar T* Lens (4.1-123mm f/3.5-6.4)\r\n👋 Handheld, manual mode\r\n🔎 24mm (35mm), 4.1mm\r\n⏯️ Camera body button\r\n\r\n#️⃣ #fungi #photo #sony #antherospora #antherosporascillae #smutfungi #fungionflower #parasiticfungi #macro #mushroom #photography #tallinn #mycology #naturephotography #fungilove #fungifanatic #estonia #pilz #eestiseened #eesti #seen #tallinnabotaanikaaed #foto #fotografia #ustilaginomycetes #std",
-          "photos": [],
+          "photos": [
+            {
+              "src": "/images/posts/Csw5mqBIBnV/01.jpg",
+              "thumb": "/thumbs/posts/Csw5mqBIBnV/01.webp",
+              "alt": "Antherospora scillae — 2019-03-30"
+            }
+          ],
           "sourceFile": "antherospora-scillae_2019-03-30_Csw5mqBIBnV.txt",
           "source": "local-caption",
           "instagramUrl": "https://www.instagram.com/p/Csw5mqBIBnV/"
@@ -11005,7 +11038,13 @@
             "dunabe"
           ],
           "caption": "👇 ...\r\n🆔 Artomyces pyxidatus (Pers.) Jülich\r\n🧾 https://bit.ly/44ssXtU\r\n📖 Published in: Jülich. In: Biblthca Mycol. 85: 399 ('1981'). (1982).\r\n🇺🇸 Crown-Tipped Coral Fungus\r\n🇩🇪 Verzweigte Becherkoralle\r\n🇪🇪 Kroonharik\r\n🇷🇺 Клавикорона крыночковидная\r\n\r\n🗓️ 5/03/23, 11:15 AM\r\n🌎 Vienna - Am Mühlwasser, Danube-Auen National Park, Austria \r\n🌳🪵 Deciduous forest (poplar, ash, alder, oak). On decaying hardwood.\r\n🍄 Auriscalpiaceae / Agaricomycetes\r\n\r\n ℹ️ no distinct cap\r\n ℹ️ hymenium is smooth\r\n🚫 hymenium attachment is irregular or not applicable\r\n🚫 lacks a stripe\r\n⚪️ spore print is white\r\n🪵 ecology is saprotrophic\r\n🍴 edibility: edible\r\n🔤 Its most characteristic feature is the crown-like shape of the tips of its branches. The epithet pyxidatus means \"box-like\"—a reference to this shape.\r\n\r\n📷 Sony CyberShot DSC-HX99\r\n🎞️ AF, ISO 200, 1/50s, ƒ/5.6, 0 ev\r\n🔆 Partial overcast with sun, sun glare, sudden contrasting deep forest shadows\r\n🎨 18MP (RAW+JPG), 1:1 & accent crop\r\n📌 N 48° 11' 32.8\" (48.1924316), E 16° 28' 15.7\" (16.4710233)\r\n\r\n🔦 Flash not fired, compulsory flash mode\r\n\r\n🔭 4.25-118mm f/3.5-6.4\r\n👋 Handheld, manual mode\r\n🔎 40mm (35mm), 6.64mm\r\n📶 Bluetooth <= iPhone 12 (GPS)\r\n⏯️ Camera body button\r\n\r\n#️⃣ #fungi #photo #sony #artomyces #artomycespyxidatus #becherkoralle #schillerporling #kroonharik #macro #mushroom #photography #tallinn #mycology #naturephotography #fungilove #fungifanatic #austria #pilze #österreichpilze #österreich #pilz #donau #foto #fotografia #coralfungus #dunabe",
-          "photos": [],
+          "photos": [
+            {
+              "src": "/images/posts/Cr1LF1QsyW_/01.jpg",
+              "thumb": "/thumbs/posts/Cr1LF1QsyW_/01.webp",
+              "alt": "Artomyces pyxidatus — 2023-05-03"
+            }
+          ],
           "sourceFile": "artomyces-pyxidatus_2023-05-03_Cr1LF1QsyW_.txt",
           "source": "local-caption",
           "instagramUrl": "https://www.instagram.com/p/Cr1LF1QsyW_/"
@@ -12751,7 +12790,23 @@
             "plasmodium"
           ],
           "caption": "👇 ...\r\n🆔 Badhamia utricularis (Bull.) Berk., 1852\r\n🌐 https://www.gbif.org/species/3214309\r\n📖 source: Nomenclatural Database of Eumycetozoa (Myxomycota)\r\n\r\n🗓️ 05/08/22, 3:30 PM\r\n🌎 Suurupi LKA, Suurupi skv, Harjumaa, Estonia\r\n🌳🪵 Mixed deep forest, with abundance of spruce and birch trees. On birch tree trunk.\r\n🍄 Physaraceae / Myxogastria\r\n\r\n ℹ️ Plasmodium color: Often yellowish, turning brown with age\r\n ℹ️ Fruit body: Stalked sporangia\r\n ℹ️ Sporangium texture: Utricular, or balloon-like\r\n ℹ️ Sporangium color: Initially translucent, becoming brown\r\n🟤 Spore color: Brown when mature\r\n🪵 Habitat: Decaying wood, leaves, and organic material\r\n🔄 Lifecycle stages: Amoeba → multicellular slug → sporulating fruit body\r\n🔤 Recognizable by its utricular sporangia, the Badhamia utricularis slime mold can be found on rotting wood and leaves. Its lifecycle is captivating, shifting from amoeba-like cells, grouping to form a slug-like mass, and eventually becoming the fruiting body. As a decomposer, it helps recycle nutrients in forest ecosystems, and its distinct sporangia offer a fascinating study for mycologists and naturalists alike.\r\n\r\n📷 Sony α7 III (ILCE-7M3)\r\n🎞️ MF, ISO 6400, 1/60s, ƒ/9.0, 0 ev\r\n🔆 Sunny weather, very deep forest shade\r\n🎨 24MP (RAW), fine tunining, enhance and denoise with Lightroom\r\n📚 3 photos, variour view angles\r\n🖼️ no crop, portrait\r\n📌 59°27'16.7\"N 24°21'37.0\"E (59.454624, 24.360286)\r\n🔦 Flash did not fire\r\n\r\n🔭 Sony FE 90mm F2.8 Macro G OSS (SEL90M28G)\r\n👋 Handheld, manual mode\r\n🔎 90mm (35mm), 90mm\r\n⏯️ Camera body button\r\n\r\n#️⃣ #slimemold #photo #sony #badhamiautricularis #badhamia #myxogastria #myxomycete #eumycetozoa #macro #physaraceae #photography #suurupi #myxomycology #naturephotography #fungilove #slimemoldlove #estonianslimemolds #schleimpilz #eestilimaseened #schleimpilzfoto #limaseen #foto #fungiphoto #грибы #slimemoldphoto #plasmodium",
-          "photos": [],
+          "photos": [
+            {
+              "src": "/images/posts/CvmhSK6MWzs/01.jpg",
+              "thumb": "/thumbs/posts/CvmhSK6MWzs/01.webp",
+              "alt": "Badhamia utricularis — 2023-08-05"
+            },
+            {
+              "src": "/images/posts/CvmhSK6MWzs/02.jpg",
+              "thumb": "/thumbs/posts/CvmhSK6MWzs/02.webp",
+              "alt": "Badhamia utricularis — 2023-08-05"
+            },
+            {
+              "src": "/images/posts/CvmhSK6MWzs/03.jpg",
+              "thumb": "/thumbs/posts/CvmhSK6MWzs/03.webp",
+              "alt": "Badhamia utricularis — 2023-08-05"
+            }
+          ],
           "sourceFile": "badhamia-utricularis_2023-08-05_CvmhSK6MWzs.txt",
           "source": "local-caption",
           "instagramUrl": "https://www.instagram.com/p/CvmhSK6MWzs/"
@@ -13389,7 +13444,18 @@
             "pinecone"
           ],
           "caption": "👇 ...\r\n🆔 Baeospora myosura (Fr.) Singer\r\n🌐 https://www.gbif.org/species/2537958\r\n📖 Published in: Singer. In: Revue Mycol., Paris 3: 193. (1938).\r\n🇺🇸 conifercone cap\r\n🇩🇪 Mäuseschwanz-Rübling\r\n🇪🇪 Hiirkäbik\r\n🇷🇺 Беоспора мышехвостая\r\n🇫🇷 collybie queue de souris\r\n\r\n🗓️ 9/24/22, 11:22 AM\r\n🌎 Värska sanatorium, Värska vald, Estonia\r\n🌰 On pine (Pinus sylvestris) cone.\r\n🍄 Cyphellaceae / Agaricomycetes\r\n\r\n ℹ️ gills on hymenium, free or slightly adnate, crowded, white to pale gray\r\n ℹ️ cap is convex to broadly convex, sometimes with a slight umbo, pale brown to cinnamon brown, smooth\r\n ℹ️ hymenium is lamellar\r\n ℹ️ stipe is thin, cylindrical, white to pale brown, covered in small scales or fibers\r\n🟤 spore print is brown\r\n🪵 ecology is saprotrophic, typically found on conifer cones, especially pine cones\r\n😐 not recommended for consumption due to its small size and lack of known nutritional value\r\n📏 fruit body to 1-4 cm tall\r\n📐 cap to 0.5-2 cm\r\n🔤 small mushroom that exclusively grows on conifer cones, particularly those of pines. It can often be found in large clusters, with numerous fruiting bodies emerging from a single cone. The species is easily recognizable by its habitat and the small scales on its stipe.\r\n\r\n📷 Sony Cyber-shot DSC-HX99\r\n🎞️ AF, ISO 400, 1/125s, ƒ/3.5\r\n🔆 Forest shade, manual WB\r\n🎨 18.2MP (RAW+JPG), fine tune in Lightroom, 1:1 crop\r\n📌 N 57° 59' 20.0\" (57.988884), E 27° 37' 43.0\" (27.628610)\r\n🔦 did not fire\r\n\r\n🔭 ZEISS® Vario-Sonnar T* 24-720mm zoom lens (4.25-118mm f/3.5-6.4)\r\n👋 Handheld, manual mode\r\n🔎 24mm (35mm), 4.25mm\r\n📶 bluetooth <= iPhone 12 (GPS)\r\n⏯️ Camera body button\r\n\r\n#️⃣ #fungi #photo #sony #coniferconecap #baeospora #fungioncone #baeosporamyosura #hiirkäbik #macro #mushroom #photography #värska #mycology #naturephotography #fungilove #fungifanatic #estonia #pilz #eestiseened #eesti #seen #foto #fotografia #mäuseschwanzrübling #pinecone",
-          "photos": [],
+          "photos": [
+            {
+              "src": "/images/posts/CtSB3DIMpHA/01.jpg",
+              "thumb": "/thumbs/posts/CtSB3DIMpHA/01.webp",
+              "alt": "Baeospora myosura — 2022-09-24"
+            },
+            {
+              "src": "/images/posts/CtSB3DIMpHA/02.jpg",
+              "thumb": "/thumbs/posts/CtSB3DIMpHA/02.webp",
+              "alt": "Baeospora myosura — 2022-09-24"
+            }
+          ],
           "sourceFile": "baeospora-myosura_2022-09-24_CtSB3DIMpHA.txt",
           "source": "local-caption",
           "instagramUrl": "https://www.instagram.com/p/CtSB3DIMpHA/"
@@ -14713,7 +14779,7 @@
       },
       "description": "Large, robust, edible bolete with a brown, convex cap, white flesh that resists staining, stipe adorned with a reticulation",
       "latestDate": "2025-09-28",
-      "firstDate": "2022-09-22",
+      "firstDate": "2022-08-05",
       "hashtags": [
         "hongos",
         "boletusedulis",
@@ -14752,19 +14818,19 @@
         "porcini",
         "macro",
         "photography",
-        "suurupi",
+        "värska",
         "fungilove",
-        "mushroomlove",
+        "fungifanatic",
         "estonia",
         "pilz",
         "eestiseened",
-        "puravik",
+        "eesti",
         "seen",
         "foto",
-        "värska",
-        "fungifanatic",
-        "eesti",
-        "fotografia"
+        "fotografia",
+        "suurupi",
+        "mushroomlove",
+        "puravik"
       ],
       "observations": [
         {
@@ -15199,204 +15265,6 @@
           "instagramUrl": "https://www.instagram.com/p/DGYqxX9sxej/"
         },
         {
-          "id": "CvksSrnsVpW",
-          "shortcode": "CvksSrnsVpW",
-          "speciesId": "boletus-edulis",
-          "latinName": "Boletus edulis",
-          "identification": "Boletus edulis Bull.",
-          "genus": "Boletus",
-          "commonName": "King Bolete",
-          "commonNames": [
-            {
-              "flag": "🇺🇸",
-              "language": "English",
-              "name": "King Bolete"
-            },
-            {
-              "flag": "🇩🇪",
-              "language": "German",
-              "name": "Gemeiner Steinpilz"
-            },
-            {
-              "flag": "🇪🇪",
-              "language": "Estonian",
-              "name": "Harilik kivipuravik"
-            },
-            {
-              "flag": "🇷🇺",
-              "language": "Russian",
-              "name": "Белый гриб"
-            },
-            {
-              "flag": "🇫🇷",
-              "language": "French",
-              "name": "Cèpe de Bordeaux"
-            },
-            {
-              "flag": "🇪🇸",
-              "language": "Spanish",
-              "name": "hongo blanco"
-            }
-          ],
-          "family": "Boletaceae",
-          "taxonomy": [
-            "Boletaceae",
-            "Agaricomycetes"
-          ],
-          "date": "2023-08-05",
-          "observedAt": "05/08/22, 4:02 PM",
-          "location": "Suurupi LKA, Suurupi skv, Harjumaa, Estonia",
-          "coordinates": "59°27'16.7\"N 24°21'37.0\"E (59.454624, 24.360286)",
-          "habitat": "Mixed deep forest, with abundance of spruce trees. In moss.",
-          "weather": "🔆 Sunny weather, very deep forest shade",
-          "photography": [
-            "📷 Sony α7 III (ILCE-7M3)",
-            "🎞️ MF, ISO 1250, 1/160s, ƒ/6.3, 0 ev",
-            "🎨 24MP (RAW), fine tunining Lightroom",
-            "📚 18 photos, focus stacking with Photoshop",
-            "🖼️ 1:1 crop",
-            "🔦 Flash did not fire",
-            "🔭 Sony FE 90mm F2.8 Macro G OSS (SEL90M28G)",
-            "👋 Handheld, manual mode",
-            "🔎 90mm (35mm), 90mm",
-            "⏯️ Camera body button"
-          ],
-          "camera": "Sony α7 III (ILCE-7M3)",
-          "lens": "Sony FE 90mm F2.8 Macro G OSS (SEL90M28G)",
-          "photoCountText": "18 photos, focus stacking with Photoshop",
-          "science": {
-            "identification": "Boletus edulis Bull.",
-            "taxonomy": [
-              "Boletaceae",
-              "Agaricomycetes"
-            ],
-            "commonNames": [
-              {
-                "flag": "🇺🇸",
-                "language": "English",
-                "name": "King Bolete"
-              },
-              {
-                "flag": "🇩🇪",
-                "language": "German",
-                "name": "Gemeiner Steinpilz"
-              },
-              {
-                "flag": "🇪🇪",
-                "language": "Estonian",
-                "name": "Harilik kivipuravik"
-              },
-              {
-                "flag": "🇷🇺",
-                "language": "Russian",
-                "name": "Белый гриб"
-              },
-              {
-                "flag": "🇫🇷",
-                "language": "French",
-                "name": "Cèpe de Bordeaux"
-              },
-              {
-                "flag": "🇪🇸",
-                "language": "Spanish",
-                "name": "hongo blanco"
-              }
-            ],
-            "traits": [
-              {
-                "label": "Hymenium",
-                "text": "pores on hymenium, small and round, initially white, becoming yellow and then greenish with age",
-                "raw": "ℹ️ pores on hymenium, small and round, initially white, becoming yellow and then greenish with age"
-              },
-              {
-                "label": "Cap",
-                "text": "cap is convex, large, brown to dark brown, often with a paler edge, smooth with a slightly sticky texture when wet",
-                "raw": "ℹ️ cap is convex, large, brown to dark brown, often with a paler edge, smooth with a slightly sticky texture when wet"
-              },
-              {
-                "label": "Hymenium",
-                "text": "hymenium is tubular (composed of tubes instead of gills)",
-                "raw": "ℹ️ hymenium is tubular (composed of tubes instead of gills)"
-              },
-              {
-                "label": "Stipe",
-                "text": "stipe is thick, swollen or club-shaped, white to pale brown with a white network pattern on the upper part",
-                "raw": "ℹ️ stipe is thick, swollen or club-shaped, white to pale brown with a white network pattern on the upper part"
-              },
-              {
-                "label": "Spore print",
-                "text": "spore print is brown",
-                "raw": "🟤 spore print is brown"
-              },
-              {
-                "label": "Ecology",
-                "text": "ecology is mycorrhizal, typically found in coniferous and broadleaved forests",
-                "raw": "🌲🌳 ecology is mycorrhizal, typically found in coniferous and broadleaved forests"
-              },
-              {
-                "label": "Edibility",
-                "text": "highly prized for its taste and texture",
-                "raw": "👑 highly prized for its taste and texture"
-              },
-              {
-                "label": "Fruit body",
-                "text": "fruit body to 8-25 cm tall",
-                "raw": "📏 fruit body to 8-25 cm tall"
-              },
-              {
-                "label": "Dimensions",
-                "text": "cap to 8-30 cm",
-                "raw": "📐 cap to 8-30 cm"
-              },
-              {
-                "label": "Overview",
-                "text": "one of the most sought-after wild mushrooms due to its excellent culinary qualities. It has a robust and distinctive shape, with a thick, swollen stipe and a large, brown cap. The flesh is firm and white, and it has a pleasant, nutty flavor. It is popular in Italian cuisine and is used in a variety of dishes, including risottos, pasta, and soups.",
-                "raw": "🔤 one of the most sought-after wild mushrooms due to its excellent culinary qualities. It has a robust and distinctive shape, with a thick, swollen stipe and a large, brown cap. The flesh is firm and white, and it has a pleasant, nutty flavor. It is popular in Italian cuisine and is used in a variety of dishes, including risottos, pasta, and soups."
-              }
-            ],
-            "raw": "ℹ️ pores on hymenium, small and round, initially white, becoming yellow and then greenish with age\nℹ️ cap is convex, large, brown to dark brown, often with a paler edge, smooth with a slightly sticky texture when wet\nℹ️ hymenium is tubular (composed of tubes instead of gills)\nℹ️ stipe is thick, swollen or club-shaped, white to pale brown with a white network pattern on the upper part\n🟤 spore print is brown\n🌲🌳 ecology is mycorrhizal, typically found in coniferous and broadleaved forests\n👑 highly prized for its taste and texture\n📏 fruit body to 8-25 cm tall\n📐 cap to 8-30 cm\n🔤 one of the most sought-after wild mushrooms due to its excellent culinary qualities. It has a robust and distinctive shape, with a thick, swollen stipe and a large, brown cap. The flesh is firm and white, and it has a pleasant, nutty flavor. It is popular in Italian cuisine and is used in a variety of dishes, including risottos, pasta, and soups.",
-            "gbifUrl": "https://www.gbif.org/species/2537958",
-            "references": [
-              "https://www.gbif.org/species/2537958"
-            ],
-            "publication": "Published in: Bull. In: Herb. Fr. (Paris) 2: tab. 60 ('1781-82'). (1782)."
-          },
-          "description": "one of the most sought-after wild mushrooms due to its excellent culinary qualities. It has a robust and distinctive shape, with a thick, swollen stipe and a large, brown cap. The flesh is firm and white, and it has a pleasant, nutty flavor. It is popular in Italian cuisine and is used in a variety of dishes, including risottos, pasta, and soups.",
-          "hashtags": [
-            "fungi",
-            "photo",
-            "sony",
-            "boletusedulis",
-            "boletus",
-            "kingbolete",
-            "porcini",
-            "kivipuravik",
-            "macro",
-            "mushroom",
-            "photography",
-            "suurupi",
-            "mycology",
-            "naturephotography",
-            "fungilove",
-            "mushroomlove",
-            "estonia",
-            "pilz",
-            "eestiseened",
-            "puravik",
-            "seen",
-            "foto",
-            "fungiphoto",
-            "gemeinersteinpilz",
-            "mushroomphoto",
-            "seenefotod"
-          ],
-          "caption": "👇 ...\r\n🆔 Boletus edulis Bull.\r\n🌐 https://www.gbif.org/species/2537958\r\n📖 Published in: Bull. In: Herb. Fr. (Paris) 2: tab. 60 ('1781-82'). (1782).\r\n🇺🇸 King Bolete\r\n🇩🇪 Gemeiner Steinpilz\r\n🇪🇪 Harilik kivipuravik\r\n🇷🇺 Белый гриб\r\n🇫🇷 Cèpe de Bordeaux\r\n🇪🇸 hongo blanco\r\n\r\n🗓️ 05/08/22, 4:02 PM\r\n🌎 Suurupi LKA, Suurupi skv, Harjumaa, Estonia\r\n🌲🌳 Mixed deep forest, with abundance of spruce trees. In moss.\r\n🍄 Boletaceae / Agaricomycetes\r\n\r\n ℹ️ pores on hymenium, small and round, initially white, becoming yellow and then greenish with age\r\n ℹ️ cap is convex, large, brown to dark brown, often with a paler edge, smooth with a slightly sticky texture when wet\r\n ℹ️ hymenium is tubular (composed of tubes instead of gills)\r\n ℹ️ stipe is thick, swollen or club-shaped, white to pale brown with a white network pattern on the upper part\r\n🟤 spore print is brown\r\n🌲🌳 ecology is mycorrhizal, typically found in coniferous and broadleaved forests\r\n👑 highly prized for its taste and texture\r\n📏 fruit body to 8-25 cm tall\r\n📐 cap to 8-30 cm\r\n🔤 one of the most sought-after wild mushrooms due to its excellent culinary qualities. It has a robust and distinctive shape, with a thick, swollen stipe and a large, brown cap. The flesh is firm and white, and it has a pleasant, nutty flavor. It is popular in Italian cuisine and is used in a variety of dishes, including risottos, pasta, and soups.\r\n\r\n📷 Sony α7 III (ILCE-7M3)\r\n🎞️ MF, ISO 1250, 1/160s, ƒ/6.3, 0 ev\r\n🔆 Sunny weather, very deep forest shade\r\n🎨 24MP (RAW), fine tunining Lightroom\r\n📚 18 photos, focus stacking with Photoshop\r\n🖼️ 1:1 crop\r\n📌 59°27'16.7\"N 24°21'37.0\"E (59.454624, 24.360286)\r\n🔦 Flash did not fire\r\n\r\n🔭 Sony FE 90mm F2.8 Macro G OSS (SEL90M28G)\r\n👋 Handheld, manual mode\r\n🔎 90mm (35mm), 90mm\r\n⏯️ Camera body button\r\n\r\n#️⃣ #fungi #photo #sony #boletusedulis #boletus #kingbolete #porcini #kivipuravik #macro #mushroom #photography #suurupi #mycology #naturephotography #fungilove #mushroomlove #estonia #pilz #eestiseened #puravik #seen #foto #fungiphoto #gemeinersteinpilz #mushroomphoto #seenefotod",
-          "photos": [],
-          "sourceFile": "boletus-edulis_2023-08-05_CvksSrnsVpW.txt",
-          "source": "local-caption",
-          "instagramUrl": "https://www.instagram.com/p/CvksSrnsVpW/"
-        },
-        {
           "id": "CtSIj_MsP0C",
           "shortcode": "CtSIj_MsP0C",
           "speciesId": "boletus-edulis",
@@ -15587,10 +15455,225 @@
             "cep"
           ],
           "caption": "👇 ...\r\n🆔 Boletus edulis Bull.\r\n🌐 https://www.gbif.org/species/2537958\r\n📖 Published in: Bull. In: Herb. Fr. (Paris) 2: tab. 60 ('1781-82'). (1782).\r\n🇺🇸 King Bolete\r\n🇩🇪 Gemeiner Steinpilz\r\n🇪🇪 Harilik kivipuravik\r\n🇷🇺 Белый гриб\r\n🇫🇷 Cèpe de Bordeaux\r\n🇪🇸 hongo blanco\r\n\r\n🗓️ 9/22/22, 5:14 PM\r\n🌎 Värska sanatorium, Värska vald, Estonia\r\n🌲🌳🍂 Mixed small forest woodland, near human habitat. Abundance of birch and spruce trees.\r\n🍄 Boletaceae / Agaricomycetes\r\n\r\n ℹ️ pores on hymenium, small and round, initially white, becoming yellow and then greenish with age\r\n ℹ️ cap is convex, large, brown to dark brown, often with a paler edge, smooth with a slightly sticky texture when wet\r\n ℹ️ hymenium is tubular (composed of tubes instead of gills)\r\n ℹ️ stipe is thick, swollen or club-shaped, white to pale brown with a white network pattern on the upper part\r\n🟤 spore print is brown\r\n🌲🌳 ecology is mycorrhizal, typically found in coniferous and broadleaved forests\r\n👑 highly prized for its taste and texture\r\n📏 fruit body to 8-25 cm tall\r\n📐 cap to 8-30 cm\r\n🔤 one of the most sought-after wild mushrooms due to its excellent culinary qualities. It has a robust and distinctive shape, with a thick, swollen stipe and a large, brown cap. The flesh is firm and white, and it has a pleasant, nutty flavor. It is popular in Italian cuisine and is used in a variety of dishes, including risottos, pasta, and soups.\r\n\r\n📷 Sony Cyber-shot DSC-HX99\r\n🎞️ AF, ISO 800, 1/60s, ƒ/3.5\r\n🔆 Forest shade, manual WB\r\n🎨 18.2MP (RAW+JPG), fine tune, accent crop in Lightroom\r\n📌 N 57° 59' 04.7\" (57.984637), E 27° 37' 18.4\" (27.621764)\r\n🔦 Flash did not fire\r\n\r\n🔭 ZEISS® Vario-Sonnar T* 24-720mm zoom lens (4.25-118mm f/3.5-6.4)\r\n👋 Handheld, manual mode\r\n🔎 24mm (35mm), 4.25mm\r\n📶 bluetooth <= iPhone 12 (GPS)\r\n⏯️ Camera body button\r\n\r\n#️⃣ #fungi #photo #sony #boletusedulis #boletus #kingbolete #porcini #kivipuravik #macro #mushroom #photography #värska #mycology #naturephotography #fungilove #fungifanatic #estonia #pilz #eestiseened #eesti #seen #foto #fotografia #gemeinersteinpilz #cep",
-          "photos": [],
+          "photos": [
+            {
+              "src": "/images/posts/CtSIj_MsP0C/01.jpg",
+              "thumb": "/thumbs/posts/CtSIj_MsP0C/01.webp",
+              "alt": "Boletus edulis — 2022-09-22"
+            },
+            {
+              "src": "/images/posts/CtSIj_MsP0C/02.jpg",
+              "thumb": "/thumbs/posts/CtSIj_MsP0C/02.webp",
+              "alt": "Boletus edulis — 2022-09-22"
+            }
+          ],
           "sourceFile": "boletus-edulis_2022-09-22_CtSIj_MsP0C.txt",
           "source": "local-caption",
           "instagramUrl": "https://www.instagram.com/p/CtSIj_MsP0C/"
+        },
+        {
+          "id": "C2aGyoKsrgm",
+          "shortcode": "C2aGyoKsrgm",
+          "speciesId": "boletus-edulis",
+          "latinName": "Boletus edulis",
+          "identification": "Boletus edulis Bull.",
+          "genus": "Boletus",
+          "commonName": "King Bolete",
+          "commonNames": [
+            {
+              "flag": "🇺🇸",
+              "language": "English",
+              "name": "King Bolete"
+            },
+            {
+              "flag": "🇩🇪",
+              "language": "German",
+              "name": "Gemeiner Steinpilz"
+            },
+            {
+              "flag": "🇪🇪",
+              "language": "Estonian",
+              "name": "Harilik kivipuravik"
+            },
+            {
+              "flag": "🇷🇺",
+              "language": "Russian",
+              "name": "Белый гриб"
+            },
+            {
+              "flag": "🇫🇷",
+              "language": "French",
+              "name": "Cèpe de Bordeaux"
+            },
+            {
+              "flag": "🇪🇸",
+              "language": "Spanish",
+              "name": "hongo blanco"
+            }
+          ],
+          "family": "Boletaceae",
+          "taxonomy": [
+            "Boletaceae",
+            "Agaricomycetes"
+          ],
+          "date": "2022-08-05",
+          "observedAt": "05/08/22, 4:02 PM",
+          "location": "Suurupi LKA, Suurupi skv, Harjumaa, Estonia",
+          "coordinates": "59°27'16.7\"N 24°21'37.0\"E (59.454624, 24.360286)",
+          "habitat": "Mixed deep forest, with abundance of spruce trees. In moss.",
+          "weather": "🔆 Sunny weather, very deep forest shade",
+          "photography": [
+            "📷 Sony α7 III (ILCE-7M3)",
+            "🎞️ MF, ISO 1250, 1/160s, ƒ/6.3, 0 ev",
+            "🎨 24MP (RAW), fine tunining Lightroom",
+            "📚 18 photos, focus stacking with Photoshop",
+            "🖼️ 1:1 crop",
+            "🔦 Flash did not fire",
+            "🔭 Sony FE 90mm F2.8 Macro G OSS (SEL90M28G)",
+            "👋 Handheld, manual mode",
+            "🔎 90mm (35mm), 90mm",
+            "⏯️ Camera body button"
+          ],
+          "camera": "Sony α7 III (ILCE-7M3)",
+          "lens": "Sony FE 90mm F2.8 Macro G OSS (SEL90M28G)",
+          "photoCountText": "18 photos, focus stacking with Photoshop",
+          "science": {
+            "identification": "Boletus edulis Bull.",
+            "taxonomy": [
+              "Boletaceae",
+              "Agaricomycetes"
+            ],
+            "commonNames": [
+              {
+                "flag": "🇺🇸",
+                "language": "English",
+                "name": "King Bolete"
+              },
+              {
+                "flag": "🇩🇪",
+                "language": "German",
+                "name": "Gemeiner Steinpilz"
+              },
+              {
+                "flag": "🇪🇪",
+                "language": "Estonian",
+                "name": "Harilik kivipuravik"
+              },
+              {
+                "flag": "🇷🇺",
+                "language": "Russian",
+                "name": "Белый гриб"
+              },
+              {
+                "flag": "🇫🇷",
+                "language": "French",
+                "name": "Cèpe de Bordeaux"
+              },
+              {
+                "flag": "🇪🇸",
+                "language": "Spanish",
+                "name": "hongo blanco"
+              }
+            ],
+            "traits": [
+              {
+                "label": "Hymenium",
+                "text": "pores on hymenium, small and round, initially white, becoming yellow and then greenish with age",
+                "raw": "ℹ️ pores on hymenium, small and round, initially white, becoming yellow and then greenish with age"
+              },
+              {
+                "label": "Cap",
+                "text": "cap is convex, large, brown to dark brown, often with a paler edge, smooth with a slightly sticky texture when wet",
+                "raw": "ℹ️ cap is convex, large, brown to dark brown, often with a paler edge, smooth with a slightly sticky texture when wet"
+              },
+              {
+                "label": "Hymenium",
+                "text": "hymenium is tubular (composed of tubes instead of gills)",
+                "raw": "ℹ️ hymenium is tubular (composed of tubes instead of gills)"
+              },
+              {
+                "label": "Stipe",
+                "text": "stipe is thick, swollen or club-shaped, white to pale brown with a white network pattern on the upper part",
+                "raw": "ℹ️ stipe is thick, swollen or club-shaped, white to pale brown with a white network pattern on the upper part"
+              },
+              {
+                "label": "Spore print",
+                "text": "spore print is brown",
+                "raw": "🟤 spore print is brown"
+              },
+              {
+                "label": "Ecology",
+                "text": "ecology is mycorrhizal, typically found in coniferous and broadleaved forests",
+                "raw": "🌲🌳 ecology is mycorrhizal, typically found in coniferous and broadleaved forests"
+              },
+              {
+                "label": "Edibility",
+                "text": "highly prized for its taste and texture",
+                "raw": "👑 highly prized for its taste and texture"
+              },
+              {
+                "label": "Fruit body",
+                "text": "fruit body to 8-25 cm tall",
+                "raw": "📏 fruit body to 8-25 cm tall"
+              },
+              {
+                "label": "Dimensions",
+                "text": "cap to 8-30 cm",
+                "raw": "📐 cap to 8-30 cm"
+              },
+              {
+                "label": "Overview",
+                "text": "one of the most sought-after wild mushrooms due to its excellent culinary qualities. It has a robust and distinctive shape, with a thick, swollen stipe and a large, brown cap. The flesh is firm and white, and it has a pleasant, nutty flavor. It is popular in Italian cuisine and is used in a variety of dishes, including risottos, pasta, and soups.",
+                "raw": "🔤 one of the most sought-after wild mushrooms due to its excellent culinary qualities. It has a robust and distinctive shape, with a thick, swollen stipe and a large, brown cap. The flesh is firm and white, and it has a pleasant, nutty flavor. It is popular in Italian cuisine and is used in a variety of dishes, including risottos, pasta, and soups."
+              }
+            ],
+            "raw": "ℹ️ pores on hymenium, small and round, initially white, becoming yellow and then greenish with age\nℹ️ cap is convex, large, brown to dark brown, often with a paler edge, smooth with a slightly sticky texture when wet\nℹ️ hymenium is tubular (composed of tubes instead of gills)\nℹ️ stipe is thick, swollen or club-shaped, white to pale brown with a white network pattern on the upper part\n🟤 spore print is brown\n🌲🌳 ecology is mycorrhizal, typically found in coniferous and broadleaved forests\n👑 highly prized for its taste and texture\n📏 fruit body to 8-25 cm tall\n📐 cap to 8-30 cm\n🔤 one of the most sought-after wild mushrooms due to its excellent culinary qualities. It has a robust and distinctive shape, with a thick, swollen stipe and a large, brown cap. The flesh is firm and white, and it has a pleasant, nutty flavor. It is popular in Italian cuisine and is used in a variety of dishes, including risottos, pasta, and soups.",
+            "gbifUrl": "https://www.gbif.org/species/2537958",
+            "references": [
+              "https://www.gbif.org/species/2537958"
+            ],
+            "publication": "Published in: Bull. In: Herb. Fr. (Paris) 2: tab. 60 ('1781-82'). (1782)."
+          },
+          "description": "one of the most sought-after wild mushrooms due to its excellent culinary qualities. It has a robust and distinctive shape, with a thick, swollen stipe and a large, brown cap. The flesh is firm and white, and it has a pleasant, nutty flavor. It is popular in Italian cuisine and is used in a variety of dishes, including risottos, pasta, and soups.",
+          "hashtags": [
+            "fungi",
+            "photo",
+            "sony",
+            "boletusedulis",
+            "boletus",
+            "kingbolete",
+            "porcini",
+            "kivipuravik",
+            "macro",
+            "mushroom",
+            "photography",
+            "suurupi",
+            "mycology",
+            "naturephotography",
+            "fungilove",
+            "mushroomlove",
+            "estonia",
+            "pilz",
+            "eestiseened",
+            "puravik",
+            "seen",
+            "foto",
+            "fungiphoto",
+            "gemeinersteinpilz",
+            "mushroomphoto",
+            "seenefotod"
+          ],
+          "caption": "👇 ...\r\n🆔 Boletus edulis Bull.\r\n🌐 https://www.gbif.org/species/2537958\r\n📖 Published in: Bull. In: Herb. Fr. (Paris) 2: tab. 60 ('1781-82'). (1782).\r\n🇺🇸 King Bolete\r\n🇩🇪 Gemeiner Steinpilz\r\n🇪🇪 Harilik kivipuravik\r\n🇷🇺 Белый гриб\r\n🇫🇷 Cèpe de Bordeaux\r\n🇪🇸 hongo blanco\r\n\r\n🗓️ 05/08/22, 4:02 PM\r\n🌎 Suurupi LKA, Suurupi skv, Harjumaa, Estonia\r\n🌲🌳 Mixed deep forest, with abundance of spruce trees. In moss.\r\n🍄 Boletaceae / Agaricomycetes\r\n\r\n ℹ️ pores on hymenium, small and round, initially white, becoming yellow and then greenish with age\r\n ℹ️ cap is convex, large, brown to dark brown, often with a paler edge, smooth with a slightly sticky texture when wet\r\n ℹ️ hymenium is tubular (composed of tubes instead of gills)\r\n ℹ️ stipe is thick, swollen or club-shaped, white to pale brown with a white network pattern on the upper part\r\n🟤 spore print is brown\r\n🌲🌳 ecology is mycorrhizal, typically found in coniferous and broadleaved forests\r\n👑 highly prized for its taste and texture\r\n📏 fruit body to 8-25 cm tall\r\n📐 cap to 8-30 cm\r\n🔤 one of the most sought-after wild mushrooms due to its excellent culinary qualities. It has a robust and distinctive shape, with a thick, swollen stipe and a large, brown cap. The flesh is firm and white, and it has a pleasant, nutty flavor. It is popular in Italian cuisine and is used in a variety of dishes, including risottos, pasta, and soups.\r\n\r\n📷 Sony α7 III (ILCE-7M3)\r\n🎞️ MF, ISO 1250, 1/160s, ƒ/6.3, 0 ev\r\n🔆 Sunny weather, very deep forest shade\r\n🎨 24MP (RAW), fine tunining Lightroom\r\n📚 18 photos, focus stacking with Photoshop\r\n🖼️ 1:1 crop\r\n📌 59°27'16.7\"N 24°21'37.0\"E (59.454624, 24.360286)\r\n🔦 Flash did not fire\r\n\r\n🔭 Sony FE 90mm F2.8 Macro G OSS (SEL90M28G)\r\n👋 Handheld, manual mode\r\n🔎 90mm (35mm), 90mm\r\n⏯️ Camera body button\r\n\r\n#️⃣ #fungi #photo #sony #boletusedulis #boletus #kingbolete #porcini #kivipuravik #macro #mushroom #photography #suurupi #mycology #naturephotography #fungilove #mushroomlove #estonia #pilz #eestiseened #puravik #seen #foto #fungiphoto #gemeinersteinpilz #mushroomphoto #seenefotod",
+          "photos": [
+            {
+              "src": "/images/posts/C2aGyoKsrgm/01.jpg",
+              "thumb": "/thumbs/posts/C2aGyoKsrgm/01.webp",
+              "alt": "Boletus edulis — 2022-08-05"
+            }
+          ],
+          "sourceFile": "boletus-edulis_2022-08-05_C2aGyoKsrgm.txt",
+          "source": "local-caption",
+          "instagramUrl": "https://www.instagram.com/p/C2aGyoKsrgm/"
         }
       ],
       "characteristics": {
@@ -20065,7 +20148,13 @@
             "foto"
           ],
           "caption": "👇 ...\r\n🆔 Calvatia gigantea (Batsch) Lloyd\r\n🌐 https://www.gbif.org/species/2536058\r\n📖 Published in: Lloyd. In: Mycol. Writ. 1 (Lycoperd. Australia) 1: 166. (1904).\r\n🇺🇸 Giant Puffball\r\n🇩🇪 Riesenbovist\r\n🇪🇪 Hiidmuna\r\n🇷🇺 Головач гигантский\r\n\r\n🗓️ 02/08/23, 7:28 PM\r\n🌎 Tuukri, Kadriorg, Harjumaa\r\n☘️🛣️ In mowed grassland patch, urban area\r\n🍄 Agaricaceae / Agaricomycetes\r\n\r\n ℹ️ hymenium is glebal (inside the puffball)\r\n ℹ️ no distinct cap, the fruiting body is a large, round to pear-shaped puffball\r\n🚫 hymenium attachment is not applicable\r\n🚫 lacks a stipe\r\n🟤⚪️ spore print is white to olive-brown\r\n🌳 ecology is saprotrophic, found in meadows, fields, and deciduous forests\r\n🍴 edibility: edible when young and the flesh is completely white. It becomes inedible as it matures and the spores develop.\r\n📏 fruit body to 10-70 cm across\r\n🔤 Easily recognized by its large, round to pear-shaped fruiting body that can reach impressive sizes. The inside (gleba) is initially solid and white, becoming yellowish and finally olive-brown as it matures. When fully mature, the puffball releases its spores through an opening or when the fruiting body is disrupted. This species is edible when young, and the interior flesh is completely white. However, it becomes inedible as it matures and the spores develop, turning the flesh into a mass of olive-brown powder. Always ensure the flesh is pure white throughout before consumption, as other, inedible or toxic puffball species can appear similar when young.\r\n\r\n📷 Sony α7 III (ILCE-7M3)\r\n🎞️ MF, ISO 640, 1/200s, ƒ/3.2, 0 ev\r\n🔆 Sunny hour, evening sun, deep shade from building\r\n🎨 24MP (RAW), fine tunining Lightroom, \r\n🖼️ 1:1 crop\r\n📚 18 photos, focus stacking with Photoshop\r\n\r\n🔭 Sony FE 90mm F2.8 Macro G OSS (SEL90M28G)\r\n👋 Handheld, manual mode\r\n🔎 90mm (35mm), 90mm\r\n⏯️ Camera body button\r\n\r\n#️⃣ #fungi #photo #sony #calvatia #calvatiagigantea #giantpuffball #riesenbovist #hiidmuna #puffball #грибы #macro #mushroom #photography #harjumaa #mycology #naturephotography #fungilove #fungiphoto #estonia #pilze #eestiseened #eestimaa #seen #seenpilt #pilzfoto #pilz #mushroomhunt #foto #fungiphoto #fungilove",
-          "photos": [],
+          "photos": [
+            {
+              "src": "/images/posts/Cvdbtp4oM9w/01.jpg",
+              "thumb": "/thumbs/posts/Cvdbtp4oM9w/01.webp",
+              "alt": "Calvatia gigantea — 2023-08-02"
+            }
+          ],
           "sourceFile": "calvatia-gigantea_2023-08-02_Cvdbtp4oM9w.txt",
           "source": "local-caption",
           "instagramUrl": "https://www.instagram.com/p/Cvdbtp4oM9w/"
@@ -20867,7 +20956,28 @@
             "harjumaa"
           ],
           "caption": "👇 ...\r\n🆔 Candolleomyces candolleanus (Fr.) D.Wächt. & A.Melzer\r\n🌐 https://www.gbif.org/species/12008655\r\n📖 source: UNITE\r\n🇺🇸 Pale Brittlestem\r\n🇩🇪 Behangener Mürbling\r\n🇪🇪 Valge psatürell\r\n🇷🇺 Псатирелла Кандолля\r\n\r\n🗓️ 30/Jul/23, 3:27 PM\r\n🌎 Treppoja Cascade, Kloogaranna, Harju County\r\n🌿🍂 Cluster under bushes on ground with decaying leaves and dead wood clutter.\r\n🍄 Psathyrellaceae / Agaricomycetes\r\n\r\n ℹ️ Hymenium: Gills are initially pale but become purplish-brown to almost black as the spores mature. They are crowded and often have a slightly jagged edge.\r\n ℹ️ Cap: conic to convex or flat, often with a slightly upturned, ragged edge when mature. It's thin-fleshed, hygrophanous, and can be pale brown when moist, drying to a lighter color, almost straw-yellow or pale grayish.\r\n ℹ️ Hymenium attachment: adnate to adnexed.\r\n ℹ️ Stipe: Slender, pale at the top, becoming brownish towards the base, with a annulus which can be lost in age.\r\n🟤 Spore print: Dark brown.\r\n🪵 Saprobic/ Sometimes growing in groups or clusters, especially in places where wood chippings have been applied.\r\n😐 Edible, but not highly regarded due to its insubstantial nature. \r\n📏 Fruit body: Up to 8 cm tall.\r\n📐 Cap: 2-5 cm in diameter.\r\n🔤 Fragile and common mushroom found in grassy habitats. It is recognizable by its thin, hygrophanous cap that changes color as it dries and its crowded, dark gills.\r\n\r\n🎞️ MF, ISO 3200, 1/80s, ƒ/18, 0 ev\r\n🔆 Fair weather with overcast and clouds\r\n🎨 24MP (RAW), fine tune, denoise with Lightroom\r\n📚 4 photos, various angles\r\n🖼️ no crop, landscape, 3:2\r\n📌 59°21'00.5\"N 24°15'55.8\"E (59.350138, 24.265492)\r\n🔦 Flash did not fire\r\n\r\n📷 Sony α7 III (ILCE-7M3)\r\n🔭 Sony FE 90mm F2.8 Macro G OSS (SEL90M28G)\r\n🏎️ AMD Radeo Vega Frontier Pro (render)\r\n👋 Handheld, manual mode\r\n🔎 90mm (35mm), 90mm\r\n⏯️ Camera body button\r\n\r\n#️⃣ #fungi #photo #sonyalpha #psathyrellacandolleana #palebrittlestem #psatürell #psathyrella #valgepsatürell #macro #mushroom #photography #mürbling #mycology #naturephotography #fungilove #behangenermürbling #treppoja #seened #eestiseened #eesti #fungistudy #грибы #foto #pilze #seenefotod #pilzefotografieren #фотогрибов #harjumaa",
-          "photos": [],
+          "photos": [
+            {
+              "src": "/images/posts/Cv21JyrsxKn/01.jpg",
+              "thumb": "/thumbs/posts/Cv21JyrsxKn/01.webp",
+              "alt": "Candolleomyces candolleanus — 2023-07-30"
+            },
+            {
+              "src": "/images/posts/Cv21JyrsxKn/02.jpg",
+              "thumb": "/thumbs/posts/Cv21JyrsxKn/02.webp",
+              "alt": "Candolleomyces candolleanus — 2023-07-30"
+            },
+            {
+              "src": "/images/posts/Cv21JyrsxKn/03.jpg",
+              "thumb": "/thumbs/posts/Cv21JyrsxKn/03.webp",
+              "alt": "Candolleomyces candolleanus — 2023-07-30"
+            },
+            {
+              "src": "/images/posts/Cv21JyrsxKn/04.jpg",
+              "thumb": "/thumbs/posts/Cv21JyrsxKn/04.webp",
+              "alt": "Candolleomyces candolleanus — 2023-07-30"
+            }
+          ],
           "sourceFile": "candolleomyces-candolleanus_2023-07-30_Cv21JyrsxKn.txt",
           "source": "local-caption",
           "instagramUrl": "https://www.instagram.com/p/Cv21JyrsxKn/"
@@ -23573,7 +23683,13 @@
             "foto"
           ],
           "caption": "👇 ...\r\n🆔 Cerioporus squamosus (Huds.) Quél.\r\n🌐 https://www.gbif.org/species/2547092\r\n📖 Published in: Quél. In: Enchir. fung. (Paris): 167. (1886).\r\n🇺🇸 Dryad'S Saddle\r\n🇩🇪 Schuppiger Stielporling\r\n🇪🇪 Soomustorik\r\n🇷🇺 Цериопорус чешуйчатый\r\n\r\n🗓️ 03/08/23, 7:02 PM\r\n🌎 Tuukri, Kadriorg, Harjumaa\r\n🌳🛣️ On living Norway maple (Acer platanoides) trunk, urban area\r\n🍄 Polyporaceae / Agaricomycetes\r\n\r\n ℹ️ hymenium is poroid, cream to yellowish in color\r\n ℹ️ cap is semicircular or fan-shaped, with dark brown scales on a lighter background, becoming more convex with age\r\n🚫 hymenium attachment is not applicable as it grows directly out of the wood\r\n🚫 lacks a stipe\r\n⚪️ spore print is white\r\n🪵🌳 ecology is saprotrophic or parasitic, found on deciduous trees, especially willows and poplars\r\n😐🍴 edibility: edible when young, but older specimens can be tough and have a strong flavor\r\n📏 fruit body to 10-40 cm across\r\n🔤 Recognizable by its semicircular, fan-shaped cap that bears dark brown scales on a lighter background. The underside contains small pores rather than gills, where it releases its spores. This mushroom is found on dead logs or living trees, where it can act as a decomposer or a parasite. While edible, only the younger specimens are recommended for consumption as the older ones can be quite tough and have a strong flavor. The smell of a fresh specimen is often compared to watermelon rind. As always, proper identification is crucial as there are many species of Polypores, and not all of them are edible.\r\n\r\n📷 Sony α7 III (ILCE-7M3)\r\n🎞️ MF, ISO 6400, 1/160s, ƒ/8, 0 ev\r\n🔆 Rainy weather, evening, full sky overcast, shadow\r\n🎨 24MP (RAW), fine tunining Lightroom\r\n🖼️ no crop\r\n📚 10 photos, focus stacking with Photoshop\r\n\r\n🔭 Sony FE 90mm F2.8 Macro G OSS (SEL90M28G)\r\n👋 Handheld, manual mode\r\n🔎 90mm (35mm), 90mm\r\n⏯️ Camera body button\r\n\r\n#️⃣ #fungi #photo #sony #cerioporus #cerioporussquamosus #dryadssaddle #schuppigerstielporling #soomustorik #mushroomphoto #грибы #macro #mushroom #photography #harjumaa #mycology #naturephotography #fungilove #fungiphoto #estonia #pilze #eestiseened #eestimaa #seen #seenpilt #pilzfoto #pilz #mushroomhunt #foto #fungiphoto #fungilove",
-          "photos": [],
+          "photos": [
+            {
+              "src": "/images/posts/CvfdS6MIi8D/01.jpg",
+              "thumb": "/thumbs/posts/CvfdS6MIi8D/01.webp",
+              "alt": "Cerioporus squamosus — 2023-08-03"
+            }
+          ],
           "sourceFile": "cerioporus-squamosus_2023-08-03_CvfdS6MIi8D.txt",
           "source": "local-caption",
           "instagramUrl": "https://www.instagram.com/p/CvfdS6MIi8D/"
@@ -26069,7 +26185,18 @@
             "фото"
           ],
           "caption": "👇 ...\r\n🆔 Ciboria amentacea (Balb.) Fuckel\r\n🧾 https://bit.ly/3GagBfs\r\n📖 Published in Fuckel. In: Jb. nassau. Ver. Naturk. 23-24: 311 ('1869-70'). (1870).\r\n🇺🇸 catkin cup\r\n🇩🇪 Erlenkätzchen-Becherling\r\n🇪🇪 Lepa-urvaliudik\r\n🇷🇺 Цибория сережчатая\r\n\r\n🗓️ 4/02/23, 3:56 PM\r\n🌎 Kadriorg park, Tallinn. Estonia.\r\n🌳 decidious damp park/forest (alder, hazel, oak)\r\n🍄 Sclerotiniaceae / Leotiomycetes\r\n\r\n📷 Sony α7 III (ILCE-7M3)\r\n🎞️ (1) AF, ISO 640, 1/320s, ƒ/8\r\n🎞️ (2) AF, ISO 640, 1/200s, ƒ/13\r\n🔆 Auto WB, sunny weather, partial shade, sunny spot\r\n🎨 24MP, fine tune (1,2), crop (2), enhance (2) (Lightroom)\r\n🔦 did not fire\r\n\r\n🔭 Sony FE 50mm F2.8 Macro (SEL50M28)\r\n👋 handheld, manual mode\r\n🔎 50mm (50mm)\r\n⏯️ camera body button\r\n\r\n#️⃣ #fungi #photo #sony #ciboria #catkincup #ciboriaamentacea #macro #mushroom #photography #kadriorg #kardriorgpark #micology #naturephotography #fungilove #fungifanatic #estonia #seened #eestiseened #eesti #pilz #грибы #foto #fotografia #фото",
-          "photos": [],
+          "photos": [
+            {
+              "src": "/images/posts/CqiUi96oHfe/01.jpg",
+              "thumb": "/thumbs/posts/CqiUi96oHfe/01.webp",
+              "alt": "Ciboria amentacea — 2023-04-02"
+            },
+            {
+              "src": "/images/posts/CqiUi96oHfe/02.jpg",
+              "thumb": "/thumbs/posts/CqiUi96oHfe/02.webp",
+              "alt": "Ciboria amentacea — 2023-04-02"
+            }
+          ],
           "sourceFile": "ciboria-amentacea_2023-04-02_CqiUi96oHfe.txt",
           "source": "local-caption",
           "instagramUrl": "https://www.instagram.com/p/CqiUi96oHfe/"
@@ -26193,7 +26320,23 @@
             "фото"
           ],
           "caption": "👇 ...\r\n🆔 Ciboria amentacea (Balb.) Fuckel\r\n🧾 https://bit.ly/3GagBfs\r\n📖 Published in Fuckel. In: Jb. nassau. Ver. Naturk. 23-24: 311 ('1869-70'). (1870).\r\n🇺🇸 catkin cup\r\n🇩🇪 Erlenkätzchen-Becherling\r\n🇪🇪 Lepa-urvaliudik\r\n🇷🇺 Цибория сережчатая\r\n\r\n🗓️ 3/18/23, 2:44 PM\r\n🌎 Kadriorg park, Tallinn. Estonia\r\n🌳 decidious damp park/forest (alder, hazel, oak)\r\n🍄 Sclerotiniaceae / Leotiomycetes\r\n\r\n📷 Sony CyberShot DSC-HX99\r\n🎞️ AF, ISO 200, 1/100s, ƒ/4.5\r\n🔆 forced daylight (sunny weather)\r\n🎨 18MP, no post processing \r\n📌 N 59° 26' 28.698\" (59.441305), E 24° 47' 31.363001\" (24.792045)\r\n🔦 did not fire\r\n\r\n🔭 4.25-118mm f/3.5-6.4\r\n👋 handheld, manual mode\r\n🔎 46mm (35mm)\r\n📶 bluetooth <= iPhone 12 (GPS)\r\n⏯️ camera body button\r\n\r\n#️⃣ #fungi #photo #sony #ciboria #catkincup #ciboriaamentacea #macro #mushroom #photography #kadriorg #kardriorgpark #micology #naturephotography #fungilove #fungifanatic #estonia #seened #eestiseened #eesti #pilz #грибы #foto #fotografia #фото",
-          "photos": [],
+          "photos": [
+            {
+              "src": "/images/posts/CqgPNxksTSY/01.jpg",
+              "thumb": "/thumbs/posts/CqgPNxksTSY/01.webp",
+              "alt": "Ciboria amentacea — 2023-03-18"
+            },
+            {
+              "src": "/images/posts/CqgPNxksTSY/02.jpg",
+              "thumb": "/thumbs/posts/CqgPNxksTSY/02.webp",
+              "alt": "Ciboria amentacea — 2023-03-18"
+            },
+            {
+              "src": "/images/posts/CqgPNxksTSY/03.jpg",
+              "thumb": "/thumbs/posts/CqgPNxksTSY/03.webp",
+              "alt": "Ciboria amentacea — 2023-03-18"
+            }
+          ],
           "sourceFile": "ciboria-amentacea_2023-03-18_CqgPNxksTSY.txt",
           "source": "local-caption",
           "instagramUrl": "https://www.instagram.com/p/CqgPNxksTSY/"
@@ -32346,7 +32489,13 @@
             "seenefotod"
           ],
           "caption": "👇 ...\r\n🆔 Collybiopsis confluens (Pers.) R.H.Petersen, 2021\r\n🌐 https://www.gbif.org/pt/species/11993337\r\n📖 Published in: Mycotaxon 136(2): 341\r\n\r\n🇺🇸 Clustered Toughshank\r\n🇩🇪 Knopfstieliger Rübling\r\n🇪🇪 kobar-metskõrges\r\n🇷🇺 Коллибия срастающаяся\r\n\r\n🗓️ 05/08/22, 3:33 PM\r\n🌎 Suurupi LKA, Suurupi skv, Harjumaa, Estonia\r\n🌲🌳 In the ground amongst decaying leaves and the wood sorrel growth (Oxalis acetosella).\r\n🍄 Omphalotaceae / Agaricomycetes\r\n\r\nℹ️ hymenium: Lamellar, white to cream, becoming pale brown with age.\r\nℹ️ cap: Convex when young, expanding to almost flat, smooth, ranging from reddish-brown to ochre.\r\nℹ️ hymenium attachment: Adnexed to slightly decurrent.\r\nℹ️ stipe: Slender, fibrous, whitish to brownish at the base, and darker towards the top.\r\n🟤 spore print: Pale brown to tan.\r\n🍂 ecology: Saprobic; growing in deciduous and coniferous forests, particularly on decaying wood or among leaf litter.\r\n❌ edibility: Inedible due to its small size and tough texture.\r\n📏 fruit body: 2-6 cm tall.\r\n📐 cap: 1-3 cm across.\r\n🔤 Widespread woodland mushroom recognized by its tufted growth often seen on decaying wood. The combination of its smooth cap, slightly decurrent gills, and preference for forested habitats distinguishes it from other forest fungi. Commonly encountered in Europe and North America.\r\n\r\n📷 Sony α7 III (ILCE-7M3)\r\n🎞️ MF, ISO 6400, 1/80s, ƒ/10, 0 ev\r\n🔆 Sunny weather, very deep forest shade\r\n🎨 24MP (RAW), fine tunining, enhance and denoise with Lightroom\r\n📚 13 photos, focus stacking with Photoshop (beta)\r\n🖼️ 1:1 crop\r\n📌 59°27'16.7\"N 24°21'37.0\"E (59.454624, 24.360286)\r\n🔦 Flash did not fire\r\n\r\n🔭 Sony FE 90mm F2.8 Macro G OSS (SEL90M28G)\r\n👋 Handheld, manual mode\r\n🔎 90mm (35mm), 90mm\r\n⏯️ Camera body button\r\n\r\n#️⃣ #fungi #photo #sony #collybiopsisconfluens #collybiopsis #clusteredtoughshank #knopfstieligerrübling #kobarmetskõrges #macro #mushroom #photography #suurupi #mycology #naturephotography #fungilove #mushroomlove #estonianfungi #pilz #eestiseened #pilzfoto #seened #foto #fungiphoto #грибы #mushroomphoto #seenefotod",
-          "photos": [],
+          "photos": [
+            {
+              "src": "/images/posts/Cvpq120MNKr/01.jpg",
+              "thumb": "/thumbs/posts/Cvpq120MNKr/01.webp",
+              "alt": "Collybiopsis confluens — 2023-08-05"
+            }
+          ],
           "sourceFile": "collybiopsis-confluens_2023-08-05_Cvpq120MNKr.txt",
           "source": "local-caption",
           "instagramUrl": "https://www.instagram.com/p/Cvpq120MNKr/"
@@ -35086,7 +35235,28 @@
             "harjumaa"
           ],
           "caption": "👇 ...\r\n🆔 Coprinellus disseminatus (Pers.) J.E.Lange\r\n🌐 https://www.gbif.org/species/2534625\r\n📖 Published in: J.E. Lange. In: Dansk bot. Ark. 9(no. 6): 93. (1938).\r\n🇺🇸 Fairy Inkcap\r\n🇩🇪 Gesäter Tintling\r\n🇪🇪 Seltsiv tindik\r\n🇷🇺 Навозник рассеянный\r\n\r\n🗓️ 30/Jul/23, 5:02 PM\r\n🌎 Kumna mansion park, Kumna, Harju County, Estonia\r\n🪵🏘️ Large cluster on decaying stump of dead deciduous tree. Urban park zone.\r\n🍄 Psathyrellaceae / Agaricomycetes\r\n\r\n ℹ️ hymenium: Gills that are free or nearly so, white when young, turning black and deliquescing (liquefying) as they mature.\r\n ℹ️ cap: Initially bell-shaped or rounded, expanding to almost flat; creamy white, often becoming tinged with brown in the center.\r\n ℹ️ hymenium attachment: Adnate or slightly descending the stipe.\r\n ℹ️ stipe: Cylindrical, white, thin, and delicate, often with a slightly swollen base.\r\n⚫ spore print: Black.\r\n🪵 Saprobic; grows in large clusters on decaying wood.\r\n😐 Edible but insubstantial due to its small size.\r\n📏 fruit body: Up to 3 cm tall.\r\n📐 cap: 0.5-2 cm in diameter.\r\n🔤 Diminutive mushroom which often appears in dense clusters on decaying wood. Its delicate, almost transparent stature and creamy-white caps make it easily distinguishable from other inky cap species. As with other members of its genus, the gills will \"deliquesce\" or turn into an inky black liquid as they mature, a mechanism for spore dispersal.\r\n\r\n🎞️ MF, ISO 3200, 1/125s, ƒ/16, 0 ev\r\n🔆 Bright fair weather with overcast and clouds\r\n🎨 24MP (RAW), fine tune, denoise with Lightroom\r\n📚 4 photos, various angles\r\n🖼️ no crop, landscape\r\n📌 59°19'27.4\"N 24°26'53.9\"E (59.324277, 24.448309)\r\n🔦 Flash did not fire\r\n\r\n📷 Sony α7 III (ILCE-7M3)\r\n🔭 Sony FE 90mm F2.8 Macro G OSS (SEL90M28G)\r\n🏎️ AMD Radeo Vega Frontier Pro\r\n👋 Handheld, manual mode\r\n🔎 90mm (35mm), 90mm\r\n⏯️ Camera body button\r\n\r\n#️⃣ #fungi #photo #sonyalpha #coprinellusdisseminatus #fairyinkcap #tindik #coprinellus #seltsivtindik #macro #mushroom #photography #tintling #mycology #naturephotography #fungilove #gesätertintling #kumnamanor #seened #eestiseened #eesti #inkcap #грибы #foto #pilze #seenefotod #pilzefotografieren #фотогрибов #harjumaa",
-          "photos": [],
+          "photos": [
+            {
+              "src": "/images/posts/Cv0SWNBMP47/01.jpg",
+              "thumb": "/thumbs/posts/Cv0SWNBMP47/01.webp",
+              "alt": "Coprinellus disseminatus — 2023-07-30"
+            },
+            {
+              "src": "/images/posts/Cv0SWNBMP47/02.jpg",
+              "thumb": "/thumbs/posts/Cv0SWNBMP47/02.webp",
+              "alt": "Coprinellus disseminatus — 2023-07-30"
+            },
+            {
+              "src": "/images/posts/Cv0SWNBMP47/03.jpg",
+              "thumb": "/thumbs/posts/Cv0SWNBMP47/03.webp",
+              "alt": "Coprinellus disseminatus — 2023-07-30"
+            },
+            {
+              "src": "/images/posts/Cv0SWNBMP47/04.jpg",
+              "thumb": "/thumbs/posts/Cv0SWNBMP47/04.webp",
+              "alt": "Coprinellus disseminatus — 2023-07-30"
+            }
+          ],
           "sourceFile": "coprinellus-disseminatus_2023-07-30_Cv0SWNBMP47.txt",
           "source": "local-caption",
           "instagramUrl": "https://www.instagram.com/p/Cv0SWNBMP47/"
@@ -35764,7 +35934,13 @@
             "фото"
           ],
           "caption": "👇 ...\r\n🆔 Coprinellus micaceus (Bull.) Vilgalys, Hopple & Jacq.Johnson\r\n🌐 https://www.gbif.org/species/2534578\r\n📖 Published in: Vilgalys, Hopple & Jacq. Johnson. In: in Redhead, Vilgalys, Moncalvo, Johnson & Hopple, Taxon 50(1): 234. (2001).\r\n🇺🇸 glistening inky cap\r\n🇩🇪 Gemeiner Glimmertintling\r\n🇪🇪 sätendav tindik\r\n🇷🇺 Навозник мерцающий\r\n🇫🇷 coprin micacé\r\n🇪🇸 coprino micáceo\r\n\r\n🗓️ 20/07/23, 5:00 PM\r\n🌎 Liivaoja, Kadriorg, Tallinn\r\n🪵 In dark corner, in dirt, near decaying wood remains\r\n🍄 Psathyrellaceae / Agaricomycetes\r\n\r\n ℹ️ Gills on hymenium, initially white, becoming black and liquifying (deliquescing) with age\r\n ℹ️ Cap is conical to bell-shaped, yellow-brown to tan, covered in small, white, mica-like granules (micaceous)\r\n ℹ️ Hymenium is lamellar\r\n ℹ️ Stipe is white, hollow, smooth\r\n⚫ Spore print is black\r\n🪵 Ecology is saprotrophic, typically growing on or near rotting wood\r\n🙁🍷🍴 Edible when young and the gills are still white, but not recommended due to the possibility of confusion with other \"inky cap\" species which can cause symptoms of poisoning when consumed with alcohol.\r\n📏 Fruit body to 3-12 cm tall\r\n📐 Cap to 1-5 cm\r\n🔤 Is known for its distinctive glistening cap, which is due to the presence of small, mica-like granules. It is also characterized by its ability to quickly \"melt\" away during spore dispersal, a common trait in the inky cap group of mushrooms.\r\n\r\n📷 Sony α7 III (ILCE-7M3)\r\n🎞️ AF, ISO 8000, 1/100s, ƒ/11, 0 ev\r\n🔆 Deep shadow with bright sunny weather in the evening\r\n🎨 24MP (RAW), fine tunining Lightroom\r\n🔦 Flash not fired\r\n\r\n🔭 Sony FE 50mm F2.8 Macro (SEL50M28)\r\n👋 Handheld, manual mode\r\n🔎 50mm (35mm), 50mm\r\n⏯️ Camera body button\r\n\r\n#️⃣ #fungi #photo #sony #coprinellus #coprinellusmicaceus #glisteninginkycap #gemeinerglimmertintling #tindik #macro #mushroom #photography #tallinn #mycology #naturephotography #fungilove #fungifanatic #estonia #pilze #eestiseened #eestimaa #seen #seenpilt #pilzfoto #pilz #inkycap #foto #fotografia #coprin #coprino #фото",
-          "photos": [],
+          "photos": [
+            {
+              "src": "/images/posts/Cu_oGHMsvD2/01.jpg",
+              "thumb": "/thumbs/posts/Cu_oGHMsvD2/01.webp",
+              "alt": "Coprinellus micaceus — 2023-07-20"
+            }
+          ],
           "sourceFile": "coprinellus-micaceus_2023-07-20_Cu_oGHMsvD2.txt",
           "source": "local-caption",
           "instagramUrl": "https://www.instagram.com/p/Cu_oGHMsvD2/"
@@ -35961,7 +36137,33 @@
             "coprino"
           ],
           "caption": "👇 ...\r\n🆔 Coprinellus micaceus (Bull.) Vilgalys, Hopple & Jacq.Johnson\r\n🌐 https://www.gbif.org/species/2534578\r\n📖 Published in: Vilgalys, Hopple & Jacq. Johnson. In: in Redhead, Vilgalys, Moncalvo, Johnson & Hopple, Taxon 50(1): 234. (2001).\r\n🇺🇸 glistening inky cap\r\n🇩🇪 Gemeiner Glimmertintling\r\n🇪🇪 sätendav tindik\r\n🇷🇺 Навозник мерцающий\r\n🇫🇷 coprin micacé\r\n🇪🇸 coprino micáceo\r\n\r\n🗓️ 5/03/23, 12:06 PM\r\n🌎 Vienna - Am Mühlwasser, Danube-Auen National Park, Austria \r\n🪵 On decaying hardwood and nearby\r\n🍄 Psathyrellaceae / Agaricomycetes\r\n\r\n ℹ️ Gills on hymenium, initially white, becoming black and liquifying (deliquescing) with age\r\n ℹ️ Cap is conical to bell-shaped, yellow-brown to tan, covered in small, white, mica-like granules (micaceous)\r\n ℹ️ Hymenium is lamellar\r\n ℹ️ Stipe is white, hollow, smooth\r\n⚫ Spore print is black\r\n🪵 Ecology is saprotrophic, typically growing on or near rotting wood\r\n🙁🍷🍴 Edible when young and the gills are still white, but not recommended due to the possibility of confusion with other \"inky cap\" species which can cause symptoms of poisoning when consumed with alcohol.\r\n📏 Fruit body to 3-12 cm tall\r\n📐 Cap to 1-5 cm\r\n🔤 Is known for its distinctive glistening cap, which is due to the presence of small, mica-like granules. It is also characterized by its ability to quickly \"melt\" away during spore dispersal, a common trait in the inky cap group of mushrooms.\r\n\r\n📷 Sony CyberShot DSC-HX99\r\n🎞️ AF, ISO 400, 1/160s, ƒ/6.3, 0 ev (1,2,3,4,5)\r\n🔆 Partial overcast with sun, sun glare, sudden contrasting brightness change\r\n🎨 18MP (RAW+JPG), no edit, 1:1 crop\r\n📌 N 48° 11' 22.36\" (48.189545), E 16° 28' 35.81\" (16.476338)\r\n🔦 Flash not fired, compulsory flash mode\r\n\r\n🔭 4.25-118mm f/3.5-6.4\r\n👋 Handheld, manual mode\r\n🔎 24mm (35mm), 4.25mm\r\n📶 Bluetooth <= iPhone 12 (GPS)\r\n⏯️ Camera body button\r\n\r\n#️⃣ #fungi #photo #sony #coprinellus #coprinellusmicaceus #glisteninginkycap #gemeinerglimmertintling #tindik #macro #mushroom #photography #vienna #mycology #naturephotography #fungilove #fungifanatic #austria #pilze #österreichpilze #österreich #pilz #donau #foto #fotografia #coprin #coprino",
-          "photos": [],
+          "photos": [
+            {
+              "src": "/images/posts/CsHMz9cID1N/01.jpg",
+              "thumb": "/thumbs/posts/CsHMz9cID1N/01.webp",
+              "alt": "Coprinellus micaceus — 2023-05-03"
+            },
+            {
+              "src": "/images/posts/CsHMz9cID1N/02.jpg",
+              "thumb": "/thumbs/posts/CsHMz9cID1N/02.webp",
+              "alt": "Coprinellus micaceus — 2023-05-03"
+            },
+            {
+              "src": "/images/posts/CsHMz9cID1N/03.jpg",
+              "thumb": "/thumbs/posts/CsHMz9cID1N/03.webp",
+              "alt": "Coprinellus micaceus — 2023-05-03"
+            },
+            {
+              "src": "/images/posts/CsHMz9cID1N/04.jpg",
+              "thumb": "/thumbs/posts/CsHMz9cID1N/04.webp",
+              "alt": "Coprinellus micaceus — 2023-05-03"
+            },
+            {
+              "src": "/images/posts/CsHMz9cID1N/05.jpg",
+              "thumb": "/thumbs/posts/CsHMz9cID1N/05.webp",
+              "alt": "Coprinellus micaceus — 2023-05-03"
+            }
+          ],
           "sourceFile": "coprinellus-micaceus_2023-05-03_CsHMz9cID1N.txt",
           "source": "local-caption",
           "instagramUrl": "https://www.instagram.com/p/CsHMz9cID1N/"
@@ -37706,7 +37908,18 @@
             "фото"
           ],
           "caption": "👇 ...\r\n🆔 Coprinus comatus (O.F.Müll.) Pers.\r\n🌐 https://www.gbif.org/species/7987658\r\n📖 Published in: Pers. In: Tent. disp. meth. fung. (Lipsiae): 62. (1797).\r\n🇺🇸 shaggy ink cap\r\n🇩🇪 Schopf-Tintling\r\n🇪🇪 Soomustindik\r\n🇷🇺 Навозник белый\r\n🇫🇷 Coprin chevelu\r\n🇪🇸 hongo tinta\r\n\r\n🗓️ 20/07/23, 4:54 PM\r\n🌎 Liivaoja, Kadriorg, Tallinn\r\n☘️🌱 In grass lawn patch, partially open space\r\n🍄 Agaricaceae / Agaricomycetes\r\n\r\n ℹ️ gills on hymenium, white to pink, becoming black and liquefying (deliquescent) with age\r\n ℹ️ cap is elongated, cylindrical or ellipsoid when young, opening out to become bell-shaped, white with shaggy scales, hence its common name\r\n ℹ️ hymenium is lamellar\r\n ℹ️ stipe is tall, white, hollow, and may have a moveable ring\r\n⚫️ spore print is black\r\n☘️🌱 ecology is saprotrophic, typically found growing on the ground in groups, often on disturbed soil or in grassy areas\r\n🍴 edibility: choice when young, but should be eaten before the gills turn black and liquefy\r\n📏 fruit body to 10-40 cm tall\r\n📐 cap to 3-5 cm wide when expanded\r\n🔤 Easily recognized mushroom due to its tall, white, shaggy cap, which turns black and begins to dissolve from the bottom up as it matures. This process of liquefying gills is known as deliquescence. It's a popular edible mushroom, best eaten when young and while the gills are still white or pink. The taste is mild and not distinctive. Note that like other members of the Coprinus genus, it should not be consumed with alcohol as it can cause adverse reactions.\r\n\r\n📷 Sony α7 III (ILCE-7M3)\r\n🎞️ AF, ISO 3200, 1/60s, ƒ/16, 0 ev\r\n🔆 Open space with evening sun overcast\r\n🎨 24MP (RAW), fine tunining Lightroom\r\n🔦 Flash not fired\r\n\r\n🔭 Sony FE 50mm F2.8 Macro (SEL50M28)\r\n👋 Handheld, manual mode\r\n🔎 50mm (35mm), 50mm\r\n⏯️ Camera body button\r\n\r\n#️⃣ #fungi #photo #sony #coprinus #coprinuscomatus #shaggyinkcap #schopftintling #tindik #tintling #soomustindik #macro #mushroom #photography #tallinn #mycology #naturephotography #fungilove #fungifanatic #estonia #pilze #eestiseened #eestimaa #seen #seenpilt #pilzfoto #pilz #inkcap #foto #fotografia #coprin #hongotinta #фото",
-          "photos": [],
+          "photos": [
+            {
+              "src": "/images/posts/Cu_pkTCsV5g/01.jpg",
+              "thumb": "/thumbs/posts/Cu_pkTCsV5g/01.webp",
+              "alt": "Coprinus comatus — 2023-07-20"
+            },
+            {
+              "src": "/images/posts/Cu_pkTCsV5g/02.jpg",
+              "thumb": "/thumbs/posts/Cu_pkTCsV5g/02.webp",
+              "alt": "Coprinus comatus — 2023-07-20"
+            }
+          ],
           "sourceFile": "coprinus-comatus_2023-07-20_Cu_pkTCsV5g.txt",
           "source": "local-caption",
           "instagramUrl": "https://www.instagram.com/p/Cu_pkTCsV5g/"
@@ -50182,9 +50395,9 @@
       },
       "scienceYear": "2026",
       "scienceSource": {
-        "id": "entoloma-sericellum-2026-09-22",
+        "id": "Ddn-JzIjLt-",
         "date": "2026-09-22",
-        "file": "entoloma-sericellum_2026-09-22_xxxxxxxxxxx.txt"
+        "file": "entoloma-sericellum_2026-09-22_Ddn-JzIjLt-.txt"
       },
       "description": "Tiny white pinkgill gradually turning yellow-ochre with age",
       "latestDate": "2026-09-22",
@@ -50198,8 +50411,8 @@
       ],
       "observations": [
         {
-          "id": "entoloma-sericellum-2026-09-22",
-          "shortcode": null,
+          "id": "Ddn-JzIjLt-",
+          "shortcode": "Ddn-JzIjLt-",
           "speciesId": "entoloma-sericellum",
           "latinName": "Entoloma sericellum",
           "identification": "Entoloma sericellum (Fr.) P. Kumm.",
@@ -50383,10 +50596,36 @@
             "naturephotography"
           ],
           "caption": "👇 …\r\n🆔 Entoloma sericellum (Fr.) P. Kumm.\r\n🍄 Entolomataceae / Agaricales / Agaricomycetes\r\n\r\n🇺🇸 Cream Pinkgill\r\n🇩🇪 Weißer Glöckling\r\n🇫🇮 Valkorusokas   \r\n🇪🇪 Kreem punalehik\r\n🇷🇺 Энтолома шелконосная\r\n\r\n🗓️ 22/Sep/2026 (🌅🌇), 3:06 PM \r\n🌡️ 14°C ⛅ Scattered clouds 💨 Wind 40° NE->SW, 20 km/h\r\n🌎 Soodla forest, Anija, Harju, Eesti  \r\n📌 59°23'15.3\"N 25°23'43.2\"E\r\n🌲🌳🌻☘️💧🍃 Mixed (conifer dominant) forest woodland edge damp waxcap grassland, in sandy soil\r\n\r\nℹ️ Hymenium: Gills moderately distant; pure white when young, becoming pale pink with maturity; edges concolorous\r\nℹ️ Cap: Hemispherical to convex, later expanding; white, progressively yellow-ochre from centre; finely felted to minutely squamulose; non-hygrophanous, margin not translucently striate\r\nℹ️ Hymenium Attachment: Adnate with a slight decurrent tooth\r\nℹ️ Stipe: Slender, cylindrical, white to yellowish-ochre; pruinose near apex, smooth and polished below; hollow and fragile; ring absent\r\n🔴⚪ Spore print pink\r\n☘️🍂 Saprobic mainly in semi-natural grasslands, meadows and grassy woodland edges, also parkland and deciduous woodland; scattered or in small groups, occasionally arcs; summer to late autumn\r\n😒 Inedible\r\n📏 Fruit body small; stipe ~2–4 cm long and ~0.1–0.2 cm thick\r\n📐 Cap ∅ ~0.5–2(–3) cm\r\n🔪 White, thin and brittle, unchanging when cut\r\n🧪 No macroscopic reagents reaction\r\n👃 Indistinct\r\n👅 Indistinct\r\n🔬 Spores heterodiametrical, distinctly 5–7-angled, ~9.5–14 × 7–9.5 µm; basidia 4-spored with clamps; cheilocystidia scattered, cylindrical, fusiform to lageniform, ~35–50 × 7–11.5 µm; pileipellis transitional between cutis and trichoderm\r\n🔤 Tiny white pinkgill gradually turning yellow-ochre with age\r\n\r\n🎞️ MF, ISO 1250, 1/200s, ƒ/11\r\n💡 Open spot, dispersed light\r\n🎨 Lightroom, IrfanView\r\n🖼️ 24MP (RAW), 3:2, no crop\r\n📖 5 photos, various views\r\n\r\n📷 Sony α7 III (ILCE-7M3)\r\n🔭 Sony FE 50mm F2.8 Macro (SEL50M28)\r\n\r\n🌐 https://www.gbif.org/taxon/6FDM9\r\n📜 (1871). Führ. Pilzk. (Zerbst): 97.\r\n\r\n#entolomasericellum #mushroomphotos #fungimacro #creampinkgill #naturephotography",
-          "photos": [],
-          "sourceFile": "entoloma-sericellum_2026-09-22_xxxxxxxxxxx.txt",
+          "photos": [
+            {
+              "src": "/images/posts/Ddn-JzIjLt-/01.jpg",
+              "thumb": "/thumbs/posts/Ddn-JzIjLt-/01.webp",
+              "alt": "Entoloma sericellum — 2026-09-22"
+            },
+            {
+              "src": "/images/posts/Ddn-JzIjLt-/02.jpg",
+              "thumb": "/thumbs/posts/Ddn-JzIjLt-/02.webp",
+              "alt": "Entoloma sericellum — 2026-09-22"
+            },
+            {
+              "src": "/images/posts/Ddn-JzIjLt-/03.jpg",
+              "thumb": "/thumbs/posts/Ddn-JzIjLt-/03.webp",
+              "alt": "Entoloma sericellum — 2026-09-22"
+            },
+            {
+              "src": "/images/posts/Ddn-JzIjLt-/04.jpg",
+              "thumb": "/thumbs/posts/Ddn-JzIjLt-/04.webp",
+              "alt": "Entoloma sericellum — 2026-09-22"
+            },
+            {
+              "src": "/images/posts/Ddn-JzIjLt-/05.jpg",
+              "thumb": "/thumbs/posts/Ddn-JzIjLt-/05.webp",
+              "alt": "Entoloma sericellum — 2026-09-22"
+            }
+          ],
+          "sourceFile": "entoloma-sericellum_2026-09-22_Ddn-JzIjLt-.txt",
           "source": "local-caption",
-          "instagramUrl": null
+          "instagramUrl": "https://www.instagram.com/p/Ddn-JzIjLt-/"
         }
       ],
       "characteristics": {
@@ -50725,7 +50964,23 @@
             "dunabe"
           ],
           "caption": "🆔 Entoloma vernum S.Lundell\r\n🧾 https://bit.ly/428OrdO\r\n📖 Published in: S. Lundell. In: Svensk bot. Tidskr. 31: 193. (1937).\r\n🇺🇸 Early spring pinkgill\r\n🇩🇪 Frühlingsrötling\r\n🇪🇪 Kevad-punalehik\r\n🇷🇺 Энтолома весенняя\r\n\r\n🗓️ 5/03/23, 1:13 PM\r\n🌎 Vienna - Am Mühlwasser, Danube-Auen National Park, Austria\r\n🌳🍃 Sparse deciduous forest, grassland (birch, alder, oak). In soil.\r\n🍄 Entolomataceae / Agaricomycetes\r\n\r\nℹ️ gills adhering to the stem almost or freely from it, quite frequent, in young mushrooms are white, brownish or grayish, turning pink with age\r\nℹ️ cap is sharply conical at a young age, opening to flat-convex, with a tubercle in the center, hygrophanous, brown in color, darker in the central part than closer to the edge, smooth, silky, fibrous\r\nℹ️ hymenium is lamellar\r\nℹ️ stipe is bare\r\n⚪️ spore print is rosy\r\n🌳 ecology is saprotroph\r\n🤢 edibility: poisonous\r\n📏 fruit body to 2-9 cm, leg 0.2-1 cm thick\r\n📐 cap 1-6 cm\r\n\r\n📷 Sony CyberShot DSC-HX99\r\n🎞️ (1) AF, ISO 400, 1/80s, ƒ/8, 0 ev\r\n🎞️ (2) AF, ISO 400, 1/100s, ƒ/8, 0 ev\r\n🎞️ (3) AF, ISO 400, 1/125s, ƒ/8, 0 ev\r\n\r\n🔆 Partial overcast with sun, open space\r\n🎨 18MP (RAW+JPG), 1:1 & accent crop, fine tune, iPhone built-in software\r\n📌 N 48° 11' 30.6\" (48.19182833), E 16° 28' 58.6\" (16.48293666)\r\n\r\n🔦 Flash not fired, compulsory flash mode\r\n\r\n🔭 4.25-118mm f/3.5-6.4\r\n👋 Handheld, manual mode\r\n🔎 24mm (35mm), 4.25mm\r\n📶 Bluetooth <= iPhone 12 (GPS)\r\n⏯️ Camera body button\r\n\r\n#️⃣ #fungi #photo #sony #entoloma #entolomavernum #pinkgill #frühlingsrötling #punalehik #macro #mushroom #photography #tallinn #mycology #naturephotography #fungilove #fungifanatic #austria #pilze #österreichpilze #österreich #pilz #donau #foto #fotografia #mycology #dunabe",
-          "photos": [],
+          "photos": [
+            {
+              "src": "/images/posts/Cr3kzqNM7Cj/01.jpg",
+              "thumb": "/thumbs/posts/Cr3kzqNM7Cj/01.webp",
+              "alt": "Entoloma vernum — 2023-05-03"
+            },
+            {
+              "src": "/images/posts/Cr3kzqNM7Cj/02.jpg",
+              "thumb": "/thumbs/posts/Cr3kzqNM7Cj/02.webp",
+              "alt": "Entoloma vernum — 2023-05-03"
+            },
+            {
+              "src": "/images/posts/Cr3kzqNM7Cj/03.jpg",
+              "thumb": "/thumbs/posts/Cr3kzqNM7Cj/03.webp",
+              "alt": "Entoloma vernum — 2023-05-03"
+            }
+          ],
           "sourceFile": "entoloma-vernum_2023-05-03_Cr3kzqNM7Cj.txt",
           "source": "local-caption",
           "instagramUrl": "https://www.instagram.com/p/Cr3kzqNM7Cj/"
@@ -52947,7 +53202,28 @@
             "vaccinium"
           ],
           "caption": "👇 ...\r\n🆔 Exobasidium vaccinii (Fuckel) Woronin\r\n🌐 https://www.gbif.org/species/9589545\r\n📖 Published in: Woronin. In: Verh. Naturf. Ges. Freiburg 4(4): 397. (1867).\r\n🇺🇸 azalea leaf gall\r\n🇩🇪 Gemeine Preiselbeer-Nacktbasidie\r\n🇪🇪 Pohla-paisseen\r\n🇷🇺 Экзобазидиум брусничный\r\n\r\n🗓️ 8/20/16, 1:47 PM (1)\r\n🗓️ 8/27/16, 5:39 PM (2)\r\n🗓️ 8/27/16, 5:55 PM (3)\r\n🗓️ 9/7/16, 2:31 PM (4)\r\n🌎 Tõrvajõe, Vaivara, Estonia\r\n🌱 Host plant Vaccinium vitis-idaea. Plant pathogen.\r\n🍄 Exobasidiaceae / Exobasidiomycetes\r\n\r\n🚫 hymenium is not applicable due to the nature of the organism, which is a plant pathogenic fungus causing leaf and flower gall on Vaccinium species\r\n🚫 cap is not applicable, as this fungus does not form traditional mushroom caps\r\n🚫 hymenium attachment is not applicable\r\n🚫 stipe is not applicable\r\n⚪️ spore print is not typically obtained, but the spores are usually white to cream in color\r\n🌱 ecology is parasitic, typically found on the leaves, flowers, and stems of Vaccinium species (including blueberries, cranberries, and bilberries)\r\n🚫 not applicable, as this fungus is not typically considered for consumption\r\n📏 size varies, but the fungal structures visible on the host plant are typically very small\r\n🔤 Plant pathogen causing a disease in Vaccinium species. The fungus induces the host to produce large, swollen, often brightly colored galls in which the fungus proliferates and produces spores. Although it can reduce the aesthetic value of ornamental plants, it is generally not harmful to the overall health of the host plant.\r\n\r\n📷 Sony Cyber-shot DSC-HX50\r\n🎞️ AF, ISO 400, 1/125s, ƒ/4.5 (1)\r\n🎞️ AF, ISO 800, 1/100s, ƒ/4.5 (2)\r\n🎞️ AF, ISO 400, 1/250s, ƒ/5.6 (3)\r\n🎞️ AF, ISO 400, 1/125s, ƒ/5.6 (4)\r\n🔆 Forest shade, manual WB\r\n🎨 20.4MP (JPG), no edit, 1:1 crop (1,2,3,4)\r\n🔦 did not fire\r\n\r\n🔭 Sony G Lens (4.3-129mm f/3.5-6.3)\r\n👋 Handheld, manual mode\r\n🔎 42.3mm (35mm), 7.53mm (1)\r\n🔎 53.07mm (35mm), 9.45mm (2)\r\n🔎 95.37mm (35mm), 16.98mm (3)\r\n🔎 112.62mm (35mm), 20.04mm (4)\r\n⏯️ Camera body button\r\n\r\n#️⃣ #fungi #photo #sony #exobasidium #exobasidiumvaccinii #plantpathogen #azalealeafgall #parasiticfungi #macro #mushroom #photography #tõrvajõe #mycology #naturephotography #fungilove #fungifanatic #estonia #pilz #eestiseened #eesti #seen #vaivara #foto #fotografia #pohlapaisseen #vaccinium",
-          "photos": [],
+          "photos": [
+            {
+              "src": "/images/posts/Csw_ODyIMet/01.jpg",
+              "thumb": "/thumbs/posts/Csw_ODyIMet/01.webp",
+              "alt": "Exobasidium vaccinii — 2016-08-27"
+            },
+            {
+              "src": "/images/posts/Csw_ODyIMet/02.jpg",
+              "thumb": "/thumbs/posts/Csw_ODyIMet/02.webp",
+              "alt": "Exobasidium vaccinii — 2016-08-27"
+            },
+            {
+              "src": "/images/posts/Csw_ODyIMet/03.jpg",
+              "thumb": "/thumbs/posts/Csw_ODyIMet/03.webp",
+              "alt": "Exobasidium vaccinii — 2016-08-27"
+            },
+            {
+              "src": "/images/posts/Csw_ODyIMet/04.jpg",
+              "thumb": "/thumbs/posts/Csw_ODyIMet/04.webp",
+              "alt": "Exobasidium vaccinii — 2016-08-27"
+            }
+          ],
           "sourceFile": "exobasidium-vaccinii_2016-08-27_Csw_ODyIMet.txt",
           "source": "local-caption",
           "instagramUrl": "https://www.instagram.com/p/Csw_ODyIMet/"
@@ -54667,7 +54943,13 @@
             "tuletael"
           ],
           "caption": "👇 ...\r\n🆔 Fomes fomentarius (L.) Fr.\r\n🌐 https://www.gbif.org/species/8068867\r\n📖 Published in: Fr. In: Summa veg. Scand., Sectio Post. (Stockholm): 321. (1849).\r\n🇺🇸 Hoof Fungus\r\n🇩🇪 Zunderschwamm\r\n🇪🇪 Tuletael\r\n🇷🇺 Трутовик настоящий\r\n🇫🇷 Amadouvier\r\n🇪🇸 Hongo yesca\r\n\r\n🗓️ 6/14/23, 9:04 PM\r\n🌎 Suhkrumäe trepp, Kadriorg, Estonia\r\n🌳🪵🛣️ Urban woodland park zone (Birch sp.), dead tree trunks\r\n🍄 Polyporaceae / Agaricomycetes\r\n\r\n ℹ️ pores on hymenium, small and round, white to grayish\r\n ℹ️ cap is hoof-shaped or semicircular, with a hard, woody texture, and typically has concentric zones of different colors ranging from gray to brown\r\n ℹ️ hymenium is tubular (composed of tubes instead of gills)\r\n ℹ️ stipe is not present, as this fungus grows directly from the wood in a bracket-like manner\r\n🟤🟠 spore print is pale brown to cinnamon\r\n🌳🪵 ecology is saprotrophic and sometimes parasitic, typically found on the wood of deciduous trees, especially beech and birch\r\n🚫 inedible due to its tough, woody texture\r\n📏 individual brackets can be 5-45 cm across\r\n🔤 Polypore mushroom known for its hard, woody texture and its historical use as tinder for starting fires. The fruiting bodies are perennial and can persist for many years, growing slowly and developing new layers of tubes. The fungus has also been used traditionally for making amadou, a material prepared from the flesh of the fruiting bodies and used for various purposes, including as a firestarter and as a material for hats and other items.\r\n\r\n📷 Sony α7 III (ILCE-7M3)\r\n🎞️ AF, ISO 640, 1/40s, ƒ/16, 0 ev\r\n🔆 Clear sky, no wind, evening sun\r\n🎨 24MP (RAW), fine tune Lightroom\r\n🔦 No flash\r\n📌 N 59° 27' 06.1\" (59.451702), E 24° 48' 42.1\" (24.811688)\r\n\r\n🔭 Sony FE 50mm F2.8 Macro (SEL50M28)\r\n👋 Handheld, manual mode\r\n🔎 50mm (35mm), 50mm\r\n📶 Bluetooth <= iPhone 12 (GPS)\r\n⏯️ Camera body button\r\n\r\n#️⃣ #fungi #photo #sony #fomesfomentarius #hoofFungus #zunderschwamm #fomes #macro #mushroom #photography #tallinn #mycology #naturephotography #fungilove #fungifanatic #estonia #seened #eestiseened #eesti #pilz #грибы #foto #fotografia #tuletael",
-          "photos": [],
+          "photos": [
+            {
+              "src": "/images/posts/CtfAsVDsheJ/01.jpg",
+              "thumb": "/thumbs/posts/CtfAsVDsheJ/01.webp",
+              "alt": "Fomes fomentarius — 2023-06-14"
+            }
+          ],
           "sourceFile": "fomes-fomentarius_2023-06-14_CtfAsVDsheJ.txt",
           "source": "local-caption",
           "instagramUrl": "https://www.instagram.com/p/CtfAsVDsheJ/"
@@ -55750,7 +56032,23 @@
             "mushroomlove"
           ],
           "caption": "👇 ...\r\n🆔 Fomitopsis pinicola (Sw.) P.Karst.\r\n🌐 https://www.gbif.org/species/2542395\r\n📖 Published in: P. Karst. In: Meddn Soc. Fauna Flora fenn. 6: 9. (1881).\r\n🇺🇸 Red-Banded Polypore\r\n🇩🇪 Rotrandiger Baumschwamm\r\n🇪🇪 Kännupess\r\n🇷🇺 Трутовик окаймлённый\r\n\r\n🗓️ 28/07/23, 7:51 PM\r\n🌎 Tädu terviserada, Lubja, Harjumaa\r\n🌲🪵 In pine (Pinus sylvestris) forest, on dead pine trunk\r\n🍄 Fomitopsidaceae / Agaricomycetes\r\n\r\n ℹ️ hymenium is poroid\r\n ℹ️ no distinct cap, instead, a bracket-like or hoof-shaped fruiting body, red-brown to black on top\r\n🚫 hymenium attachment is not applicable as it grows directly out of the wood\r\n🚫 lacks a stipe\r\n🟠 spore print is yellow-brown\r\n🌲🪵 ecology is parasitic or saprotrophic, primarily found on conifer trees but can also be found on deciduous trees\r\n🚫 edibility: inedible due to its tough, woody texture\r\n📏 fruit body to 10-30 cm across\r\n📐 bracket depth 3-15 cm\r\n🔤 Fungus that forms large, bracket-like or hoof-shaped fruiting bodies on trees. The top surface is typically glossy and zonate with bands of different colors, ranging from white to red-brown to almost black. The underside contains many small pores where the spores are released. It's often found on dead or dying trees, where it can act as a decomposer (saprotrophic) or weak parasite. Although it's not poisonous, it's considered inedible due to its tough, woody texture. It has been used traditionally in some cultures for medicinal purposes.\r\n\r\n📷 Sony α7 III (ILCE-7M3)\r\n🎞️ MF, ISO 8000, 1/160s, ƒ/18, 0 ev\r\n🔆 Forest shade, with late evening partial sun\r\n🎨 24MP (RAW), fine tunining Lightroom \r\n🖼️ 1:1 crop\r\n📚 3 photos, various view angles\r\n📌 59°31'08.3\"N 24°54'06.4\"E (59.518970, 24.901774)\r\n🔦 Flash not fired\r\n\r\n🔭 Sony FE 90mm F2.8 Macro G OSS (SEL90M28G)\r\n👋 Handheld, manual mode\r\n🔎 90mm (35mm), 90mm\r\n⏯️ Camera body button\r\n\r\n#️⃣ #fungi #photo #sony #fomitopsis #fomitopsispinicola #redbandedpolypore #rotrandigerbaumschwamm #kännupess #polypore #гриб #macro #mushroom #photography #harjumaa #mycology #naturephotography #fungilove #fungifanatic #estonia #pilze #eestiseened #eestimaa #seen #seenpilt #pilzfoto #pilz #иaumschwamm #foto #mushroomlove #fungilove",
-          "photos": [],
+          "photos": [
+            {
+              "src": "/images/posts/CvSnnQdsA14/01.jpg",
+              "thumb": "/thumbs/posts/CvSnnQdsA14/01.webp",
+              "alt": "Fomitopsis pinicola — 2023-07-28"
+            },
+            {
+              "src": "/images/posts/CvSnnQdsA14/02.jpg",
+              "thumb": "/thumbs/posts/CvSnnQdsA14/02.webp",
+              "alt": "Fomitopsis pinicola — 2023-07-28"
+            },
+            {
+              "src": "/images/posts/CvSnnQdsA14/03.jpg",
+              "thumb": "/thumbs/posts/CvSnnQdsA14/03.webp",
+              "alt": "Fomitopsis pinicola — 2023-07-28"
+            }
+          ],
           "sourceFile": "fomitopsis-pinicola_2023-07-28_CvSnnQdsA14.txt",
           "source": "local-caption",
           "instagramUrl": "https://www.instagram.com/p/CvSnnQdsA14/"
@@ -62645,7 +62943,13 @@
             "seenefotod"
           ],
           "caption": "👇 ...\r\n🆔 Gyrodon lividus (Bull.) Sacc.\r\n🌐 https://www.gbif.org/species/8972210\r\n📖 Published in: Sacc. In: Syll. fung. (Abellini) 6: 52. (1888).\r\n🇺🇸 Alder Bolete\r\n🇩🇪 Erlen-Grübling\r\n🇪🇪 Lepapuravik\r\n🇷🇺 Гиродон сизоватый\r\n\r\n🗓️ 05/08/22, 4:22 PM\r\n🌎 Suurupi LKA, Suurupi skv, Harjumaa, Estonia\r\n🌲🌳 Mixed deep forest, with abundance of spruce and birch trees. Nearby with alder (Alnus sp.) trees.\r\n🍄 Paxillaceae / Agaricomycetes\r\n\r\n ℹ️ hymenium is tubular or poroid, olive-brown\r\n ℹ️ cap is convex to flat, with an uneven surface, yellowish-brown to olive-brown\r\n ℹ️ hymenium attachment is slightly decurrent to the stipe\r\n ℹ️ stipe is cylindrical, paler than the cap, firm, with a smooth surface\r\n🟤🟠 spore print is ochre to olive-brown\r\n🌳 ecology is mycorrhizal, specifically associated with alder (Alnus spp.)\r\n🤮 edibility: considered inedible; can cause gastrointestinal distress if consumed\r\n📏 fruit body to 4-8 cm tall\r\n📐 cap to 3-7 cm\r\n🔤 Remarkable mushroom due to its decurrent, bright yellow pores which undergo a color change to blue-grey when bruised. It holds a close taxonomic relation to the genus Paxillus. Its primary habitat is in Europe, forming a symbiotic mycorrhizal association with alders, although reports also indicate its presence in regions such as China, Japan, and California. Notably different from the typical boletes, this mushroom stands out both for its unique association with alder and its distinct pore coloration. \r\n\r\n📷 Sony α7 III (ILCE-7M3)\r\n🎞️ MF, ISO 6400, 1/160s, ƒ/9.0, 0 ev\r\n🔆 Sunny weather, very deep forest shade\r\n🎨 24MP (RAW), fine tunining, enhance and denoise with Lightroom\r\n📚 30 photos, focus stacking with Zerene Stacker\r\n🖼️ proportional accent crop\r\n📌 59°27'16.7\"N 24°21'37.0\"E (59.454624, 24.360286)\r\n🔦 Flash did not fire\r\n\r\n🔭 Sony FE 90mm F2.8 Macro G OSS (SEL90M28G)\r\n👋 Handheld, manual mode\r\n🔎 90mm (35mm), 90mm\r\n⏯️ Camera body button\r\n\r\n#️⃣ #fungi #photo #sony #gyrodonlividus #gyrodon #alderbolete #erlengrübling #lepapuravik #macro #mushroom #photography #suurupi #mycology #naturephotography #fungilove #mushroomlove #estonianfungi #pilz #eestiseened #pilzfoto #seened #foto #fungiphoto #грибы #mushroomphoto #seenefotod",
-          "photos": [],
+          "photos": [
+            {
+              "src": "/images/posts/CvlAp2RMC9l/01.jpg",
+              "thumb": "/thumbs/posts/CvlAp2RMC9l/01.webp",
+              "alt": "Gyrodon lividus — 2023-08-05"
+            }
+          ],
           "sourceFile": "gyrodon-lividus_2023-08-05_CvlAp2RMC9l.txt",
           "source": "local-caption",
           "instagramUrl": "https://www.instagram.com/p/CvlAp2RMC9l/"
@@ -64238,7 +64542,13 @@
             "lorchel"
           ],
           "caption": "🆔 Helvella acetabulum (L.) Quél.\r\n🧾 https://bit.ly/3nwQCso\r\n📖 Published in: Quél. In: Hyménomycètes, Fasc. Suppl. (Alençon): 102. (1874).\r\n🇺🇸 vinegar cup\r\n🇩🇪 Hochgerippte Becher-Lorchel\r\n🇪🇪 Karikhelvell\r\n🇷🇺 Лопастник бокальчатый\r\n\r\n🗓️ 5/13/23, 1:31 PM\r\n🌎 Vienna - Am Mühlwasser, Danube-Auen National Park, Austria\r\n🌳🍂 Deciduous forest, sandy soil (birch, beech, oak, alder)\r\n🍄 Helvellaceae / Pezizomycetes\r\n\r\nℹ️ no distinct cap, but rather a lobed, cup-shaped structure, grayish-brown to dark brown, smooth or slightly wrinkled\r\nℹ️ hymenium is smooth\r\n🚫 hymenium attachment is not applicable\r\nℹ️ stipe is hollow, cylindrical, furrowed, whitish to pale grayish-brown\r\n⚪️ spore print is white\r\n🌳 ecology is saprotrophic\r\n☹️ edibility: not recommended, as some Helvella species contain the toxin gyromitrin\r\n📏 fruit body to 3-10 cm tall\r\n📐 \"cap\" to 3-8 cm\r\n🔤 Commonly known as the \"Vinegar Cup,\" Helvella acetabulum is easily recognized by its distinct cup-shaped, lobed structure and furrowed stipe. It usually grows on the ground in mixed forests, particularly under hardwoods.\r\n\r\n📷 Sony CyberShot DSC-HX99\r\n🎞️ AF, ISO 400, 1/80s, ƒ/6.3, 0 ev\r\n🔆 Partial overcast with sun, semi-shade spot\r\n🎨 18MP (RAW+JPG), no edit\r\n📌 N 48° 11' 27.5\" (48.19097), E 16° 29' 03.4\" (16.48427)\r\n\r\n🔦 Flash not fired, compulsory flash mode\r\n\r\n🔭 4.25-118mm f/3.5-6.4\r\n👋 Handheld, manual mode\r\n🔎 24mm (35mm), 4.25mm\r\n📶 Bluetooth <= iPhone 12 (GPS)\r\n⏯️ Camera body button\r\n\r\n#️⃣ #fungi #photo #sony #helvella #helvellaacetabulum #helvell #vinegarcup #elfincup #cupfungi #macro #mushroom #photography #tallinn #mycology #naturephotography #fungilove #fungifanatic #austria #pilze #österreichpilze #österreich #pilz #donau #foto #fotografia #lorchel",
-          "photos": [],
+          "photos": [
+            {
+              "src": "/images/posts/Cr0MAvFMrIz/01.jpg",
+              "thumb": "/thumbs/posts/Cr0MAvFMrIz/01.webp",
+              "alt": "Helvella acetabulum — 2023-05-03"
+            }
+          ],
           "sourceFile": "helvella-acetabulum_2023-05-03_Cr0MAvFMrIz.txt",
           "source": "local-caption",
           "instagramUrl": "https://www.instagram.com/p/Cr0MAvFMrIz/"
@@ -65840,7 +66150,13 @@
             "pilze"
           ],
           "caption": "👇 ...\r\n🆔 Hortiboletus rubellus (Krombh.) Simonini, Vizzini & Gelardi\r\n🍄 Boletaceae / Boletales / Agaricomycetes\r\n\r\n🇺🇸 ruby bolete\r\n🇩🇪 Blutroter Röhrling\r\n🇫🇮 Punatarhatatti\r\n🇪🇪 Karmiin-sametpuravik\r\n🇷🇺 Садовоборовик красный\r\n\r\n🗓️ 12/Jul/2026, 7:48 AM \r\n🌡️ 20°C 🌤️ Sunny, dispersed light 💨 Wind 40° NE->SW, 9 km/h\r\n🌎 Kadrioru park, Tallinn, Harju, Eesti \r\n📌 59°26'21.6\"N 24°47'25.7\"E\r\n⛲🌳🌾🍀 Urban park, near Oak and Linden trees, in mossy mawned grass\r\n\r\nℹ️ Hymenium: Pores angular, yellow at first, becoming dull olive-yellow with age, bruising blue\r\nℹ️ Cap: Convex to broadly convex or nearly flat; dry, smooth to finely velvety when young; bright ruby-red, cherry-red to pinkish-red, often fading and cracking with age\r\nℹ️ Hymenium Attachment: Adnate to slightly depressed around the stipe\r\nℹ️ Stipe: Slender, yellow at apex, pinkish-red to red below, often with red dots or points, not reticulate\r\n🟤🟢 Spore print: Olive-brown\r\n🌳 Ectomycorrhizal with broadleaved trees, especially oaks; in woodland edges, parks, gardens, lawns, meadows and disturbed roadsides; summer to autumn\r\n😕 Edible but poor quality, often maggot-infested and sometimes described as soapy\r\n📏 Fruit body: Small to medium; stipe ~3–7 cm long, ~0.4–1 cm thick\r\n📐 Cap: ∅ ~2.5–6 cm\r\n🔪 Flesh: whitish to yellowish, slowly and slightly blueing when cut\r\n🧪 KOH: Dull orange on cap surface and flesh\r\n👃 Mild, pleasant mushroomy\r\n👅 Slightly soapy\r\n🔬 Spores subfusoid, smooth, ~10–13 × 4–5 µm; golden in KOH; hymenial cystidia lageniform; pileipellis a palisadoderm of septate, encrusted elements\r\n🔤 Small ruby-red garden or oak-associated bolete with yellow pores that bruise blue\r\n\r\n🎞️ MF, ISO 1600, 1/160s, ƒ/10\r\n💡 Morning light, open spot\r\n🎨 Lightroom, IrfanView, Photoshop\r\n🖼️ 24MP (RAW), 3:2, no crop\r\n📚 Focus stacking (40 photos)\r\n\r\n📷 Sony α7 III (ILCE-7M3)\r\n🔭 Sony FE 50mm F2.8 Macro (SEL50M28)\r\n👋 Handheld, manual mode\r\n🔎 50mm (35mm), 50mm\r\n\r\n🌐 https://www.gbif.org/species/8060178\r\n📖 (2015). In Vizzini, Index Fungorum 244: 1.\r\n\r\n#hortiboletusrubellus #mushroomphotos #fungi #boletes #naturephotography\r\n\r\n#️⃣ #hongos #morchellaesculenta #morchella #yellowmorel #ümarmürkel #mürkel #pallohuhtasieni #speisemorchel #morchel #mushroomphoto #fungiphoto #fungimacro #naturephotography #seenefotod #pilzefotografieren #фотогрибов #sieniäkuvia #houby #mycology #fungistudy #mushroom #fungi #ascomycete #morel #pezizales #pilze",
-          "photos": [],
+          "photos": [
+            {
+              "src": "/images/posts/DatIEVIMl1B/01.jpg",
+              "thumb": "/thumbs/posts/DatIEVIMl1B/01.webp",
+              "alt": "Hortiboletus rubellus — 2023-07-12"
+            }
+          ],
           "sourceFile": "hortiboletus-rubellus_2023-07-12_DatIEVIMl1B.txt",
           "source": "local-caption",
           "instagramUrl": "https://www.instagram.com/p/DatIEVIMl1B/"
@@ -73474,7 +73790,13 @@
             "boletemould"
           ],
           "caption": "👇 ...\r\n🆔 Hypomyces chrysospermus Tul. & C.Tul.\r\n🌐 https://www.gbif.org/species/2561867\r\n📖 Published in: Tul. & C. Tul. In: Annls Sci. Nat., Bot., sér. 4 13: 16. (1860).\r\n🇺🇸 bolete eater\r\n🇩🇪 Goldschimmel \r\n🇪🇪 kollane üleniidik\r\n🇷🇺 Гипомицес золотистоспоровый\r\n\r\n🗓️ 9/19/22, 4:23 PM\r\n🌎 Värska sanatorium, Värska vald, Estonia\r\n🍄 Parasite growing on Leccinum scabrum fungus fruiting body\r\n🍄 Hypocreaceae / Sordariomycetes\r\n\r\n🚫 hymenium is not applicable as this is a parasitic fungus that grows on the surfaces of other fungi\r\n🚫 cap is not applicable, as this fungus forms a mold-like covering over the host mushroom\r\n🚫 hymenium attachment is not applicable\r\n🚫 stipe is not applicable\r\n🟡 spore print is yellow\r\n🍄 ecology is parasitic, grows on the surfaces of bolete mushrooms, turning them into solid masses covered in a powdery yellow mold\r\n🚫 not edible\r\n📏 size varies depending on the host mushroom, but the powdery mold can cover an entire mushroom cap and stem\r\n🔤 Parasitic fungus that specifically infects bolete mushrooms. It transforms the host mushroom into a hard, yellowish mass covered with a yellow powdery mold. The fungus is easily recognizable by its bright yellow spore powder and its preference for growing on bolete mushrooms. It is not considered edible and often renders the host mushroom inedible as well.\r\n\r\n📷 Sony Cyber-shot DSC-HX99\r\n🎞️ AF, ISO 400, 1/250s, ƒ/4\r\n🔆 Forest shade, manual WB\r\n🎨 18.2MP (RAW+JPG), fine tune, accent crop in Lightroom\r\n📌 N 57° 59' 11.0\" (57.986391), E 27° 37' 25.1\" (27.623635)\r\n🔦 Flash did not fire\r\n\r\n🔭 ZEISS® Vario-Sonnar T* 24-720mm zoom lens (4.25-118mm f/3.5-6.4)\r\n👋 Handheld, manual mode\r\n🔎 24mm (35mm), 4.25mm\r\n📶 bluetooth <= iPhone 12 (GPS)\r\n⏯️ Camera body button\r\n\r\n#️⃣ #fungi #photo #sony #boleteeater #goldschimmel #parasite #hypomyces #üleniidik #macro #mushroom #photography #värska #mycology #naturephotography #fungilove #fungifanatic #estonia #pilz #eestiseened #eesti #seen #foto #fotografia #hypomyceschrysospermus #boletemould",
-          "photos": [],
+          "photos": [
+            {
+              "src": "/images/posts/CtSNgUsMoQP/01.jpg",
+              "thumb": "/thumbs/posts/CtSNgUsMoQP/01.webp",
+              "alt": "Hypomyces chrysospermus — 2022-09-19"
+            }
+          ],
           "sourceFile": "hypomyces-chrysospermus_2022-09-19_CtSNgUsMoQP.txt",
           "source": "local-caption",
           "instagramUrl": "https://www.instagram.com/p/CtSNgUsMoQP/"
@@ -77880,7 +78202,13 @@
             "chaga"
           ],
           "caption": "🆔 Inonotus obliquus (Fr.) Pilát\r\n🧾 https://bit.ly/42rafAS\r\n📖 Published in: Pilát. In: Atlas Champ. l'Europe, III, Polyporaceae (Praha) 1: 572. (1942).\r\n🇺🇸 chaga\r\n🇩🇪 Schiefer Schillerporling\r\n🇪🇪 Must pässik\r\n🇷🇺 Инонотус ско́шенный\r\n\r\n🗓️ 5/03/23, 12:46 PM\r\n🌎 Vienna - Am Mühlwasser, Danube-Auen National Park, Austria\r\n🌳 White poplar tree (Populus alba)\r\n🍄 Hymenochaetaceae / Agaricomycetes\r\n\r\nℹ️ no distinct cap\r\nℹ️ hymenium is smooth\r\n🚫 hymenium attachment is not applicable\r\n🚫 lacks a stripe\r\n🚫 sterile form\r\n🦠 ecology is parasitic\r\n🙂⚕️ edibility: choice, medicinal\r\n🔤 The sterile conk is irregularly formed and resembles burnt charcoal. It is not the fruiting body of the fungus, but a sclerotium or mass of mycelium, mostly black because of a great amount of melanin.\r\n\r\n📷 Sony CyberShot DSC-HX99\r\n🎞️ Manual, ISO 80, 1/100s, ƒ/8, 0 ev\r\n🔆 Partial overcast with sun\r\n🎨 18MP (RAW+JPG), 1:1 crop\r\n📌 N 48° 11' 29.0\" (48.19138), E 16° 28' 49.9\" (16.480525)\r\n\r\n🔦 Flash not fired, compulsory flash mode\r\n\r\n🔭 4.25-118mm f/3.5-6.4\r\n👋 Handheld, manual mode\r\n🔎 314mm (35mm), 51mm\r\n📶 Bluetooth <= iPhone 12 (GPS)\r\n⏯️ Camera body button\r\n\r\n#️⃣ #fungi #photo #sony #inonotus #inonotusobliquus #schieferschillerporlin #schillerporling #mustpässik #macro #mushroom #photography #tallinn #mycology #naturephotography #fungilove #fungifanatic #austria #pilze #österreichpilze #österreich #pilz #donau #foto #fotografia #chaga",
-          "photos": [],
+          "photos": [
+            {
+              "src": "/images/posts/Cr0xp_7M61y/01.jpg",
+              "thumb": "/thumbs/posts/Cr0xp_7M61y/01.webp",
+              "alt": "Inonotus obliquus — 2023-05-03"
+            }
+          ],
           "sourceFile": "inonotus-obliquus_2023-05-03_Cr0xp_7M61y.txt",
           "source": "local-caption",
           "instagramUrl": "https://www.instagram.com/p/Cr0xp_7M61y/"
@@ -81555,7 +81883,18 @@
             "elmízcalo"
           ],
           "caption": "👇 ...\r\n🆔 Lactarius deliciosus (L.) Gray\r\n🌐 https://www.gbif.org/species/2537958\r\n📖 Published in: Gray. In: Nat. Arr. Brit. Pl. (London) 1: 624. (1821).\r\n🇺🇸 Saffron Milkcap\r\n🇩🇪 Edel-Reizker\r\n🇪🇪 Porgandriisikas\r\n🇷🇺 Рыжик настоящий\r\n🇫🇷 Lactaire délicieux\r\n🇪🇸 El mízcalo\r\n\r\n🗓️ 9/20/22, 3:01 PM\r\n🌎 Värska sanatorium, Värska vald, Estonia\r\n🌲🌿 In moist moss. Grassland with various fungi, near human habitat and spruce/pine forest.\r\n🍄 Russulaceae / Agaricomycetes\r\n\r\n ℹ️ gills on hymenium, crowded, initially pale orange, darkening with age\r\n ℹ️ cap is convex, becoming depressed with age, orange with darker orange concentric zones, often with a slightly wrinkled surface\r\n ℹ️ hymenium is lamellar\r\n ℹ️ stipe is cylindrical, hollow, orange with darker orange spots or streaks, exudes a carrot-colored latex when cut or broken\r\n🟠 spore print is orange\r\n🌲 ecology is mycorrhizal, typically found in coniferous and mixed forests, often associated with pine trees\r\n🍴😋 known for its delicious taste\r\n📏 fruit body to 5-15 cm tall\r\n📐 cap to 5-20 cm\r\n🔤 Prized for its culinary qualities. It is characterized by its orange cap with darker zonations, the carrot-colored latex it exudes, and the change in gill color as it matures. The flavor is mild to slightly nutty, and the texture is tender. It's popular in various cuisines and can be cooked in various ways, including sautéing and grilling.\r\n\r\n📷 Sony Cyber-shot DSC-HX99\r\n🎞️ AF, ISO 400, 1/200s, ƒ/3.5\r\n🔆 Forest shade, manual WB\r\n🎨 18.2MP (RAW+JPG), fine tune, accent crop in Lightroom\r\n📌 N 57° 59' 09.6\" (57.985989), E 27° 37' 22.4\" (27.622892)\r\n🔦 Flash did not fire\r\n\r\n🔭 ZEISS® Vario-Sonnar T* 24-720mm zoom lens (4.25-118mm f/3.5-6.4)\r\n👋 Handheld, manual mode\r\n🔎 24mm (35mm), 4.25mm\r\n📶 bluetooth <= iPhone 12 (GPS)\r\n⏯️ Camera body button\r\n\r\n#️⃣ #fungi #photo #sony #lactariusdeliciosus #lactarius #saffronmilkcap #edelreizker #porgandriisikas #macro #mushroom #photography #värska #mycology #naturephotography #fungilove #fungifanatic #estonia #pilz #eestiseened #eesti #seen #foto #fotografia #lactairedélicieux #elmízcalo",
-          "photos": [],
+          "photos": [
+            {
+              "src": "/images/posts/CtSR_04s6ac/01.jpg",
+              "thumb": "/thumbs/posts/CtSR_04s6ac/01.webp",
+              "alt": "Lactarius deliciosus — 2022-09-20"
+            },
+            {
+              "src": "/images/posts/CtSR_04s6ac/02.jpg",
+              "thumb": "/thumbs/posts/CtSR_04s6ac/02.webp",
+              "alt": "Lactarius deliciosus — 2022-09-20"
+            }
+          ],
           "sourceFile": "lactarius-deliciosus_2022-09-20_CtSR_04s6ac.txt",
           "source": "local-caption",
           "instagramUrl": "https://www.instagram.com/p/CtSR_04s6ac/"
@@ -85806,7 +86145,13 @@
             "фото"
           ],
           "caption": "👇 ...\r\n🆔 Laetiporus sulphureus (Bull.) Murrill\r\n🌐 https://www.gbif.org/species/9072021\r\n📖 Published in: Murrill. In: Mycologia 12(1): 11. (1920).\r\n🇺🇸 Chicken of the Woods\r\n🇩🇪 Schwefelporling\r\n🇪🇪 Vääveltorik\r\n🇷🇺 Трутовик серно-жёлтый\r\n🇫🇷 Polypore soufré\r\n\r\n🗓️ 6/14/23, 8:33 PM\r\n🌎 Tallinna Lauluväljak, Estonia\r\n🌳🪵🛣️ Urban park zone (Willow sp), old big tree trunks\r\n🍄 Fomitopsidaceae / Agaricomycetes\r\n\r\n ℹ️ pores on hymenium, small and round, bright yellow to orange\r\n ℹ️ cap is shelf-like, semicircular to fan-shaped, bright yellow to orange, often in overlapping clusters\r\n ℹ️ hymenium is tubular (composed of tubes instead of gills)\r\n ℹ️ stipe is not typically present, as this fungus grows directly from the wood in a shelf-like manner\r\n⚪🟡 spore print is white to pale yellow\r\n🌳🪵 ecology is saprotrophic and sometimes parasitic, typically found on deciduous trees, especially oak, but sometimes also on conifers\r\n🍴🪵 tasty when young and tender, but becomes tough and inedible with age\r\n📏 individual shelves can be 5-40 cm across\r\n🔤 Known for its bright yellow to orange colors and its chicken-like taste and texture when young. It is a popular edible mushroom, but caution is advised as some individuals may have an allergic reaction to it. It's best eaten when the fruiting bodies are young and tender. Older specimens can become tough and unpalatable. It's also advised to thoroughly cook this mushroom before consumption.\r\n\r\n📷 Sony α7 III (ILCE-7M3)\r\n🎞️ AF, ISO 2500, 1/40s, ƒ/16, 0 ev\r\n🔆 Clear sky, no wind, evening sun\r\n🎨 24MP (RAW), fine tune Lightroom\r\n🔦 No flash\r\n📌 N 59° 26' 43.1\" (59.445298), E 24° 48' 26.8\" (24.807431)\r\n\r\n🔭 Sony FE 50mm F2.8 Macro (SEL50M28)\r\n👋 Handheld, manual mode\r\n🔎 50mm (35mm), 50mm\r\n📶 Bluetooth <= iPhone 12 (GPS)\r\n⏯️ Camera body button\r\n\r\n#️⃣ #fungi #photo #sony #laetiporussulphureus #chickenofthewoods #sulphurshelf #laetiporus #macro #mushroom #photography #tallinn #mycology #naturephotography #fungilove #fungifanatic #estonia #seened #eestiseened #eesti #pilz #грибы #foto #fotografia #фото",
-          "photos": [],
+          "photos": [
+            {
+              "src": "/images/posts/Cte89ZJMU4E/01.jpg",
+              "thumb": "/thumbs/posts/Cte89ZJMU4E/01.webp",
+              "alt": "Laetiporus sulphureus — 2023-06-14"
+            }
+          ],
           "sourceFile": "laetiporus-sulphureus_2023-06-14_Cte89ZJMU4E.txt",
           "source": "local-caption",
           "instagramUrl": "https://www.instagram.com/p/Cte89ZJMU4E/"
@@ -85930,7 +86275,13 @@
             "фото"
           ],
           "caption": "👇 ...\r\n🆔 Laetiporus sulphureus (Bull.) Murrill\r\n🧾 https://bit.ly/3LkTVMl\r\n📖 Published in: Murrill. In: Mycologia 12(1): 11. (1920).\r\n🇺🇸 Chicken of the Woods\r\n🇩🇪 Schwefelporling\r\n🇪🇪 Vääveltorik\r\n🇷🇺 Трутовик серно-жёлтый\r\n\r\n🗓️ 9/4/22, 4:04 PM\r\n🌎 Kõlakoja tee 4, 11911 Tallinn, Estonia\r\n\r\n🌳🪵🛣️ Urban park woodland zone (willow, oak, alder), dead hardwood\r\n🍄 Fomitopsidaceae / Agaricomycetes\r\n\r\n📷 Sony CyberShot DSC-HX99\r\n🎞️ Manual, ISO 800, 1/80s, ƒ/3.5\r\n🔆 Shade\r\n🎨 18MP (RAW), fine tune Lightroom\r\n📌 N 59° 27' 11.323\" (59.453145), E 24° 48' 45.738998\" (24.812705)\r\n🔦 Flash not fired, compulsory flash mode\r\n\r\n🔭 4.25-118mm f/3.5-6.4\r\n👋 Handheld, manual mode\r\n🔎 24mm (35mm), 4.25mm\r\n📶 Bluetooth <= iPhone 12 (GPS)\r\n⏯️ Camera body button\r\n\r\n#️⃣ #fungi #photo #sony #laetiporussulphureus #chickenofthewoods #sulphurshelf #laetiporus #macro #mushroom #photography #tallinn #mycology #naturephotography #fungilove #fungifanatic #estonia #seened #eestiseened #eesti #pilz #грибы #foto #fotografia #фото",
-          "photos": [],
+          "photos": [
+            {
+              "src": "/images/posts/CrTw62EI-Tp/01.jpg",
+              "thumb": "/thumbs/posts/CrTw62EI-Tp/01.webp",
+              "alt": "Laetiporus sulphureus — 2022-04-09"
+            }
+          ],
           "sourceFile": "laetiporus-sulphureus_2022-04-09_CrTw62EI-Tp.txt",
           "source": "local-caption",
           "instagramUrl": "https://www.instagram.com/p/CrTw62EI-Tp/"
@@ -87291,7 +87642,13 @@
             "seenefotod"
           ],
           "caption": "👇 ...\r\n🆔 Leccinum scabrum (Bull.) Gray\r\n🌐 https://www.gbif.org/species/9141390\r\n📖 Published in: Gray. In: Nat. Arr. Brit. Pl. (London) 1: 647. (1821).\r\n\r\n🇺🇸 Brown Birch Bolete\r\n🇩🇪 Gemeiner Birkenpilz\r\n🇪🇪 Kasepuravik\r\n🇷🇺 Подберёзовик обыкновенный\r\n\r\n🗓️ 05/08/22, 3:23 PM\r\n🌎 Suurupi LKA, Suurupi skv, Harjumaa, Estonia\r\n🌲🌳 In moss with ground of decaying leaves. Forest with abundance of birch (Betula sp.) and spruce (Picea abies) trees.\r\n🍄 Boletaceae / Agaricomycetes\r\n\r\nℹ️ hymenium: Tubular, white to cream, turning olive-brown with age.\r\nℹ️ cap: Convex when young, expanding to broadly convex or almost flat, smooth to slightly rough, ranging from pale brown to darker brown.\r\nℹ️ hymenium attachment: Attached directly to the stipe.\r\nℹ️ stipe: Sturdy, white or pale grey, covered with blackish-brown scabrous scales.\r\n🟤 spore print: Brown to olive-brown.\r\n🌳 ecology: Mycorrhizal, typically found in association with birch trees.\r\n🍴 edibility: Edible and good, although thorough cooking is recommended.\r\n📏 fruit body: 8-20 cm tall.\r\n📐 cap: 5-20 cm across.\r\n🔤 Common mycorrhizal mushroom found primarily in association with birch trees. A characteristic feature is its rough stipe adorned with dark scab-like scales, contrasting the paler flesh of the stem. Found throughout Europe and North America.\r\n\r\n📷 Sony α7 III (ILCE-7M3)\r\n🎞️ MF, ISO 6400, 1/125s, ƒ/11, 0 ev\r\n🔆 Sunny weather with some overcast, very deep forest shade\r\n🎨 24MP (RAW), fine tunining, enhance and denoise with Lightroom\r\n📚 14 photos, focus stacking with Zerene Stacker (PMax)\r\n🖼️ 1:1 crop\r\n📌 59°27'16.7\"N 24°21'37.0\"E (59.454624, 24.360286)\r\n🔦 Flash did not fire\r\n\r\n🔭 Sony FE 90mm F2.8 Macro G OSS (SEL90M28G)\r\n👋 Handheld, manual mode\r\n🔎 90mm (35mm), 90mm\r\n⏯️ Camera body button\r\n\r\n#️⃣ #fungi #photo #sony #leccinumscabrum #leccinum #brownbirchbolete #gemeinebirkenpilz #Kasepuravik #macro #mushroom #photography #suurupi #mycology #naturephotography #fungilove #mushroomlove #estonianfungi #pilz #eestiseened #pilzfoto #seened #foto #fungiphoto #bolete #mushroomphoto #seenefotod",
-          "photos": [],
+          "photos": [
+            {
+              "src": "/images/posts/Cvsjqb5spCH/01.jpg",
+              "thumb": "/thumbs/posts/Cvsjqb5spCH/01.webp",
+              "alt": "Leccinum scabrum — 2023-08-05"
+            }
+          ],
           "sourceFile": "leccinum-scabrum_2023-08-05_Cvsjqb5spCH.txt",
           "source": "local-caption",
           "instagramUrl": "https://www.instagram.com/p/Cvsjqb5spCH/"
@@ -90860,7 +91217,28 @@
             "harjumaa"
           ],
           "caption": "👇 ...\r\n🆔 Leptoporus mollis (Pers.) Quél.\r\n🌐 https://www.gbif.org/species/9168484\r\n📖 Published in: Quél. In: Enchir. fung. (Paris): 175. (1886).\r\n🇺🇸 Soft Bracket\r\n🇩🇪 Rötender Saftporling\r\n🇪🇪 Lillatümak\r\n🇷🇺 Лептопорус мягкий\r\n\r\n🗓️ 02/Oct/21, 3:11 PM\r\n🌎 Valgejõe, Harju County, Estonia\r\n🪵🌲 Dead fallen spruce (Picea abies) tree trunk. In midst of forest.\r\n🍄 Irpicaceae / Agaricomycetes\r\n\r\n ℹ️ Hymenium: Pores are white, small, and dense, becoming yellowish with age.\r\n ℹ️ Cap: Convex to flat, soft and spongy in texture, yellowish-white to pale orange.\r\n ℹ️ Hymenium attachment: Decurrent.\r\n ℹ️ Stipe: Absent or rudimentary; the mushroom is often sessile.\r\n🟡 Spore print: Yellowish.\r\n🪵🌲 Saprobic, growing on decaying coniferous wood, particularly on spruce.\r\n😑 Generally considered inedible due to its soft and insubstantial texture.\r\n📏 Fruit body: Up to 5-10 cm across.\r\n📐 Cap: 3-8 cm in diameter.\r\n🔤 Wood-rotting fungus that forms soft, spongy fruit bodies on dead coniferous wood. The pale color and soft, rubbery texture are distinguishing features. This mushroom plays a vital role in nutrient recycling within forest ecosystems but is not of culinary interest due to its texture.\r\n\r\n🎞️ AF, ISO 800, 1/80s, ƒ/4, 0 ev\r\n🔆 Fair weather with overcast and clouds, forest semi-shade\r\n🎨 18MP (JPEG), no edit\r\n📚 4 photos, various angles\r\n🖼️ no crop, landscape, 4:3\r\n📌 59°27'49.3\"N 25°45'28.1\"E (59.463693, 25.757793), alt: 63.30 m\r\n🔦 Flash did not fire\r\n\r\n📷 Sony CyberShot DSC-HX90V\r\n🔭 ZEISS® Vario-Sonnar T* 24-720mm zoom lens (4.25-118mm f/3.5-6.4)\r\n👋 Handheld, manual mode\r\n🔎 24mm (35mm), 4.10mm\r\n🛰️ GPS built in camera\r\n⏯️ Camera body button\r\n\r\n#️⃣ #fungi #photo #sonycybershot #leptoporusmollis #softbracket #mushroomphoto #leptoporus #lillatümak #macro #mushroom #photography #saftporling #mycology #naturephotography #fungilove #rötendersaftporling #valgejõe #seened #eestiseened #estonia #polypore #грибы #foto #pilze #seenefotod #pilzefotografieren #фотогрибов #harjumaa",
-          "photos": [],
+          "photos": [
+            {
+              "src": "/images/posts/Cv0nY54ItYw/01.jpg",
+              "thumb": "/thumbs/posts/Cv0nY54ItYw/01.webp",
+              "alt": "Leptoporus mollis — 2021-10-02"
+            },
+            {
+              "src": "/images/posts/Cv0nY54ItYw/02.jpg",
+              "thumb": "/thumbs/posts/Cv0nY54ItYw/02.webp",
+              "alt": "Leptoporus mollis — 2021-10-02"
+            },
+            {
+              "src": "/images/posts/Cv0nY54ItYw/03.jpg",
+              "thumb": "/thumbs/posts/Cv0nY54ItYw/03.webp",
+              "alt": "Leptoporus mollis — 2021-10-02"
+            },
+            {
+              "src": "/images/posts/Cv0nY54ItYw/04.jpg",
+              "thumb": "/thumbs/posts/Cv0nY54ItYw/04.webp",
+              "alt": "Leptoporus mollis — 2021-10-02"
+            }
+          ],
           "sourceFile": "leptoporus-mollis_2021-10-02_Cv0nY54ItYw.txt",
           "source": "local-caption",
           "instagramUrl": "https://www.instagram.com/p/Cv0nY54ItYw/"
@@ -93992,7 +94370,13 @@
             "seenefotod"
           ],
           "caption": "👇 ...\r\n🆔 Marasmiellus ramealis (Bull.) Singer\r\n🌐 https://www.gbif.org/species/9141390\r\n📖 Published in: Singer. In: Pap. Mich. Acad. Sci. 32: 130 ('1946'). (1948).\r\n\r\n🇺🇸 Twig Parachute\r\n🇩🇪 Ästchen-Zwergschwindling\r\n🇪🇪 Oksanupik\r\n🇷🇺 Маразмиеллус веточный\r\n\r\n🗓️ 05/08/22, 3:12 PM\r\n🌎 Suurupi LKA, Suurupi skv, Harjumaa, Estonia\r\n🪵 On decaying deciduous tree twig. Mixed forest.\r\n🍄 Omphalotaceae / Agaricomycetes\r\n\r\n ℹ️ hymenium: Gills are white to pale cream.\r\n ℹ️ cap: Initially convex, becoming broadly convex to nearly flat with maturity, hygrophanous, pale tan to light brown, drying paler.\r\n ℹ️ hymenium attachment: Adnexed to free.\r\n ℹ️ stipe: Cylindrical, slender, pale at the top and becoming darker brown towards the base.\r\n🟤 spore print: White to pale cream.\r\n🪵 ecology: Saprobic, growing on fallen twigs and woody debris, primarily of broadleaf trees.\r\n😑 edibility: Inedible due to its small size and tough texture, but not known to be toxic.\r\n📏 fruit body: 2-4 cm tall.\r\n📐 cap: 0.5-1.5 cm across.\r\n🔤 Can frequently be spotted on decaying wood, specifically fallen twigs and branches of broadleaf trees. This small mushroom is characterized by its thin, wiry stem and tiny, pale cap. Despite its unassuming size, the resilience of this fungus is remarkable; after drying out, it can rehydrate and appear fresh again with the next rain. Found in various parts of the world.\r\n\r\n📷 Sony α7 III (ILCE-7M3)\r\n🎞️ MF, ISO 1250, 1/320s, ƒ/11, 0 ev\r\n🔆 Sunny weather with some overcast, forest shade, sunny spot\r\n🎨 24MP (RAW), fine tunining, enhance and denoise with Lightroom\r\n📚 20 photos, focus stacking with Photoshop\r\n🖼️ accent proportional crop, landscape\r\n📌 59°27'16.7\"N 24°21'37.0\"E (59.454624, 24.360286)\r\n🔦 Flash did not fire\r\n\r\n🔭 Sony FE 90mm F2.8 Macro G OSS (SEL90M28G)\r\n👋 Handheld, manual mode\r\n🔎 90mm (35mm), 90mm\r\n⏯️ Camera body button\r\n\r\n#️⃣ #fungi #photo #sony #marasmiellusramealis #marasmiellus #twigparachute #ästchenzwergschwindling #oksanupik #macro #mushroom #photography #suurupi #mycology #naturephotography #fungilove #mushroomlove #estonianfungi #pilz #eestiseened #pilzfoto #seened #foto #fungiphoto #twigfungi #mushroomphoto #seenefotod",
-          "photos": [],
+          "photos": [
+            {
+              "src": "/images/posts/Cvu69f-sMFR/01.jpg",
+              "thumb": "/thumbs/posts/Cvu69f-sMFR/01.webp",
+              "alt": "Marasmiellus ramealis — 2023-08-05"
+            }
+          ],
           "sourceFile": "marasmiellus-ramealis_2023-08-05_Cvu69f-sMFR.txt",
           "source": "local-caption",
           "instagramUrl": "https://www.instagram.com/p/Cvu69f-sMFR/"
@@ -94936,7 +95320,33 @@
             "фото"
           ],
           "caption": "👇 ...\r\n🆔 Marasmius oreades (Bolton) Fr.\r\n🌐 https://www.gbif.org/species/2537250\r\n📖 Published in: Fr. In: Anteckn. Sver. Ätl. Svamp.: 52. (1836).\r\n🇺🇸 fairy ring champignon\r\n🇩🇪 Nelken-Schwindling\r\n🇪🇪 Aasnööbik\r\n🇷🇺 Опёнок луговой\r\n🇫🇷 Marasme des Oréades\r\n\r\n🗓️ 7/06/23, 6:53 PM\r\n🌎 Kadrioru park, Tallinn, Estonia\r\n☘️🛣️ Urban park zone, near road, in grass lawn, after fresh rain\r\n🍄 Marasmiaceae / Agaricomycetes\r\n\r\n ℹ️ gills on hymenium, white to cream, widely spaced\r\n ℹ️ cap is convex, becoming flat with a slight central depression and often a small umbo, smooth, pale tan to buff\r\n ℹ️ hymenium is lamellar\r\n ℹ️ stipe is thin, tough, and wiry, same color as the cap or slightly paler\r\n⚪️ spore print is white\r\n☘️ ecology is saprotrophic, typically found in grassy areas such as lawns, pastures, and meadows\r\n🍴 edibility: choice, known for its excellent taste and texture, especially when dried\r\n📏 fruit body to 2-8 cm tall\r\n📐 cap to 2-5 cm\r\n🔤 Small agaric that is often found in troops or fairy rings in grassy areas. It is characterized by its small, buff-colored, bell-shaped cap and the spaced gills on the underside. The flesh is thin but tough. It's popular in cooking, particularly in French cuisine, where it's known as \"mousseron\". It can be eaten fresh, but its flavor greatly intensifies when dried, making it an excellent mushroom for flavoring dishes.\r\n\r\n📷 Sony α7 III (ILCE-7M3)\r\n🎞️ AF, ISO 1250, 1/60s, ƒ/16, 0 ev\r\n🔆 Cloudy overcast, mild wind, evening sun\r\n🎨 24MP (RAW), fine tune Lightroom\r\n🔦 No flash\r\n📌 N 59° 26' 31.9\" (59.442198), E 24° 47' 30.7\" (24.791847)\r\n\r\n🔭 Sony FE 50mm F2.8 Macro (SEL50M28)\r\n👋 Handheld, manual mode\r\n🔎 50mm (35mm), 50mm\r\n📶 Bluetooth <= iPhone 12 (GPS)\r\n⏯️ Camera body button\r\n\r\n#️⃣ #fungi #photo #sony #marasmiusoreades #fairyringchampignon #fairyring #marasmius #aasnööbik #macro #mushroom #photography #tallinn #mycology #naturephotography #fungilove #fungifanatic #estonia #seened #eestiseened #eesti #pilz #грибы #foto #pilze #seenefotod #pilzefotografieren #fotografia #фото",
-          "photos": [],
+          "photos": [
+            {
+              "src": "/images/posts/CuaOFcTswIP/01.jpg",
+              "thumb": "/thumbs/posts/CuaOFcTswIP/01.webp",
+              "alt": "Marasmius oreades — 2023-07-06"
+            },
+            {
+              "src": "/images/posts/CuaOFcTswIP/02.jpg",
+              "thumb": "/thumbs/posts/CuaOFcTswIP/02.webp",
+              "alt": "Marasmius oreades — 2023-07-06"
+            },
+            {
+              "src": "/images/posts/CuaOFcTswIP/03.jpg",
+              "thumb": "/thumbs/posts/CuaOFcTswIP/03.webp",
+              "alt": "Marasmius oreades — 2023-07-06"
+            },
+            {
+              "src": "/images/posts/CuaOFcTswIP/04.jpg",
+              "thumb": "/thumbs/posts/CuaOFcTswIP/04.webp",
+              "alt": "Marasmius oreades — 2023-07-06"
+            },
+            {
+              "src": "/images/posts/CuaOFcTswIP/05.jpg",
+              "thumb": "/thumbs/posts/CuaOFcTswIP/05.webp",
+              "alt": "Marasmius oreades — 2023-07-06"
+            }
+          ],
           "sourceFile": "marasmius-oreades_2023-07-06_CuaOFcTswIP.txt",
           "source": "local-caption",
           "instagramUrl": "https://www.instagram.com/p/CuaOFcTswIP/"
@@ -96905,7 +97315,13 @@
             "morille"
           ],
           "caption": "👇 ...\r\n🆔 Morchella elata Fr.\r\n🧾 https://bit.ly/3MfKcHP\r\n📖 Published in: Fr. In: Syst. mycol. (Lundae) 2(1): 8. (1822).\r\n🇺🇸 Elongated Black Morel\r\n🇩🇪 Hoch Spitzmorchel\r\n🇪🇪 Hiidmürkel\r\n🇷🇺 Сморчок высокий\r\n🇫🇷 morille élevée\r\n🇪🇸 Colmenilla Alta Negra\r\n\r\n🗓️ 5/10/23, 2:24 PM\r\n🌎 Nearby Kadriorg park, Tallinn, Estonia\r\n🌳🏠🍂 Urban green zone. Plantations of garden plants. In mulchy soil.\r\n🍄 Morchellaceae / Pezizomycetes\r\n\r\n ℹ️ hymenium is ribbed, forming a honeycomb-like pattern\r\n ℹ️ cap is conical to oval, covered with a network of ridges and pits, dark brown to black, attached to the stipe at the base\r\n🚫 hymenium attachment is not applicable\r\n⭕ stipe is hollow, cylindrical, whitish to pale grayish-brown, smooth or slightly granular\r\n🟡 spore print is cream to yellowish\r\n🌳 ecology is mycorrhizal\r\n🍴😐 edibility: choice, but should be cooked thoroughly as raw morels can cause gastrointestinal upset\r\n📏 fruit body to 10-20 cm tall\r\n📐 cap to 3-7 cm\r\n🔤 Highly prized for its culinary value. It has a distinctive honeycomb-like cap with dark pits and ridges. The mushroom typically appears in the spring, often in burned areas or in coniferous forests.\r\n\r\n📷 Sony α7 III (ILCE-7M3)\r\n🎞️ MF, ISO 640, 1/125s, ƒ/16, 0 ev\r\n🔆 Sunny weather, sunny spot\r\n🎨 24MP (RAW), fine tune Lightroom, focus stacking (3 photos) Photoshop layers, 1:1 accent crop\r\n\r\n🔦 Flash not fired, compulsory flash mode\r\n\r\n🔭 Sony FE 50mm F2.8 Macro (SEL50M28)\r\n📸 held on ground, manual mode\r\n🔎 50mm (35mm), 50mm\r\n⏯️ Camera body button\r\n\r\n#️⃣ #fungi #photo #sony #morchella #morchellaelata #spitzmorchel #morel #hiidmürkel #macro #mushroom #photography #tallinn #mycology #naturephotography #fungilove #fungifanatic #estonia #seened #eestimaaseened #eestimaa #seen #mürkel #foto #fotografia #colmenilla #morille",
-          "photos": [],
+          "photos": [
+            {
+              "src": "/images/posts/CsEvGckoODZ/01.jpg",
+              "thumb": "/thumbs/posts/CsEvGckoODZ/01.webp",
+              "alt": "Morchella elata — 2023-05-10"
+            }
+          ],
           "sourceFile": "morchella-elata_2023-05-10_CsEvGckoODZ.txt",
           "source": "local-caption",
           "instagramUrl": "https://www.instagram.com/p/CsEvGckoODZ/"
@@ -100207,7 +100623,28 @@
             "фото"
           ],
           "caption": "👇 ...\r\n🆔 Mycena inclinata (Fr.) Quél.\r\n🧾 https://bit.ly/40qWqBb\r\n📖 Published in: Quél. In: Mém. Soc. Émul. Montbéliard, Sér. 2 5: 105. (1872).\r\n🇺🇸 Clustered Bonnet\r\n🇩🇪 Schiefknolliger Helmling\r\n🇪🇪 Kobarmütsik\r\n🇷🇺 Мицена наклонённая\r\n\r\n🗓️ 9/30/22, 11:59 AM\r\n🌎 Käsmu tee 11, 11911 Tallinn, Estonia\r\n🌳🪵🌰 Urban park environment rotting stump of horse chestnut tree\r\n🍄 Mycenaceae / Agaricomycetes\r\n\r\n📷 Sony CyberShot DSC-HX99\r\n🎞️ Manual, ISO 800, 1/60s, ƒ/3.5\r\n🔆 Shade, complete overcast with light rain\r\n🎨 18MP (RAW), fine tune Lightroom\r\n📌 N 59° 26' 19.201\" (59.438667), E 24° 47' 41.804001\" (24.794946)\r\n🔦 Flash not fired, compulsory flash mode\r\n\r\n🔭 4.25-118mm f/3.5-6.4\r\n👋 Handheld, manual mode\r\n🔎 24mm (35mm), 4.25mm\r\n📶 Bluetooth <= iPhone 12 (GPS)\r\n⏯️ Camera body button\r\n\r\n#️⃣ #fungi #photo #sony #mycenainclinata #clusteredbonnet #oakstumpbonnetcap #mycena #bonnetcap #macro #mushroom #photography #kadriorg #mycology #naturephotography #fungilove #fungifanatic #estonia #seened #eestiseened #eesti #pilz #грибы #foto #fotografia #фото",
-          "photos": [],
+          "photos": [
+            {
+              "src": "/images/posts/CrT7zv2o7Kz/01.jpg",
+              "thumb": "/thumbs/posts/CrT7zv2o7Kz/01.webp",
+              "alt": "Mycena inclinata — 2022-09-30"
+            },
+            {
+              "src": "/images/posts/CrT7zv2o7Kz/02.jpg",
+              "thumb": "/thumbs/posts/CrT7zv2o7Kz/02.webp",
+              "alt": "Mycena inclinata — 2022-09-30"
+            },
+            {
+              "src": "/images/posts/CrT7zv2o7Kz/03.jpg",
+              "thumb": "/thumbs/posts/CrT7zv2o7Kz/03.webp",
+              "alt": "Mycena inclinata — 2022-09-30"
+            },
+            {
+              "src": "/images/posts/CrT7zv2o7Kz/04.jpg",
+              "thumb": "/thumbs/posts/CrT7zv2o7Kz/04.webp",
+              "alt": "Mycena inclinata — 2022-09-30"
+            }
+          ],
           "sourceFile": "mycena-inclinata_2022-09-30_CrT7zv2o7Kz.txt",
           "source": "local-caption",
           "instagramUrl": "https://www.instagram.com/p/CrT7zv2o7Kz/"
@@ -103224,7 +103661,13 @@
             "sawgill"
           ],
           "caption": "👇 ...\r\n🆔 Neolentinus cyathiformis (Schaeff.) Della Magg. & Trassin.\r\n🧾 https://bit.ly/3HCn7wh\r\n📖 Published in: Della Magg. & Trassin. In: Index Fungorum 171: 1. (2014).\r\n🇺🇸 cup-shaped sawgill\r\n🇩🇪 Becherförmig sägeblättling\r\n🇪🇪 Tassikujuline hammaslehik\r\n🇷🇺 Пилолистник бокаловидный\r\n\r\n🗓️ 5/03/23, 11:21 PM\r\n🌎 Vienna - Am Mühlwasser, Danube-Auen National Park, Austria \r\n🌳🪵 Deciduous forest (birch, poplar, oak, alder), dead wood stump\r\n🍄 Gloeophyllaceae / Agaricomycetes\r\n\r\nℹ️ gills on hymenium, decurrent, crowded, white to pale yellow\r\nℹ️ cap is funnel-shaped with an incurved margin, grayish-brown to dark brown, scaly or fibrillose\r\nℹ️ hymenium is lamellar\r\nℹ️ stipe is central, cylindrical, sometimes curved, white to pale grayish-brown, scaly or fibrillose\r\n🟤 spore print is brown\r\n🌳 ecology is saprotrophic\r\n🆗🍴 edibility: edible, but caution is advised due to similarity to poisonous species\r\n📏 fruit body to 5-15 cm tall\r\n📐 cap to 4-12 cm\r\n🔤 Neolentinus cyathiformis, also known as the \"Goblet Lentinus,\" has a distinct funnel-shaped cap with a scaly or fibrillose surface. The species is typically found on decaying wood, especially conifers, and is more commonly encountered in North America.\r\n\r\n📷 Sony CyberShot DSC-HX99\r\n🎞️ AF, ISO 400, 1/25s, ƒ/7.1, 0 ev\r\n🔆 Partial overcast with sun, full forest shade\r\n🎨 18MP (RAW+JPG), no edit\r\n📌 N 48° 11' 32.3\" (48.192318), E 16° 28' 16.7\" (16.471301)\r\n\r\n🔦 Flash not fired, compulsory flash mode\r\n\r\n🔭 4.25-118mm f/3.5-6.4\r\n👋 Handheld, manual mode\r\n🔎 46mm (35mm), 7.53mm\r\n📶 Bluetooth <= iPhone 12 (GPS)\r\n⏯️ Camera body button\r\n\r\n#️⃣ #fungi #photo #sony #neolentinus #neolentinuscyathiformis #sägeblättling #cupshapedsawgill #trainwrecker #macro #mushroom #photography #tallinn #mycology #naturephotography #fungilove #fungifanatic #austria #pilze #österreichpilze #österreich #pilz #donau #foto #fotografia #sawgill",
-          "photos": [],
+          "photos": [
+            {
+              "src": "/images/posts/Cr0YTKsMRxz/01.jpg",
+              "thumb": "/thumbs/posts/Cr0YTKsMRxz/01.webp",
+              "alt": "Neolentinus cyathiformis — 2023-05-03"
+            }
+          ],
           "sourceFile": "neolentinus-cyathiformis_2023-05-03_Cr0YTKsMRxz.txt",
           "source": "local-caption",
           "instagramUrl": "https://www.instagram.com/p/Cr0YTKsMRxz/"
@@ -104305,7 +104748,13 @@
             "фото"
           ],
           "caption": "👇 ...\r\n🆔 Otidea bufonia (Pers.) Boud.\r\n🧾 https://bit.ly/3KQECK9\r\n📖 Published in: Boud. In: Hist. Class. Discom. Eur. (Paris): 52. (1907).\r\n🇺🇸 Toad's Ear\r\n🇩🇪 Kröten-Ohrförmiger\r\n🇪🇪 Tumepruun kõrvliudik\r\n🇷🇺 Отидея жабья\r\n\r\n🗓️ 9/21/22, 2:27 PM\r\n🌎 Valga maantee 47, Võru, 65609 Võru County, Estonia\r\n🌳🍂 Deciduous forests with leaf litter (birch, alder, oak, maple)\r\n🍄 Pezizaceae / Pezizomycetes\r\n\r\n📷 Sony CyberShot DSC-HX99\r\n🎞️ Manual, ISO 800, 1/50s, ƒ/3.5\r\n🔆 Shade\r\n🎨 18MP (RAW), fine tune Lightroom + Luminar Neo\r\n📌 N 57° 59' 14.196\" (57.987277), E 27° 37' 27.816999\" (27.624394)\r\n\r\n🔦 Flash not fired, compulsory flash mode\r\n\r\n🔭 4.25-118mm f/3.5-6.4\r\n👋 Handheld, manual mode\r\n🔎 24mm (35mm), 4.25mm\r\n📶 Bluetooth <= iPhone 12 (GPS)\r\n⏯️ Camera body button\r\n\r\n#️⃣ #fungi #photo #sony #otideabufonia #toadsear #macro #mushroom #photography #värska #naturelove #mycology #naturephotography #fungilove #fungifanatic #estonia #seened #eestiseened #eesti #pilz #грибы #foto #fotografia #фото",
-          "photos": [],
+          "photos": [
+            {
+              "src": "/images/posts/CrReBWfsPdo/01.jpg",
+              "thumb": "/thumbs/posts/CrReBWfsPdo/01.webp",
+              "alt": "Otidea bufonia — 2022-09-21"
+            }
+          ],
           "sourceFile": "otidea-bufonia_2022-09-21_CrReBWfsPdo.txt",
           "source": "local-caption",
           "instagramUrl": "https://www.instagram.com/p/CrReBWfsPdo/"
@@ -105417,7 +105866,23 @@
             "foto"
           ],
           "caption": "👇 ...\r\n🆔 Panaeolina foenisecii (Pers.) Maire\r\n🌐 https://www.gbif.org/species/2526698\r\n📖 Published in: Maire. In: Treb. Mus. Ciènc. nat. Barcelona, sér. bot. 15(no. 2): 109. (1933).\r\n🇺🇸 Brown Mottlegill\r\n🇩🇪 Heudüngerling\r\n🇪🇪 Koppelseen\r\n🇷🇺 Панеолина сенокосная\r\n\r\n🗓️ 31/07/23, 2:41 PM\r\n🌎 Tuukri, Kadriorg, Harjumaa\r\n☘️🛣️ In mowed grassland patch, urban area\r\n🍄 Suillaceae / Agaricomycetes\r\n\r\n ℹ️ gills on hymenium, brownish, closely spaced\r\n ℹ️ cap is convex, becoming broadly convex to flat, smooth, brown, often with a slightly darker center\r\n ℹ️ hymenium is lamellar\r\n ℹ️ stipe is cylindrical, smooth, white, often with a slight brownish tint\r\n🟤 spore print is brown\r\n☘️ ecology is saprotrophic, commonly found in lawns, grassy areas, and pastures\r\n🤮😵‍💫 edibility: inedible - contains small amounts of the hallucinogenic compound psilocin and can cause gastric upset\r\n📏 fruit body to 2-6 cm tall\r\n📐 cap to 1-4 cm\r\n🔤 Small, brown mushroom that is frequently found in lawns and other grassy areas. It's recognized by its smooth, brown cap and gills that are brownish in color. This species is considered inedible due to the presence of small amounts of the hallucinogenic compound psilocin, and it can cause gastric upset if consumed. As always, it's essential to properly identify any wild mushrooms before considering them for consumption, as many species can look similar but have vastly different edibility profiles.\r\n\r\n📷 Sony α7 III (ILCE-7M3)\r\n🎞️ MF, ISO 3200, 1/100s, ƒ/16, 0 ev\r\n🔆 overcast with clouds, rainy weather\r\n🎨 24MP (RAW), fine tunining Lightroom, \r\n🖼️ no crop\r\n📚 3 photos, various view angles\r\n📌 59°26'31.6\"N 24°46'56.6\"E (59.442101, 24.782394)\r\n\r\n🔭 Sony FE 90mm F2.8 Macro G OSS (SEL90M28G)\r\n👋 Handheld, manual mode\r\n🔎 90mm (35mm), 90mm\r\n⏯️ Camera body button\r\n📶 bluetooth <= iPhone 12 (GPS)\r\n\r\n#️⃣ #fungi #photo #sony #panaeolina #panaeolinafoenisecii #brownmottlegill #heudüngerling #koppelseen #mottlegill #грибы #macro #mushroom #photography #harjumaa #mycology #naturephotography #fungilove #fungiphoto #estonia #pilze #eestiseened #eestimaa #seen #seenpilt #pilzfoto #pilz #röhrling #foto #fungiphoto #fungilove",
-          "photos": [],
+          "photos": [
+            {
+              "src": "/images/posts/CvaaHI8MPDy/01.jpg",
+              "thumb": "/thumbs/posts/CvaaHI8MPDy/01.webp",
+              "alt": "Panaeolina foenisecii — 2023-07-31"
+            },
+            {
+              "src": "/images/posts/CvaaHI8MPDy/02.jpg",
+              "thumb": "/thumbs/posts/CvaaHI8MPDy/02.webp",
+              "alt": "Panaeolina foenisecii — 2023-07-31"
+            },
+            {
+              "src": "/images/posts/CvaaHI8MPDy/03.jpg",
+              "thumb": "/thumbs/posts/CvaaHI8MPDy/03.webp",
+              "alt": "Panaeolina foenisecii — 2023-07-31"
+            }
+          ],
           "sourceFile": "panaeolina-foenisecii_2023-07-31_CvaaHI8MPDy.txt",
           "source": "local-caption",
           "instagramUrl": "https://www.instagram.com/p/CvaaHI8MPDy/"
@@ -106585,7 +107050,18 @@
             "tavavahelik"
           ],
           "caption": "🆔 Paxillus involutus (Batsch) Fr.\r\n🧾 https://bit.ly/428OrdO\r\n📖 Published in: Fr. In: Epicr. syst. mycol. (Upsaliae): 317 ('1836-1838'). (1838).\r\n🇺🇸 brown roll-rim\r\n🇩🇪 Kahler Krempling\r\n🇪🇪 Tavavahelik\r\n🇷🇺 Свинушка тонкая\r\n\r\n🗓️ 5/03/23, 1:43 PM\r\n🌎 Vienna - Am Mühlwasser, Danube-Auen National Park, Austria\r\n🌳🌿 Deciduous forest, undergrowth (birch, alder, oak). In soil.\r\n🍄 Paxillaceae / Agaricomycetes\r\n\r\nℹ️ gills on hymenium\r\nℹ️ cap is depressed\r\nℹ️ hymenium is decurrent\r\nℹ️ stipe is bare\r\n🟤 spore print is brown\r\n🌳 ecology is mycorrhizal\r\n☠️ edibility: deadly\r\n📏 fruit body to 6 cm\r\n📐 cap to 12 cm\r\n\r\n📷 Sony CyberShot DSC-HX99\r\n🎞️ (1) AF, ISO 400, 1/20s, ƒ/8, 0 ev\r\n🎞️ (2) AF, ISO 400, 1/30s, ƒ/8, 0 ev\r\n🔆 Partial overcast with sun, open space\r\n🎨 18MP (RAW+JPG), fine tune iPhone built-in software\r\n📌 N 48° 11' 24.8\" (48.190221666), E 16° 28' 57.8\" (16.482728333)\r\n\r\n🔦 Flash not fired, compulsory flash mode\r\n\r\n🔭 4.25-118mm f/3.5-6.4\r\n👋 Handheld, manual mode\r\n🔎 24mm (35mm), 4.25mm\r\n📶 Bluetooth <= iPhone 12 (GPS)\r\n⏯️ Camera body button\r\n\r\n#️⃣ #fungi #photo #sony #paxillus #paxillusinvolutus #brownrollrim #kahlerkrempling #macro #mushroom #photography #tallinn #mycology #naturephotography #fungilove #fungifanatic #austria #pilze #österreichpilze #österreich #pilz #donau #foto #fotografia #mycology #dunabe #tavavahelik",
-          "photos": [],
+          "photos": [
+            {
+              "src": "/images/posts/Cr31BAjs2cf/01.jpg",
+              "thumb": "/thumbs/posts/Cr31BAjs2cf/01.webp",
+              "alt": "Paxillus involutus — 2023-05-03"
+            },
+            {
+              "src": "/images/posts/Cr31BAjs2cf/02.jpg",
+              "thumb": "/thumbs/posts/Cr31BAjs2cf/02.webp",
+              "alt": "Paxillus involutus — 2023-05-03"
+            }
+          ],
           "sourceFile": "paxillus-involutus_2023-05-03_Cr31BAjs2cf.txt",
           "source": "local-caption",
           "instagramUrl": "https://www.instagram.com/p/Cr31BAjs2cf/"
@@ -109504,7 +109980,28 @@
             "фото"
           ],
           "caption": "👇 ...\r\n🆔 Phaeolus schweinitzii (Fr.) Pat.\r\n🧾 https://bit.ly/40ytXcG\r\n📖 Published in: Pat. In: Essai Tax. Hyménomyc. (Lons-le-Saunier): 86. (1900).\r\n🇺🇸 Dyer's Polypore\r\n🇩🇪 Fichten-Wurzelschwamm\r\n🇪🇪 Juurepruunik\r\n🇷🇺 Феолус Швейница\r\n\r\n🗓️ 9/4/22, 5:10 PM\r\n🌎 Pirita tee 28, 11911 Tallinn, Estonia\r\n🌲🍁🌿 mixed forest, near tree base (spruces, pines) incorporating blades of grass (Convallaria)\r\n🍄 Fomitopsidaceae / Agaricomycetes\r\n\r\n📷 Sony CyberShot DSC-HX99\r\n🎞️ Manual, ISO 400, 1/50s, ƒ/3.5\r\n🔆 Shade\r\n🎨 18MP (RAW), fine tune Lightroom, 1:1 crop (1,2,3,4)\r\n📌 N 59° 27' 31.496\" (59.458749), E 24° 50' 56.547001\" (24.849041)\r\n🔦 Flash not fired, compulsory flash mode\r\n\r\n🔭 4.25-118mm f/3.5-6.4\r\n👋 Handheld, manual mode\r\n🔎 24mm (35mm), 4.25mm\r\n📶 Bluetooth <= iPhone 12 (GPS)\r\n⏯️ Camera body button\r\n\r\n#️⃣ #fungi #photo #sony #phaeolusschweinitzii #dyerspolypore #Polypore #macro #mushroom #photography #tallinn #mycology #naturephotography #fungilove #fungifanatic #estonia #seened #eestiseened #eesti #pilz #грибы #foto #fotografia #фото",
-          "photos": [],
+          "photos": [
+            {
+              "src": "/images/posts/CrTo21tI80K/01.jpg",
+              "thumb": "/thumbs/posts/CrTo21tI80K/01.webp",
+              "alt": "Phaeolus schweinitzii — 2022-09-04"
+            },
+            {
+              "src": "/images/posts/CrTo21tI80K/02.jpg",
+              "thumb": "/thumbs/posts/CrTo21tI80K/02.webp",
+              "alt": "Phaeolus schweinitzii — 2022-09-04"
+            },
+            {
+              "src": "/images/posts/CrTo21tI80K/03.jpg",
+              "thumb": "/thumbs/posts/CrTo21tI80K/03.webp",
+              "alt": "Phaeolus schweinitzii — 2022-09-04"
+            },
+            {
+              "src": "/images/posts/CrTo21tI80K/04.jpg",
+              "thumb": "/thumbs/posts/CrTo21tI80K/04.webp",
+              "alt": "Phaeolus schweinitzii — 2022-09-04"
+            }
+          ],
           "sourceFile": "phaeolus-schweinitzii_2022-09-04_CrTo21tI80K.txt",
           "source": "local-caption",
           "instagramUrl": "https://www.instagram.com/p/CrTo21tI80K/"
@@ -115938,7 +116435,13 @@
             "фото"
           ],
           "caption": "👇 ...\r\n🆔 Ramaria eumorpha (P.Karst.) Corner\r\n🌐 https://www.gbif.org/species/5238712\r\n📖 Published in: Corner. In: Monograph of Clavaria and allied Genera, (Annals of Botany Memoirs No. 1): 575. (1950).\r\n🇺🇸 Common ramaria\r\n🇩🇪 Ockergelbe Kiefern-Koralle\r\n🇪🇪 Kuuseharik\r\n🇷🇺 Рамария обыкновенная\r\n\r\n🗓️ 05/Aug/23, 3:46 PM\r\n🌎 Suurupi LKA, Suurupi skv, Harjumaa, Estonia\r\n🌲🪵 In decaying remains of spruce needles and wood. Forming long witch lines. Spruce (Picea abies) abundant part of forest.\r\n🍄 Gomphaceae / Agaricomycetes\r\n\r\n ℹ️ hymenium: Branched coral-like structures, cream to yellowish when young, becoming tan or brownish with age.\r\n ℹ️ cap: Not applicable, as this species has coral-like fruit bodies rather than distinct caps.\r\n ℹ️ hymenium attachment: Coral-like branches emerge directly from the base or substrate.\r\n ℹ️ stipe: Not distinctly separate due to its coral-like form, base is typically whitish to cream.\r\n🟠🟡🟤 spore print: Yellow-brown to ochre.\r\n🪵 Saprobic, found primarily on decaying wood and forest litter.\r\n😑 Not recommended for consumption\r\n📏 fruit body: Up to 15 cm tall.\r\n📐 branch width: 0.5-2 cm.\r\n🔤 Striking coral fungus with intricately branched, upright fruiting bodies resembling marine corals. Its branches are cream to yellowish when young and become tan or brownish with age. Found in mixed forests, this species grows on decaying wood and forest litter, playing a vital role in nutrient cycling.\r\n\r\n🎞️ MF, ISO 6400, 1/100s, ƒ/8, 0 ev\r\n🔆 Clear bright weather with light overcast and clouds\r\n🎨 24MP (RAW), fine tune and denoise with Lightroom\r\n📚 18 photos, focus stacking with Zerene Stacker (PMax)\r\n🖼️ no crop, landscape, 3:2\r\n📌 59°27'16.7\"N 24°21'37.0\"E (59.454624, 24.360286)\r\n🔦 Flash did not fire\r\n\r\n📷 Sony α7 III (ILCE-7M3)\r\n🔭 Sony FE 90mm F2.8 Macro G OSS (SEL90M28G)\r\n🏎️ AMD Radeo Vega Frontier Pro\r\n👋 Handheld, manual mode\r\n🔎 90mm (35mm), 90mm\r\n⏯️ Camera body button\r\n\r\n#️⃣ #fungi #photo #sony #ramariaeumorpha #commonramaria #fairyring #ramaria #kuuseharik #macro #mushroom #photography #tallinn #mycology #naturephotography #fungilove #kiefernkoralle #estonia #seened #eestiseened #eesti #pilz #грибы #foto #pilze #seenefotod #pilzefotografieren #фотогрибов #фото",
-          "photos": [],
+          "photos": [
+            {
+              "src": "/images/posts/Cvxl3YLMILV/01.jpg",
+              "thumb": "/thumbs/posts/Cvxl3YLMILV/01.webp",
+              "alt": "Ramaria eumorpha — 2023-08-05"
+            }
+          ],
           "sourceFile": "ramaria-eumorpha_2023-08-05_Cvxl3YLMILV.txt",
           "source": "local-caption",
           "instagramUrl": "https://www.instagram.com/p/Cvxl3YLMILV/"
@@ -119670,7 +120173,13 @@
             "mushroomlove"
           ],
           "caption": "👇 ...\r\n🆔 Russula claroflava Grove\r\n🌐 https://www.gbif.org/species/2551299\r\n📖 Published in: Grove. In: Midland Naturalist: 265. (1888).\r\n🇺🇸 Yellow Swamp Brittlegill\r\n🇩🇪 Gelber Graustiel-Täubling\r\n🇪🇪 Kollane pilvik\r\n🇷🇺 Сыроежка светло-жёлтая\r\n\r\n🗓️ 28/07/23, 8:02 PM\r\n🌎 Tädu terviserada, Lubja, Harjumaa\r\n🌲🌿 In pine (Pinus sylvestris) forest, in moss and covered with undergrowth\r\n🍄 Russulaceae / Agaricomycetes\r\n\r\n ℹ️ gills on hymenium, white to pale cream, closely spaced\r\n ℹ️ cap is convex, becoming flat with a slight depression, smooth, yellow or ochre\r\n ℹ️ hymenium is lamellar\r\n ℹ️ stipe is cylindrical, smooth, white\r\n⚪️ spore print is white to cream\r\n🌲🌳 ecology is mycorrhizal, often found in coniferous and deciduous forests\r\n🙂🥜 edibility: edible, and considered quite good. It has a mild, nutty flavor.\r\n📏 fruit body to 4-10 cm tall\r\n📐 cap to 3-7 cm\r\n🔤 Characterized by its yellow or ochre cap and white gills and stem. Like other members of the Russula genus, it has a brittle texture. This species forms a mycorrhizal relationship with various trees, and it is often found in coniferous and deciduous forests. It's known for its mild, nutty flavor and is considered a good edible mushroom. As always, proper identification is crucial as there are many species in the Russula genus, some of which may be inedible or have a peppery or bitter taste.\r\n\r\n📷 Sony α7 III (ILCE-7M3)\r\n🎞️ MF, ISO 8000, 1/100s, ƒ/20, 0 ev\r\n🔆 Forest shade, with late evening partial sun\r\n🎨 24MP (RAW), fine tunining Lightroom \r\n🖼️ 1:1 crop\r\n📚 7 photos, focus stacking Photoshop\r\n📌 59°31'04.3\"N, 24°54'04.4\"E (59.517854, 24.901223)\r\n🔦 Flash not fired\r\n\r\n🔭 Sony FE 90mm F2.8 Macro G OSS (SEL90M28G)\r\n👋 Handheld, manual mode\r\n🔎 90mm (35mm), 90mm\r\n⏯️ Camera body button\r\n\r\n#️⃣ #fungi #photo #sony #russula #russulaclaroflava #yellowswampbrittlegill #gelbergraustieltäubling #pilvik #brittlegill #kollanepilvik #macro #mushroom #photography #harjumaa #mycology #naturephotography #fungilove #fungifanatic #estonia #pilze #eestiseened #eestimaa #seen #seenpilt #pilzfoto #pilz #täubling #foto #mushroomlove #fungilove",
-          "photos": [],
+          "photos": [
+            {
+              "src": "/images/posts/CvSK_WhIZu_/01.jpg",
+              "thumb": "/thumbs/posts/CvSK_WhIZu_/01.webp",
+              "alt": "Russula claroflava — 2023-07-28"
+            }
+          ],
           "sourceFile": "russula-claroflava_2023-07-28_CvSK_WhIZu_.txt",
           "source": "local-caption",
           "instagramUrl": "https://www.instagram.com/p/CvSK_WhIZu_/"
@@ -120431,7 +120940,28 @@
             "mushroomlove"
           ],
           "caption": "👇 ...\r\n🆔 Russula delica Fr.\r\n🌐 https://www.gbif.org/species/2551331\r\n📖 Published in: Fr. In: Epicr. syst. mycol. (Upsaliae): 350 ('1836-1838'). (1838).\r\n🇺🇸 Milk White Brittlegill\r\n🇩🇪 Gemeiner Weiß-Täubling\r\n🇪🇪 Kuiv pilvik\r\n🇷🇺 Подгруздок белый\r\n\r\n🗓️ 27/07/23, 3:20 PM\r\n🌎 Tohisoo manor park, Kohila, Raplamaa\r\n☘️🌱 In dirt, with some grass and nearby trees, partially open space\r\n🍄 Russulaceae / Agaricomycetes\r\n\r\n ℹ️ gills on hymenium, white, closely spaced, brittle\r\n ℹ️ cap is convex, becoming flat and then depressed with age, white, can be slightly yellowish or grayish, often with a peeling cuticle\r\n ℹ️ hymenium is lamellar\r\n ℹ️ stipe is cylindrical, smooth, white, often stout and robust\r\n⚪️ spore print is white to cream\r\n🌳 ecology is mycorrhizal, often found in association with deciduous and coniferous trees\r\n😐 edibility: edible, but of little culinary value due to its mild flavor and occasional bitterness\r\n📏 fruit body to 5-15 cm tall\r\n📐 cap to 5-15 cm\r\n🔤 Mushroom known for its large size, robust stature, and uniformly white appearance. Like other members of the Russula genus, it has a brittle texture due to the presence of spherical cells called sphaerocysts. It can often be found in association with various trees as it forms mutualistic mycorrhizal relationships. While it is considered edible, its flavor is mild and not particularly remarkable, and some individuals find it slightly bitter. It's always important to be cautious when identifying Russula species, as some can be very similar in appearance but have different edibility profiles.\r\n\r\n📷 Sony α7 III (ILCE-7M3)\r\n🎞️ MF, ISO 640, 1/125s, ƒ/16, 0 ev\r\n🔆 Semi-shade, sunny fair weather with some clouds, with nearby storms\r\n🎨 24MP (RAW), fine tunining Lightroom\r\n📚 4 photos, various view angles\r\n🔦 Flash not fired\r\n\r\n🔭 Sony FE 90mm F2.8 Macro G OSS (SEL90M28G)\r\n👋 Handheld, manual mode\r\n🔎 90mm (35mm), 90mm\r\n⏯️ Camera body button\r\n\r\n#️⃣ #fungi #photo #sony #russula #russuladelica #milkwhitebrittlegill #gemeinerweißtäubling #pilvik #brittlegill #kuivpilvik #macro #mushroom #photography #raplamaa #mycology #naturephotography #fungilove #fungifanatic #estonia #pilze #eestiseened #eestimaa #seen #seenpilt #pilzfoto #pilz #täubling #foto #mushroomlove #fungilove",
-          "photos": [],
+          "photos": [
+            {
+              "src": "/images/posts/CvN-icIsYuv/01.jpg",
+              "thumb": "/thumbs/posts/CvN-icIsYuv/01.webp",
+              "alt": "Russula delica — 2023-07-27"
+            },
+            {
+              "src": "/images/posts/CvN-icIsYuv/02.jpg",
+              "thumb": "/thumbs/posts/CvN-icIsYuv/02.webp",
+              "alt": "Russula delica — 2023-07-27"
+            },
+            {
+              "src": "/images/posts/CvN-icIsYuv/03.jpg",
+              "thumb": "/thumbs/posts/CvN-icIsYuv/03.webp",
+              "alt": "Russula delica — 2023-07-27"
+            },
+            {
+              "src": "/images/posts/CvN-icIsYuv/04.jpg",
+              "thumb": "/thumbs/posts/CvN-icIsYuv/04.webp",
+              "alt": "Russula delica — 2023-07-27"
+            }
+          ],
           "sourceFile": "russula-delica_2023-07-27_CvN-icIsYuv.txt",
           "source": "local-caption",
           "instagramUrl": "https://www.instagram.com/p/CvN-icIsYuv/"
@@ -124132,7 +124662,13 @@
             "фото"
           ],
           "caption": "👇 ...\r\n🆔 Sarcoscypha austriaca (Beck ex Sacc.)\r\n🧾 https://bit.ly/3Ktjr1u\r\n📖 Published in Boud. In: Hist. Class. Discom. Eur. (Paris): 55. (1907).\r\n🇺🇸 scarlet elfcup\r\n🇩🇪 Österreichischer Kelchbecherling\r\n🇪🇪 Harilik karikseen\r\n🇷🇺 Саркосцифа австрийская\r\n\r\n🗓️ 4/01/23, 1:58 PM\r\n🌍 Tallinna Botaanikaaed, Estonia\r\n🌳🪵 decidious alder forest, moist warm low spot, fallen damp hardwood\r\n🍄 Sarcoscyphaceae / Pezizomycetes\r\n\r\n📷 Sony α7 III (ILCE-7M3)\r\n🎞️ MF, ISO 640, 1/25s, ƒ/5.6\r\n🎨 24MP, focus stack of 10 photos, fine tune, edit, crop, Lightroom + Photoshop\r\n🔆 Auto WB, sunny weather, forest shade\r\n🔦 did not fire\r\n\r\n🔭 Sony FE 50mm F2.8 Macro (SEL50M28)\r\n⚙️ Artcise ZF-60 (EB36S)\r\n🔎 50mm (50mm)\r\n⏯️ camera body button\r\n\r\n#️⃣ #fungi #photo #sony #sarcoscypha #scarletelfcup #cupfungi #elfcup #sarcoscyphaaustriaca #macro #mushroom #photography #tallinnabotaanikaaed #tallinnbotanicalgarden #micology #naturephotography #fungilove #fungifanatic #estonia #seened #eestiseened #eesti #pilz #грибы #foto #fotografia #фото",
-          "photos": [],
+          "photos": [
+            {
+              "src": "/images/posts/CqiSpROo5rh/01.jpg",
+              "thumb": "/thumbs/posts/CqiSpROo5rh/01.webp",
+              "alt": "Sarcoscypha austriaca — 2023-04-01"
+            }
+          ],
           "sourceFile": "sarcoscypha-austriaca_2023-04-01_CqiSpROo5rh.txt",
           "source": "local-caption",
           "instagramUrl": "https://www.instagram.com/p/CqiSpROo5rh/"
@@ -124257,7 +124793,18 @@
             "фото"
           ],
           "caption": "👇 ...\r\n🆔 Sarcoscypha austriaca (Beck ex Sacc.)\r\n🧾 https://bit.ly/3Ktjr1u\r\n📖 Published in Boud. In: Hist. Class. Discom. Eur. (Paris): 55. (1907).\r\n🇺🇸 scarlet elfcup \r\n🇩🇪 Österreichischer Kelchbecherling\r\n🇪🇪 Harilik karikseen \r\n🇷🇺 Саркосцифа австрийская \r\n\r\n🗓️ 4/01/23, 1:45 PM\r\n🌍 Tallinna Botaanikaaed, Estonia \r\n🌳🪵 decidious alder forest, moist warm low spot, fallen damp hardwood\r\n🍄 Sarcoscyphaceae / Pezizomycetes\r\n\r\n📷 Sony α7 III (ILCE-7M3)\r\n🎞️ MF, ISO 640, 1/80s, ƒ/16\r\n🎨 24MP, focus stack of 14 photos, fine tune, edit, crop, Lightroom + Photoshop\r\n🔆 Auto WB, sunny weather, sunny spot\r\n🔦 did not fire\r\n\r\n🔭 Sony FE 50mm F2.8 Macro (SEL50M28)\r\n⚙️ Artcise ZF-60 (EB36S)\r\n🔎 50mm (35mm), 50mm\r\n⏯️ camera body button\r\n\r\n#️⃣ #fungi #photo #sony #sarcoscypha #scarletelfcup #cupfungi #elfcup #sarcoscyphaaustriaca #macro #mushroom #photography #tallinnabotaanikaaed #tallinnbotanicalgarden #micology #naturephotography #fungilove #fungifanatic #estonia #seened #eestiseened #eesti #pilz #грибы #foto #fotografia #фото",
-          "photos": [],
+          "photos": [
+            {
+              "src": "/images/posts/CqgIe1GMt9a/01.jpg",
+              "thumb": "/thumbs/posts/CqgIe1GMt9a/01.webp",
+              "alt": "Sarcoscypha austriaca — 2023-04-01"
+            },
+            {
+              "src": "/images/posts/CqgIe1GMt9a/02.jpg",
+              "thumb": "/thumbs/posts/CqgIe1GMt9a/02.webp",
+              "alt": "Sarcoscypha austriaca — 2023-04-01"
+            }
+          ],
           "sourceFile": "sarcoscypha-austriaca_2023-04-01_CqgIe1GMt9a.txt",
           "source": "local-caption",
           "instagramUrl": "https://www.instagram.com/p/CqgIe1GMt9a/"
@@ -127599,7 +128146,13 @@
             "фото"
           ],
           "caption": "👇 ...\r\n🆔 Spathularia flavida Pers.\r\n🧾 https://bit.ly/3LgYBmq\r\n📖 Published in: Pers. In: Neues Mag. Bot. 1: 116. (1794).\r\n🇺🇸 yellow earth tongue\r\n🇩🇪 Gelber Löffeltrichterling\r\n🇪🇪 Tumepruun kõrvliudik\r\n🇷🇺 Спатулярия желтоватая\r\n\r\n🗓️ 9/24/22, 12:51 PM\r\n🌎 Valga maantee 47, Võru, 65609 Võru County, Estonia\r\n🍂🌲🌳 humid, mixed forest (rich ground cover, leaf litter, moss)\r\n🍄 Cudoniaceae / Leotiomycetes\r\n\r\n📷 Sony CyberShot DSC-HX99\r\n🎞️ AF, ISO 80, 1/100s, ƒ/5.6\r\n🔆 forced daylight (sunny weather, bright spot)\r\n🎨 18MP (RAW), fine tune Lightroom + Luminar Neo\r\n📌 N 57° 59' 11.09\" (57.986414), E 27° 37' 23.669001\" (27.623241)\r\n\r\n🔦 did not fire\r\n\r\n🔭 ZEISS® Vario-Sonnar T* 24-720 mm1 zoom lens (4.25-118mm f/3.5-6.4)\r\n👋 handheld, manual mode\r\n🔎 50mm (35mm), 8.07mm\r\n📶 bluetooth <= iPhone 12 (GPS)\r\n⏯️ camera body button\r\n\r\n#️⃣ #fungi #photo #sony #spathularia #yellowearthtongue #spathulariaflavida #macro #mushroom #photography #värska #naturelove #micology #naturephotography #fungilove #fungifanatic #estonia #seened #eestiseened #eesti #pilz #грибы #foto #fotografia #фото",
-          "photos": [],
+          "photos": [
+            {
+              "src": "/images/posts/CrRZzx-scvP/01.jpg",
+              "thumb": "/thumbs/posts/CrRZzx-scvP/01.webp",
+              "alt": "Spathularia flavida — 2022-09-24"
+            }
+          ],
           "sourceFile": "spathularia-flavida_2022-09-24_CrRZzx-scvP.txt",
           "source": "local-caption",
           "instagramUrl": "https://www.instagram.com/p/CrRZzx-scvP/"
@@ -131901,7 +132454,13 @@
             "shrooms"
           ],
           "caption": "👇 ...\r\n🆔 Suillus granulatus (L.) Roussel\r\n🌐 https://www.gbif.org/species/8146046\r\n📖 Published in: Roussel. In: Fl. Calvados: 34. (1796).\r\n🇺🇸 Weeping Bolete\r\n🇩🇪 Körnchen-Röhrling\r\n🇪🇪 Lambatatik\r\n🇷🇺 Маслёнок зернистый\r\n\r\n🗓️ 30/07/23, 3:47 PM\r\n🌎 Treppoja Cascade, Kloogaranna, Harjumaa\r\n🌲🌿 In pine and spruce forest, in moss and grass\r\n🍄 Suillaceae / Agaricomycetes\r\n\r\n ℹ️ tubes under the cap instead of gills, yellowish, turning brownish with age\r\n ℹ️ cap is convex, becoming broadly convex to nearly flat with age, smooth, yellow to brown, often sticky when moist\r\n ℹ️ hymenium attachment is adnate to decurrent\r\n ℹ️ stipe is cylindrical, smooth or slightly granular, yellowish\r\n🟤 spore print is brownish\r\n🌲 ecology is mycorrhizal, particularly associated with pine trees\r\n🍴 edible, though not considered high-quality due to a somewhat slimy texture. Recommended to be cooked before consumption.\r\n📏 fruit body to 6-10 cm tall\r\n📐 cap to 4-10 cm\r\n🔤 Mushroom characterized by a smooth, often sticky cap and yellowish tubes under the cap. It is particularly noted for the droplets (or \"weeping\") that appear at the base of the tubes, which gives the mushroom its common name. It forms a mycorrhizal relationship with pine trees, helping the trees to absorb water and nutrients while receiving sugars and other nutrients in return. While edible, it's not typically considered a top-tier culinary mushroom due to its somewhat slimy texture. Nevertheless, it can be a nice addition to dishes when cooked properly, and some recommend removing the skin of the cap to improve the texture. \r\n\r\n📷 Sony α7 III (ILCE-7M3)\r\n🎞️ MF, ISO 1600, 1/125s, ƒ/18, 0 ev\r\n🔆 Forest semishade, partial overcast\r\n🎨 24MP (RAW), fine tunining Lightroom, \r\n🖼️ 1:1 crop\r\n📚 7 photos, focus stacking Photoshop\r\n\r\n🔭 Sony FE 90mm F2.8 Macro G OSS (SEL90M28G)\r\n👋 Handheld, manual mode\r\n🔎 90mm (35mm), 90mm\r\n⏯️ Camera body button\r\n\r\n#️⃣ #fungi #photo #sony #suillus #suillusgranulatus #weepingbolete #körnchenröhrling #lambatatik #bolete #tatik #macro #mushroom #photography #harjumaa #mycology #naturephotography #fungilove #fungiphoto #estonia #pilze #eestiseened #eestimaa #seen #seenpilt #pilzfoto #pilz #röhrling #foto #shrooms #fungilove",
-          "photos": [],
+          "photos": [
+            {
+              "src": "/images/posts/CvVWVyYM-m6/01.jpg",
+              "thumb": "/thumbs/posts/CvVWVyYM-m6/01.webp",
+              "alt": "Suillus granulatus — 2023-07-30"
+            }
+          ],
           "sourceFile": "suillus-granulatus_2023-07-30_CvVWVyYM-m6.txt",
           "source": "local-caption",
           "instagramUrl": "https://www.instagram.com/p/CvVWVyYM-m6/"
@@ -132424,7 +132983,13 @@
             "kuldtatik"
           ],
           "caption": "👇 ...\r\n🆔 Suillus grevillei (Klotzsch) Singer\r\n🧾 https://bit.ly/3KS52eq\r\n📖 Published in: Singer. In: Farlowia 2(2): 259. (1945). \r\n🇺🇸 Larch Bolete\r\n🇩🇪 Körnchenröhrling\r\n🇪🇪 Kuldtatik\r\n🇷🇺 Маслёнок лиственничный\r\n\r\n🗓️ 9/17/22, 6:04 PM\r\n🌎 Jaapani Aed, Tallinn, Estonia\r\n🌲🍂 Coniferous park plantations, under larch trees\r\n🍄 Suillaceae / Agaricomycetes\r\n\r\n📷 Sony CyberShot DSC-HX99\r\n🎞️ Manual, ISO 800, 1/80s, ƒ/3.5\r\n🔆 Shade\r\n🎨 18MP (RAW), fine tune Lightroom, 1:1 crop\r\n📌 N 59° 26' 29.997999\" (59.441666), E 24° 47' 54.198002\" (24.798388)\r\n\r\n🔦 Flash not fired, compulsory flash mode\r\n\r\n🔭 4.25-118mm f/3.5-6.4\r\n👋 Handheld, manual mode\r\n🔎 24mm (35mm), 4.25mm\r\n📶 Bluetooth <= iPhone 12 (GPS)\r\n⏯️ Camera body button\r\n\r\n#️⃣ #fungi #photo #sony #suillus #suillusgrevillei #grevillesbolete #larchbolete #bolete #macro #mushroom #photography #tallinn #mycology #naturephotography #fungilove #fungifanatic #estonia #seened #eestiseened #eesti #pilz #jaapaniaed #foto #fotografia #kuldtatik",
-          "photos": [],
+          "photos": [
+            {
+              "src": "/images/posts/CrTrv9yoF1C/01.jpg",
+              "thumb": "/thumbs/posts/CrTrv9yoF1C/01.webp",
+              "alt": "Suillus grevillei — 2022-09-17"
+            }
+          ],
           "sourceFile": "suillus-grevillei_2022-09-17_CrTrv9yoF1C.txt",
           "source": "local-caption",
           "instagramUrl": "https://www.instagram.com/p/CrTrv9yoF1C/"
@@ -133204,7 +133769,13 @@
             "mushroomlove"
           ],
           "caption": "👇 ...\r\n🆔 Suillus variegatus (Sw.) Richon & Roze\r\n🌐 https://www.gbif.org/species/9043861\r\n📖 Published in: Richon & Roze. In: Atlas Champ. (Aubrevilliers): 178. (1888).\r\n🇺🇸 Velvet Bolete\r\n🇩🇪 Sand-Röhrling\r\n🇪🇪 Liivtatik\r\n🇷🇺 Маслёнок жёлто-бурый\r\n\r\n🗓️ 28/07/23, 7:17 PM\r\n🌎 Tädu terviserada, Lubja, Harjumaa\r\n🌲🌿 In pine (Pinus sylvestris) forest, between bilberry (Vaccinium myrtillus) bushes\r\n🍄 Suillaceae / Agaricomycetes\r\n\r\n ℹ️ tubes under the cap instead of gills, yellow to olive, becoming brownish with age\r\n ℹ️ cap is convex, becoming broadly convex to nearly flat in age, smooth to finely velvet, reddish-brown with a variegated pattern\r\n ℹ️ hymenium attachment is adnate to decurrent\r\n ℹ️ stipe is cylindrical, yellowish at the top, reddish-brown towards the base, may have a ring\r\n🟤 spore print is brown\r\n🌲 ecology is mycorrhizal, often found in association with pine trees\r\n🍴 edibility: edible, but should be peeled before consumption due to a potentially indigestible cuticle on the cap\r\n📏 fruit body to 6-12 cm tall\r\n📐 cap to 4-12 cm\r\n🔤 Mushroom recognized by its distinctive cap with a variegated pattern of reddish-brown and yellow hues. Like other members of the Suillus genus, it has tubes instead of gills under the cap, which help to identify it as a bolete. It forms mutualistic relationships with pine trees, helping the tree to absorb nutrients while the mushroom benefits from the tree's photosynthesis products. Although it is edible, the cap's skin should be removed before cooking, as it can cause indigestion in some people.\r\n\r\n📷 Sony α7 III (ILCE-7M3)\r\n🎞️ MF, ISO 6400, 1/50s, ƒ/20, 0 ev\r\n🔆 Forest shade, with evening partial sun\r\n🎨 24MP (RAW), fine tunining Lightroom, 1:1 crop\r\n📚 3 photos, focus stacking Photoshop\r\n🔦 Flash not fired\r\n\r\n🔭 Sony FE 90mm F2.8 Macro G OSS (SEL90M28G)\r\n👋 Handheld, manual mode\r\n🔎 90mm (35mm), 90mm\r\n⏯️ Camera body button\r\n\r\n#️⃣ #fungi #photo #sony #suillus #suillusvariegatus #velvetbolete #sandröhrling #liivtatik #bolete #tatik #macro #mushroom #photography #harjumaa #mycology #naturephotography #fungilove #fungifanatic #estonia #pilze #eestiseened #eestimaa #seen #seenpilt #pilzfoto #pilz #röhrling #foto #mushroomlove #fungilove",
-          "photos": [],
+          "photos": [
+            {
+              "src": "/images/posts/CvQXFV0M-18/01.jpg",
+              "thumb": "/thumbs/posts/CvQXFV0M-18/01.webp",
+              "alt": "Suillus variegatus — 2023-07-28"
+            }
+          ],
           "sourceFile": "suillus-variegatus_2023-07-28_CvQXFV0M-18.txt",
           "source": "local-caption",
           "instagramUrl": "https://www.instagram.com/p/CvQXFV0M-18/"
@@ -133763,7 +134334,13 @@
             "фото"
           ],
           "caption": "👇 ...\r\n🆔 Taphrina padi (Jacz.) Mix\r\n🌐 https://www.gbif.org/species/2593025\r\n📖 Published in: Mix. In: Trans. Kansas Acad. Sci. 50: 1. (1947).\r\n🇺🇸 Bird Cherry Pocket\r\n🇷🇺 Тафрина черёмуховая\r\n\r\n🗓️ 6/18/23, 10:44 AM\r\n🌎 Lohusalu sadam, Harju, Estonia\r\n🌳🌊🍒 Park land, near sea, bird cherry fruits (Prunus padus)\r\n🍄 Taphrinaceae / Taphrinomycetes\r\n\r\n ℹ️ hymenium is not applicable due to the nature of the organism, which is a plant pathogenic fungus causing deformities in bird cherry (Prunus padus) leaves\r\n ℹ️ cap is not applicable, as this fungus does not form traditional mushroom caps\r\n ℹ️ hymenium attachment is not applicable\r\n ℹ️ stipe is not applicable\r\n🚫 spore print is not typically obtained, as this fungus does not produce mushroom-like fruiting bodies\r\n🍒🍃 ecology is parasitic, typically found infecting bird cherry (Prunus padus) leaves, causing pouch-like deformities known as 'pocket galls'\r\n🚫 not applicable, as this fungus is not typically considered for consumption\r\n📏 size varies, but the galls on the host plant's leaves are typically very small\r\n🔤 Plant pathogenic fungus that specifically infects bird cherry (Prunus padus) leaves, causing characteristic 'pocket galls'. These are pouch-like deformities that occur on the leaves and are the result of the fungus manipulating the plant tissue. Taphrina padi belongs to the Ascomycota division, and its primary mode of reproduction is through the production of ascospores. This fungus is mainly of interest for its effect on bird cherry trees and is not used for culinary or medicinal purposes.\r\n\r\n📷 Sony α7 III (ILCE-7M3)\r\n🎞️ AF, ISO 1250, 1/200s, ƒ/16, 0 ev\r\n🔆 Clear sky, moderate wind, semishade from trees\r\n🎨 24MP (RAW), fine tune Lightroom, 1:1 crop\r\n🔦 No flash\r\n📌 No GPS information\r\n\r\n🔭 Sony FE 50mm F2.8 Macro (SEL50M28)\r\n👋 Handheld, manual mode\r\n🔎 50mm (35mm), 50mm\r\n⏯️ Camera body button\r\n\r\n#️⃣ #fungi #photo #sony #taphrinapadi #taphrina #birdcherrypocket #galls #macro #mushroom #photography #lohusalu #mycology #naturephotography #fungilove #fungifanatic #estonia #seened #eestiseened #eesti #pilz #грибы #foto #fotografia #фото",
-          "photos": [],
+          "photos": [
+            {
+              "src": "/images/posts/Ctn8VemMaSu/01.jpg",
+              "thumb": "/thumbs/posts/Ctn8VemMaSu/01.webp",
+              "alt": "Taphrina padi — 2023-06-18"
+            }
+          ],
           "sourceFile": "taphrina-padi_2023-06-18_Ctn8VemMaSu.txt",
           "source": "local-caption",
           "instagramUrl": "https://www.instagram.com/p/Ctn8VemMaSu/"
@@ -137154,7 +137731,23 @@
             "фото"
           ],
           "caption": "👇 ...\r\n🆔 Trametes hirsuta (Wulfen) Lloyd\r\n🧾 https://bit.ly/409GlQo\r\n📖 Published in: Lloyd. In: Mycol. Writ. 7(Letter 73): 1319. (1924).\r\n🇺🇸 hairy bracket\r\n🇩🇪 Striegelige Tramete\r\n🇪🇪 Karvane lehtrik\r\n🇷🇺 Траметес жёстковолосистый\r\n\r\n🗓️ 4/15/23, 3:25 PM\r\n🌍 Tallinna Botaanikaaed, Estonia\r\n🌳🪵 decidious alder forest, dead alder trunk\r\n🍄 Polyporaceae / Agaricomycetes\r\n\r\n📷 Sony α7 III (ILCE-7M3)\r\n🎞️ (1,2) MF, ISO 100, 1/15s, ƒ/13\r\n🎨 24MP, focus stack of 12 (1), 10 (2) photos, fine tune, crop (3), Lightroom + Photoshop\r\n🔆 Auto WB, fair weather, slight overcast with sun, forest shade\r\n🔦 did not fire\r\n\r\n🔭 Sony FE 50mm F2.8 Macro (SEL50M28)\r\n⚙️ Artcise ZF-60 (EB36S)\r\n🔎 50mm (50mm)\r\n⏯️ Sony Remote Commander (RMT-P1BT)\r\n\r\n#️⃣ #fungi #photo #sony #trametes #scarletelfcup #bracket #hairybracket #trameteshirsuta #macro #mushroom #photography #tallinnabotaanikaaed #tallinnbotanicalgarden #micology #naturephotography #fungilove #fungifanatic #estonia #seened #eestiseened #eesti #pilz #грибы #foto #fotografia #фото",
-          "photos": [],
+          "photos": [
+            {
+              "src": "/images/posts/CrEBU1Zoj3-/01.jpg",
+              "thumb": "/thumbs/posts/CrEBU1Zoj3-/01.webp",
+              "alt": "Trametes hirsuta — 2023-04-15"
+            },
+            {
+              "src": "/images/posts/CrEBU1Zoj3-/02.jpg",
+              "thumb": "/thumbs/posts/CrEBU1Zoj3-/02.webp",
+              "alt": "Trametes hirsuta — 2023-04-15"
+            },
+            {
+              "src": "/images/posts/CrEBU1Zoj3-/03.jpg",
+              "thumb": "/thumbs/posts/CrEBU1Zoj3-/03.webp",
+              "alt": "Trametes hirsuta — 2023-04-15"
+            }
+          ],
           "sourceFile": "trametes-hirsuta_2023-04-15_CrEBU1Zoj3-.txt",
           "source": "local-caption",
           "instagramUrl": "https://www.instagram.com/p/CrEBU1Zoj3-/"
