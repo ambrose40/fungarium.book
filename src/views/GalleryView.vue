@@ -9,7 +9,7 @@ import CharacteristicFilters from '../components/CharacteristicFilters.vue'
 import TopNineSlideshow from '../components/TopNineSlideshow.vue'
 import ScientificSearchFilters from '../components/ScientificSearchFilters.vue'
 import { SITE_NAME } from '../branding'
-import { buildTaxonomyIndex, filterCatalog, normalizeTaxonomyQuery, setTaxonomyFilter } from '../lib/catalog.mjs'
+import { buildTaxonomyIndex, filterCatalog, normalizeTaxonomyQuery, setTaxonomyFilter, TAXONOMY_FIELDS } from '../lib/catalog.mjs'
 import { readCharacteristicSelections, setCharacteristicSelection, clearCharacteristicSelections, characteristicFacetCounts } from '../lib/characteristic-filters.mjs'
 import { readScientificSearches, setScientificSearch, clearScientificSearches } from '../lib/scientific-search.mjs'
 import { ORGANISM_GROUPS, readOrganismSelections, setOrganismSelections } from '../lib/organism-groups.mjs'
@@ -26,7 +26,7 @@ async function explore() {
 const filtersOpen = ref(false)
 const canonicalQuery = computed(() => normalizeTaxonomyQuery(route.query))
 watch(() => route.query, query => {
-  if (query.genus && query.family) router.replace({ query: normalizeTaxonomyQuery(query) })
+  if (TAXONOMY_FIELDS.filter(field => Array.isArray(query[field]) ? query[field][0] : query[field]).length > 1) router.replace({ query: normalizeTaxonomyQuery(query) })
 }, { immediate: true })
 // URL-backed models keep native links, back/forward, and the form in sync.
 function queryModel(key, fallback = '') {
@@ -35,7 +35,7 @@ function queryModel(key, fallback = '') {
       const value = canonicalQuery.value[key]
       return String((Array.isArray(value) ? value[0] : value) || fallback)
     },
-    set: value => router.replace({ query: ['genus', 'family'].includes(key)
+    set: value => router.replace({ query: TAXONOMY_FIELDS.includes(key)
       ? setTaxonomyFilter(canonicalQuery.value, key, value)
       : { ...canonicalQuery.value, [key]: value && value !== fallback ? value : undefined } }),
   })
@@ -44,6 +44,7 @@ const search = queryModel('q')
 const scope = queryModel('scope', 'all')
 const genus = queryModel('genus')
 const family = queryModel('family')
+const taxonomicClass = queryModel('class')
 const year = queryModel('year')
 const sort = queryModel('sort', 'name')
 const letter = queryModel('letter')
@@ -60,10 +61,11 @@ const scopeField = computed(() => scientificSearchFields.find(field => scope.val
 const searchPlaceholder = computed(() => scopeField.value ? `Search ${scopeField.value.label.toLowerCase()} descriptions…` : scope.value === 'scientific' ? 'Search scientific names, e.g. Boletus edulis…' : 'Search names, places, or scientific descriptions…')
 const taxonomy = buildTaxonomyIndex(species)
 const families = taxonomy.families.map(item => item.name)
+const classes = taxonomy.classes.map(item => item.name)
 const years = [...new Set(species.flatMap(item => item.observations.map(post => post.date.slice(0, 4))))].sort().reverse()
 const letters = [...new Set(species.map(item => item.latinName[0]))].sort()
 const characteristics = computed(() => readCharacteristicSelections(canonicalQuery.value))
-const baseFilters = computed(() => ({ search: search.value, scope: scope.value, genus: genus.value, family: family.value, year: year.value, letter: letter.value, tag: tag.value, scientificSearches: scientificSearches.value, organismGroups: organismGroups.value }))
+const baseFilters = computed(() => ({ search: search.value, scope: scope.value, genus: genus.value, family: family.value, taxonomicClass: taxonomicClass.value, year: year.value, letter: letter.value, tag: tag.value, scientificSearches: scientificSearches.value, organismGroups: organismGroups.value }))
 const taxonomyFiltered = computed(() => filterCatalog(species, baseFilters.value))
 const characteristicCounts = computed(() => characteristicFacetCounts(taxonomyFiltered.value, characteristics.value, characteristicFilters))
 const activeCharacteristics = computed(() => characteristicFilters.flatMap(group =>
@@ -77,20 +79,19 @@ const filtered = computed(() => {
   return result.sort((a, b) => sort.value === 'newest' ? b.latestDate.localeCompare(a.latestDate) || a.latinName.localeCompare(b.latinName) : sort.value === 'observations' ? b.observations.length - a.observations.length || a.latinName.localeCompare(b.latinName) : a.latinName.localeCompare(b.latinName))
 })
 const visible = computed(() => filtered.value.slice(0, limit.value))
-const hasFilters = computed(() => search.value || scope.value !== 'all' || genus.value || family.value || year.value || letter.value || tag.value || activeCharacteristics.value.length || activeScientificSearches.value.length || organismFilterActive.value)
-const filterCount = computed(() => [genus.value, family.value, year.value, letter.value, tag.value].filter(Boolean).length + activeCharacteristics.value.length + activeScientificSearches.value.length + Number(organismFilterActive.value))
+const hasFilters = computed(() => search.value || scope.value !== 'all' || genus.value || family.value || taxonomicClass.value || year.value || letter.value || tag.value || activeCharacteristics.value.length || activeScientificSearches.value.length || organismFilterActive.value)
+const filterCount = computed(() => [genus.value, family.value, taxonomicClass.value, year.value, letter.value, tag.value].filter(Boolean).length + activeCharacteristics.value.length + activeScientificSearches.value.length + Number(organismFilterActive.value))
 watch(() => route.fullPath, () => { limit.value = 36 })
 function reset() { resetVersion.value++; router.replace({ query: {} }) }
 function clearTaxonomy() {
   const query = { ...canonicalQuery.value }
-  delete query.genus
-  delete query.family
+  for (const field of TAXONOMY_FIELDS) delete query[field]
   router.replace({ query })
 }
 function changeCharacteristic(id, values) { router.replace({ query: setCharacteristicSelection(canonicalQuery.value, id, values) }) }
 function clearCharacteristics() { router.replace({ query: clearCharacteristicSelections(canonicalQuery.value) }) }
 function removeCharacteristic(id, value) { changeCharacteristic(id, characteristics.value[id].filter(item => item !== value)) }
-function familyLink(name) { return { name: 'gallery', query: setTaxonomyFilter(canonicalQuery.value, 'family', name) } }
+function taxonomyLink(field, name) { return { name: 'gallery', query: setTaxonomyFilter(canonicalQuery.value, field, name) } }
 function changeScientificSearch(id, text) { router.replace({ query: setScientificSearch(canonicalQuery.value, id, text) }) }
 function clearDescriptionSearches() { router.replace({ query: clearScientificSearches(canonicalQuery.value) }) }
 function changeOrganism(id, checked) {
@@ -133,10 +134,10 @@ function cover(item) { return item.observations.find(post => post.photos.length)
       </div>
       <div id="collection-filters" v-show="filtersOpen" class="collection-filters">
         <fieldset class="organism-filters"><legend>Organism groups</legend><label v-for="group in ORGANISM_GROUPS" :key="group.id"><input type="checkbox" :checked="organismGroups.includes(group.id)" :aria-label="`Show ${group.label.toLowerCase()}`" @change="changeOrganism(group.id, $event.target.checked)" /><span>{{ group.label }}</span><small>{{ organismCounts[group.id] }}</small></label></fieldset>
-        <div class="select-filters"><label for="family">Family <select id="family" v-model="family" aria-label="Filter by family"><option value="">All families</option><option v-for="item in families" :key="item">{{ item }}</option></select></label><label for="year">Observation year <select id="year" v-model="year" aria-label="Filter by observation year"><option value="">All years</option><option v-for="item in years" :key="item">{{ item }}</option></select></label></div>
-        <div class="filter-reset-bar"><p>Choose a genus <em>or</em> a family, then add characteristics to refine your results.</p><button class="button button-outline filter-reset-button" type="button" :disabled="!hasFilters" @click="reset">Clear all filters <X :size="14" /></button></div>
+        <div class="select-filters"><label for="family">Family <select id="family" v-model="family" aria-label="Filter by family"><option value="">All families</option><option v-for="item in families" :key="item">{{ item }}</option></select></label><label for="taxonomic-class">Taxonomy class <select id="taxonomic-class" v-model="taxonomicClass" aria-label="Filter by taxonomy class"><option value="">All classes</option><option v-for="item in classes" :key="item">{{ item }}</option></select></label><label for="year">Observation year <select id="year" v-model="year" aria-label="Filter by observation year"><option value="">All years</option><option v-for="item in years" :key="item">{{ item }}</option></select></label></div>
+        <div class="filter-reset-bar"><p>Choose a genus, family, <em>or</em> class, then add characteristics to refine your results.</p><button class="button button-outline filter-reset-button" type="button" :disabled="!hasFilters" @click="reset">Clear all filters <X :size="14" /></button></div>
         <section class="taxonomy-browser" aria-labelledby="taxonomy-heading">
-          <div class="taxonomy-browser-heading"><h3 id="taxonomy-heading">Quick taxonomic filters</h3><div class="taxonomy-heading-actions"><p>Genus and family selections replace one another</p><button type="button" class="text-button" :disabled="!genus && !family" @click="clearTaxonomy">Clear taxonomy <X :size="12" /></button></div></div>
+          <div class="taxonomy-browser-heading"><h3 id="taxonomy-heading">Quick taxonomic filters</h3><div class="taxonomy-heading-actions"><p>Genus, family, and class selections replace one another</p><button type="button" class="text-button" :disabled="!genus && !family && !taxonomicClass" @click="clearTaxonomy">Clear taxonomy <X :size="12" /></button></div></div>
           <div class="taxonomy-browser-sections">
             <TaxonomyFilter :key="`genus-${resetVersion}`" field="genus" :entries="taxonomy.genera" :selected="genus" />
             <TaxonomyFilter :key="`family-${resetVersion}`" field="family" :entries="taxonomy.families" :selected="family" />
@@ -154,6 +155,7 @@ function cover(item) { return item.observations.find(post => post.photos.length)
           <span v-for="field in activeScientificSearches" :key="field.id" class="tag-filter scientific-search-chip"><span>{{ field.label }}: {{ scientificSearches[field.id] }}</span><button :aria-label="`Remove ${field.label} description search`" @click="changeScientificSearch(field.id, '')"><X :size="12" /></button></span>
           <span v-if="genus" class="tag-filter taxonomy-active-chip">Genus: <em>{{ genus }}</em><button aria-label="Remove genus filter" @click="genus = ''"><X :size="12" /></button></span>
           <span v-if="family" class="tag-filter taxonomy-active-chip">Family: {{ family }}<button aria-label="Remove family filter" @click="family = ''"><X :size="12" /></button></span>
+          <span v-if="taxonomicClass" class="tag-filter taxonomy-active-chip">Class: {{ taxonomicClass }}<button aria-label="Remove class filter" @click="taxonomicClass = ''"><X :size="12" /></button></span>
           <span v-for="item in activeCharacteristics" :key="`${item.group}:${item.value}`" class="tag-filter characteristic-active-chip"><span>{{ item.title }}: {{ item.label }}</span><button :aria-label="`Remove ${item.title} ${item.label} filter`" @click="removeCharacteristic(item.group, item.value)"><X :size="12" /></button></span>
           <span v-if="tag" class="tag-filter">#{{ tag }} <button aria-label="Remove hashtag filter" @click="tag = ''"><X :size="12" /></button></span>
           <button v-if="hasFilters" class="text-button clear-filters" @click="reset">Clear filters <X :size="12" /></button>
@@ -169,8 +171,12 @@ function cover(item) { return item.observations.find(post => post.photos.length)
                 <div class="card-caption"><span><em>{{ item.latinName }}</em><small>{{ item.commonName || item.family || 'A closer look' }}</small></span><ArrowRight :size="17" /></div>
               </MediaFrame>
             </RouterLink>
-            <RouterLink v-if="item.family" :to="familyLink(item.family)" class="card-family" :aria-label="`Show family ${item.family}`" :title="`Filter collection by family ${item.family}`" :aria-current="family === item.family ? 'true' : undefined">{{ item.family }}</RouterLink>
-            <span v-else class="card-family">Field discovery</span>
+            <div class="card-taxonomy" :class="{ 'has-encounter-count': item.observations.length > 1 }">
+              <RouterLink v-if="item.family" :to="taxonomyLink('family', item.family)" class="card-family" :aria-label="`Show family ${item.family}`" :title="`Filter collection by family ${item.family}`" :aria-current="family === item.family ? 'true' : undefined">{{ item.family }}</RouterLink>
+              <span v-if="item.family && item.taxonomicClass" class="card-taxonomy-separator" aria-hidden="true">/</span>
+              <RouterLink v-if="item.taxonomicClass" :to="taxonomyLink('class', item.taxonomicClass)" class="card-class" :aria-label="`Show class ${item.taxonomicClass}`" :title="`Filter collection by class ${item.taxonomicClass}`" :aria-current="taxonomicClass === item.taxonomicClass ? 'true' : undefined">{{ item.taxonomicClass }}</RouterLink>
+              <span v-if="!item.family && !item.taxonomicClass" class="card-family">Field discovery</span>
+            </div>
           </div>
         </div>
         <div v-else class="empty-state"><Search :size="30" :stroke-width="1" /><h3>No discoveries here just yet.</h3><p>Try a different name, taxonomy, or characteristic combination.</p><button class="button button-dark" @click="reset">Reset filters</button></div>

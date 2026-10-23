@@ -123,11 +123,13 @@ select option { color: var(--text); background: var(--surface); }
 .species-card:hover { border-color: #756052; }
 .species-card-link { display: block; }
 .species-card-link:focus-visible { outline-offset: -3px; }
-.species-card > .card-family { z-index: 1; }
-.species-card > a.card-family { display: inline-flex; align-items: center; min-height: 32px; text-decoration: underline; text-decoration-color: #ffffff70; text-underline-offset: 3px; }
-.species-card > a.card-family:hover, .species-card > a.card-family:focus-visible { background: #291c17ed; color: #ffd3bf; border-color: #c5846b; }
-.species-card > a.card-family[aria-current="true"] { border-color: #c5846b; }
-.species-card > a.card-family:focus-visible { outline-offset: 2px; }
+.card-taxonomy { position: absolute; top: 12px; left: 12px; z-index: 1; display: flex; align-items: center; flex-wrap: wrap; max-width: calc(100% - 24px); border: 1px solid #ffffff25; border-radius: 3px; background: #080a08bf; color: #eae8df; }
+.card-taxonomy.has-encounter-count { max-width: calc(100% - 70px); }
+.species-card .card-taxonomy .card-family, .species-card .card-taxonomy .card-class { position: static; display: inline-flex; align-items: center; min-height: 32px; max-width: 100%; margin: 0; padding: 5px 6px; border: 0; border-radius: 2px; background: transparent; color: inherit; font-size: 8px; line-height: 1.4; overflow-wrap: anywhere; }
+.card-taxonomy a { text-decoration: underline; text-decoration-color: #ffffff70; text-underline-offset: 3px; }
+.card-taxonomy a:hover, .card-taxonomy a:focus-visible, .card-taxonomy a[aria-current="true"] { background: #291c17ed; color: #ffd3bf; }
+.card-taxonomy a:focus-visible { outline-offset: 2px; }
+.card-taxonomy-separator { font-size: 10px; color: #c4b7a7; }
 .media-frame { background: #1c201c; aspect-ratio: 3 / 2; height: auto; }
 .featured-button > .media-frame { aspect-ratio: 3 / 2; }
 .photo-thumbnails button { width: 90px; min-width: 90px; aspect-ratio: 3 / 2; }
@@ -279,8 +281,7 @@ select option { color: var(--text); background: var(--surface); }
   .species-card .card-caption { padding: 42px 16px 16px; }
   .species-card .card-caption em { font-size: 24px; }
   .species-card .card-caption small { font-size: 11px; }
-  .species-card .card-family { font-size: 10px; }
-  .species-card > a.card-family { min-height: 44px; }
+  .species-card .card-taxonomy .card-family, .species-card .card-taxonomy .card-class { min-height: 44px; font-size: 10px; }
   .footer-brand { font-size: 17px; gap: 8px; }
   .footer-brand img { width: 31px; height: 31px; }
   .footer-brand small { font-size: 6px; letter-spacing: 1.8px; }

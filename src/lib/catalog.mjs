@@ -4,6 +4,12 @@ import { ORGANISM_GROUPS } from './organism-groups.mjs'
 
 export { normalizeSearch } from './scientific-search.mjs'
 
+export const TAXONOMY_FIELDS = ['genus', 'family', 'class']
+
+export function recordedTaxonomicClass(taxonomy = []) {
+  return taxonomy.length >= 2 ? taxonomy.at(-1).trim() : ''
+}
+
 export function buildTaxonomyIndex(species) {
   function index(field) {
     const groups = new Map()
@@ -15,33 +21,39 @@ export function buildTaxonomyIndex(species) {
     }
     return [...groups].map(([name, ids]) => ({ name, count: ids.size })).sort((a, b) => a.name.localeCompare(b.name))
   }
-  return { genera: index('genus'), families: index('family') }
+  return { genera: index('genus'), families: index('family'), classes: index('taxonomicClass') }
 }
 
 export function normalizeTaxonomyQuery(query) {
   const result = { ...query }
   const first = value => Array.isArray(value) ? value[0] : value
-  if (first(result.genus) && first(result.family)) delete result.family
+  let selected = false
+  for (const field of TAXONOMY_FIELDS) {
+    if (!first(result[field])) continue
+    if (selected) delete result[field]
+    else selected = true
+  }
   return result
 }
 
 export function setTaxonomyFilter(query, field, value) {
-  if (field !== 'genus' && field !== 'family') throw new Error('Unknown taxonomic filter.')
+  if (!TAXONOMY_FIELDS.includes(field)) throw new Error('Unknown taxonomic filter.')
   const result = normalizeTaxonomyQuery(query)
   if (value) {
     result[field] = value
-    delete result[field === 'genus' ? 'family' : 'genus']
+    for (const other of TAXONOMY_FIELDS) if (other !== field) delete result[other]
   } else delete result[field]
   return result
 }
 
-export function filterCatalog(species, { search = '', scope = 'all', genus = '', family = '', year = '', letter = '', tag = '', characteristics = {}, scientificSearches = {}, organismGroups = ORGANISM_GROUPS.map(group => group.id) } = {}) {
+export function filterCatalog(species, { search = '', scope = 'all', genus = '', family = '', taxonomicClass = '', year = '', letter = '', tag = '', characteristics = {}, scientificSearches = {}, organismGroups = ORGANISM_GROUPS.map(group => group.id) } = {}) {
   const terms = normalizeSearch(search).split(' ').filter(Boolean)
   const allOrganisms = ORGANISM_GROUPS.every(group => organismGroups.includes(group.id))
   return species.filter(item => {
     if (!allOrganisms && !organismGroups.includes(item.organismGroup)) return false
     if (genus && item.genus !== genus) return false
     if (!genus && family && item.family !== family) return false
+    if (!genus && !family && taxonomicClass && item.taxonomicClass !== taxonomicClass) return false
     if (year && !item.observations.some(post => post.date.startsWith(year))) return false
     if (letter && !item.latinName.startsWith(letter)) return false
     if (tag && !item.hashtags.includes(tag)) return false
@@ -53,7 +65,7 @@ export function filterCatalog(species, { search = '', scope = 'all', genus = '',
     const category = scope.startsWith('trait:') ? scope.slice('trait:'.length) : ''
     const fields = category ? [Object.hasOwn(descriptions, category) ? descriptions[category] : ''] : [item.latinName, item.identification]
     if (!category && scope !== 'scientific') fields.push(
-      item.commonName, item.genus, item.family,
+      item.commonName, item.genus, item.family, item.taxonomicClass,
       ...(item.science?.commonNames || []).map(name => name.name),
       ...item.hashtags, ...item.observations.map(post => post.location),
       ...Object.values(descriptions),

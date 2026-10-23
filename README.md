@@ -11,8 +11,8 @@ A Vue 3 + Vite photographic encyclopedia built from the original `*.txt` Instagr
 - **3:2 landscape** gallery cards, encounter thumbnails, photo-selection strips, and featured-photo frames; full-image viewing with keyboard navigation.
 - Scientific-name, multilingual, and category-based scientific-description search, plus year, initial-letter, hashtag, and sort controls.
 - Independent **Fungi** and **Slime moulds** checkboxes to show either group or both.
-- Automatically generated genus and family quick-link lists with counts and local list finders. Genus and family selections are mutually exclusive.
-- Clickable family badges on gallery thumbnails for filtering directly from the photos.
+- Automatically generated genus/family quick-link lists and a taxonomy-class dropdown. Genus, family, and class selections are mutually exclusive.
+- Clickable **Family / Class** labels on gallery thumbnails for filtering directly from the photos.
 - Additive mycological filters across all twelve illustrated characteristic categories, with contextual counts and individual, group, taxonomy-only, and global clear controls.
 - Latest-record scientific profiles, original captions, multilingual names, GBIF/publication references, weather, habitat, and photography notes.
 - One JavaScript Google Map per species with pins from all its observations, plus individual coordinate links.
@@ -122,6 +122,7 @@ Hash-based routes work on ordinary static hosting without server rewrite rules. 
 - Names are not automatically merged using presumed synonyms. In particular, `Ramaria eumorpha` and `Phaeoclavulina eumorpha` are separate named taxa until an explicit synonym mapping is agreed. No outside taxonomy is invented.
 - All encounters for the same species ID appear on its page, newest first.
 - **The single newest filename date supplies the entire scientific profile.** It supplies identification and authorship, classification, common names in all recorded languages, morphology, ecology, microscopy, other descriptions, references, and publication. Older profiles are never used to fill gaps in the newest profile. On the same day the filename/post ID is used as a deterministic tie-breaker.
+- The taxonomy class is the final entry in that profile's recorded family/class or family/order/class classification. It is generated as `taxonomicClass`; a family-only or absent classification leaves the class empty.
 - Filename dates are the unambiguous sort key. The date/time written in the caption is also displayed verbatim, including source discrepancies or ambiguous numeric dates.
 - Older and newer formats are handled separately by their semantic markers and section positions: `ℹ️`, `🚫`, and `❌` start scientific descriptions; camera/processing lines end the block. Ecology inside that block is scientific information, while habitat between the observation date and the scientific block belongs to that encounter.
 - Some older files have a revised second `🆔` block: the final scientific block is used for that file.
@@ -136,8 +137,8 @@ The generator writes:
 
 | Generated output | Contents |
 | --- | --- |
-| `src/data/posts.json` | Complete corpus, metadata, scientific profiles, encounters, organism groups, and compact characteristic keys |
-| `src/data/index.json` | Gallery records, latest-profile text grouped by scientific category, generated search fields/counts, organism groups, characteristic keys, and mycological filter options/counts |
+| `src/data/posts.json` | Complete corpus, metadata, scientific profiles, taxonomy classes, encounters, organism groups, and compact characteristic keys |
+| `src/data/index.json` | Gallery records with taxonomy classes, latest-profile text grouped by scientific category, generated search fields/counts, organism groups, characteristic keys, and mycological filter options/counts |
 | `src/data/species/<species-id>.json` | Individual species pages, loaded on demand |
 | `public/branding/` and `public/icons/` | Selected logo/favicon assets copied from `fungi-support/` |
 
@@ -145,15 +146,15 @@ Do not edit generated JSON by hand: update the source captions and run `npm run 
 
 ## Search and taxonomic quick filters
 
-The collection has one main search field and a **Search scope** selector. **Scientific name** searches only the recorded Latin name and scientific identification/authorship. **All fields** also searches multilingual common names, places, families, genera, hashtags, and the latest scientific descriptions. The **Scientific descriptions** options in the selector search a specific category, such as Cap or Hymenium. Search is case-insensitive, tolerates repeated spaces and diacritics, and requires all entered words to match. Descriptions can mention other taxa; choose **Scientific name** for a dedicated name search.
+The collection has one main search field and a **Search scope** selector. **Scientific name** searches only the recorded Latin name and scientific identification/authorship. **All fields** also searches multilingual common names, places, families, genera, taxonomy classes, hashtags, and the latest scientific descriptions. The **Scientific descriptions** options in the selector search a specific category, such as Cap or Hymenium. Search is case-insensitive, tolerates repeated spaces and diacritics, and requires all entered words to match. Descriptions can mention other taxa; choose **Scientific name** for a dedicated name search.
 
-Advanced controls are in the **Filters** panel beside search, collapsed by default on all screen sizes. Open it for organism checkboxes, family/year dropdowns, genus/family quick links, scientific-description search fields, mycological characteristics, and the initial-letter selector. The button's badge counts selected taxonomy, year, letter, hashtag, characteristic, and description filters, plus an organism-group restriction. Closing the panel preserves selections; results, active chips, sorting, and **Clear filters** remain outside it. **Show … species** closes the panel and moves directly to the matching photos. Filtering takes effect immediately.
+Advanced controls are in the **Filters** panel beside search, collapsed by default on all screen sizes. Open it for organism checkboxes, family/class/year dropdowns, genus/family quick links, scientific-description search fields, mycological characteristics, and the initial-letter selector. The button's badge counts selected taxonomy, year, letter, hashtag, characteristic, and description filters, plus an organism-group restriction. Closing the panel preserves selections; results, active chips, sorting, and **Clear filters** remain outside it. **Show … species** closes the panel and moves directly to the matching photos. Filtering takes effect immediately.
 
-The family name over each gallery thumbnail is also a filter link: click, tap, or focus it and press **Enter** to select that family without opening the advanced panel. This replaces an active genus selection while preserving search, year, characteristics, and other non-taxonomic selections, including sorting. The URL and active family chip update immediately; remove the chip to clear that family. These are ordinary links that can be copied or opened in a new tab. The rest of the photo and its caption open the species page. If a taxon has no recorded family, **Field discovery** remains a plain label.
+Each thumbnail shows **Family / Class**, for example **Boletaceae / Agaricomycetes**, as two separate filter links. Click, tap, or focus either name and press **Enter** to select that rank without opening the advanced panel. Selecting the class opens the whole class, replacing a narrower genus/family selection while preserving search, year, characteristics, organism groups, description searches, and sorting. The URL and active taxonomy chip update immediately; remove the chip to clear that selection. These are ordinary links that can be copied or opened in a new tab. The rest of the photo and its caption open the species page. Missing ranks are omitted; **Field discovery** is a plain label when neither rank is available.
 
 Two separate **Genera** and **Families** sections list all recorded taxa alphabetically. They are constructed from the species data, deduplicated, and show counts of distinct named taxa rather than photographs or observations. Each section has its own list finder, scrollable links, an “All” link, and a collapsible heading.
 
-Selecting a link filters the collection by that exact genus **or** family. The two taxonomic filters are mutually exclusive: choosing a genus removes the selected family, and choosing a family removes the selected genus, including selections made with the family dropdown. Both quick-link sections stay available so you can switch between them. Legacy URLs containing both are normalized to genus only.
+The **Taxonomy class** dropdown lists every class recorded in the latest profiles, including slime-mould classes when present. Choosing a class, family, or genus replaces the other taxonomic selections. The genus/family quick links and family/class thumbnail links follow the same rule, and all other filters remain additive. URLs containing multiple taxonomic selections are normalized to one, with precedence **genus → family → class**.
 
 ### Scientific description searches
 
@@ -180,7 +181,7 @@ Clearing options:
 - **Clear all filters**, prominently above the quick links, resets the main search, description fields, organism groups, taxonomy, characteristics, other filter selections, and local taxonomic list finders.
 - **Clear description searches** removes only category-text searches, while individual description chips or field-removal buttons clear one category.
 - Removing the organism-group chip restores both Fungi and Slime moulds.
-- **Clear taxonomy** removes just the genus/family selection.
+- **Clear taxonomy** removes just the genus/family/class selection.
 - Each selected taxonomic quick-link section has its own **Clear filter** link.
 - **Clear characteristics** removes all mycological selections while preserving taxonomy and other filters.
 - **Clear this group** removes only one characteristic category; individual active chips can also be removed.
@@ -195,8 +196,9 @@ Selections are stored in shareable URL parameters and survive reloads and browse
 | `scope` | `scope=scientific` | Scientific identification only; use `trait:cap` (or another category ID) for one scientific-description category; omit or use `all` for all searchable fields |
 | `sc.<category-id>` | `sc.hymenium=pores&sc.stipe=reticulate` | Independent description searches combined with AND; category IDs are generated from source labels |
 | `organisms` | `organisms=slime-moulds` | `fungi`, `slime-moulds`, or `none`; omit for both groups |
-| `genus` | `genus=Amanita` | Exact genus, replacing family selection |
-| `family` | `family=Boletaceae` | Exact family, replacing genus selection |
+| `genus` | `genus=Amanita` | Exact genus, replacing family/class selection |
+| `family` | `family=Boletaceae` | Exact family, replacing genus/class selection |
+| `class` | `class=Agaricomycetes` | Exact taxonomy class, replacing genus/family selection |
 | `year` | `year=2026` | Species with an encounter in that year |
 | `letter` | `letter=A` | Initial letter of the scientific name |
 | `tag` | `tag=fungi` | Exact hashtag, without `#` |
@@ -230,6 +232,7 @@ Examples:
 /#/?scope=scientific&q=Boletus&sc.hymenium=pores&sc.stipe=reticulate&organisms=fungi
 /#/?scope=trait:cap&q=scarlet-red
 /#/?organisms=slime-moulds&sc.plasmodium-phase=watery
+/#/?class=Myxogastria&organisms=slime-moulds
 ```
 
 Repeating a characteristic parameter selects multiple alternatives in that category. The example with repeated `mc.cap` matches convex **or** flat caps, together with free hymenium attachment.
@@ -475,7 +478,7 @@ dist/                         Generated static website
 
 Relevant application modules:
 
-- `src/lib/catalog.mjs`: search, taxonomic index, and exclusive taxonomy/filter matching.
+- `src/lib/catalog.mjs`: search, latest-profile class extraction, taxonomic indexes, and exclusive genus/family/class matching.
 - `src/lib/scientific-search.mjs`: generated category definitions, latest-profile searchable text, normalization, category matching, and `sc.*` URL helpers; `ScientificSearchFilters.vue` provides the optional multi-field UI.
 - `src/lib/organism-groups.mjs`: source-based Fungi/Slime moulds classification and organism-selection URL helpers.
 - `src/lib/characteristic-filters.mjs`: generated characteristic options, compact species keys, contextual counts, and `mc.*` URL selection helpers.
@@ -497,9 +500,9 @@ npm run build
 npm run test:ui
 ```
 
-The Node.js suite checks real caption extraction, latest-profile selection, generated scientific-category text/counts, combined field searches, taxonomy exclusivity, organism classification/selections, additive characteristic logic/counts, coordinate formats, Maps key configuration, and downloader/image handling. Downloader restriction and resume tests use mocked requests rather than contacting Instagram.
+The Node.js suite checks real caption extraction, latest-profile selection, generated scientific-category text/counts, combined field searches, recorded class extraction, taxonomic indexes/exclusivity, organism classification/selections, additive characteristic logic/counts, coordinate formats, Maps key configuration, and downloader/image handling. Downloader restriction and resume tests use mocked requests rather than contacting Instagram.
 
-Browser checks cover desktop/mobile layouts, scientific-name/category search, multiple description fields, organism checkboxes, taxonomic links, thumbnail family filtering with keyboard and touch, characteristic selection, clear controls, URL persistence/back/forward navigation, maps links, branding, and illustrated profiles. Playwright launches installed Chrome and starts a production preview on `http://127.0.0.1:4173`; that port must be available. Screenshots are written to `test-results/`.
+Browser checks cover desktop/mobile layouts, scientific-name/category search, multiple description fields, organism checkboxes, taxonomic links, thumbnail family/class filtering with keyboard and touch, class dropdown selection, characteristic selection, clear controls, URL persistence/back/forward navigation, maps links, branding, and illustrated profiles. Playwright launches installed Chrome and starts a production preview on `http://127.0.0.1:4173`; that port must be available. Screenshots are written to `test-results/`.
 
 Observation-map checks cover one map per species, lazy loading, exact current/historical pins, fitting all positions, single-location zoom, independence from encounter expansion, shared script loading, cleanup on navigation, mobile sizing, and network/authentication failure fallbacks. Browser suites intercept Maps JavaScript requests with a local test double, so automated checks make no live Maps API calls. Map-specific checks are skipped if the production build has no key; a nonempty dummy `GOOGLE_MAPS_API_KEY` at build time exercises these checks without a real key. Build with the actual browser key for deployment.
 

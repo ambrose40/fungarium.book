@@ -20,12 +20,16 @@ follow `CONTRIBUTING.md`.
 - **Gallery:** `src/views/GalleryView.vue` owns search, filtering, sorting, and
   pagination. `src/dark-theme.css` supplies the dark palette and layout overrides
   after `src/style.css`.
-- **Filtering:** selections are URL-backed; genus and family replace each other.
+- **Filtering:** selections are URL-backed; genus, family, and class replace one another.
   Mycological filters are additive, with OR within a category and AND across
-  categories. Closing the filter panel must preserve selections. Thumbnail family
-  badges are native filter links that preserve other selections; the photo and
-  caption independently open the species page. Keep these links as siblings,
-  never nested anchors.
+  categories. Closing the filter panel must preserve selections. Thumbnail
+  **Family / Class** labels are separate native filter links that preserve other
+  selections; the photo and caption independently open the species page. Keep
+  taxonomy links outside the photo/detail anchor; never nest anchors.
+- **Taxonomy classes:** derive `taxonomicClass` from the final rank of the latest
+  profile's family/class or family/order/class taxonomy. Omit absent classes;
+  never infer them from genus or older records. `class=<recorded name>` selects
+  an exact class. Mixed URLs normalize with precedence genus → family → class.
 - **Scientific search:** generate fields and searchable category text from each
   taxon's latest scientific traits. `scope=trait:<id>` selects one category for
   the main search; `sc.<id>` adds independent description fields, combined with
@@ -64,6 +68,35 @@ follow `CONTRIBUTING.md`.
   focused scope, and a body describing significant behavior and verification.
 
 ## Recent changesets
+
+### 2026-10-23 — Thumbnail class links and taxonomy-class filtering
+
+- Added generated `taxonomicClass` metadata to full and compact species records
+  using only the latest scientific taxonomy. The current collection has 16
+  recorded classes, including Myxogastria and Protosteliomycetes.
+- Changed the thumbnail badge to **Family / Class**, with separate native links,
+  accessible names/tooltips, active/focus states, and 44 px-high phone targets.
+  Kept these links outside the photo/detail anchor, reserved space for encounter
+  counts, and omitted unavailable ranks without dangling separators.
+- Added the Taxonomy class dropdown, URL-backed `class` selection, active chip,
+  filter count, and clear/reset handling. Selecting any genus/family/class
+  replaces the other taxonomy choices while preserving descriptions, organism
+  groups, characteristics, search, year, letter, tags, and sorting. Legacy mixed
+  URLs prefer genus, then family, then class. All-fields search includes classes.
+- Added unit coverage for rank extraction, exact matching, class lists/counts,
+  additive filters, normalization, and generated latest-profile class values.
+  Browser coverage includes dropdown and keyboard/touch class links, history,
+  reloads, native family/detail navigation, empty results, clear controls, and
+  deployment-base URLs. Reviewed desktop and 320 px card screenshots.
+- Updated README behavior, source rules, generated-data description, query
+  examples, and verification guidance; refreshed AGENTS taxonomy guidance.
+- **Verification:** `npm test` passed (70 tests), `npm run test:ui` passed
+  (38 tests), and `npx playwright test --config=playwright.subpath.config.js`
+  passed (9 tests). Root and `/encyclopedia/` production builds passed.
+  `git diff --check` passed. Catalog totals remain 388 observations, 327 taxa,
+  and 1,641 photos.
+- **Build state:** `dist/` is currently configured for `/encyclopedia/`.
+- **Unresolved follow-ups:** none identified.
 
 ### 2026-10-23 — Scientific category search and organism group filters
 

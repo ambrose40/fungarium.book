@@ -1,7 +1,7 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { readFile } from 'node:fs/promises'
-import { normalizeSearch, buildTaxonomyIndex, filterCatalog, setTaxonomyFilter, normalizeTaxonomyQuery } from '../src/lib/catalog.mjs'
+import { normalizeSearch, buildTaxonomyIndex, filterCatalog, setTaxonomyFilter, normalizeTaxonomyQuery, recordedTaxonomicClass } from '../src/lib/catalog.mjs'
 
 const { species } = JSON.parse(await readFile(new URL('../src/data/index.json', import.meta.url), 'utf8'))
 
@@ -64,4 +64,63 @@ test('selecting either taxonomy clears the other and preserves additive filters'
   assert.deepEqual(cleared['mc.spore-print'], ['white'])
   assert.deepEqual(normalizeTaxonomyQuery({ genus: 'Agaricus', family: 'Amanitaceae' }), { genus: 'Agaricus' })
   assert.equal(query.family, 'Boletaceae')
+})
+
+test('taxonomy classes follow the recorded family/class and family/order/class formats', () => {
+  assert.equal(recordedTaxonomicClass(['Boletaceae', 'Agaricomycetes']), 'Agaricomycetes')
+  assert.equal(recordedTaxonomicClass(['Ceratiomyxaceae', 'Ceratiomyxales', 'Protosteliomycetes']), 'Protosteliomycetes')
+  assert.equal(recordedTaxonomicClass(['OnlyFamily']), '')
+  assert.equal(recordedTaxonomicClass(), '')
+})
+
+test('class lists count distinct taxa and omit missing classifications', () => {
+  const result = buildTaxonomyIndex([
+    { id: 'a', taxonomicClass: 'Agaricomycetes', observations: [{}, {}] },
+    { id: 'b', taxonomicClass: 'Agaricomycetes', observations: [{}] },
+    { id: 'b', taxonomicClass: 'Agaricomycetes', observations: [{}] },
+    { id: 'c', taxonomicClass: 'Myxogastria' }, { id: 'd', taxonomicClass: '' },
+  ])
+  assert.deepEqual(result.classes, [{ name: 'Agaricomycetes', count: 2 }, { name: 'Myxogastria', count: 1 }])
+  const real = buildTaxonomyIndex(species).classes
+  assert.equal(real.length, new Set(species.map(item => item.taxonomicClass).filter(Boolean)).size)
+  assert.equal(real.reduce((sum, item) => sum + item.count, 0), species.filter(item => item.taxonomicClass).length)
+})
+
+test('class filters match exactly, compose with other filters, and preserve legacy taxonomy precedence', () => {
+  const selected = filterCatalog(species, { taxonomicClass: 'Myxogastria', organismGroups: ['slime-moulds'] })
+  assert.ok(selected.some(item => item.id === 'badhamia-utricularis'))
+  assert.ok(selected.every(item => item.taxonomicClass === 'Myxogastria'))
+  assert.deepEqual(filterCatalog(species, { taxonomicClass: 'Protosteliomycetes' }).map(item => item.id), ['ceratiomyxa-fruticulosa'])
+  assert.deepEqual(filterCatalog(species, { taxonomicClass: 'Agarico' }), [])
+  assert.deepEqual(filterCatalog(species, { taxonomicClass: 'Agaricomycetes', search: 'Boletus edulis', scope: 'scientific', year: '2025', organismGroups: ['fungi'], scientificSearches: { stipe: 'reticulate' }, characteristics: { hymenium: ['pores'] } }).map(item => item.id), ['boletus-edulis'])
+  assert.deepEqual(filterCatalog(species, { genus: 'Ceratiomyxa', taxonomicClass: 'Agaricomycetes' }).map(item => item.id), ['ceratiomyxa-fruticulosa'])
+  assert.ok(filterCatalog(species, { search: 'Myxogastria' }).some(item => item.id === 'badhamia-utricularis'))
+  assert.deepEqual(filterCatalog(species, { search: 'Myxogastria', scope: 'scientific' }), [])
+})
+
+test('class selection replaces genus and family while retaining description and organism selections', () => {
+  const original = { genus: 'Boletus', q: 'pores', 'sc.stipe': 'reticulate', organisms: 'fungi', 'mc.hymenium': ['pores'], sort: 'newest' }
+  const selected = setTaxonomyFilter(original, 'class', 'Agaricomycetes')
+  assert.equal(selected.class, 'Agaricomycetes')
+  assert.equal(Object.hasOwn(selected, 'genus'), false)
+  assert.equal(selected['sc.stipe'], 'reticulate')
+  assert.equal(selected.organisms, 'fungi')
+  assert.equal(selected.sort, 'newest')
+  const family = setTaxonomyFilter(selected, 'family', 'Boletaceae')
+  assert.equal(Object.hasOwn(family, 'class'), false)
+  assert.equal(family.family, 'Boletaceae')
+  assert.equal(Object.hasOwn(setTaxonomyFilter(selected, 'genus', 'Boletus'), 'class'), false)
+  assert.deepEqual(normalizeTaxonomyQuery({ class: 'Myxogastria', family: 'Boletaceae' }), { family: 'Boletaceae' })
+  assert.deepEqual(normalizeTaxonomyQuery({ class: ['Myxogastria'], family: 'Boletaceae', genus: 'Boletus' }), { genus: 'Boletus' })
+  assert.equal(Object.hasOwn(setTaxonomyFilter(selected, 'class', ''), 'class'), false)
+  assert.equal(original.genus, 'Boletus')
+})
+
+test('generated class labels come only from the latest scientific taxonomy', async () => {
+  const full = JSON.parse(await readFile(new URL('../src/data/posts.json', import.meta.url), 'utf8'))
+  for (const item of full.species) {
+    const expected = item.science.taxonomy.length >= 2 ? item.science.taxonomy.at(-1) : ''
+    assert.equal(item.taxonomicClass, expected, item.id)
+    assert.equal(species.find(record => record.id === item.id).taxonomicClass, expected, item.id)
+  }
 })

@@ -23,7 +23,7 @@ commit convention and contribution workflow.
 
 - Keep the gallery photo-first, with optional advanced filters and a single
   column of species cards on phones.
-- Preserve URL-backed filter selections and genus/family exclusivity.
+- Preserve URL-backed filter selections and genus/family/class exclusivity.
 - Scientific profiles come entirely from the latest dated caption for each
   taxon. Captions, text metadata, and local shell helpers live in the ignored
   `instagram-meta/` folder. Update source captions and regenerate content rather

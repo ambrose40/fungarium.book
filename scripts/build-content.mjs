@@ -8,6 +8,7 @@ import { TOP_NINE_SLIDES } from '../src/lib/top-nine.mjs'
 import { root, instagramMetaDirectory } from './project-paths.mjs'
 import { buildScientificSearchFields, summarizeScientificText } from '../src/lib/scientific-search.mjs'
 import { classifyOrganism } from '../src/lib/organism-groups.mjs'
+import { recordedTaxonomicClass } from '../src/lib/catalog.mjs'
 
 export { root } from './project-paths.mjs'
 async function optionalJson(file, fallback) {
@@ -70,6 +71,7 @@ export async function buildContent() {
   }
   const species = groupSpecies(result).map(item => ({
     ...item,
+    taxonomicClass: recordedTaxonomicClass(item.science.taxonomy),
     organismGroup: classifyOrganism(item.science.taxonomy, item.observations[0].caption),
     characteristics: summarizeCharacteristics(item.science),
   }))
@@ -100,7 +102,7 @@ export async function buildContent() {
   await Promise.all(species.map(item => writeFile(path.join(root, `src/data/species/${item.id}.json`), JSON.stringify(item))))
   const index = species.map(item => ({
     id: item.id, latinName: item.latinName, identification: item.identification,
-    genus: item.genus, family: item.family, commonName: item.commonName,
+    genus: item.genus, family: item.family, taxonomicClass: item.taxonomicClass, commonName: item.commonName,
     organismGroup: item.organismGroup,
     latestDate: item.latestDate, hashtags: item.hashtags,
     characteristics: item.characteristics,

@@ -90,6 +90,21 @@ test('thumbnail family links filter within the encyclopedia deployment folder', 
   for (const name of await page.locator('.card-family').allTextContents()) expect(name).toBe('Boletaceae')
 })
 
+test('thumbnail class links and class selection stay inside the encyclopedia folder', async ({ page }) => {
+  await page.goto('./#/?genus=Boletus&organisms=fungi&sc.stipe=reticulate')
+  const link = page.locator('.species-card a.card-class').first()
+  await expect(link).toHaveJSProperty('href', 'http://127.0.0.1:4174/encyclopedia/#/?organisms=fungi&sc.stipe=reticulate&class=Agaricomycetes')
+  await link.click()
+  await expect(page).toHaveURL(/\/encyclopedia\/#\/\?.*class=Agaricomycetes/)
+  await expect(page).not.toHaveURL(/genus=/)
+  await page.reload()
+  await page.getByRole('button', { name: /^Filters/ }).click()
+  await expect(page.getByLabel('Filter by taxonomy class')).toHaveValue('Agaricomycetes')
+  await expect(page.locator('.scientific-search-chip')).toContainText('Stipe: reticulate')
+  await page.locator('.species-card-link').first().click()
+  await expect(page).toHaveURL(/\/encyclopedia\/#\/fungi\//)
+})
+
 test('one species map pins all observations under the encyclopedia deployment base', async ({ page }) => {
   await page.goto('./#/fungi/boletus-edulis')
   await expect(page.locator('.species-heading h1')).toBeVisible()
