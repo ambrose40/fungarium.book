@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test'
+import { test, expect } from '../helpers/browser.js'
 
 test('TopNine slides automatically advance, wrap, and suspend while hovered', async ({ page }) => {
   await page.clock.install()

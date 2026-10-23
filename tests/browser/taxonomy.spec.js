@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test'
+import { test, expect } from '../helpers/browser.js'
 
 test('dedicated scientific search and all-fields mode work with shareable URLs', async ({ page }) => {
   await page.goto('/')

@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test'
+import { test, expect } from '../helpers/browser.js'
 
 async function openGroup(page, id) {
   const group = page.locator(`[data-characteristic-filter="${id}"]`)

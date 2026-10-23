@@ -8,6 +8,7 @@ import { assetUrl } from '../lib/asset-urls.mjs'
 import MediaFrame from '../components/MediaFrame.vue'
 import MycologicalCharacteristics from '../components/MycologicalCharacteristics.vue'
 import CoordinatesLink from '../components/CoordinatesLink.vue'
+import ObservationMap from '../components/ObservationMap.vue'
 
 const route = useRoute()
 const fungus = ref(null)
@@ -121,6 +122,7 @@ function scrollToSection(id) { document.getElementById(id)?.scrollIntoView({ beh
     </section>
     <section id="encounters" class="encounters-section">
       <div class="section-heading"><div><p class="eyebrow">SAME SPECIES, DIFFERENT MOMENTS</p><h2>Field encounters<span class="count">{{ fungus.observations.length }}</span></h2></div><p>A record of being there.<br /><span>Newest encounter first.</span></p></div>
+      <ObservationMap :key="fungus.id" :observations="fungus.observations" :species-name="fungus.latinName" />
       <details v-for="(post, postIndex) in fungus.observations" :key="post.id" class="encounter" :open="postIndex === 0">
         <summary>
           <MediaFrame :photo="post.photos[0]" :name="fungus.latinName" :seed="post.id" compact thumbnail />

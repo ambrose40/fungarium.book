@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test'
+import { test, expect } from '../helpers/browser.js'
 
 test('illustrations change with actual species characteristics and expose the original evidence', async ({ page }) => {
   const errors = []

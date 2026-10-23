@@ -14,12 +14,13 @@ A Vue 3 + Vite photographic encyclopedia built from the original `*.txt` Instagr
 - Clickable family badges on gallery thumbnails for filtering directly from the photos.
 - Additive mycological filters across all twelve illustrated characteristic categories, with contextual counts and individual, group, taxonomy-only, and global clear controls.
 - Latest-record scientific profiles, original captions, multilingual names, GBIF/publication references, weather, habitat, and photography notes.
-- Google Maps links that pin the encounter coordinates.
+- One JavaScript Google Map per species with pins from all its observations, plus individual coordinate links.
 - Resumable Instagram photo downloading, offline WebP thumbnail generation, and an optional account-export importer.
 
 ## Contents
 
 - [Design and branding](#design-and-branding)
+- [Observation maps](#observation-maps)
 - [Setup and commands](#setup-and-commands)
 - [Content generation and source rules](#content-generation-and-source-rules)
 - [Search and filters](#search-and-taxonomic-quick-filters)
@@ -37,9 +38,29 @@ The black/charcoal theme takes its direction from [fungarium.info](https://funga
 
 The gallery prioritizes photography. On phones (up to 600 px wide), the TopNine slideshow appears before the introduction and species cards use one full-width column with larger captions. **Explore the collection** moves directly to the photo grid below the sticky header and respects reduced-motion preferences.
 
-Encounter coordinates link to Google Maps search URLs containing a numeric latitude/longitude, which pins the actual location. DMS, curly-prime, prefixed-hemisphere, and annotated-decimal formats are normalized by `src/lib/coordinates.mjs`; the original caption text is retained as the visible link. Unparseable coordinates stay plain text rather than linking to an unrelated place.
+Species pages combine all usable observation coordinates on one inline Google Map when a Maps JavaScript API key is configured. Each encounter also retains its own coordinate link. DMS, curly-prime, prefixed-hemisphere, and annotated-decimal formats are normalized by `src/lib/coordinates.mjs`; the original caption text is retained as the visible link. Unparseable coordinates stay plain text rather than linking to an unrelated place.
 
 The header's **Home** link uses `href="../"` to open the parent directory (the main domain root when the encyclopedia is deployed at `/encyclopedia/`). **The collection** and the logo return to the encyclopedia itself. **Fungarium.INFO** opens the main website at `https://fungarium.info/`, separately from the Instagram profile link. The **My other projects** footer includes AzrvanAkaranA, travel-pics.vip, herbarium.info, fungarium.info, algaerium.info, lichenarium.info, and plantarium.info. Project names and destination URLs are maintained in `src/site-links.js`.
+
+## Observation maps
+
+Each species detail page displays a single interactive **Google Maps JavaScript** map above its field-encounter list, collecting usable coordinates from **all observations**, including historical and collapsed encounters. There is one pin per located observation, titled with its recorded location and date/time, and a pin count in the map caption. Repeated observations at the same coordinate retain separate pins, which can overlap.
+
+The map starts in terrain view and automatically fits all recorded positions with padding. A single location (including repeated observations at that location) stays centered at zoom level 14 rather than over-zooming. Google Maps' built-in Data layer supplies the pins, so no separate map ID or geocoding request is required. The full-width map frame is 300 px high on desktop and 260 px on phones. Map/satellite switching, zoom, and fullscreen controls are available; cooperative gestures keep the page scrollable on phones.
+
+The combined map loads when it comes near the viewport, independently of encounter expansion. The Google Maps script is shared across species navigation; map listeners and data layers are released when the species page changes. Individual coordinate links remain in the encounter metadata, including when the network or Google Maps authentication fails. With no configured key or no usable coordinates for that species, the site does not reserve map space.
+
+### API key configuration
+
+Vite reads the browser key from **`secrets/maps-api.key`** at development startup or build time. The file contains only the key, with optional surrounding whitespace. Alternatively, set **`GOOGLE_MAPS_API_KEY`** in the build environment or in an ignored `.env.local` file:
+
+```dotenv
+GOOGLE_MAPS_API_KEY=your-browser-maps-api-key
+```
+
+The environment value takes precedence over the key file. An explicitly empty value disables maps. Restart the development server or rebuild after changing the key. The Google Cloud project must have **Maps JavaScript API** enabled and billing configured.
+
+This is a browser API key and is included in the compiled client JavaScript. Configure its HTTP-referrer restrictions for the production website and the local development/preview origins you use, and restrict its API access to Maps JavaScript API. The source `secrets/` folder is Git-ignored and stays outside `public/`; deploy the built `dist/` contents, not the secrets folder. The static deployment needs no runtime server-side key file.
 
 ## Setup and commands
 
@@ -48,6 +69,7 @@ The header's **Home** link uses `href="../"` to open the parent directory (the m
 - **Node.js 22.12 or newer**; Node.js 24 is recommended, with npm installed.
 - **Google Chrome** for the authenticated photo downloader and Playwright browser checks. Building and browsing the website do not require Chrome on the build machine.
 - The original caption files, `TopNine/` collage, and `fungi-support/` assets in the project root.
+- A configured Maps JavaScript API browser key for inline observation maps; coordinate links work without one.
 
 ### Start development
 
@@ -378,6 +400,7 @@ PROJECT_MEMORY.md             Durable decisions and changeset memory
 CONTRIBUTING.md               Changeset workflow and commit convention
 TopNine/                      Original 2024, 2025, and 2026 photo collages
 fungi-support/                Original logo and favicon artwork
+secrets/maps-api.key           Local Google Maps browser key (Git-ignored)
 scripts/                      Content, audit, download, and import utilities
 src/
   views/                      Gallery and species-detail pages
@@ -403,6 +426,7 @@ dist/                         Generated static website
 | `scripts/content-lib.mjs` | Caption parsing, taxon grouping, and export validation; shared module |
 | `scripts/audit-content.mjs` | Standalone caption audit; reports missing descriptions, taxonomy, references, photography details, and genus-level identifications |
 | `scripts/prepare-branding.mjs` | Branding asset-copy helper called by the content builder |
+| `scripts/maps-config.mjs` | Read the Maps browser key from the environment or ignored local key file for Vite |
 | `scripts/fetch-instagram-photos.mjs` | Resumable authenticated/export-based photo downloader and offline thumbnail CLI |
 | `scripts/instagram-photo-lib.mjs` | Pacing policy, shortcode decoding, URL/image validation, image storage, and WebP helpers |
 | `scripts/instagram-browser-export.js` | Script run manually in the logged-in Instagram page's browser console |
@@ -414,9 +438,10 @@ Relevant application modules:
 - `src/lib/characteristic-filters.mjs`: generated characteristic options, compact species keys, contextual counts, and `mc.*` URL selection helpers.
 - `src/lib/mycology.mjs`: evidence-based characteristic classification used by both species illustrations and gallery filters.
 - `src/lib/coordinates.mjs`: coordinate normalization and pinned Google Maps URLs.
+- `src/lib/google-maps.mjs`: shared lazy Maps JavaScript loader, timeout, and authentication-failure handling; `src/components/ObservationMap.vue` renders the species-level map with all observation pins.
 - `src/lib/asset-urls.mjs`: resolve generated image/logo paths against Vite's deployment base.
 
-Local/private runtime files include `content/instagram-browser/`, `content/photo-download-state.json`, and `content/photo-download.lock`. They are Git-ignored and are not copied to the static site. Export JSON and legacy media manifests are also excluded from Git.
+Local/private files include `secrets/`, `content/instagram-browser/`, `content/photo-download-state.json`, and `content/photo-download.lock`. They are Git-ignored and are not copied as folders to the static site. The configured browser Maps key is compiled into JavaScript as described above. Export JSON and legacy media manifests are also excluded from Git.
 
 ## Verification and deployment
 
@@ -429,9 +454,11 @@ npm run build
 npm run test:ui
 ```
 
-The Node.js suite checks real caption extraction, latest-profile selection, taxonomy exclusivity, search, additive characteristic logic/counts, coordinate formats, and downloader/image handling. Downloader restriction and resume tests use mocked requests rather than contacting Instagram.
+The Node.js suite checks real caption extraction, latest-profile selection, taxonomy exclusivity, search, additive characteristic logic/counts, coordinate formats, Maps key configuration, and downloader/image handling. Downloader restriction and resume tests use mocked requests rather than contacting Instagram.
 
 Browser checks cover desktop/mobile layouts, scientific search, taxonomic links, thumbnail family filtering with keyboard and touch, characteristic selection, clear controls, URL persistence/back/forward navigation, maps links, branding, and illustrated profiles. Playwright launches installed Chrome and starts a production preview on `http://127.0.0.1:4173`; that port must be available. Screenshots are written to `test-results/`.
+
+Observation-map checks cover one map per species, lazy loading, exact current/historical pins, fitting all positions, single-location zoom, independence from encounter expansion, shared script loading, cleanup on navigation, mobile sizing, and network/authentication failure fallbacks. Browser suites intercept Maps JavaScript requests with a local test double, so automated checks make no live Maps API calls. Map-specific checks are skipped if the production build has no key; a nonempty dummy `GOOGLE_MAPS_API_KEY` at build time exercises these checks without a real key. Build with the actual browser key for deployment.
 
 For a subdirectory deployment, also run:
 

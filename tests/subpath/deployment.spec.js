@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test'
+import { test, expect } from '../helpers/browser.js'
 import { readFile } from 'node:fs/promises'
 
 const content = JSON.parse(await readFile(new URL('../../src/data/index.json', import.meta.url), 'utf8'))
@@ -88,6 +88,23 @@ test('thumbnail family links filter within the encyclopedia deployment folder', 
   await expect(page.getByRole('button', { name: 'Remove family filter' })).toBeVisible()
   await expect(page.getByRole('button', { name: 'Remove genus filter' })).toHaveCount(0)
   for (const name of await page.locator('.card-family').allTextContents()) expect(name).toBe('Boletaceae')
+})
+
+test('one species map pins all observations under the encyclopedia deployment base', async ({ page }) => {
+  await page.goto('./#/fungi/boletus-edulis')
+  await expect(page.locator('.species-heading h1')).toBeVisible()
+  const map = page.locator('.observation-map')
+  test.skip(await map.count() === 0, 'Build with a Google Maps API key to exercise embedded maps.')
+  await map.scrollIntoViewIfNeeded()
+  await expect(map).toHaveAttribute('data-map-state', 'ready')
+  await expect(map).toHaveCount(1)
+  await expect(page.locator('.encounter .observation-map')).toHaveCount(0)
+  const pins = await page.evaluate(() => window.__googleMapsTest.maps[0].pins)
+  expect(pins).toHaveLength(4)
+  expect(pins[0].lat).toBeCloseTo(59.38575, 7)
+  expect(pins[0].lng).toBeCloseTo(25.3962777778, 7)
+  expect(pins).toContainEqual({ lat: 57.984637, lng: 27.621764 })
+  await expect(page).toHaveURL('http://127.0.0.1:4174/encyclopedia/#/fungi/boletus-edulis')
 })
 
 test('all annual TopNine slides load inside the encyclopedia deployment folder', async ({ page }) => {

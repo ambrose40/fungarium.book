@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test'
+import { test, expect } from '../helpers/browser.js'
 
 test('gallery search, filters, load-more, and species navigation', async ({ page }) => {
   const errors = []

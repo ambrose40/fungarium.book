@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test'
+import { test, expect } from '../helpers/browser.js'
 
 const projects = [
   ['AzrvanAkaranA', 'https://azrvanakarana.me/'],

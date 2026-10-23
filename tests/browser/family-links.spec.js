@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test'
+import { test, expect } from '../helpers/browser.js'
 
 test('family badges replace genus, preserve other filters, and support keyboard and history navigation', async ({ page }) => {
   await page.goto('/#/?genus=Boletus&q=boletus&scope=scientific&year=2025&sort=newest&mc.hymenium=pores')

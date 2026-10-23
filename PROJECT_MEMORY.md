@@ -35,10 +35,77 @@ follow `CONTRIBUTING.md`.
 - **Deployment:** hash routing supports static hosting; production hosting at
   `/encyclopedia/` requires `npm run build:encyclopedia`. Root browser checks use
   a root build. Browser checks use installed Chrome.
+- **Observation maps:** `ObservationMap.vue` renders one lazy JavaScript Google
+  Map per species above its encounter list, collecting pins from all usable
+  observation coordinates, including historical and collapsed encounters. Fit
+  all locations; use zoom 14 for a single location. Keep the 300 px desktop /
+  260 px phone frame and retain individual external coordinate links. Share the
+  API through `src/lib/google-maps.mjs` and reuse the existing coordinate parser.
+  Vite reads `GOOGLE_MAPS_API_KEY` (environment or `.env.local`) before the ignored
+  `secrets/maps-api.key`; an empty environment value disables maps. The browser
+  key is compiled into the client bundle; never commit its literal value or copy
+  the secrets folder into public assets. Automated browser suites mock Maps API
+  requests via `tests/helpers/browser.js`.
 - **Commits:** Conventional Commits, imperative summary around 72 characters,
   focused scope, and a body describing significant behavior and verification.
 
 ## Recent changesets
+
+### 2026-10-23 — One species map for all observation locations
+
+- Replaced repeated encounter maps with one species-level map above the field
+  encounter list, using all observations' usable coordinates regardless of
+  whether individual encounter panels are expanded.
+- Kept the existing frame heights and Google Maps controls. Add one Data-layer
+  feature per located observation, including repeated coordinates, with each
+  pin titled by location and recorded date/time. Show the pin count in the caption.
+- Fit distinct positions with padded bounds. Keep zoom 14 when every observation
+  shares one coordinate so a single location does not over-zoom. Omit the map
+  when no usable coordinates or configured key are available.
+- Key the component by species ID and keep lazy viewport loading, shared API
+  loading, and cleanup on navigation. Point failure messages to individual
+  coordinate links in the field encounters below.
+- Updated browser mocks and coverage for all current/historical pins on one map,
+  fitted bounds, single-location centering, no new maps on encounter toggles,
+  script reuse across species, cleanup, dimensions, failure fallbacks, and the
+  `/encyclopedia/` deployment. Updated README behavior and test documentation.
+- **Verification:** root and `/encyclopedia/` production builds passed;
+  `npm run test:ui` passed (29 tests), and
+  `npx playwright test --config=playwright.subpath.config.js` passed (7 tests).
+  A live Chrome smoke check with the supplied key rendered one combined map for
+  Boletus edulis with its four observation features, no per-encounter maps, and
+  no Google API errors; reviewed the fitted-map screenshot.
+  `git diff --check` passed. The unchanged Node.js suite was not rerun.
+- **Build state:** `dist/` is currently configured for `/encyclopedia/`.
+- **Unresolved follow-ups:** none identified.
+
+### 2026-10-23 — Embedded JavaScript maps for observation coordinates
+
+- Added inline terrain maps with exact coordinate pins, map-type/zoom/fullscreen
+  controls, and cooperative touch gestures, between encounter metadata and
+  photographs. Reused `parseCoordinates` for DMS and annotated-decimal inputs.
+  The Maps Data layer supplies pins without a map ID or geocoding service.
+- Load maps only near the viewport inside expanded encounters; share the API
+  script across maps, handle loading timeouts and authentication/network failures,
+  and clean up listeners/data layers on navigation. Keep original coordinate
+  links as the fallback. Omit maps when coordinates or a configured key are absent.
+- Wired `secrets/maps-api.key` into Vite through `scripts/maps-config.mjs`, with
+  environment/`.env.local` overrides. Read the supplied key without printing it.
+  Preserved the user's existing `.gitignore` edit excluding `/secrets`.
+- Added key-configuration unit tests, map browser tests, and subpath map coverage.
+  All browser suites now use a shared Maps request test double to avoid live API
+  calls in automated checks. Map-specific tests skip when built without a key.
+- Updated README behavior, key setup, deployment, source structure, and test
+  instructions. No new package dependency is required.
+- **Verification:** root and `/encyclopedia/` production builds passed;
+  `npm test` passed (57 tests); `npm run test:ui` passed (29 tests);
+  `npx playwright test --config=playwright.subpath.config.js` passed (7 tests).
+  A separate live Chrome smoke check using the supplied key rendered the actual
+  Google map and pin with loaded map images, no Google API errors, and no error
+  panel; reviewed its screenshot. `git diff --check` passed.
+- **Build state:** `dist/` is currently configured for `/encyclopedia/` with the
+  supplied browser Maps key.
+- **Unresolved follow-ups:** none identified.
 
 ### 2026-10-23 — Clickable thumbnail family filters
 

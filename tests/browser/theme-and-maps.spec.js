@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test'
+import { test, expect } from '../helpers/browser.js'
 
 test('black theme, original support artwork, favicon and updated site identity', async ({ page, request }) => {
   await page.setViewportSize({ width: 1440, height: 1000 })
