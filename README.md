@@ -5,6 +5,7 @@ A Vue 3 + Vite photographic encyclopedia built from the original `*.txt` Instagr
 ## Features
 
 - Black/charcoal design and original **Fungarium.INFO Encyclopedia** branding.
+- Home navigation to the parent site, a direct link to the main Fungarium.INFO website, and a footer linking to the author's other projects.
 - Auto-advancing TopNine photo slideshow for **2024, 2025, and 2026**, with year selection, previous/next controls, and pause/play.
 - **3:2 landscape** gallery cards, encounter thumbnails, photo-selection strips, and featured-photo frames; full-image viewing with keyboard navigation.
 - Scientific-name and multilingual search, plus year, initial-letter, hashtag, and sort controls.
@@ -32,6 +33,8 @@ A Vue 3 + Vite photographic encyclopedia built from the original `*.txt` Instagr
 The black/charcoal theme takes its direction from [fungarium.info](https://fungarium.info/), with the original red mushroom logo and browser/device icons supplied in `fungi-support/favicon_package_v0.16/`. `npm run content`, `dev`, and `build` copy the selected artwork into `public/branding/` and `public/icons/`. Theme colours are centralized in `src/dark-theme.css`; the device manifest uses the same site identity and dark background.
 
 Encounter coordinates link to Google Maps search URLs containing a numeric latitude/longitude, which pins the actual location. DMS, curly-prime, prefixed-hemisphere, and annotated-decimal formats are normalized by `src/lib/coordinates.mjs`; the original caption text is retained as the visible link. Unparseable coordinates stay plain text rather than linking to an unrelated place.
+
+The header's **Home** link uses `href="../"` to open the parent directory (the main domain root when the encyclopedia is deployed at `/encyclopedia/`). **The collection** and the logo return to the encyclopedia itself. **Fungarium.INFO** opens the main website at `https://fungarium.info/`, separately from the Instagram profile link. The **My other projects** footer includes AzrvanAkaranA, travel-pics.vip, herbarium.info, fungarium.info, algaerium.info, lichenarium.info, and plantarium.info. Project names and destination URLs are maintained in `src/site-links.js`.
 
 ## Setup and commands
 

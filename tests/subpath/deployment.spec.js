@@ -91,3 +91,18 @@ test('all annual TopNine slides load inside the encyclopedia deployment folder',
   }
   await expect(page).toHaveURL('http://127.0.0.1:4174/encyclopedia/#/')
 })
+
+test('Home targets the parent directory while main-domain and project links keep their external targets', async ({ page }) => {
+  await page.goto('./#/fungi/amanita-muscaria')
+  await expect(page.locator('.species-heading h1')).toHaveText('Amanita muscaria')
+  const navigation = page.getByRole('navigation', { name: 'Main navigation' })
+  const home = navigation.getByRole('link', { name: 'Home', exact: true })
+  await expect(home).toHaveAttribute('href', '../')
+  expect(await home.evaluate(link => link.href)).toBe('http://127.0.0.1:4174/')
+  await expect(navigation.getByRole('link', { name: 'Fungarium.INFO main website', exact: true })).toHaveAttribute('href', 'https://fungarium.info/')
+  const projects = page.getByRole('navigation', { name: 'Other projects' })
+  await expect(projects.getByRole('link')).toHaveCount(7)
+  await expect(projects.getByRole('link', { name: 'algaerium.info', exact: true })).toHaveAttribute('href', 'https://algaerium.herbarium.info/')
+  await expect(projects.getByRole('link', { name: 'lichenarium.info', exact: true })).toHaveAttribute('href', 'https://lichenarium.herbarium.info/')
+  await expect(projects.getByRole('link', { name: 'plantarium.info', exact: true })).toHaveAttribute('href', 'https://herbarium.info/plantarium')
+})
