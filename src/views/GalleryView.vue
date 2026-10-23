@@ -8,15 +8,14 @@ import TaxonomyFilter from '../components/TaxonomyFilter.vue'
 import CharacteristicFilters from '../components/CharacteristicFilters.vue'
 import TopNineSlideshow from '../components/TopNineSlideshow.vue'
 import ScientificSearchFilters from '../components/ScientificSearchFilters.vue'
-import { SITE_NAME } from '../branding'
 import { buildTaxonomyIndex, filterCatalog, normalizeTaxonomyQuery, setTaxonomyFilter, TAXONOMY_FIELDS } from '../lib/catalog.mjs'
 import { readCharacteristicSelections, setCharacteristicSelection, clearCharacteristicSelections, characteristicFacetCounts } from '../lib/characteristic-filters.mjs'
 import { readScientificSearches, setScientificSearch, clearScientificSearches } from '../lib/scientific-search.mjs'
 import { ORGANISM_GROUPS, readOrganismSelections, setOrganismSelections } from '../lib/organism-groups.mjs'
+import { hashtagText } from '../lib/hashtags.mjs'
 
 const route = useRoute()
 const router = useRouter()
-document.title = SITE_NAME
 async function explore() {
   await nextTick()
   const photos = document.getElementById('collection-photos')
@@ -157,7 +156,7 @@ function cover(item) { return item.observations.find(post => post.photos.length)
           <span v-if="family" class="tag-filter taxonomy-active-chip">Family: {{ family }}<button aria-label="Remove family filter" @click="family = ''"><X :size="12" /></button></span>
           <span v-if="taxonomicClass" class="tag-filter taxonomy-active-chip">Class: {{ taxonomicClass }}<button aria-label="Remove class filter" @click="taxonomicClass = ''"><X :size="12" /></button></span>
           <span v-for="item in activeCharacteristics" :key="`${item.group}:${item.value}`" class="tag-filter characteristic-active-chip"><span>{{ item.title }}: {{ item.label }}</span><button :aria-label="`Remove ${item.title} ${item.label} filter`" @click="removeCharacteristic(item.group, item.value)"><X :size="12" /></button></span>
-          <span v-if="tag" class="tag-filter">#{{ tag }} <button aria-label="Remove hashtag filter" @click="tag = ''"><X :size="12" /></button></span>
+          <span v-if="tag" class="tag-filter">#{{ hashtagText(tag) }} <button aria-label="Remove hashtag filter" @click="tag = ''"><X :size="12" /></button></span>
           <button v-if="hasFilters" class="text-button clear-filters" @click="reset">Clear filters <X :size="12" /></button>
         </p>
         <label>Sort by <select v-model="sort" aria-label="Sort species"><option value="name">Latin name, A–Z</option><option value="newest">Latest encounter</option><option value="observations">Most encounters</option></select></label>

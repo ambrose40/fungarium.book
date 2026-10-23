@@ -18,6 +18,10 @@ commit convention and contribution workflow.
   changes they describe.
 - Use Conventional Commits as documented in `CONTRIBUTING.md`. Commit or push
   only when the user requests it.
+- For the current TODO workflow, implement one chapter at a time, then stop and
+  report for user review. Wait for the user's explicit green flag before a
+  commit or starting the next chapter; apply requested amendments to the active
+  chapter first.
 
 ## Implementation essentials
 

@@ -54,7 +54,7 @@ test.describe('mobile family badges', () => {
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
 
     await page.locator('.species-card-link').first().tap()
-    await expect(page).toHaveURL(/#\/fungi\//)
+    await expect(page).toHaveURL(/\/fungi\/[^/]+\/$/)
     await expect(page.locator('.species-heading h1')).toBeVisible()
   })
 })

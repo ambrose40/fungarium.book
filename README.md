@@ -15,12 +15,14 @@ A Vue 3 + Vite photographic encyclopedia built from the original `*.txt` Instagr
 - Clickable **Family / Class** labels on gallery thumbnails for filtering directly from the photos.
 - Additive mycological filters across all twelve illustrated characteristic categories, with contextual counts and individual, group, taxonomy-only, and global clear controls.
 - Latest-record scientific profiles, original captions, multilingual names, GBIF/publication references, weather, habitat, and photography notes.
+- Static, crawlable species HTML with page-specific metadata, social previews, structured data, a sitemap, and a no-JavaScript reading view.
 - One JavaScript Google Map per species with pins from all its observations, plus individual coordinate links.
 - Resumable Instagram photo downloading, offline WebP thumbnail generation, and an optional account-export importer.
 
 ## Contents
 
 - [Design and branding](#design-and-branding)
+- [Page metadata and crawlable profiles](#page-metadata-and-crawlable-profiles)
 - [Observation maps](#observation-maps)
 - [Setup and commands](#setup-and-commands)
 - [Content generation and source rules](#content-generation-and-source-rules)
@@ -42,7 +44,21 @@ The gallery prioritizes photography. On phones (up to 600 px wide), the TopNine 
 
 Species pages combine all usable observation coordinates on one inline Google Map when a Maps JavaScript API key is configured. Each encounter also retains its own coordinate link. DMS, curly-prime, prefixed-hemisphere, and annotated-decimal formats are normalized by `src/lib/coordinates.mjs`; the original caption text is retained as the visible link. Unparseable coordinates stay plain text rather than linking to an unrelated place.
 
-The header's **Home** link uses `href="../"` to open the parent directory (the main domain root when the encyclopedia is deployed at `/encyclopedia/`). **The collection** and the logo return to the encyclopedia itself. **Fungarium.INFO** opens the main website at `https://fungarium.info/`, separately from the Instagram profile link. The **My other projects** footer includes AzrvanAkaranA, travel-pics.vip, herbarium.info, fungarium.info, algaerium.info, lichenarium.info, and plantarium.info. Project names and destination URLs are maintained in `src/site-links.js`.
+The header's **Home** link resolves the parent of the deployment folder, including from a deeply nested species URL (the main domain root when deployed at `/encyclopedia/`). **The collection** and the logo return to the encyclopedia itself. **Fungarium.INFO** opens the main website at `https://fungarium.info/`, separately from the Instagram profile link. The **My other projects** footer includes AzrvanAkaranA, travel-pics.vip, herbarium.info, fungarium.info, algaerium.info, lichenarium.info, and plantarium.info. Project names and destination URLs are maintained in `src/site-links.js`.
+
+## Page metadata and crawlable profiles
+
+New visits use clean URLs, for example **`/encyclopedia/fungi/boletus-edulis/`**. A production build writes an actual `fungi/<species-id>/index.html` file for every published taxon, with its scientific profile, recorded encounters, image, and source hashtags readable before JavaScript runs. The same page becomes the interactive Vue view when JavaScript loads. The gallery HTML includes links to every profile, and `sitemap.xml` lists the collection and all clean species URLs.
+
+Existing `/#/fungi/...` and `/#/?...` bookmarks remain supported. Hash fragments are not sent to the server, so use the clean profile URLs for sharing and crawling: those HTTP responses contain species-specific metadata directly. The client updates the same managed metadata during navigation, including titles, descriptions, canonical links, Open Graph and Twitter-card fields, social images/alt text, source-tag keywords, and Schema.org WebSite/CollectionPage/WebPage/Taxon/ImageObject/BreadcrumbList data.
+
+Descriptions use the latest recorded overview, with a factual name/family/encounter fallback when an overview is absent. No scientific text, publication dates, social accounts, image licences, or missing source fields are invented. Filtered collection URLs are `noindex, follow` and canonicalize to the unfiltered collection; they do not publish an unfiltered ItemList as though it were their result set. Missing profiles and data-loading errors are also marked `noindex`. Tracking parameters are stripped from canonical URLs without making otherwise valid pages non-indexable.
+
+The canonical origin defaults to **`https://fungarium.info`**; the path comes from Vite's deployment base. Set `SITE_ORIGIN=https://your-domain.example` in the build environment or ignored `.env.local` for another host, then rebuild. It must be an HTTP(S) origin with no path, query, or credentials. Use `npm run build:encyclopedia` for the production `/encyclopedia/` path; the root build/dev server uses `/`.
+
+The build also creates `robots.txt` with the absolute sitemap URL. For a root deployment, serve it at `/robots.txt`. **For `/encyclopedia/` hosting, merge the generated Sitemap directive into the main site's existing origin-root `/robots.txt`**; a file served only at `/encyclopedia/robots.txt` is not authoritative for crawlers. Preserve the main site's existing crawler rules when merging.
+
+Run `npm run content` followed by **`npm run audit:metadata`** to reproduce the source-data audit. Findings and Chapter 1 verification are recorded in [the metadata review report](docs/reviews/chapter-1-metadata.md). Source omissions remain explicit; update verified captions in `instagram-meta/` and regenerate to address them.
 
 ## Observation maps
 
@@ -101,7 +117,8 @@ Open the local URL printed by Vite (normally `http://127.0.0.1:5173`).
 | --- | --- |
 | `npm run dev` | Regenerate content and branding assets, then start Vite on `127.0.0.1` |
 | `npm run content` | Regenerate species pages, the gallery index, scientific search fields, organism groups, characteristic filter options/counts, and branding assets |
-| `npm run build` | Regenerate content and create the deployable `dist/` directory |
+| `npm run audit:metadata` | Read generated content and report hashtag coverage/variants and missing profile/encounter source fields |
+| `npm run build` | Regenerate content and create client assets, static species HTML, and SEO files in `dist/` |
 | `npm run build:encyclopedia` | Build production assets for hosting at `/encyclopedia/` |
 | `npm run preview` | Serve the existing production build locally; run `build` first |
 | `npm run preview:encyclopedia` | Preview the subdirectory build at `/encyclopedia/` |
@@ -114,7 +131,7 @@ Open the local URL printed by Vite (normally `http://127.0.0.1:5173`).
 
 After editing captions or adding images, run `npm run content` to refresh a running development site. `dev` and `build` also regenerate content automatically when started.
 
-Hash-based routes work on ordinary static hosting without server rewrite rules. Deploy `dist/` after building. The interface uses locally bundled icons and system fallbacks for its optional Google Fonts.
+Generated clean routes work on ordinary static hosting with directory index files; legacy hash routes remain available. Deploy all of `dist/`, including the generated `fungi/` tree, after building. The interface uses locally bundled icons and system fallbacks for its optional Google Fonts.
 
 ## Content generation and source rules
 
@@ -129,7 +146,7 @@ Hash-based routes work on ordinary static hosting without server rewrite rules. 
 - Some older files have a revised second `🆔` block: the final scientific block is used for that file.
 - `📖` can be a publication or a photo-count line; lines describing photos/images/views belong to the photographic record, not the bibliography. `📜` publications and `🦠` slime-mould classifications are supported.
 - Weather, coordinates, camera, lens, lighting, exposure, processing, stacking, and other photographic details belong to each encounter. **Full original captions remain available**, including any source typos or mismatched hashtags.
-- A species’ hashtag list is the deduplicated union of its encounters’ tags. Hashtag links filter the collection.
+- A species’ hashtag list is the case-insensitive, Unicode-NFC-deduplicated union of its encounters’ tags, retaining the first source spelling in newest-first encounter order. Extraction supports Unicode combining marks and punctuation/emoji boundaries while excluding URL fragments. Exact source captions remain untouched. Hashtag filters are case-insensitive but preserve meaningful accents; the profile displays a count and expandable/collapsible full list, or an explicit empty state.
 - Plant records with a `🌸` classification and bucket-list posts without a `🆔` identification are excluded. Fungal plant parasites and slime moulds are retained.
 - Organism groups come from the latest caption's recorded taxonomy and classification marker. Recorded slime-mould classes such as `Myxogastria` and `Protosteliomycetes` take precedence over historical `🍄` markers; `🦠` classifications identify slime moulds directly. Unclassified records are retained when both groups are shown.
 - A caption with a placeholder `xxxxxxxxxxx` post ID is retained as a local encounter, but is not given a fabricated Instagram link.
@@ -227,13 +244,13 @@ Use the UI for the complete list of values present in the current collection. `u
 Examples:
 
 ```text
-/#/?genus=Amanita&mc.spore-print=white&mc.cap=convex
-/#/?family=Boletaceae&mc.hymenium=pores
-/#/?mc.cap=convex&mc.cap=flat&mc.attachment=free
-/#/?scope=scientific&q=Boletus&sc.hymenium=pores&sc.stipe=reticulate&organisms=fungi
-/#/?scope=trait:cap&q=scarlet-red
-/#/?organisms=slime-moulds&sc.plasmodium-phase=watery
-/#/?class=Myxogastria&organisms=slime-moulds
+/?genus=Amanita&mc.spore-print=white&mc.cap=convex
+/?family=Boletaceae&mc.hymenium=pores
+/?mc.cap=convex&mc.cap=flat&mc.attachment=free
+/?scope=scientific&q=Boletus&sc.hymenium=pores&sc.stipe=reticulate&organisms=fungi
+/?scope=trait:cap&q=scarlet-red
+/?organisms=slime-moulds&sc.plasmodium-phase=watery
+/?class=Myxogastria&organisms=slime-moulds
 ```
 
 Repeating a characteristic parameter selects multiple alternatives in that category. The example with repeated `mc.cap` matches convex **or** flat caps, together with free hymenium attachment.
@@ -462,6 +479,9 @@ public/
 content/                      Local downloader state and optional account export
 tests/                        Node.js tests and Playwright browser checks
 dist/                         Generated static website
+  fungi/<species-id>/index.html  Crawlable species HTML with server-readable metadata
+  sitemap.xml                 Collection and clean species URLs
+  robots.txt                  Crawler/sitemap template (merge at origin root)
 ```
 
 | Script | Role |
@@ -470,6 +490,8 @@ dist/                         Generated static website
 | `scripts/content-lib.mjs` | Caption parsing, taxon grouping, and export validation; shared module |
 | `scripts/project-paths.mjs` | Shared project root and `instagram-meta/` source-directory resolution |
 | `scripts/audit-content.mjs` | Standalone caption audit; reports missing descriptions, taxonomy, references, photography details, and genus-level identifications |
+| `scripts/audit-metadata.mjs` | Read-only generated-content audit for hashtag coverage/variants and source-data omissions |
+| `scripts/seo-pages.mjs` | Vite plugin generating metadata, readable static HTML, clean profile pages, sitemap, and robots template |
 | `scripts/prepare-branding.mjs` | Branding asset-copy helper called by the content builder |
 | `scripts/maps-config.mjs` | Read the Maps browser key from the environment or ignored local key file for Vite |
 | `scripts/fetch-instagram-photos.mjs` | Resumable authenticated/export-based photo downloader and offline thumbnail CLI |
@@ -487,6 +509,8 @@ Relevant application modules:
 - `src/lib/coordinates.mjs`: coordinate normalization and pinned Google Maps URLs.
 - `src/lib/google-maps.mjs`: shared lazy Maps JavaScript loader, timeout, and authentication-failure handling; `src/components/ObservationMap.vue` renders the species-level map with all observation pins.
 - `src/lib/asset-urls.mjs`: resolve generated image/logo paths against Vite's deployment base.
+- `src/lib/hashtags.mjs`: source hashtag extraction, Unicode/case normalization, deduplication, and exact-tag matching.
+- `src/lib/seo.mjs`: shared canonical URLs, descriptions, social metadata, structured data, and client head updates.
 
 Local/private files include `instagram-meta/`, `secrets/`, `content/instagram-browser/`, `content/photo-download-state.json`, and `content/photo-download.lock`. They are Git-ignored and are not copied as folders to the static site. The configured browser Maps key is compiled into JavaScript as described above. Export JSON and legacy media manifests are also excluded from Git.
 
@@ -501,9 +525,11 @@ npm run build
 npm run test:ui
 ```
 
-The Node.js suite checks real caption extraction, latest-profile selection, generated scientific-category text/counts, combined field searches, recorded class extraction, taxonomic indexes/exclusivity, organism classification/selections, additive characteristic logic/counts, coordinate formats, Maps key configuration, and downloader/image handling. Downloader restriction and resume tests use mocked requests rather than contacting Instagram.
+The Node.js suite checks real caption extraction, latest-profile selection, generated scientific-category text/counts, combined field searches, recorded class extraction, taxonomic indexes/exclusivity, organism classification/selections, additive characteristic logic/counts, coordinate formats, Maps key configuration, hashtag fidelity/normalization, metadata generation/escaping, canonical URLs, structured data, sitemap content, and downloader/image handling. Downloader restriction and resume tests use mocked requests rather than contacting Instagram.
 
 Browser checks cover desktop/mobile layouts, scientific-name/category search, multiple description fields, organism checkboxes, taxonomic links, thumbnail family/class filtering with keyboard and touch, class dropdown selection, characteristic selection, clear controls, URL persistence/back/forward navigation, maps links, branding, and illustrated profiles. Playwright launches installed Chrome and starts a production preview on `http://127.0.0.1:4173`; that port must be available. Screenshots are written to `test-results/`.
+
+SEO checks fetch every published species HTML response, verify sitemap and social metadata, read a profile with JavaScript disabled, exercise clean and legacy URL navigation, verify dynamic metadata resets/error handling, and check hashtag expansion and case-equivalent filtering. These checks are separate from the pending formal WCAG and Lighthouse chapters.
 
 Observation-map checks cover one map per species, lazy loading, exact current/historical pins, fitting all positions, single-location zoom, independence from encounter expansion, shared script loading, cleanup on navigation, mobile sizing, and network/authentication failure fallbacks. Browser suites intercept Maps JavaScript requests with a local test double, so automated checks make no live Maps API calls. Map-specific checks are skipped if the production build has no key; a nonempty dummy `GOOGLE_MAPS_API_KEY` at build time exercises these checks without a real key. Build with the actual browser key for deployment.
 
@@ -522,9 +548,9 @@ npm run build
 npm run preview
 ```
 
-Verify the local production preview, then upload the **contents of `dist/`** to the hosting root. Keep `index.html`, `assets/`, images, thumbnails, branding, icons, and the manifest together. Hash routes such as `/#/fungi/amanita-muscaria` do not require server rewrite rules.
+Verify the local production preview, then upload the **contents of `dist/`** to the hosting root. Keep `index.html`, the generated `fungi/` pages, `assets/`, images, thumbnails, branding, icons, manifest, sitemap, and robots file together. Generated species routes have actual directory index files, so no SPA fallback rewrite is required for them. Keep the host's normal HTTP 404 behavior for missing directories. Legacy hash bookmarks continue to work in the browser.
 
-### Deploy at `/encyclopedia/#/`
+### Deploy at `/encyclopedia/`
 
 Build using the deployment-specific command:
 
@@ -532,7 +558,7 @@ Build using the deployment-specific command:
 npm run build:encyclopedia
 ```
 
-This sets Vite's base to **`/encyclopedia/`**, including the trailing slash. Vue Router uses that same base for its hash routes, and generated photo/logo URLs are prefixed at display time. The manifest's launch URL, scope, and device icons resolve relative to its deployment folder.
+This sets Vite's base to **`/encyclopedia/`**, including the trailing slash. Vue Router uses that base for clean routes and legacy hash bookmarks; static HTML, canonical/social URLs, sitemap entries, and photo/logo paths use it too. The manifest launches the clean collection URL, with scope and device icons relative to the deployment folder.
 
 Preview the resulting build:
 
@@ -540,7 +566,7 @@ Preview the resulting build:
 npm run preview:encyclopedia
 ```
 
-Open `http://127.0.0.1:4173/encyclopedia/#/` using the port shown by Vite.
+Open `http://127.0.0.1:4173/encyclopedia/` using the port shown by Vite.
 
 Upload the **contents of `dist/`** into the production server's **`encyclopedia/` directory**, for example:
 
@@ -549,32 +575,36 @@ public_html/
   encyclopedia/
     index.html
     assets/
+    fungi/<species-id>/index.html
     images/
     thumbs/
     branding/
     icons/
     site.webmanifest
+    sitemap.xml
+    robots.txt
 ```
 
 The production URL will then be:
 
 ```text
-https://fungarium.info/encyclopedia/#/
-https://fungarium.info/encyclopedia/#/fungi/amanita-muscaria
+https://fungarium.info/encyclopedia/
+https://fungarium.info/encyclopedia/fungi/amanita-muscaria/
 ```
 
-The server must serve `encyclopedia/index.html` as that directory's index and allow access to its static files. Because routes follow `#`, no Vue-specific rewrite rule is needed. Use the output of `build:encyclopedia` for this deployment so its compiled asset paths match the hosting folder.
+The server must serve directory index files for `encyclopedia/` and its generated species directories, and allow access to all static assets. Use the output of `build:encyclopedia` so HTML, canonical URLs, and compiled asset paths match the hosting folder. Merge the generated sitemap declaration into the origin-root robots file as described above. Existing `/encyclopedia/#/...` URLs remain browser-compatible aliases; prefer the clean URLs for sharing.
 
 The site is static after generation: deploying new captions, images, or generated filter options requires a new build. The application does not need the Chrome profile, downloader state, or original caption files on the public web server.
 
 ## Follow-ups and TODOs
 
-The following work is pending. Record findings, fixes, and verification results in `PROJECT_MEMORY.md` as these items are completed.
+Chapter 1 is implemented and approved by the user. Chapters 2 and 3 are pending. Complete one chapter at a time, report the result, and wait for the user's green flag before committing or continuing. Record findings, fixes, and verification results in `PROJECT_MEMORY.md`.
 
 1. **Page metadata and other missing supporting data**
-   - [ ] Audit gallery/species page metadata and miscellaneous missing data, then add or correct the identified omissions using the existing source rules.
-   - [ ] **1a — Hashtags:** review completeness, consistency, presentation, and filtering; document and address missing hashtag data without inventing source content.
-   - [ ] **1b — HTML and SEO:** review page titles, meta descriptions, canonical URLs, robots/indexing directives, Open Graph/social-sharing tags and images, structured data, and sitemap coverage. Evaluate crawlability and per-species metadata delivery for the current hash-based routes.
+   - [x] Audit gallery/species page metadata and miscellaneous missing data; provide factual metadata fallbacks and document source omissions in [the Chapter 1 report](docs/reviews/chapter-1-metadata.md).
+   - [x] **1a — Hashtags:** verify source coverage, repair Unicode extraction and case-equivalent filtering/deduplication, and support complete expandable presentation.
+   - [x] **1b — HTML and SEO:** implement titles/descriptions, canonical and robots directives, social metadata/images, structured data, static species HTML, a sitemap, and clean URLs with legacy bookmark compatibility.
+   - [ ] **Source-content curation:** add verified missing overviews/descriptions/references/publications and optional encounter data to original captions when available; use `npm run audit:metadata` to locate them. These omissions are not filled with invented or older scientific text.
 2. **WCAG verification**
    - [ ] Review the design and implementation against **WCAG 2.2 AA**, combining automated checks with manual keyboard and screen-reader testing.
    - [ ] Verify styles and colours, text/control contrast (including labels over photos), font sizes/weights, readability, zoom/reflow, and mobile layouts.

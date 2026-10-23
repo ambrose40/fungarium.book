@@ -1,3 +1,5 @@
+import { extractHashtags, uniqueHashtags } from '../src/lib/hashtags.mjs'
+
 export const isFungiCaption = caption => /^\s*🆔\s+\S/mu.test(caption) && !/^\s*🌸\s/mu.test(caption)
 const clean = value => value.replace(/^(?:\p{Extended_Pictographic}|\p{Regional_Indicator}|\p{Emoji_Modifier}|[\uFE0F\u200D\s])+/u, '').replace(/^[^\p{L}\p{N}]+/u, '').trim()
 const photographyMarker = /^(?:📷|📸|🔭|🎞|🎨|🖼|📚|🔦|💡|👋|🔎|📶|⏯|📕|📗|📘|⚙|🏎)/u
@@ -38,7 +40,7 @@ export function parseCaption(caption, { shortcode, date = '', sourceFile = null,
   const get = marker => lines.find(line => line.startsWith(marker))?.slice(marker.length).replace(/^\uFE0F/u, '').trim() || ''
   const taxonomyLine = lines.find(line => /^(?:🍄|🦠)\s/u.test(line) && line.includes('/')) || ''
   const taxonomy = clean(taxonomyLine).split('/').map(value => value.trim()).filter(Boolean)
-  const hashtags = [...new Set([...caption.matchAll(/(?<!\S)#([\p{L}\p{N}_]+)/gu)].map(match => match[1]))]
+  const hashtags = extractHashtags(caption)
   const start = lines.findIndex((line, index) => index > lastId && /^(?:ℹ|🚫|❌)/u.test(line))
   const endIndex = start < 0 ? -1 : lines.findIndex((line, index) => index > start && photographyMarker.test(line))
   const end = endIndex < 0 ? lines.length : endIndex
@@ -91,7 +93,7 @@ export function groupSpecies(posts) {
       scienceSource: { id: newest.id, date: newest.date, file: newest.sourceFile },
       description: newest.description,
       latestDate: newest.date, firstDate: observations.at(-1).date,
-      hashtags: [...new Set(observations.flatMap(post => post.hashtags))],
+      hashtags: uniqueHashtags(observations.flatMap(post => post.hashtags)),
       observations,
     }
   }).sort((a, b) => a.latinName.localeCompare(b.latinName))

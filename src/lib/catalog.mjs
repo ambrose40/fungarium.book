@@ -1,6 +1,7 @@
 import { matchesCharacteristics } from './characteristic-filters.mjs'
 import { normalizeSearch, scientificText, matchesScientificSearches } from './scientific-search.mjs'
 import { ORGANISM_GROUPS } from './organism-groups.mjs'
+import { hasHashtag } from './hashtags.mjs'
 
 export { normalizeSearch } from './scientific-search.mjs'
 
@@ -56,7 +57,7 @@ export function filterCatalog(species, { search = '', scope = 'all', genus = '',
     if (!genus && !family && taxonomicClass && item.taxonomicClass !== taxonomicClass) return false
     if (year && !item.observations.some(post => post.date.startsWith(year))) return false
     if (letter && !item.latinName.startsWith(letter)) return false
-    if (tag && !item.hashtags.includes(tag)) return false
+    if (tag && !hasHashtag(item.hashtags, tag)) return false
     if (!matchesCharacteristics(item, characteristics)) return false
     if (!matchesScientificSearches(item, scientificSearches)) return false
     if (!terms.length) return true

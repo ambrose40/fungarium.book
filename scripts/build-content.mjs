@@ -106,7 +106,7 @@ export async function buildContent() {
     organismGroup: item.organismGroup,
     latestDate: item.latestDate, hashtags: item.hashtags,
     characteristics: item.characteristics,
-    science: { commonNames: item.science.commonNames, searchText: summarizeScientificText(item.science) },
+    science: { commonNames: item.science.commonNames, gbifUrl: item.science.gbifUrl, searchText: summarizeScientificText(item.science) },
     observations: item.observations.map(post => ({ date: post.date, location: post.location, photos: post.photos })),
   }))
   await writeFile(path.join(root, 'src/data/index.json'), JSON.stringify({ metadata: content.metadata, species: index, characteristicFilters, scientificSearchFields }))

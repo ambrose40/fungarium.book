@@ -3,7 +3,7 @@ import { computed, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { ArrowLeft, ArrowRight, ArrowUpRight, MapPin, CloudSun, Camera, CalendarDays, ChevronDown, BookOpen, Microscope, X, ChevronLeft, ChevronRight, Image, ExternalLink } from 'lucide-vue-next'
 import { species, formatDate, loadSpecies } from '../data'
-import { SITE_NAME } from '../branding'
+import { applyPageMetadata, pageMetadata } from '../lib/seo.mjs'
 import { assetUrl } from '../lib/asset-urls.mjs'
 import MediaFrame from '../components/MediaFrame.vue'
 import MycologicalCharacteristics from '../components/MycologicalCharacteristics.vue'
@@ -38,8 +38,13 @@ const lightboxIndex = ref(0)
 watch(fungus, item => {
   activePhoto.value = 0
   showAllTags.value = false
-  document.title = `${item ? item.latinName : 'Species not found'} — ${SITE_NAME}`
 }, { immediate: true })
+watch([loading, loadError], ([pending, failed]) => {
+  if (route.name !== 'detail') return
+  if (pending || (!failed && fungus.value)) return
+  const item = species.find(record => record.id === route.params.id)
+  applyPageMetadata(pageMetadata({ item, species, query: route.query, base: import.meta.env.BASE_URL, origin: import.meta.env.VITE_SITE_ORIGIN, error: failed ? 'load-error' : 'not-found' }))
+})
 const tags = computed(() => showAllTags.value ? fungus.value.hashtags : fungus.value.hashtags.slice(0, 24))
 function openLightbox(photos, photoIndex = 0) {
   if (!photos?.length) return
@@ -61,9 +66,9 @@ function scrollToSection(id) { document.getElementById(id)?.scrollIntoView({ beh
     <div class="detail-navigation">
       <RouterLink to="/" class="back-link"><ArrowLeft :size="16" /> Back to the collection</RouterLink>
       <div class="species-pagination">
-        <RouterLink v-if="previous" :to="`/fungi/${previous.id}`" :aria-label="`Previous species: ${previous.latinName}`"><ChevronLeft :size="18" /></RouterLink>
+        <RouterLink v-if="previous" :to="{ name: 'detail', params: { id: previous.id } }" :aria-label="`Previous species: ${previous.latinName}`"><ChevronLeft :size="18" /></RouterLink>
         <span>{{ index + 1 }} / {{ species.length }}</span>
-        <RouterLink v-if="next" :to="`/fungi/${next.id}`" :aria-label="`Next species: ${next.latinName}`"><ChevronRight :size="18" /></RouterLink>
+        <RouterLink v-if="next" :to="{ name: 'detail', params: { id: next.id } }" :aria-label="`Next species: ${next.latinName}`"><ChevronRight :size="18" /></RouterLink>
       </div>
     </div>
     <header class="species-heading">
@@ -156,11 +161,13 @@ function scrollToSection(id) { document.getElementById(id)?.scrollIntoView({ beh
     </section>
     <section id="hashtags" class="hashtags-section">
       <p class="eyebrow">FOLLOW THE THREADS</p><h2>From the field notes</h2><p class="muted">Original hashtags across this species’ encounters.</p>
-      <div class="hashtag-list"><RouterLink v-for="tag in tags" :key="tag" :to="{ name: 'gallery', query: { tag } }">#{{ tag }}</RouterLink><button v-if="!showAllTags && fungus.hashtags.length > 24" @click="showAllTags = true">+ {{ fungus.hashtags.length - 24 }} more</button></div>
+      <p class="muted">{{ fungus.hashtags.length }} recorded {{ fungus.hashtags.length === 1 ? 'hashtag' : 'hashtags' }}.</p>
+      <p v-if="!fungus.hashtags.length" class="muted">No hashtags were recorded in these encounters.</p>
+      <div id="species-hashtag-list" class="hashtag-list"><RouterLink v-for="tag in tags" :key="tag" :to="{ name: 'gallery', query: { tag } }">#{{ tag }}</RouterLink><button v-if="fungus.hashtags.length > 24" :aria-expanded="showAllTags" aria-controls="species-hashtag-list" @click="showAllTags = !showAllTags">{{ showAllTags ? 'Show fewer hashtags' : `+ ${fungus.hashtags.length - 24} more` }}</button></div>
     </section>
     <div class="bottom-navigation">
       <RouterLink to="/" class="back-link"><ArrowLeft :size="16" /> All discoveries</RouterLink>
-      <RouterLink v-if="next" :to="`/fungi/${next.id}`" class="next-species"><span>NEXT IN THE COLLECTION<em>{{ next.latinName }}</em></span><ArrowRight :size="22" /></RouterLink>
+      <RouterLink v-if="next" :to="{ name: 'detail', params: { id: next.id } }" class="next-species"><span>NEXT IN THE COLLECTION<em>{{ next.latinName }}</em></span><ArrowRight :size="22" /></RouterLink>
     </div>
   </div>
   <div v-else class="container empty-state">

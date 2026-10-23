@@ -15,7 +15,7 @@ test('Home targets the parent directory and the main website and project destina
   const navigation = page.getByRole('navigation', { name: 'Main navigation' })
   await expect(navigation.getByRole('link', { name: 'Fungarium.INFO main website', exact: true })).toHaveAttribute('href', 'https://fungarium.info/')
   await expect(navigation.getByRole('link', { name: 'Instagram — @fungarium.info', exact: true })).toHaveAttribute('href', 'https://www.instagram.com/fungarium.info/')
-  await expect(navigation.getByRole('link', { name: 'Home', exact: true })).toHaveAttribute('href', '../')
+  await expect(navigation.getByRole('link', { name: 'Home', exact: true })).toHaveAttribute('href', '/')
   const footer = page.getByRole('navigation', { name: 'Other projects' })
   await expect(page.getByRole('heading', { name: 'My other projects', exact: true })).toBeVisible()
   await expect(footer.getByRole('link')).toHaveCount(7)

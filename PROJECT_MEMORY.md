@@ -9,6 +9,10 @@ behavior or workflows change. Keep these updates with their implementation in
 the same commit. Persistent agent guidance is in `AGENTS.md`; commit messages
 follow `CONTRIBUTING.md`.
 
+For the current TODO workflow, implement **one chapter at a time**, stop, and
+report for user review. Wait for an explicit green flag before committing or
+starting the next chapter. Apply requested amendments to the active chapter first.
+
 ## Durable project context
 
 - **Product:** Fungarium.INFO Encyclopedia, a Vue 3 + Vite static photographic
@@ -50,9 +54,26 @@ follow `CONTRIBUTING.md`.
   downloaded post photos, thumbnails, and downloader session/checkpoint files
   follow `.gitignore`.
   Generated catalog JSON, selected branding, and TopNine assets are tracked.
-- **Deployment:** hash routing supports static hosting; production hosting at
-  `/encyclopedia/` requires `npm run build:encyclopedia`. Root browser checks use
-  a root build. Browser checks use installed Chrome.
+- **Deployment:** new visits use clean URLs, with static species HTML generated
+  at `fungi/<id>/index.html`; legacy `/#/...` bookmarks remain browser-compatible.
+  Production hosting at `/encyclopedia/` requires `npm run build:encyclopedia` and
+  uploading the complete `fungi/` tree. Root browser checks use a root build;
+  browser checks use installed Chrome. Home resolves the deployment's parent
+  even from nested profile paths.
+- **SEO:** `src/lib/seo.mjs` shares metadata between the client and
+  `scripts/seo-pages.mjs`. Default canonical origin is `https://fungarium.info`,
+  overridable with `SITE_ORIGIN`; the deployment base supplies the path. Builds
+  generate per-species HTML, sitemap, and robots template. Merge the Sitemap
+  directive into the origin-root robots file when deploying under a subdirectory.
+  Filtered collection/error pages are noindex; canonical URLs omit query/hash
+  variants. Source-only structured data and factual description fallbacks avoid
+  invented scientific facts, dates, accounts, or image licences.
+- **Hashtags:** preserve original captions, extract combining marks and
+  punctuation/emoji-boundary tags, normalize NFC, and deduplicate/match without
+  regard to case while retaining the first source spelling. Meaningful accents
+  remain distinct. `npm run audit:metadata` reports coverage and genuine source
+  omissions from generated content; never synthesize missing tags or backfill
+  scientific profiles from older captions.
 - **Observation maps:** `ObservationMap.vue` renders one lazy JavaScript Google
   Map per species above its encounter list, collecting pins from all usable
   observation coordinates, including historical and collapsed encounters. Fit
@@ -69,19 +90,24 @@ follow `CONTRIBUTING.md`.
 
 ## Open follow-ups and TODOs
 
-Requested on 2026-10-23. These items are pending; existing application/browser
-checks do not constitute completed WCAG or Lighthouse audits. Keep this list and
-the README's **Follow-ups and TODOs** section in sync as work progresses.
+Requested on 2026-10-23. Chapter 1 is implemented and approved by the user;
+verified source-content curation remains open. Chapters 2 and 3 are pending.
+Existing application/browser checks do not constitute completed WCAG or
+Lighthouse audits. Keep this list and the README's **Follow-ups and TODOs** section
+in sync as work progresses.
 
 1. **Page metadata and miscellaneous missing data**
-   - [ ] Audit gallery/species page metadata and other missing supporting data;
-     add or correct omissions using the existing caption/source rules.
-   - [ ] **1a — Hashtags:** verify completeness, consistency, presentation, and
-     filtering; address missing data without inventing source content.
-   - [ ] **1b — HTML/SEO:** review titles, meta descriptions, canonical URLs,
-     robots/indexing directives, Open Graph/social-sharing tags/images,
-     structured data, and sitemap coverage. Evaluate hash-route crawlability
-     and how per-species metadata is delivered.
+   - [x] Audit gallery/species metadata; add factual fallbacks and record genuine
+     source omissions in `docs/reviews/chapter-1-metadata.md`.
+   - [x] **1a — Hashtags:** verify source coverage, repair Unicode extraction and
+     case-equivalent filtering/deduplication, and expose the complete tag list.
+   - [x] **1b — HTML/SEO:** implement complete managed page metadata, canonical and
+     robots directives, social previews, source-based structured data, static
+     species HTML, clean URLs, and sitemap with legacy bookmark compatibility.
+   - [ ] **Source-content curation:** add verified missing overviews/descriptions,
+     direct GBIF references, publications, and optional encounter data to original
+     captions when available. Use `npm run audit:metadata` to locate records;
+     never invent content or copy older scientific profiles to fill omissions.
 2. **WCAG verification of design and code**
    - [ ] Use WCAG 2.2 AA as the review target, with automated checks plus manual
      keyboard and screen-reader testing.
@@ -98,6 +124,52 @@ the README's **Follow-ups and TODOs** section in sync as work progresses.
    - [ ] Prioritize findings, implement improvements, and rerun affected audits.
 
 ## Recent changesets
+
+### 2026-10-24 — Chapter 1 implemented and approved
+
+- Adopted the user's chapter-by-chapter workflow: stop and report after the
+  active chapter, with explicit approval required for a commit or the next chapter.
+  Updated AGENTS, README, and this memory accordingly.
+- Added shared metadata generation/client updates for titles, descriptions,
+  canonical links, robots, Open Graph/Twitter cards, source keywords, and
+  Schema.org website/collection/profile/taxon/image/breadcrumb data. Tracking
+  parameters do not deindex valid pages; filtered collections/errors are noindex.
+- Added Vite generation of 327 species HTML pages and a readable gallery before
+  JavaScript, plus a 328-URL sitemap and robots template. New visits use clean
+  routes; old hash bookmarks remain supported, including a mode switch when
+  opened from a running clean gallery. Fixed Home and named previous/next links
+  for nested routes, and changed the manifest launch URL to the clean collection.
+- Added `SITE_ORIGIN` for canonical hosting configuration and documented directory
+  index deployment, complete output upload, and origin-root robots merging for
+  `/encyclopedia/`. Extended the compact index with latest GBIF URLs so server
+  and client metadata agree.
+- Added source-faithful hashtag helpers: combining marks now recover the full
+  `lillatümak` tag in Leptoporus mollis, and case-only polypore duplicates merge
+  in Phaeolus schweinitzii. Comparisons accept case variants and preserve accents.
+  Added tag counts, show-all/show-fewer behavior, and an empty state. Compared
+  generated records with HEAD: all 327 scientific profiles and 388 original
+  caption strings/other observation fields remain unchanged; only tag metadata
+  changed in the full corpus.
+- Added `npm run audit:metadata` and the Chapter 1 review report. All 388
+  observations have source hashtags (1,955 normalized unique tags). Recorded
+  gaps include 6 latest overviews, 3 scientific descriptions, 10 direct GBIF
+  references, 2 publications, 19 coordinates, and 3 weather entries. Missing
+  overview metadata uses a factual fallback; source facts await verified curation.
+- **Verification:** `npm test` passed (78 tests); root build and
+  `npm run test:ui` passed (44 tests); `/encyclopedia/` build and
+  `npx playwright test --config=playwright.subpath.config.js` passed (10 tests).
+  Raw HTML metadata was fetched for every published species; no-JavaScript
+  reading, clean/legacy navigation, head resets/errors, hashtags, and deployment
+  URLs were checked. The development-server smoke check verified static and
+  interactive Boletus edulis content. Metadata audit and `git diff --check` passed.
+  Commit review moved the hashtag import to the module header for consistency;
+  the 13 content/hashtag tests passed again after this non-behavioral cleanup.
+- **Build state:** `dist/` is configured for `/encyclopedia/`, with generated
+  species pages, sitemap, and robots template.
+- **Review gate:** the user approved Chapter 1 and requested its Conventional
+  Commit. Chapters 2 (WCAG) and 3 (Lighthouse) await further instruction.
+- **Unresolved follow-ups:** verified source curation above and origin-root
+  robots merging at release time, plus the two remaining audit chapters.
 
 ### 2026-10-23 — Record metadata, WCAG, and Lighthouse follow-ups
 

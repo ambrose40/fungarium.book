@@ -4,10 +4,12 @@ import { useRoute } from 'vue-router'
 import { ArrowUpRight, House, Instagram, Menu, X } from 'lucide-vue-next'
 import { BRAND_MARK, SITE_NAME } from './branding'
 import { MAIN_SITE_URL, OTHER_PROJECTS } from './site-links'
+import { parentSitePath } from './lib/seo.mjs'
 
 const route = useRoute()
 const about = ref(null)
 const menuOpen = ref(false)
+const homePath = parentSitePath(import.meta.env.BASE_URL)
 function skipToContent() { document.getElementById('main')?.focus() }
 watch(() => route.fullPath, () => { menuOpen.value = false })
 </script>
@@ -22,7 +24,7 @@ watch(() => route.fullPath, () => { menuOpen.value = false })
       </RouterLink>
       <button class="icon-button mobile-menu" :aria-expanded="menuOpen" aria-label="Toggle navigation" @click="menuOpen = !menuOpen"><X v-if="menuOpen" :size="22" /><Menu v-else :size="22" /></button>
       <nav :class="{ 'is-open': menuOpen }" aria-label="Main navigation">
-        <a href="../" class="home-link" @click="menuOpen = false"><House :size="14" /> Home</a>
+        <a :href="homePath" class="home-link" @click="menuOpen = false"><House :size="14" /> Home</a>
         <RouterLink to="/" :class="{ active: route.name === 'gallery' }" @click="menuOpen = false">The collection</RouterLink>
         <button class="nav-button" @click="about.showModal(); menuOpen = false">About the journal</button>
         <a class="main-domain-link" :href="MAIN_SITE_URL" target="_blank" rel="noopener noreferrer" aria-label="Fungarium.INFO main website" @click="menuOpen = false">Fungarium.INFO <ArrowUpRight :size="14" /></a>
