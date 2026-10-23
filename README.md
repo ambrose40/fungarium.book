@@ -1,6 +1,6 @@
 # Fungarium.INFO Encyclopedia
 
-A Vue 3 + Vite photographic encyclopedia built from the original `*.txt` Instagram captions in this folder. The collection is **one card and page per scientific taxon**, with an expandable journal of its individual encounters.
+A Vue 3 + Vite photographic encyclopedia built from the original `*.txt` Instagram captions in `instagram-meta/`. The collection is **one card and page per scientific taxon**, with an expandable journal of its individual encounters.
 
 ## Features
 
@@ -68,8 +68,21 @@ This is a browser API key and is included in the compiled client JavaScript. Con
 
 - **Node.js 22.12 or newer**; Node.js 24 is recommended, with npm installed.
 - **Google Chrome** for the authenticated photo downloader and Playwright browser checks. Building and browsing the website do not require Chrome on the build machine.
-- The original caption files, `TopNine/` collage, and `fungi-support/` assets in the project root.
+- The original caption files in `instagram-meta/`, plus the `TopNine/` collages and `fungi-support/` assets in the project root.
 - A configured Maps JavaScript API browser key for inline observation maps; coordinate links work without one.
+
+### Local Instagram metadata
+
+Keep the local caption archive, text lists/notes, and shell helpers in **`instagram-meta/`**. Restore that folder from your local archive in a fresh checkout; its contents are Git-ignored. The content builder, caption audit, and downloader queue read dated caption filenames directly from this folder, independently of the caller's working directory. Shared source paths are defined in `scripts/project-paths.mjs`.
+
+Run the local Bash helpers from the project root with:
+
+```sh
+bash instagram-meta/count-ids.sh
+bash instagram-meta/count-ids-v2.sh
+```
+
+Each helper resolves captions beside its own script. Other text files and shell helpers in the folder are not imported as scientific records. Caption `sourceFile` values remain basenames; resolve them relative to `instagram-meta/`.
 
 ### Start development
 
@@ -103,7 +116,7 @@ Hash-based routes work on ordinary static hosting without server rewrite rules. 
 
 ## Content generation and source rules
 
-- Source files match `<name>_<YYYY-MM-DD>_<Instagram-shortcode>.txt`. Shortcodes may contain `_` and `-`; the parser takes **everything after the date separator**, including those characters.
+- Source captions live in `instagram-meta/` and match `<name>_<YYYY-MM-DD>_<Instagram-shortcode>.txt`. Shortcodes may contain `_` and `-`; the parser takes **everything after the date separator**, including those characters.
 - A `🆔 ` identification line supplies the scientific name. A normalized scientific name supplies the stable species ID and route, for example `boletus-edulis`. Taxonomic author names are excluded from the grouping key. Varieties, forms, and subspecies retain their ranks and epithets in the key. An unresolved genus-level record remains a separate taxon.
 - Names are not automatically merged using presumed synonyms. In particular, `Ramaria eumorpha` and `Phaeoclavulina eumorpha` are separate named taxa until an explicit synonym mapping is agreed. No outside taxonomy is invented.
 - All encounters for the same species ID appear on its page, newest first.
@@ -261,7 +274,7 @@ The original square collages are displayed in full, independently of the 3:2 spe
 
 ## Download photos from the caption post IDs
 
-The resumable downloader reads Instagram post IDs from the local caption filenames, downloads **photos** from each post/carousel, and creates matching WebP thumbnails in the folders used by the Vue site. It selects the highest-resolution image returned by Instagram, preserves its original bytes/format, and makes thumbnails with a maximum width/height of 600 px, quality 80, without upscaling. Direct post lookups skip video slides and preserve carousel positions, so filenames can have gaps. In export mode, the export's `photos` entries determine the images to download.
+The resumable downloader reads Instagram post IDs from the local caption filenames in `instagram-meta/`, downloads **photos** from each post/carousel, and creates matching WebP thumbnails in the folders used by the Vue site. It selects the highest-resolution image returned by Instagram, preserves its original bytes/format, and makes thumbnails with a maximum width/height of 600 px, quality 80, without upscaling. Direct post lookups skip video slides and preserve carousel positions, so filenames can have gaps. In export mode, the export's `photos` entries determine the images to download.
 
 ### 1. Inspect the queue without making requests
 
@@ -394,7 +407,9 @@ A **complete** account export becomes authoritative about published posts and ca
 ## Project structure and script reference
 
 ```text
-*.txt                         Original species/encounter captions
+instagram-meta/               Local Instagram metadata archive (Git-ignored)
+  *.txt                       Original captions, lists, and notes
+  count-ids*.sh               Local Bash counting helpers
 AGENTS.md                     Persistent coding-agent guidance
 PROJECT_MEMORY.md             Durable decisions and changeset memory
 CONTRIBUTING.md               Changeset workflow and commit convention
@@ -424,6 +439,7 @@ dist/                         Generated static website
 | --- | --- |
 | `scripts/build-content.mjs` | CLI/content builder used by `content`, `dev`, and `build`; scans captions and photos and writes generated JSON/filter data |
 | `scripts/content-lib.mjs` | Caption parsing, taxon grouping, and export validation; shared module |
+| `scripts/project-paths.mjs` | Shared project root and `instagram-meta/` source-directory resolution |
 | `scripts/audit-content.mjs` | Standalone caption audit; reports missing descriptions, taxonomy, references, photography details, and genus-level identifications |
 | `scripts/prepare-branding.mjs` | Branding asset-copy helper called by the content builder |
 | `scripts/maps-config.mjs` | Read the Maps browser key from the environment or ignored local key file for Vite |
@@ -441,7 +457,7 @@ Relevant application modules:
 - `src/lib/google-maps.mjs`: shared lazy Maps JavaScript loader, timeout, and authentication-failure handling; `src/components/ObservationMap.vue` renders the species-level map with all observation pins.
 - `src/lib/asset-urls.mjs`: resolve generated image/logo paths against Vite's deployment base.
 
-Local/private files include `secrets/`, `content/instagram-browser/`, `content/photo-download-state.json`, and `content/photo-download.lock`. They are Git-ignored and are not copied as folders to the static site. The configured browser Maps key is compiled into JavaScript as described above. Export JSON and legacy media manifests are also excluded from Git.
+Local/private files include `instagram-meta/`, `secrets/`, `content/instagram-browser/`, `content/photo-download-state.json`, and `content/photo-download.lock`. They are Git-ignored and are not copied as folders to the static site. The configured browser Maps key is compiled into JavaScript as described above. Export JSON and legacy media manifests are also excluded from Git.
 
 ## Verification and deployment
 

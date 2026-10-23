@@ -2,6 +2,7 @@ import { readdir, readFile, mkdir, writeFile, rename, rm, access } from 'node:fs
 import path from 'node:path'
 import sharp from 'sharp'
 import { isFungiCaption } from './content-lib.mjs'
+import { instagramMetaDirectory } from './project-paths.mjs'
 
 export const POLICY = Object.freeze({
   metadataMinMs: 15_000,
@@ -88,12 +89,13 @@ export function reserveRequest(state, kind, now = Date.now(), random = Math.rand
 }
 
 export async function collectPostIds(root) {
+  const captionDirectory = instagramMetaDirectory(root)
   const jobs = new Map()
   let placeholders = 0
-  for (const filename of (await readdir(root)).sort()) {
+  for (const filename of (await readdir(captionDirectory)).sort()) {
     const match = filename.match(/^(.+)_(\d{4}-\d{2}-\d{2})_([A-Za-z0-9_-]+)\.txt$/u)
     if (!match) continue
-    if (!isFungiCaption(await readFile(path.join(root, filename), 'utf8'))) continue
+    if (!isFungiCaption(await readFile(path.join(captionDirectory, filename), 'utf8'))) continue
     if (/^x+$/i.test(match[3])) { placeholders++; continue }
     if (!/^[A-Za-z0-9_-]{5,30}$/.test(match[3])) throw new Error(`Invalid post ID in ${filename}`)
     jobs.set(match[3], { shortcode: match[3], date: match[2], filename })

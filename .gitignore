@@ -14,7 +14,6 @@ public/images/posts/**
 !public/images/posts/.gitkeep
 public/thumbs/posts/**
 !public/thumbs/posts/.gitkeep
-/*.txt
-/*.sh
+/instagram-meta/
 /fungi-support
 /secrets

@@ -26,11 +26,15 @@ follow `CONTRIBUTING.md`.
   badges are native filter links that preserve other selections; the photo and
   caption independently open the species page. Keep these links as siblings,
   never nested anchors.
-- **Scientific source:** the latest filename-dated caption supplies the entire
-  taxon's scientific profile. Older encounters retain their own metadata and
-  full original captions. Source rules and generated outputs are in the README.
-- **Local assets:** caption archives, support artwork, downloaded post photos,
-  thumbnails, and downloader session/checkpoint files follow `.gitignore`.
+- **Scientific source:** captions, text metadata, and local Bash helpers live in
+  `instagram-meta/`, resolved through `scripts/project-paths.mjs`. The latest
+  filename-dated caption supplies the entire taxon's scientific profile. Older
+  encounters retain their own metadata and full original captions. Recorded
+  `sourceFile` values remain basenames relative to `instagram-meta/`. Source
+  rules and generated outputs are in the README.
+- **Local assets:** the entire `instagram-meta/` archive, support artwork,
+  downloaded post photos, thumbnails, and downloader session/checkpoint files
+  follow `.gitignore`.
   Generated catalog JSON, selected branding, and TopNine assets are tracked.
 - **Deployment:** hash routing supports static hosting; production hosting at
   `/encyclopedia/` requires `npm run build:encyclopedia`. Root browser checks use
@@ -50,6 +54,35 @@ follow `CONTRIBUTING.md`.
   focused scope, and a body describing significant behavior and verification.
 
 ## Recent changesets
+
+### 2026-10-23 — Consolidate local Instagram metadata in instagram-meta
+
+- Moved all 401 root `.txt` files and both root `.sh` files into
+  `instagram-meta/`. Verified SHA-256 hashes for all 403 files immediately after
+  moving them and confirmed no root `.txt`/`.sh` files remained. Updated the two
+  relocated Bash helpers afterward to read captions beside their script when
+  invoked from any working directory.
+- Replaced the root text/shell exclusions with `/instagram-meta/` so the whole
+  local metadata archive remains excluded from Git.
+- Added `scripts/project-paths.mjs` and refactored content generation, the audit,
+  and the downloader queue to read captions from `instagram-meta/`. Preserve
+  project-root asset/state locations and filename-only `sourceFile` metadata.
+- Updated real-corpus tests and downloader fixtures for the new directory. The
+  queue regression includes a root-level decoy caption and non-caption files
+  inside the metadata folder to verify source selection.
+- Updated README setup/source paths, shell commands, project structure, and
+  local-input exclusions; refreshed CONTRIBUTING and AGENTS guidance.
+- **Verification:** root and `/encyclopedia/` production builds passed;
+  `npm test` passed (57 tests), `npm run test:ui` passed (29 tests), and
+  `npx playwright test --config=playwright.subpath.config.js` passed (7 tests).
+  Generated `src/data/` has no diff: 388 observations, 327 taxa, and 1,641 photos.
+  Downloader dry run found all 388 post IDs without network requests or file
+  changes. The caption audit ran successfully from `scripts/`. Both Bash helpers
+  passed syntax checks and executed from the project root or `scripts/`.
+  `git check-ignore` confirmed the moved archive is ignored; `git diff --check`
+  passed.
+- **Build state:** `dist/` is currently configured for `/encyclopedia/`.
+- **Unresolved follow-ups:** none identified.
 
 ### 2026-10-23 — One species map for all observation locations
 

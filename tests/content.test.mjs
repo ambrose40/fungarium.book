@@ -2,11 +2,11 @@ import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { readFile, readdir } from 'node:fs/promises'
 import path from 'node:path'
-import { root } from '../scripts/build-content.mjs'
+import { root, instagramMetaDirectory } from '../scripts/project-paths.mjs'
 import { parseCaption, scientificName, speciesId, groupSpecies, isFungiCaption } from '../scripts/content-lib.mjs'
 
-const read = filename => readFile(path.join(root, filename), 'utf8')
-const generated = JSON.parse(await read('src/data/posts.json'))
+const read = filename => readFile(path.join(instagramMetaDirectory(), filename), 'utf8')
+const generated = JSON.parse(await readFile(path.join(root, 'src/data/posts.json'), 'utf8'))
 const get = id => generated.species.find(item => item.id === id)
 
 test('scientific grouping ignores authorities but preserves varieties and forms', () => {
@@ -92,7 +92,7 @@ test('real multi-year species preserves all encounters and its newest profile', 
 test('every local fungal record is represented once with correct filename shortcode and date', async () => {
   const expected = []
   const allPosts = generated.species.flatMap(item => item.observations)
-  for (const filename of await readdir(root)) {
+  for (const filename of await readdir(instagramMetaDirectory())) {
     const match = filename.match(/^(.+)_(\d{4}-\d{2}-\d{2})_([\w-]+)\.txt$/u)
     if (!match || !isFungiCaption(await read(filename))) continue
     expected.push(filename)

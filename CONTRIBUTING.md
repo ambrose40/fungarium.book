@@ -52,11 +52,12 @@ Mark incompatible changes with `!` after the type/scope and explain them in a
 
 ## Local source inputs and generated content
 
-The current Git exclusions keep root-level caption `*.txt` files, root-level
-shell helpers, and `fungi-support/` local. Restore the caption files and branding
-source assets from your local archive before running content-generation commands
-in a fresh checkout. Downloaded post photographs, thumbnails, browser sessions,
-and downloader checkpoints are also local inputs; see `README.md` for their paths.
+The current Git exclusions keep the `instagram-meta/` caption/text archive and
+shell helpers, plus `fungi-support/`, local. Restore captions and helpers into
+`instagram-meta/` and branding source assets into `fungi-support/` from your local
+archive before running content-generation commands in a fresh checkout.
+Downloaded post photographs, thumbnails, browser sessions, and downloader
+checkpoints are also local inputs; see `README.md` for their paths.
 
 Generated catalog JSON and the public logo, favicon, and TopNine assets are part
 of the project snapshot. Update original captions and regenerate content with

@@ -9,6 +9,7 @@ import {
   requestReadyAt, reserveRequest, collectPostIds, savePhoto, ensureThumbnail, readImageResponse,
 } from '../scripts/instagram-photo-lib.mjs'
 import { optionsFromArgs, run } from '../scripts/fetch-instagram-photos.mjs'
+import { instagramMetaDirectory } from '../scripts/project-paths.mjs'
 
 test('shortcodes decode with BigInt precision, including hyphens and underscores', () => {
   assert.equal(shortcodeToMediaId('BA'), '64')
@@ -68,17 +69,23 @@ test('Retry-After supports both seconds and HTTP dates', () => {
   assert.equal(retryAfterMs(null), 0)
 })
 
-test('queue reads full filename suffixes, excludes plants and placeholder IDs, and deduplicates posts', async () => {
+test('queue reads instagram-meta only, preserves full filename suffixes, excludes plants and placeholders, and deduplicates posts', async () => {
   const temporary = await mkdtemp(path.join(os.tmpdir(), 'opencode', 'fungarium-queue-'))
   try {
     const fungi = '🆔 Example fungus Author\n🍄 Exampleaceae / Exampleclass'
-    await writeFile(path.join(temporary, 'example-fungus_2025-01-01_DZ6T1NzCD__.txt'), fungi)
-    await writeFile(path.join(temporary, 'same-post_2025-01-01_DZ6T1NzCD__.txt'), fungi)
-    await writeFile(path.join(temporary, 'draft_2026-01-01_xxxxxxxxxxx.txt'), fungi)
-    await writeFile(path.join(temporary, 'plant_2026-01-01_plant123.txt'), '🆔 Example plant\n🌸 Examplefamily / Exampleclass')
+    const metadata = instagramMetaDirectory(temporary)
+    await mkdir(metadata)
+    await writeFile(path.join(metadata, 'example-fungus_2025-01-01_DZ6T1NzCD__.txt'), fungi)
+    await writeFile(path.join(metadata, 'same-post_2025-01-01_DZ6T1NzCD__.txt'), fungi)
+    await writeFile(path.join(metadata, 'draft_2026-01-01_xxxxxxxxxxx.txt'), fungi)
+    await writeFile(path.join(metadata, 'plant_2026-01-01_plant123.txt'), '🆔 Example plant\n🌸 Examplefamily / Exampleclass')
+    await writeFile(path.join(metadata, 'fungi_list.txt'), fungi)
+    await writeFile(path.join(metadata, 'count-ids.sh'), '#!/bin/bash\n')
+    await writeFile(path.join(temporary, 'root-caption_2026-01-01_root123.txt'), fungi)
     const queue = await collectPostIds(temporary)
     assert.equal(queue.jobs.length, 1)
     assert.equal(queue.jobs[0].shortcode, 'DZ6T1NzCD__')
+    assert.equal(queue.jobs[0].filename, 'same-post_2025-01-01_DZ6T1NzCD__.txt')
     assert.equal(queue.placeholders, 1)
   } finally { await rm(temporary, { recursive: true, force: true }) }
 })
@@ -123,7 +130,8 @@ test('CLI defaults to a small resumable batch and rejects conflicting modes', ()
 
 async function downloadFixture() {
   const root = await mkdtemp(path.join(os.tmpdir(), 'opencode', 'fungarium-download-'))
-  await writeFile(path.join(root, 'example_2026-01-01_post123.txt'), '🆔 Example fungus Author\n🍄 Exampleaceae / Exampleclass')
+  await mkdir(instagramMetaDirectory(root))
+  await writeFile(path.join(instagramMetaDirectory(root), 'example_2026-01-01_post123.txt'), '🆔 Example fungus Author\n🍄 Exampleaceae / Exampleclass')
   return root
 }
 

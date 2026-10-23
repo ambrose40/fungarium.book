@@ -5,8 +5,9 @@ import { isFungiCaption, parseCaption, validateExport, groupSpecies } from './co
 import { prepareBranding } from './prepare-branding.mjs'
 import { summarizeCharacteristics, buildCharacteristicFilterIndex } from '../src/lib/characteristic-filters.mjs'
 import { TOP_NINE_SLIDES } from '../src/lib/top-nine.mjs'
+import { root, instagramMetaDirectory } from './project-paths.mjs'
 
-export const root = fileURLToPath(new URL('../', import.meta.url))
+export { root } from './project-paths.mjs'
 async function optionalJson(file, fallback) {
   try { return JSON.parse(await readFile(path.join(root, file), 'utf8')) }
   catch (error) { if (error.code === 'ENOENT') return fallback; throw error }
@@ -14,13 +15,14 @@ async function optionalJson(file, fallback) {
 
 export async function buildContent() {
   await prepareBranding(root)
-  const entries = await readdir(root)
+  const captionDirectory = instagramMetaDirectory()
+  const entries = await readdir(captionDirectory)
   const posts = new Map()
   let unlinkedPosts = 0
   for (const filename of entries.sort()) {
     const match = filename.match(/^(.+)_(\d{4}-\d{2}-\d{2})_([\w-]+)\.txt$/u)
     if (!match) continue
-    const caption = (await readFile(path.join(root, filename), 'utf8')).replace(/^\uFEFF/u, '').trim()
+    const caption = (await readFile(path.join(captionDirectory, filename), 'utf8')).replace(/^\uFEFF/u, '').trim()
     if (!isFungiCaption(caption)) continue
     if (/^x+$/i.test(match[3])) unlinkedPosts++
     const post = parseCaption(caption, { shortcode: match[3], date: match[2], sourceFile: filename, filenameSpecies: match[1] })

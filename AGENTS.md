@@ -25,8 +25,9 @@ commit convention and contribution workflow.
   column of species cards on phones.
 - Preserve URL-backed filter selections and genus/family exclusivity.
 - Scientific profiles come entirely from the latest dated caption for each
-  taxon. Update source captions and regenerate content rather than hand-editing
-  generated JSON.
+  taxon. Captions, text metadata, and local shell helpers live in the ignored
+  `instagram-meta/` folder. Update source captions and regenerate content rather
+  than hand-editing generated JSON.
 - Treat caption archives, original support assets, downloaded photographs,
   thumbnails, browser profiles, and downloader state according to the existing
   Git exclusions; do not stage local/private files.
