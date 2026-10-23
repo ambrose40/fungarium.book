@@ -67,7 +67,54 @@ follow `CONTRIBUTING.md`.
 - **Commits:** Conventional Commits, imperative summary around 72 characters,
   focused scope, and a body describing significant behavior and verification.
 
+## Open follow-ups and TODOs
+
+Requested on 2026-10-23. These items are pending; existing application/browser
+checks do not constitute completed WCAG or Lighthouse audits. Keep this list and
+the README's **Follow-ups and TODOs** section in sync as work progresses.
+
+1. **Page metadata and miscellaneous missing data**
+   - [ ] Audit gallery/species page metadata and other missing supporting data;
+     add or correct omissions using the existing caption/source rules.
+   - [ ] **1a — Hashtags:** verify completeness, consistency, presentation, and
+     filtering; address missing data without inventing source content.
+   - [ ] **1b — HTML/SEO:** review titles, meta descriptions, canonical URLs,
+     robots/indexing directives, Open Graph/social-sharing tags/images,
+     structured data, and sitemap coverage. Evaluate hash-route crawlability
+     and how per-species metadata is delivered.
+2. **WCAG verification of design and code**
+   - [ ] Use WCAG 2.2 AA as the review target, with automated checks plus manual
+     keyboard and screen-reader testing.
+   - [ ] Check styles, colours, text/control contrast (including photo labels),
+     fonts, readability, zoom/reflow, and mobile layouts.
+   - [ ] Check semantics, ARIA/labels, focus visibility/order, touch targets,
+     navigation, filters, dialogs/lightboxes, slideshow controls, maps, and
+     reduced motion. Record issues, fixes, and re-verification.
+3. **Lighthouse validation**
+   - [ ] Audit mobile and desktop production `/encyclopedia/` pages: gallery,
+     filtered collection, and representative species profiles.
+   - [ ] Save reports and record Performance, Accessibility, Best Practices,
+     and SEO results, including URLs, build, and audit conditions.
+   - [ ] Prioritize findings, implement improvements, and rerun affected audits.
+
 ## Recent changesets
+
+### 2026-10-23 — Record metadata, WCAG, and Lighthouse follow-ups
+
+- Added synchronized, unchecked follow-up lists to README and project memory
+  covering missing metadata, hashtags, HTML/SEO, WCAG design/style/colour/font/code
+  verification, and production Lighthouse validation.
+- Set WCAG 2.2 AA as the review target and included manual keyboard/screen-reader
+  checks alongside automated auditing. Require recorded findings and repeat
+  verification when issues are addressed.
+- Added the README contents link for the follow-up section. These entries record
+  future work; the audits have not been performed by this documentation changeset.
+- **Verification:** reviewed Markdown structure and section anchors;
+  `git diff --check` passed. Runtime tests were not rerun for documentation-only
+  edits.
+- **Requested publication target:** `new-origin/master`, at
+  `https://github.com/ambrose40/fungarium.book.git`.
+- **Unresolved follow-ups:** the three open workstreams listed above.
 
 ### 2026-10-23 — Thumbnail class links and taxonomy-class filtering
 

@@ -31,6 +31,7 @@ A Vue 3 + Vite photographic encyclopedia built from the original `*.txt` Instagr
 - [Account export and import](#account-export-and-import)
 - [Project structure and script reference](#project-structure-and-script-reference)
 - [Verification and deployment](#verification-and-deployment)
+- [Follow-ups and TODOs](#follow-ups-and-todos)
 - [Project memory and contributing](#project-memory-and-contributing)
 
 ## Design and branding
@@ -565,6 +566,23 @@ https://fungarium.info/encyclopedia/#/fungi/amanita-muscaria
 The server must serve `encyclopedia/index.html` as that directory's index and allow access to its static files. Because routes follow `#`, no Vue-specific rewrite rule is needed. Use the output of `build:encyclopedia` for this deployment so its compiled asset paths match the hosting folder.
 
 The site is static after generation: deploying new captions, images, or generated filter options requires a new build. The application does not need the Chrome profile, downloader state, or original caption files on the public web server.
+
+## Follow-ups and TODOs
+
+The following work is pending. Record findings, fixes, and verification results in `PROJECT_MEMORY.md` as these items are completed.
+
+1. **Page metadata and other missing supporting data**
+   - [ ] Audit gallery/species page metadata and miscellaneous missing data, then add or correct the identified omissions using the existing source rules.
+   - [ ] **1a — Hashtags:** review completeness, consistency, presentation, and filtering; document and address missing hashtag data without inventing source content.
+   - [ ] **1b — HTML and SEO:** review page titles, meta descriptions, canonical URLs, robots/indexing directives, Open Graph/social-sharing tags and images, structured data, and sitemap coverage. Evaluate crawlability and per-species metadata delivery for the current hash-based routes.
+2. **WCAG verification**
+   - [ ] Review the design and implementation against **WCAG 2.2 AA**, combining automated checks with manual keyboard and screen-reader testing.
+   - [ ] Verify styles and colours, text/control contrast (including labels over photos), font sizes/weights, readability, zoom/reflow, and mobile layouts.
+   - [ ] Verify semantic HTML, ARIA and labels, focus visibility/order, touch targets, navigation, filters, dialogs/lightboxes, slideshow controls, map interaction, and reduced-motion behavior. Record issues and verify fixes before closing the review.
+3. **Lighthouse validation**
+   - [ ] Run mobile and desktop Lighthouse audits against the production `/encyclopedia/` build for the gallery, a filtered collection, and representative species pages.
+   - [ ] Save reports and record Performance, Accessibility, Best Practices, and SEO results with the tested URLs, build, and audit conditions.
+   - [ ] Prioritize findings, implement improvements, and rerun the affected audits to confirm results.
 
 ## Project memory and contributing
 
