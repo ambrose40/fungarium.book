@@ -1,6 +1,7 @@
 <script setup>
 import { computed, nextTick, ref } from 'vue'
 import { ChevronDown, Plus, Search, X } from 'lucide-vue-next'
+import { focusElement } from '../lib/focus.mjs'
 
 const props = defineProps({ fields: { type: Array, required: true }, searches: { type: Object, required: true } })
 const emit = defineEmits(['change', 'clear'])
@@ -20,12 +21,13 @@ async function add() {
 function remove(id) {
   added.value = added.value.filter(value => value !== id)
   emit('change', id, '')
+  focusElement(document.getElementById('scientific-category-picker'))
 }
-function clear() { added.value = []; emit('clear') }
+function clear() { added.value = []; emit('clear'); focusElement(document.getElementById('scientific-category-picker')) }
 </script>
 
 <template>
-  <details class="scientific-text-search">
+  <details id="scientific-search-filters" class="scientific-text-search">
     <summary><Search :size="16" /><span>Search scientific descriptions</span><span v-if="activeCount" class="count">{{ activeCount }} active</span><ChevronDown :size="16" /></summary>
     <div class="scientific-text-search-body">
       <p>Search the original text in specific categories from the latest scientific profile. All entered words must match within each category; combine different categories with AND.</p>

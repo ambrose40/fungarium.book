@@ -2,6 +2,7 @@
 import { computed, ref } from 'vue'
 import { ChevronDown, X, SlidersHorizontal } from 'lucide-vue-next'
 import MycologyGlyph from './MycologyGlyph.vue'
+import { focusElement } from '../lib/focus.mjs'
 
 const props = defineProps({
   groups: { type: Array, required: true },
@@ -16,15 +17,23 @@ function toggle(group, value) {
   emit('change', group, selected.includes(value) ? selected.filter(item => item !== value) : [...selected, value])
 }
 function count(group, option) { return props.counts[group]?.[option.value] ?? option.count }
+function clearGroup(id) {
+  emit('change', id, [])
+  focusElement(document.querySelector(`[data-characteristic-filter="${id}"] > summary`))
+}
+function clearAll() {
+  emit('clear')
+  focusElement(document.querySelector('.characteristic-filter-group > summary'))
+}
 </script>
 
 <template>
   <section class="characteristic-filters" aria-labelledby="characteristic-filters-title">
     <div class="characteristic-filters-heading">
       <div><p class="eyebrow"><SlidersHorizontal :size="12" /> REFINE THE DISCOVERY</p><h3 id="characteristic-filters-title">Mycological filters <span v-if="activeCount" class="count">{{ activeCount }} selected</span></h3></div>
-      <button type="button" class="text-button characteristic-clear-all" :disabled="!activeCount" @click="emit('clear')">Clear characteristics <X :size="13" /></button>
+      <button type="button" class="text-button characteristic-clear-all" :disabled="!activeCount" @click="clearAll">Clear characteristics <X :size="13" /></button>
     </div>
-    <p class="characteristic-filter-help">Add characteristics to your genus or family filter. Match any checked value within a group; combine different groups with AND.</p>
+    <p class="characteristic-filter-help">Add characteristics to your genus, family, or class filter. Match any checked value within a group; combine different groups with AND.</p>
     <div class="characteristic-filter-grid">
       <details v-for="group in groups" :key="group.id" class="characteristic-filter-group" :data-characteristic-filter="group.id" :open="opened[group.id] || false" @toggle="opened[group.id] = $event.target.open">
         <summary><span><strong>{{ group.title }}</strong><small :class="{ 'has-selection': selections[group.id]?.length }">{{ selections[group.id]?.length ? `${selections[group.id].length} selected` : 'Any' }}</small></span><ChevronDown :size="14" /></summary>
@@ -36,7 +45,7 @@ function count(group, option) { return props.counts[group]?.[option.value] ?? op
               <span>{{ option.label }}</span><small>{{ count(group.id, option) }}</small>
             </label>
           </fieldset>
-          <button v-if="selections[group.id]?.length" type="button" class="text-button characteristic-group-clear" :aria-label="`Clear ${group.title} filter`" @click="emit('change', group.id, [])">Clear this group <X :size="12" /></button>
+          <button v-if="selections[group.id]?.length" type="button" class="text-button characteristic-group-clear" :aria-label="`Clear this group: ${group.title} filter`" @click="clearGroup(group.id)">Clear this group <X :size="12" /></button>
         </div>
       </details>
     </div>

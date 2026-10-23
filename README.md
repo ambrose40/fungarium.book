@@ -6,9 +6,10 @@ A Vue 3 + Vite photographic encyclopedia built from the original `*.txt` Instagr
 
 - Black/charcoal design and original **Fungarium.INFO Encyclopedia** branding.
 - Photo-first mobile introduction, full-width single-column species cards on phones, and optional advanced filters collapsed by default.
+- Readable dark-theme text, high-contrast photo labels, visible keyboard focus, skip links, and named keyboard-operable dialogs.
 - Home navigation to the parent site, a direct link to the main Fungarium.INFO website, and a footer linking to the author's other projects.
 - Auto-advancing TopNine photo slideshow for **2024, 2025, and 2026**, with year selection, previous/next controls, and pause/play.
-- **3:2 landscape** gallery cards, encounter thumbnails, photo-selection strips, and featured-photo frames; full-image viewing with keyboard navigation.
+- **3:2 landscape** gallery photographs, encounter thumbnails, photo-selection strips, and featured-photo frames; full-image viewing with keyboard navigation.
 - Scientific-name, multilingual, and category-based scientific-description search, plus year, initial-letter, hashtag, and sort controls.
 - Independent **Fungi** and **Slime moulds** checkboxes to show either group or both.
 - Automatically generated genus/family quick-link lists and a taxonomy-class dropdown. Genus, family, and class selections are mutually exclusive.
@@ -22,6 +23,7 @@ A Vue 3 + Vite photographic encyclopedia built from the original `*.txt` Instagr
 ## Contents
 
 - [Design and branding](#design-and-branding)
+- [Accessibility](#accessibility)
 - [Page metadata and crawlable profiles](#page-metadata-and-crawlable-profiles)
 - [Observation maps](#observation-maps)
 - [Setup and commands](#setup-and-commands)
@@ -45,6 +47,16 @@ The gallery prioritizes photography. On phones (up to 600 px wide), the TopNine 
 Species pages combine all usable observation coordinates on one inline Google Map when a Maps JavaScript API key is configured. Each encounter also retains its own coordinate link. DMS, curly-prime, prefixed-hemisphere, and annotated-decimal formats are normalized by `src/lib/coordinates.mjs`; the original caption text is retained as the visible link. Unparseable coordinates stay plain text rather than linking to an unrelated place.
 
 The header's **Home** link resolves the parent of the deployment folder, including from a deeply nested species URL (the main domain root when deployed at `/encyclopedia/`). **The collection** and the logo return to the encyclopedia itself. **Fungarium.INFO** opens the main website at `https://fungarium.info/`, separately from the Instagram profile link. The **My other projects** footer includes AzrvanAkaranA, travel-pics.vip, herbarium.info, fungarium.info, algaerium.info, lichenarium.info, and plantarium.info. Project names and destination URLs are maintained in `src/site-links.js`.
+
+## Accessibility
+
+The accessibility review targets **WCAG 2.2 AA**. Body reading text is generally 16 px, common controls and secondary text 14 px, and ancillary labels 12 px. `src/accessibility.css` loads after the theme and supplies contrast, focus, target-size, and reflow improvements. Thumbnail labels use compact 2 px spacing, 75%-opaque dark backgrounds, and black text shadows. Their text contrast is checked against a worst-case pure-white photograph without counting the shadows; taxonomy links retain at least 24 × 24 px hit areas. On phones the species caption flows below its 3:2 photograph so long names and wrapped Family/Class links cannot cover each other. The decorative desktop slideshow note sits below its caption.
+
+**Skip to content**, page navigation, and profile section links move keyboard focus to the destination below the sticky header. Query edits retain input focus; removing filters and adding photos provide explicit focus destinations and status messages. **Skip taxonomic quick links** bypasses the long genus/family lists. The mobile navigation closes with Escape; About and photo dialogs contain Tab focus and return it on closing. The photo viewer supports left/right arrows and announces its position. Reduced motion starts the slideshow paused and removes animated scrolling/transitions. Selected controls also use text decoration or borders, including in forced-colour mode.
+
+Common names and explicitly flag-marked caption lines have language annotations based on recorded source markers. Original caption text is preserved. Maps have a labelled region, loading/failure status, and individual coordinate links in the encounters as an alternative.
+
+Run **`npm run test:a11y`** for production-build axe and keyboard/reflow/contrast checks. [The Chapter 2 report](docs/reviews/chapter-2-accessibility.md) records findings, measured contrast, scope, and remaining manual checks. Human NVDA/VoiceOver testing and wider browser/device verification remain open; the current checks do not establish comprehensive WCAG conformance.
 
 ## Page metadata and crawlable profiles
 
@@ -124,6 +136,7 @@ Open the local URL printed by Vite (normally `http://127.0.0.1:5173`).
 | `npm run preview:encyclopedia` | Preview the subdirectory build at `/encyclopedia/` |
 | `npm test` | Run Node.js tests for content extraction, search, taxonomy, characteristic filters, coordinates, and downloader behavior |
 | `npm run test:ui` | Run Playwright browser checks against the existing production build using Chrome |
+| `npm run test:a11y` | Build for `/encyclopedia/` and run axe, keyboard, contrast, target-size, language, and reflow checks in Chrome |
 | `npm run test:subpath` | Build for `/encyclopedia/` and verify routing, assets, manifest, filters, and photo viewing in Chrome |
 | `npm run photos:instagram -- <options>` | Run the resumable photo downloader or offline thumbnail generator |
 | `npm run import:instagram -- "path/to/export.json"` | Import account content from a browser export with the earlier importer |
@@ -470,6 +483,7 @@ src/
   data/                       Generated gallery index and species JSON
   branding.js                 Shared site name and logo URL
   dark-theme.css              Dark theme and layout overrides
+  accessibility.css           Readability, contrast, keyboard focus, and reflow overrides
 public/
   images/posts/<post-id>/      Full photographs
   thumbs/posts/<post-id>/      WebP thumbnails
@@ -511,6 +525,8 @@ Relevant application modules:
 - `src/lib/asset-urls.mjs`: resolve generated image/logo paths against Vite's deployment base.
 - `src/lib/hashtags.mjs`: source hashtag extraction, Unicode/case normalization, deduplication, and exact-tag matching.
 - `src/lib/seo.mjs`: shared canonical URLs, descriptions, social metadata, structured data, and client head updates.
+- `src/lib/focus.mjs`: main-content focus, focus restoration, and dialog Tab containment.
+- `src/lib/languages.mjs`: source-recorded common-name and caption language annotations without changing source text.
 
 Local/private files include `instagram-meta/`, `secrets/`, `content/instagram-browser/`, `content/photo-download-state.json`, and `content/photo-download.lock`. They are Git-ignored and are not copied as folders to the static site. The configured browser Maps key is compiled into JavaScript as described above. Export JSON and legacy media manifests are also excluded from Git.
 
@@ -525,11 +541,11 @@ npm run build
 npm run test:ui
 ```
 
-The Node.js suite checks real caption extraction, latest-profile selection, generated scientific-category text/counts, combined field searches, recorded class extraction, taxonomic indexes/exclusivity, organism classification/selections, additive characteristic logic/counts, coordinate formats, Maps key configuration, hashtag fidelity/normalization, metadata generation/escaping, canonical URLs, structured data, sitemap content, and downloader/image handling. Downloader restriction and resume tests use mocked requests rather than contacting Instagram.
+The Node.js suite checks real caption extraction, latest-profile selection, generated scientific-category text/counts, combined field searches, recorded class extraction, taxonomic indexes/exclusivity, organism classification/selections, additive characteristic logic/counts, coordinate formats, Maps key configuration, hashtag fidelity/normalization, metadata generation/escaping, canonical URLs, structured data, sitemap content, source-language annotation fidelity, contrast calculations, and downloader/image handling. Downloader restriction and resume tests use mocked requests rather than contacting Instagram.
 
 Browser checks cover desktop/mobile layouts, scientific-name/category search, multiple description fields, organism checkboxes, taxonomic links, thumbnail family/class filtering with keyboard and touch, class dropdown selection, characteristic selection, clear controls, URL persistence/back/forward navigation, maps links, branding, and illustrated profiles. Playwright launches installed Chrome and starts a production preview on `http://127.0.0.1:4173`; that port must be available. Screenshots are written to `test-results/`.
 
-SEO checks fetch every published species HTML response, verify sitemap and social metadata, read a profile with JavaScript disabled, exercise clean and legacy URL navigation, verify dynamic metadata resets/error handling, and check hashtag expansion and case-equivalent filtering. These checks are separate from the pending formal WCAG and Lighthouse chapters.
+SEO checks fetch every published species HTML response, verify sitemap and social metadata, read a profile with JavaScript disabled, exercise clean and legacy URL navigation, verify dynamic metadata resets/error handling, and check hashtag expansion and case-equivalent filtering. Lighthouse validation remains a separate pending chapter.
 
 Observation-map checks cover one map per species, lazy loading, exact current/historical pins, fitting all positions, single-location zoom, independence from encounter expansion, shared script loading, cleanup on navigation, mobile sizing, and network/authentication failure fallbacks. Browser suites intercept Maps JavaScript requests with a local test double, so automated checks make no live Maps API calls. Map-specific checks are skipped if the production build has no key; a nonempty dummy `GOOGLE_MAPS_API_KEY` at build time exercises these checks without a real key. Build with the actual browser key for deployment.
 
@@ -540,6 +556,20 @@ npm run test:subpath
 ```
 
 This command creates a fresh `/encyclopedia/` build and tests it at `http://127.0.0.1:4174/encyclopedia/`. It checks direct species routes, filter URLs, logo/favicon/manifest paths, and locally available photo thumbnails and lightbox images. The photo-specific check is skipped when no post photographs have been downloaded. This leaves `dist/` configured for `/encyclopedia/`; the standard root-path browser suite uses the output of `npm run build`.
+
+### Accessibility checks
+
+```sh
+npm run test:a11y
+```
+
+This builds `/encyclopedia/` and uses installed Chrome at `http://127.0.0.1:4176/encyclopedia/`; port 4176 must be free. The dedicated configuration is `playwright.accessibility.config.js`. To reuse an existing subpath build, run `npx playwright test --config=playwright.accessibility.config.js`.
+
+The suite runs axe WCAG A/AA rules through 2.2 plus best-practice checks and explicitly enables `target-size`. It checks representative gallery/filter/empty/profile/dialog/mobile/no-application-JavaScript states, keyboard focus/return, live status structure, measured contrast, 24 px standalone targets, recorded languages, reduced motion, forced colours, 200% CSS zoom, a 320 CSS-pixel viewport, and text-spacing overrides. CSS zoom and viewport emulation are useful regression checks; real browser zoom and assistive-technology testing are still needed.
+
+Raw axe JSON, a browser accessibility-tree snapshot, contrast measurements, and the mobile long-name screenshot are written to Git-ignored `accessibility-results/`, separate from other suites' `test-results/`. Inspect axe `incomplete` findings as well as violations: zero automated violations does not mean every criterion passed. Map API requests use the shared test double; actual Google Maps controls require a separate live review. See [the Chapter 2 report](docs/reviews/chapter-2-accessibility.md) for results and the human screen-reader follow-up.
+
+This leaves `dist/` configured for `/encyclopedia/`; rebuild at the root before `npm run test:ui`.
 
 ### Static deployment
 
@@ -598,7 +628,7 @@ The site is static after generation: deploying new captions, images, or generate
 
 ## Follow-ups and TODOs
 
-Chapter 1 is implemented and approved by the user. Chapters 2 and 3 are pending. Complete one chapter at a time, report the result, and wait for the user's green flag before committing or continuing. Record findings, fixes, and verification results in `PROJECT_MEMORY.md`.
+Chapters 1 and 2 implementations are approved by the user; human assistive-technology follow-ups for Chapter 2 remain open. Chapter 3 is pending and awaits further instruction. Complete one chapter at a time, report the result, and wait for the user's green flag before committing or continuing. Record findings, fixes, and verification results in `PROJECT_MEMORY.md`.
 
 1. **Page metadata and other missing supporting data**
    - [x] Audit gallery/species page metadata and miscellaneous missing data; provide factual metadata fallbacks and document source omissions in [the Chapter 1 report](docs/reviews/chapter-1-metadata.md).
@@ -606,9 +636,11 @@ Chapter 1 is implemented and approved by the user. Chapters 2 and 3 are pending.
    - [x] **1b — HTML and SEO:** implement titles/descriptions, canonical and robots directives, social metadata/images, structured data, static species HTML, a sitemap, and clean URLs with legacy bookmark compatibility.
    - [ ] **Source-content curation:** add verified missing overviews/descriptions/references/publications and optional encounter data to original captions when available; use `npm run audit:metadata` to locate them. These omissions are not filled with invented or older scientific text.
 2. **WCAG verification**
-   - [ ] Review the design and implementation against **WCAG 2.2 AA**, combining automated checks with manual keyboard and screen-reader testing.
-   - [ ] Verify styles and colours, text/control contrast (including labels over photos), font sizes/weights, readability, zoom/reflow, and mobile layouts.
-   - [ ] Verify semantic HTML, ARIA and labels, focus visibility/order, touch targets, navigation, filters, dialogs/lightboxes, slideshow controls, map interaction, and reduced-motion behavior. Record issues and verify fixes before closing the review.
+   - [x] Audit representative production states against **WCAG 2.2 AA** with axe and keyboard-driven browser checks; record findings and fixes in [the Chapter 2 report](docs/reviews/chapter-2-accessibility.md).
+   - [x] Improve and check styles/colours, text/control/photo-label contrast, font readability, CSS zoom/reflow, text spacing, and mobile layouts.
+   - [x] Improve and check semantics, ARIA/labels, focus/return, targets, navigation, filters, dialogs/lightboxes, slideshow controls, map alternatives, and reduced motion; perform a separate live Maps smoke check.
+   - [ ] Complete human screen-reader testing (NVDA/Chrome and VoiceOver/Safari), real browser zoom/device review, and remaining incomplete/third-party checks before claiming comprehensive conformance.
+   - [x] User approved the reviewed Chapter 2 implementation and requested its commit; starting Chapter 3 awaits further instruction.
 3. **Lighthouse validation**
    - [ ] Run mobile and desktop Lighthouse audits against the production `/encyclopedia/` build for the gallery, a filtered collection, and representative species pages.
    - [ ] Save reports and record Performance, Accessibility, Best Practices, and SEO results with the tested URLs, build, and audit conditions.

@@ -74,6 +74,21 @@ starting the next chapter. Apply requested amendments to the active chapter firs
   remain distinct. `npm run audit:metadata` reports coverage and genuine source
   omissions from generated content; never synthesize missing tags or backfill
   scientific profiles from older captions.
+- **Accessibility:** WCAG 2.2 AA is the review target. Load `src/accessibility.css`
+  after the theme; keep readable text, contrast-checked photo labels, visible focus, and
+  header-aware destinations. Phone captions flow below 3:2 photos so long names
+  cannot collide with thumbnail taxonomy links. Query edits retain focus; removals,
+  load-more, routes, and dialogs have explicit focus destinations. Use recorded
+  language markers without changing caption text. `npm run test:a11y` builds the
+  subpath and uses Chrome on port 4176; raw evidence lives in ignored
+  `accessibility-results/`. Human AT review remains open; zero axe violations is
+  not a comprehensive conformance claim.
+- **Thumbnail label preference:** compact 2 px edge offsets/padding, no secondary
+  caption top margin, and 75%-opaque dark backgrounds with black text shadows.
+  Verify translucent contrast against a pure-white photo without crediting shadows.
+  Keep taxonomy links at least 24 × 24 px and their focus outline visible within
+  the tight image edge. Desktop caption padding is `32px 2px 2px`; phone captions
+  remain below the image with 2 px padding.
 - **Observation maps:** `ObservationMap.vue` renders one lazy JavaScript Google
   Map per species above its encounter list, collecting pins from all usable
   observation coordinates, including historical and collapsed encounters. Fit
@@ -91,10 +106,10 @@ starting the next chapter. Apply requested amendments to the active chapter firs
 ## Open follow-ups and TODOs
 
 Requested on 2026-10-23. Chapter 1 is implemented and approved by the user;
-verified source-content curation remains open. Chapters 2 and 3 are pending.
-Existing application/browser checks do not constitute completed WCAG or
-Lighthouse audits. Keep this list and the README's **Follow-ups and TODOs** section
-in sync as work progresses.
+verified source-content curation remains open. Chapter 2 implementation and
+browser verification are approved by the user for commit, with human assistive-technology
+checks still open. Chapter 3 remains pending. Keep this list and the README's
+**Follow-ups and TODOs** section in sync as work progresses.
 
 1. **Page metadata and miscellaneous missing data**
    - [x] Audit gallery/species metadata; add factual fallbacks and record genuine
@@ -109,13 +124,17 @@ in sync as work progresses.
      captions when available. Use `npm run audit:metadata` to locate records;
      never invent content or copy older scientific profiles to fill omissions.
 2. **WCAG verification of design and code**
-   - [ ] Use WCAG 2.2 AA as the review target, with automated checks plus manual
-     keyboard and screen-reader testing.
-   - [ ] Check styles, colours, text/control contrast (including photo labels),
-     fonts, readability, zoom/reflow, and mobile layouts.
-   - [ ] Check semantics, ARIA/labels, focus visibility/order, touch targets,
-     navigation, filters, dialogs/lightboxes, slideshow controls, maps, and
-     reduced motion. Record issues, fixes, and re-verification.
+   - [x] Audit representative production states against WCAG 2.2 AA with axe and
+     keyboard-driven browser checks; record findings/fixes in the Chapter 2 report.
+   - [x] Improve and check styles, colours, text/control/photo-label contrast,
+     fonts/readability, CSS zoom/reflow, spacing, and mobile layouts.
+   - [x] Improve and check semantics, ARIA/labels, focus/return, targets,
+     navigation, filters, dialogs/lightboxes, slideshow, map alternatives, and
+     reduced motion; perform a separate live Maps smoke check.
+   - [ ] Complete human NVDA/Chrome and VoiceOver/Safari review, actual browser
+     zoom/device checks, and contextual incomplete/third-party findings review.
+   - [x] User approved the reviewed Chapter 2 implementation and requested its commit.
+     Starting Chapter 3 still requires an explicit instruction.
 3. **Lighthouse validation**
    - [ ] Audit mobile and desktop production `/encyclopedia/` pages: gallery,
      filtered collection, and representative species profiles.
@@ -124,6 +143,72 @@ in sync as work progresses.
    - [ ] Prioritize findings, implement improvements, and rerun affected audits.
 
 ## Recent changesets
+
+### 2026-10-24 — Chapter 2 approved for commit
+
+- The user approved the reviewed accessibility changes, including the compact
+  translucent thumbnail-label amendment, and requested a Conventional Commit.
+- Reviewed status, implementation/documentation diff, new test helpers, and recent
+  commit style. Retain the recorded passing checks; this approval changes only
+  documentation. Commit includes README, review report, and project memory.
+- Human assistive-technology/actual-zoom/device follow-ups remain open. Chapter 3
+  awaits further instruction; publication was not requested.
+
+### 2026-10-24 — Chapter 2 code-review amendment: compact thumbnail labels
+
+- Applied requested 2 px taxonomy/count offsets and padding, compact caption
+  backplates, and zero secondary-caption top margin. Kept taxonomy hit areas at
+  least 24 × 24 px rather than approximately 22 px with `min-height: 0`; shifted
+  focus outlines inward at the tighter image edge. Phone captions remain below
+  the 3:2 photo with 2 px padding; desktop uses `32px 2px 2px`.
+- Replaced opaque name/taxonomy/count backgrounds with 75%-opaque dark plates and
+  black text shadows; removed the broad caption gradient to expose more photo.
+  Conservative white-photo contrast without shadows is 8.24:1 for names, 5.40:1
+  for secondary captions, and 6.72:1 for taxonomy/count labels.
+- Updated existing contrast checks for the white-photo bound and compact targets;
+  added compact axe summaries. All ten audited states still have zero violations.
+  Translucency produces image-background contrast incompletes: desktop gallery
+  151, selected filters 14, mobile gallery/navigation 79 each. Empty/profile remain
+  8/4. These are retained; shared photo-label styles have separate contrast checks.
+- **Verification:** root/subpath builds, 44 main browser tests, 11 accessibility
+  tests, 10 subpath tests, and the contrast-calculation unit test passed. Reviewed
+  desktop normal/focus and mobile long-name screenshots. Data diff and
+  `git diff --check` passed. Full Node suite was not rerun for this CSS amendment.
+- Updated README and the Chapter 2 review. Awaiting user review; no commit/push
+  or Chapter 3 work. Human screen-reader/device/actual-zoom follow-ups remain open.
+
+### 2026-10-24 — Chapter 2 accessibility implementation and browser review
+
+- Added WCAG-targeted axe production checks and an accessibility stylesheet with
+  larger reading/control text, opaque photo-label backplates, stronger input and
+  hover contrast, visible/forced-colour focus, touch targets, reduced motion,
+  wrapping layouts, and scrollable dialogs. Phone species captions flow below
+  unchanged 3:2 photos after visual review caught a long-name/taxonomy overlap;
+  the desktop slideshow note now sits below the caption instead of over controls.
+- Fixed visible-label/accessibility-name mismatches, carousel/map semantics,
+  collection lists, dialog naming, disclosure/pressed states, and result/live
+  status structure. Added skip/route/section focus, header-aware scroll margins,
+  filter-removal and load-more destinations, modal Tab containment/return, and
+  mobile navigation dismissal. Static profiles retain skip links and landmarks.
+- Added recorded language annotations to common names/caption lines without
+  changing original text. Scientific records and generated `src/data` are unchanged.
+- Added `npm run test:a11y`, axe development dependency, dedicated port 4176
+  configuration, contrast/language unit checks, and 11 accessibility browser tests.
+  Raw reports/snapshots/measurements/screenshots use ignored `accessibility-results/`.
+  Updated README and `docs/reviews/chapter-2-accessibility.md` with reproduction,
+  measured contrast, findings, and explicit limitations.
+- **Verification:** 81 Node tests, 44 main browser tests, 11 accessibility tests,
+  and 10 subpath tests passed; root and `/encyclopedia/` production builds passed.
+  Ten axe states have zero violations; three retain contrast incompletes (5, 8,
+  and 4 nodes). Sampled text contrast is at least 5.45:1; input boundary 5.40:1
+  and photo-focus indicator 10.53:1. Desktop/mobile screenshots reviewed, including
+  the 320 px long-name fix. `git diff --check` and unchanged-data diff passed.
+- **Live Maps:** actual map reached ready, retained four coordinate alternatives,
+  and allowed keyboard exit; zero axe violations, with 11 contrast and one target
+  incomplete in third-party content. Automated suites use the Maps test double.
+- **Build/review state:** `dist/` targets `/encyclopedia/`. Awaiting user review;
+  no commit/push. Human NVDA/VoiceOver, actual zoom/device, and contextual
+  incomplete/third-party review remain open. Chapter 3 Lighthouse has not started.
 
 ### 2026-10-24 — Chapter 1 implemented and approved
 

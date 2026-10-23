@@ -7,6 +7,7 @@ import { applyPageMetadata, pageMetadata } from './lib/seo.mjs'
 import './style.css'
 import './dark-theme.css'
 import './seo-fallback.css'
+import './accessibility.css'
 
 // Existing hash bookmarks retain their behavior; new visits use static, crawlable URLs.
 const legacyHash = window.location.hash.startsWith('#/')

@@ -57,7 +57,8 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <figure class="hero-photo top-nine-slideshow" role="region" aria-roledescription="carousel" aria-label="TopNine annual photo collections" @mouseenter="hovered = true" @mouseleave="hovered = false" @focusin="onFocus" @keydown.left.prevent="goTo(active - 1)" @keydown.right.prevent="goTo(active + 1)">
+  <section class="hero-photo top-nine-slideshow" role="region" aria-roledescription="carousel" aria-label="TopNine annual photo collections" @mouseenter="hovered = true" @mouseleave="hovered = false" @focusin="onFocus" @keydown.left.prevent="goTo(active - 1)" @keydown.right.prevent="goTo(active + 1)">
+    <figure>
     <div class="top-nine-viewport" :aria-live="rotating ? 'off' : 'polite'" aria-atomic="true" @pointerdown="startSwipe" @pointerup="finishSwipe" @pointercancel="swipeStart = null">
       <div class="top-nine-track" :style="{ transform: `translateX(-${active * 100}%)` }">
         <div v-for="(slide, index) in slides" :key="slide.year" class="top-nine-slide" role="group" aria-roledescription="slide" :aria-label="`${slide.year}, slide ${index + 1} of ${slides.length}`" :aria-hidden="index !== active">
@@ -77,7 +78,8 @@ onUnmounted(() => {
     </div>
     <figcaption><span>THE MANY FORMS OF FUNGI</span><span>TopNine {{ slides[active].year }} · {{ active + 1 }} / {{ slides.length }}</span></figcaption>
     <span class="photo-side-note">OBSERVE · DOCUMENT · WONDER</span>
-  </figure>
+    </figure>
+  </section>
 </template>
 
 <style scoped>

@@ -4,6 +4,7 @@ import { root } from './project-paths.mjs'
 import { SITE_NAME } from '../src/branding.js'
 import { assetUrl } from '../src/lib/asset-urls.mjs'
 import { deploymentBase, metadataElements, pageMetadata, parentSitePath, siteOrigin, speciesPath } from '../src/lib/seo.mjs'
+import { languageTag } from '../src/lib/languages.mjs'
 
 export function escapeHtml(value) {
   return String(value ?? '').replace(/[&<>"']/gu, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[character])
@@ -23,24 +24,25 @@ function photoHtml(photo, name, base) {
 
 export function renderStaticContent({ item = null, species, base = '/', error = '' }) {
   const home = deploymentBase(base)
-  const header = `<header class="seo-static-header"><a href="${escapeHtml(home)}">${SITE_NAME}</a><a href="${escapeHtml(parentSitePath(base))}">Home</a></header>`
-  const footer = `<p><a href="${escapeHtml(home)}">Back to the collection</a> · Photography and field notes by <a href="https://www.instagram.com/fungarium.info/">@fungarium.info</a></p>`
-  if (error) return `<main class="container seo-fallback">${header}<h1>Species not found</h1><p>The requested species is not in the collection.</p>${footer}</main>`
+  const header = `<a class="skip-link" href="#main">Skip to content</a><header class="container seo-static-header"><a href="${escapeHtml(home)}">${SITE_NAME}</a><a href="${escapeHtml(parentSitePath(base))}">Home</a></header>`
+  const footer = `<footer class="container seo-static-footer"><p><a href="${escapeHtml(home)}">Back to the collection</a> · Photography and field notes by <a href="https://www.instagram.com/fungarium.info/">@fungarium.info</a></p></footer>`
+  const start = `${header}<main id="main" tabindex="-1" class="container seo-fallback">`
+  if (error) return `${start}<h1>Species not found</h1><p>The requested species is not in the collection.</p></main>${footer}`
   if (!item) {
     const cards = species.map(record => {
       const photo = record.observations.find(post => post.photos.length)?.photos[0]
-      return `<article class="seo-static-card"><a href="${escapeHtml(speciesPath(record.id, base))}">${photoHtml(photo, record.latinName, base)}<h2><em>${escapeHtml(record.latinName)}</em></h2></a><p>${escapeHtml([record.family, record.taxonomicClass].filter(Boolean).join(' / '))}</p></article>`
+      return `<li class="seo-static-card"><a href="${escapeHtml(speciesPath(record.id, base))}">${photoHtml(photo, record.latinName, base)}<h2><em>${escapeHtml(record.latinName)}</em></h2></a><p>${escapeHtml([record.family, record.taxonomicClass].filter(Boolean).join(' / '))}</p></li>`
     }).join('\n')
-    return `<main class="container seo-fallback">${header}<h1>${SITE_NAME}</h1><p>Original photographs, latest-record scientific profiles, and field encounters for ${species.length} species and taxa.</p><noscript><p>Browse the profiles below. Interactive search and filters are available with JavaScript enabled.</p></noscript><section class="species-grid" aria-label="The collection">${cards}</section>${footer}</main>`
+    return `${start}<h1>${SITE_NAME}</h1><p>Original photographs, latest-record scientific profiles, and field encounters for ${species.length} species and taxa.</p><noscript><p>Browse the profiles below. Interactive search and filters are available with JavaScript enabled.</p></noscript><ul class="species-grid seo-static-list" role="list" aria-label="The collection">${cards}</ul></main>${footer}`
   }
   const photo = item.observations.find(post => post.photos.length)?.photos[0]
   const taxonomy = `<dl><dt>Scientific identification</dt><dd>${escapeHtml(item.identification)}</dd>${item.family ? `<dt>Family</dt><dd>${escapeHtml(item.family)}</dd>` : ''}${item.taxonomicClass ? `<dt>Class</dt><dd>${escapeHtml(item.taxonomicClass)}</dd>` : ''}<dt>Genus</dt><dd>${escapeHtml(item.genus)}</dd></dl>`
-  const names = item.science.commonNames.map(name => `<li>${escapeHtml(name.language)}: ${escapeHtml(name.name)}</li>`).join('')
+  const names = item.science.commonNames.map(name => `<li>${escapeHtml(name.language)}: <span${languageTag(name) ? ` lang="${languageTag(name)}"` : ''}>${escapeHtml(name.name)}</span></li>`).join('')
   const traits = item.science.traits.map(trait => `<section><h3>${escapeHtml(trait.label)}</h3><p>${escapeHtml(trait.text)}</p></section>`).join('')
   const references = [...new Set(item.science.references)].map(url => `<li><a href="${escapeHtml(url)}">${escapeHtml(url)}</a></li>`).join('')
   const observations = item.observations.map(post => `<article><h3>${escapeHtml(post.observedAt || post.date)}</h3><p>${escapeHtml(post.location || 'Location not recorded')}</p>${post.habitat ? `<p>${escapeHtml(post.habitat)}</p>` : ''}${post.coordinates ? `<p>${escapeHtml(post.coordinates)}</p>` : ''}${post.weather ? `<p>${escapeHtml(post.weather)}</p>` : ''}${post.instagramUrl ? `<a href="${escapeHtml(post.instagramUrl)}">Original Instagram post</a>` : ''}</article>`).join('')
   const hashtags = item.hashtags.map(tag => `<a href="${escapeHtml(`${home}?tag=${encodeURIComponent(tag)}`)}">#${escapeHtml(tag)}</a>`).join(' ')
-  return `<main class="container seo-fallback">${header}<h1><em>${escapeHtml(item.latinName)}</em></h1>${item.commonName ? `<p>${escapeHtml(item.commonName)}</p>` : ''}<figure class="seo-static-photo">${photoHtml(photo, item.latinName, base)}</figure>${taxonomy}<section><h2>Names across languages</h2><ul>${names}</ul></section><section><h2>The scientific profile</h2><p>From the latest record: ${escapeHtml(item.scienceSource.date)}.</p>${traits || '<p>This latest caption does not include a scientific description.</p>'}${item.science.publication ? `<p>${escapeHtml(item.science.publication)}</p>` : ''}${references ? `<ul>${references}</ul>` : ''}</section><section><h2>Field encounters</h2>${observations}</section><section><h2>Source hashtags</h2><p>${hashtags || 'No hashtags recorded.'}</p></section>${footer}</main>`
+  return `${start}<h1><em>${escapeHtml(item.latinName)}</em></h1>${item.commonName ? `<p>${escapeHtml(item.commonName)}</p>` : ''}<figure class="seo-static-photo">${photoHtml(photo, item.latinName, base)}</figure>${taxonomy}<section><h2>Names across languages</h2><ul>${names}</ul></section><section><h2>The scientific profile</h2><p>From the latest record: ${escapeHtml(item.scienceSource.date)}.</p>${traits || '<p>This latest caption does not include a scientific description.</p>'}${item.science.publication ? `<p>${escapeHtml(item.science.publication)}</p>` : ''}${references ? `<ul>${references}</ul>` : ''}</section><section><h2>Field encounters</h2>${observations}</section><section><h2>Source hashtags</h2><p>${hashtags || 'No hashtags recorded.'}</p></section></main>${footer}`
 }
 
 export function renderSeoPage(template, metadata, body) {

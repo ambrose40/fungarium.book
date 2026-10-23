@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref, watch } from 'vue'
+import { computed, nextTick, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { ArrowLeft, ArrowRight, ArrowUpRight, MapPin, CloudSun, Camera, CalendarDays, ChevronDown, BookOpen, Microscope, X, ChevronLeft, ChevronRight, Image, ExternalLink } from 'lucide-vue-next'
 import { species, formatDate, loadSpecies } from '../data'
@@ -9,16 +9,21 @@ import MediaFrame from '../components/MediaFrame.vue'
 import MycologicalCharacteristics from '../components/MycologicalCharacteristics.vue'
 import CoordinatesLink from '../components/CoordinatesLink.vue'
 import ObservationMap from '../components/ObservationMap.vue'
+import { containDialogFocus, focusMainContent, restoreFocus } from '../lib/focus.mjs'
+import { captionLanguageRuns, languageTag } from '../lib/languages.mjs'
 
 const route = useRoute()
 const fungus = ref(null)
 const loading = ref(true)
 const loadError = ref(false)
+const lightbox = ref(null)
 let requestId = 0
+let photoOpener
 watch(() => route.params.id, async id => {
   const request = ++requestId
   loading.value = true
   loadError.value = false
+  lightbox.value?.close()
   try {
     const result = await loadSpecies(id)
     if (request === requestId) fungus.value = result
@@ -32,13 +37,18 @@ const next = computed(() => species[index.value + 1])
 const featured = computed(() => fungus.value?.observations.find(post => post.photos.length))
 const activePhoto = ref(0)
 const showAllTags = ref(false)
-const lightbox = ref(null)
 const lightboxPhotos = ref([])
 const lightboxIndex = ref(0)
 watch(fungus, item => {
   activePhoto.value = 0
   showAllTags.value = false
 }, { immediate: true })
+watch(loading, async pending => {
+  const main = document.getElementById('main')
+  if (pending || document.activeElement !== main) return
+  await nextTick()
+  if (document.activeElement === main) focusMainContent()
+})
 watch([loading, loadError], ([pending, failed]) => {
   if (route.name !== 'detail') return
   if (pending || (!failed && fungus.value)) return
@@ -46,16 +56,22 @@ watch([loading, loadError], ([pending, failed]) => {
   applyPageMetadata(pageMetadata({ item, species, query: route.query, base: import.meta.env.BASE_URL, origin: import.meta.env.VITE_SITE_ORIGIN, error: failed ? 'load-error' : 'not-found' }))
 })
 const tags = computed(() => showAllTags.value ? fungus.value.hashtags : fungus.value.hashtags.slice(0, 24))
-function openLightbox(photos, photoIndex = 0) {
+async function openLightbox(photos, photoIndex = 0, opener = document.activeElement) {
   if (!photos?.length) return
+  photoOpener = opener
   lightboxPhotos.value = photos
   lightboxIndex.value = photoIndex
-  lightbox.value.showModal()
+  await nextTick()
+  if (lightbox.value && !lightbox.value.open) lightbox.value.showModal()
 }
 function movePhoto(direction) {
   lightboxIndex.value = (lightboxIndex.value + direction + lightboxPhotos.value.length) % lightboxPhotos.value.length
 }
-function scrollToSection(id) { document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' }) }
+function scrollToSection(id) {
+  const target = document.getElementById(id)
+  target?.focus({ preventScroll: true })
+  target?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' })
+}
 </script>
 
 <template>
@@ -73,12 +89,12 @@ function scrollToSection(id) { document.getElementById(id)?.scrollIntoView({ beh
     </div>
     <header class="species-heading">
       <p class="eyebrow">{{ fungus.family || 'FIELD DISCOVERY' }} <span> / </span> SPECIES PROFILE</p>
-      <div><h1><em>{{ fungus.latinName }}</em></h1><span class="encounter-pill"><BookOpen :size="14" /> {{ fungus.observations.length }} {{ fungus.observations.length === 1 ? 'encounter' : 'encounters' }}</span></div>
+      <div><h1 tabindex="-1"><em>{{ fungus.latinName }}</em></h1><span class="encounter-pill"><BookOpen :size="14" /> {{ fungus.observations.length }} {{ fungus.observations.length === 1 ? 'encounter' : 'encounters' }}</span></div>
       <p class="species-authority">{{ fungus.identification }}</p>
     </header>
     <div class="species-overview">
       <div class="featured-media">
-        <button class="featured-button" :disabled="!featured" :aria-label="`View photograph of ${fungus.latinName}`" @click="openLightbox(featured?.photos, activePhoto)">
+        <button class="featured-button" :disabled="!featured" :aria-label="`View photograph of ${fungus.latinName}`" @click="openLightbox(featured?.photos, activePhoto, $event.currentTarget)">
           <MediaFrame :photo="featured?.photos[activePhoto]" :name="fungus.latinName" :seed="fungus.id" />
           <span v-if="featured" class="view-photo"><Image :size="15" /> View photograph</span>
         </button>
@@ -102,7 +118,7 @@ function scrollToSection(id) { document.getElementById(id)?.scrollIntoView({ beh
         </dl>
         <h3 class="small-heading">NAMES ACROSS LANGUAGES</h3>
         <ul class="language-list">
-          <li v-for="name in fungus.science.commonNames" :key="`${name.flag}-${name.name}`"><span class="language-label"><span aria-hidden="true">{{ name.flag }}</span>{{ name.language }}</span><span>{{ name.name }}</span></li>
+          <li v-for="name in fungus.science.commonNames" :key="`${name.flag}-${name.name}`"><span class="language-label"><span aria-hidden="true">{{ name.flag }}</span>{{ name.language }}</span><span :lang="languageTag(name)">{{ name.name }}</span></li>
         </ul>
         <a v-if="fungus.science.gbifUrl" :href="fungus.science.gbifUrl" target="_blank" rel="noopener noreferrer" class="gbif-link">View on GBIF <ArrowUpRight :size="16" /></a>
       </aside>
@@ -112,8 +128,8 @@ function scrollToSection(id) { document.getElementById(id)?.scrollIntoView({ beh
       <a href="#encounters" @click.prevent="scrollToSection('encounters')"><BookOpen :size="16" /> Field encounters <span>{{ fungus.observations.length }}</span></a>
       <a href="#hashtags" @click.prevent="scrollToSection('hashtags')"># Hashtags</a>
     </nav>
-    <section id="scientific-profile" class="science-section">
-      <div class="section-heading"><div><p class="eyebrow">GETTING TO KNOW THE SPECIES</p><h2>The scientific profile</h2></div><span class="source-label">From the latest record · {{ fungus.scienceYear }}</span></div>
+    <section id="scientific-profile" class="science-section" tabindex="-1" aria-labelledby="scientific-profile-title">
+      <div class="section-heading"><div><p class="eyebrow">GETTING TO KNOW THE SPECIES</p><h2 id="scientific-profile-title">The scientific profile</h2></div><span class="source-label">From the latest record · {{ fungus.scienceYear }}</span></div>
       <p class="source-note">{{ formatDate(fungus.scienceSource.date) }} · Scientific information is taken only from this latest dated caption.</p>
       <MycologicalCharacteristics :science="fungus.science" :year="fungus.scienceYear" />
       <div v-if="fungus.science.traits.length" class="traits-grid">
@@ -125,8 +141,8 @@ function scrollToSection(id) { document.getElementById(id)?.scrollIntoView({ beh
         <div><h3>Nomenclature & publication</h3><p v-if="fungus.science.publication">{{ fungus.science.publication }}</p><a v-for="url in fungus.science.references" :key="url" :href="url" target="_blank" rel="noopener noreferrer">{{ url.includes('gbif.org') ? 'GBIF taxon reference' : 'Original taxonomic reference' }} <ArrowUpRight :size="14" /></a></div>
       </div>
     </section>
-    <section id="encounters" class="encounters-section">
-      <div class="section-heading"><div><p class="eyebrow">SAME SPECIES, DIFFERENT MOMENTS</p><h2>Field encounters<span class="count">{{ fungus.observations.length }}</span></h2></div><p>A record of being there.<br /><span>Newest encounter first.</span></p></div>
+    <section id="encounters" class="encounters-section" tabindex="-1" aria-labelledby="encounters-title">
+      <div class="section-heading"><div><p class="eyebrow">SAME SPECIES, DIFFERENT MOMENTS</p><h2 id="encounters-title">Field encounters<span class="count">{{ fungus.observations.length }}</span></h2></div><p>A record of being there.<br /><span>Newest encounter first.</span></p></div>
       <ObservationMap :key="fungus.id" :observations="fungus.observations" :species-name="fungus.latinName" />
       <details v-for="(post, postIndex) in fungus.observations" :key="post.id" class="encounter" :open="postIndex === 0">
         <summary>
@@ -147,7 +163,7 @@ function scrollToSection(id) { document.getElementById(id)?.scrollIntoView({ beh
             <div><h4><Camera :size="16" /> Camera & lens</h4><p>{{ post.camera || 'Camera not recorded' }}</p><p v-if="post.lens">{{ post.lens }}</p></div>
           </div>
           <div v-if="post.photos.length" class="encounter-photos">
-            <button v-for="(photo, photoIndex) in post.photos" :key="photo.src" :aria-label="`Open photograph ${photoIndex + 1} from ${formatDate(post.date)}`" @click="openLightbox(post.photos, photoIndex)"><MediaFrame :photo="photo" :name="fungus.latinName" thumbnail /></button>
+            <button v-for="(photo, photoIndex) in post.photos" :key="photo.src" :aria-label="`Open photograph ${photoIndex + 1} from ${formatDate(post.date)}`" @click="openLightbox(post.photos, photoIndex, $event.currentTarget)"><MediaFrame :photo="photo" :name="fungus.latinName" thumbnail /></button>
           </div>
           <div v-else class="observation-photo-space"><Image :size="20" :stroke-width="1.3" /><div><strong>Photographs reserved for this encounter</strong><p>{{ post.photoCountText || 'Original photographs to be added' }}</p><code>images/posts/{{ post.id }}/</code></div></div>
           <div v-if="post.photography.length" class="photography-notes"><h4>Making the photograph</h4><ul><li v-for="(line, lineIndex) in post.photography" :key="lineIndex">{{ line }}</li></ul></div>
@@ -155,12 +171,12 @@ function scrollToSection(id) { document.getElementById(id)?.scrollIntoView({ beh
             <a v-if="post.instagramUrl" :href="post.instagramUrl" class="text-link" target="_blank" rel="noopener noreferrer">Original Instagram post <ExternalLink :size="14" /></a>
             <span v-else class="muted">Instagram post ID not yet available</span><span class="source-file" :title="post.sourceFile">{{ post.sourceFile }}</span>
           </div>
-          <details class="original-caption"><summary>Read the full original caption <ChevronDown :size="15" /></summary><p>{{ post.caption }}</p></details>
+          <details class="original-caption"><summary>Read the full original caption <ChevronDown :size="15" /></summary><p><span v-for="(run, runIndex) in captionLanguageRuns(post.caption)" :key="runIndex" :lang="run.lang">{{ run.text }}</span></p></details>
         </div>
       </details>
     </section>
-    <section id="hashtags" class="hashtags-section">
-      <p class="eyebrow">FOLLOW THE THREADS</p><h2>From the field notes</h2><p class="muted">Original hashtags across this species’ encounters.</p>
+    <section id="hashtags" class="hashtags-section" tabindex="-1" aria-labelledby="hashtags-title">
+      <p class="eyebrow">FOLLOW THE THREADS</p><h2 id="hashtags-title">From the field notes</h2><p class="muted">Original hashtags across this species’ encounters.</p>
       <p class="muted">{{ fungus.hashtags.length }} recorded {{ fungus.hashtags.length === 1 ? 'hashtag' : 'hashtags' }}.</p>
       <p v-if="!fungus.hashtags.length" class="muted">No hashtags were recorded in these encounters.</p>
       <div id="species-hashtag-list" class="hashtag-list"><RouterLink v-for="tag in tags" :key="tag" :to="{ name: 'gallery', query: { tag } }">#{{ tag }}</RouterLink><button v-if="fungus.hashtags.length > 24" :aria-expanded="showAllTags" aria-controls="species-hashtag-list" @click="showAllTags = !showAllTags">{{ showAllTags ? 'Show fewer hashtags' : `+ ${fungus.hashtags.length - 24} more` }}</button></div>
@@ -175,11 +191,12 @@ function scrollToSection(id) { document.getElementById(id)?.scrollIntoView({ beh
     <p v-if="loadError">Please refresh this page to try again.</p>
     <RouterLink to="/" class="button button-dark">Back to the collection <ArrowLeft :size="16" /></RouterLink>
   </div>
-  <dialog ref="lightbox" class="lightbox" @click="event => { if (event.target === lightbox) lightbox.close() }" @keydown.left.prevent="movePhoto(-1)" @keydown.right.prevent="movePhoto(1)">
+  <dialog ref="lightbox" class="lightbox" aria-labelledby="lightbox-title" aria-describedby="lightbox-position" @keydown.tab="containDialogFocus" @close="restoreFocus(photoOpener)" @click="event => { if (event.target === lightbox) lightbox.close() }" @keydown.left.prevent="movePhoto(-1)" @keydown.right.prevent="movePhoto(1)">
+    <h2 id="lightbox-title" class="sr-only">Photographs of {{ fungus?.latinName || 'the recorded species' }}</h2>
     <button class="icon-button lightbox-close" aria-label="Close photograph" @click="lightbox.close()"><X :size="26" /></button>
     <template v-if="lightboxPhotos.length">
       <img :src="assetUrl(lightboxPhotos[lightboxIndex].src)" :alt="lightboxPhotos[lightboxIndex].alt || fungus?.latinName" />
-      <div class="lightbox-controls"><button class="icon-button" aria-label="Previous photograph" :disabled="lightboxPhotos.length < 2" @click="movePhoto(-1)"><ChevronLeft :size="24" /></button><span>{{ lightboxIndex + 1 }} / {{ lightboxPhotos.length }}</span><button class="icon-button" aria-label="Next photograph" :disabled="lightboxPhotos.length < 2" @click="movePhoto(1)"><ChevronRight :size="24" /></button></div>
+      <div class="lightbox-controls"><button class="icon-button" aria-label="Previous photograph" :disabled="lightboxPhotos.length < 2" @click="movePhoto(-1)"><ChevronLeft :size="24" /></button><span id="lightbox-position" role="status" aria-live="polite" aria-atomic="true">Photograph {{ lightboxIndex + 1 }} of {{ lightboxPhotos.length }}</span><button class="icon-button" aria-label="Next photograph" :disabled="lightboxPhotos.length < 2" @click="movePhoto(1)"><ChevronRight :size="24" /></button></div>
     </template>
   </dialog>
 </template>

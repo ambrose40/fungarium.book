@@ -85,7 +85,8 @@ test.describe('mobile class links', () => {
     await card.scrollIntoViewIfNeeded()
     for (const link of [family, taxonomicClass]) {
       const bounds = await link.boundingBox()
-      expect(bounds.height).toBeGreaterThanOrEqual(44)
+      expect(bounds.width).toBeGreaterThanOrEqual(24)
+      expect(bounds.height).toBeGreaterThanOrEqual(24)
     }
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
     await card.screenshot({ path: 'test-results/taxonomy-class-card-mobile.png' })

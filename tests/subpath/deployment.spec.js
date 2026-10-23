@@ -132,7 +132,7 @@ test('scientific description searches and organism groups persist under the depl
   await page.getByRole('button', { name: /^Filters/ }).click()
   await expect(page.getByRole('checkbox', { name: 'Show fungi', exact: true })).not.toBeChecked()
   await expect(page.getByRole('checkbox', { name: 'Show slime moulds', exact: true })).toBeChecked()
-  await page.getByRole('link', { name: /^Ceratiomyxa fruticulosa,/ }).click()
+  await page.getByRole('link', { name: /^Ceratiomyxa fruticulosa\b/ }).click()
   await expect(page).toHaveURL('http://127.0.0.1:4174/encyclopedia/#/fungi/ceratiomyxa-fruticulosa')
 })
 

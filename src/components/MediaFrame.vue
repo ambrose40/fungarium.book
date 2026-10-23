@@ -3,7 +3,7 @@ import { computed, ref, watch } from 'vue'
 import { Image } from 'lucide-vue-next'
 import { assetUrl } from '../lib/asset-urls.mjs'
 
-const props = defineProps({ photo: Object, name: { type: String, default: '' }, thumbnail: Boolean, compact: Boolean, seed: { type: String, default: '' } })
+const props = defineProps({ photo: Object, name: { type: String, default: '' }, thumbnail: Boolean, compact: Boolean, decorative: Boolean, seed: { type: String, default: '' } })
 const failed = ref(false)
 const src = computed(() => assetUrl(props.thumbnail ? props.photo?.thumb || props.photo?.src : props.photo?.src))
 watch(src, () => { failed.value = false })
@@ -12,7 +12,7 @@ const tone = computed(() => [...(props.seed || props.name)].reduce((sum, char) =
 
 <template>
   <div class="media-frame" :class="[`tone-${tone}`, { 'is-placeholder': !src || failed, compact }]">
-    <img v-if="src && !failed" :src="src" :alt="photo.alt || name" loading="lazy" decoding="async" @error="failed = true" />
+    <img v-if="src && !failed" :src="src" :alt="decorative ? '' : photo.alt || name" loading="lazy" decoding="async" @error="failed = true" />
     <template v-else>
       <svg class="mushroom-sketch" viewBox="0 0 260 220" fill="none" aria-hidden="true">
         <g stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">

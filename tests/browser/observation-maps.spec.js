@@ -57,7 +57,7 @@ test('one lazy species map fits every observation, survives encounter toggles, a
   await expect.poll(() => page.evaluate(() => window.__googleMapsTest.cleaned)).toBe(1)
 
   await page.getByRole('searchbox').fill(singleLocation.latinName)
-  await page.getByRole('link', { name: `${singleLocation.latinName}, ${singleLocation.observations.length} observations`, exact: true }).click()
+  await page.locator(`.species-card-link[href="#/fungi/${singleLocation.id}"]`).click()
   await map.scrollIntoViewIfNeeded()
   await expect(map).toHaveAttribute('data-map-state', 'ready')
   const next = await page.evaluate(() => window.__googleMapsTest.maps[1])

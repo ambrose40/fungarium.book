@@ -77,9 +77,10 @@ onBeforeUnmount(() => {
   <figure v-if="mapsConfigured && points.length" ref="container" class="observation-map" :data-map-state="state" :aria-label="`Observation locations: ${speciesName || 'this species'}`">
     <figcaption><MapPin :size="14" /><span>Observation locations<span v-if="speciesName"> · {{ speciesName }}</span></span><small>{{ points.length }} {{ points.length === 1 ? 'pin' : 'pins' }} · Google Maps</small></figcaption>
     <div class="observation-map-frame">
-      <div v-show="state !== 'error'" ref="canvas" class="observation-map-canvas" :aria-label="`Google Map of observation locations for ${speciesName || 'this species'}`" />
-      <p v-if="state !== 'ready'" class="observation-map-status" role="status">{{ state === 'error' ? 'The map is unavailable. Use the coordinate links in the field encounters below to open individual locations in Google Maps.' : state === 'loading' ? 'Loading Google Maps…' : 'Map loads when it comes into view.' }}</p>
+      <div v-show="state !== 'error'" ref="canvas" class="observation-map-canvas" role="region" :aria-label="`Google Map of observation locations for ${speciesName || 'this species'}`" aria-describedby="observation-map-help" />
+      <p :class="state === 'ready' ? 'sr-only' : 'observation-map-status'" role="status" aria-live="polite" aria-atomic="true">{{ state === 'error' ? 'The map is unavailable. Use the coordinate links in the field encounters below to open individual locations in Google Maps.' : state === 'loading' ? 'Loading Google Maps…' : state === 'ready' ? `Map loaded with ${points.length} observation locations.` : 'Map loads when it comes into view.' }}</p>
     </div>
+    <p id="observation-map-help" class="observation-map-help">Observation coordinates are also available as links in each field encounter below.</p>
   </figure>
 </template>
 

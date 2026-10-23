@@ -9,7 +9,7 @@ const url = computed(() => googleMapsUrl(props.coordinates))
 
 <template>
   <p v-if="coordinates" class="coordinates">
-    <a v-if="url" class="coordinates-link" :href="url" target="_blank" rel="noopener noreferrer" :aria-label="`Open ${location || 'encounter coordinates'} in Google Maps (new tab)`" title="Open this location in Google Maps">
+    <a v-if="url" class="coordinates-link" :href="url" target="_blank" rel="noopener noreferrer" :aria-label="`Open ${coordinates} in Google Maps${location ? ` — ${location}` : ''} (new tab)`" title="Open this location in Google Maps">
       <MapPin :size="12" /><span>{{ coordinates }}</span><ArrowUpRight :size="12" />
     </a>
     <span v-else>{{ coordinates }}</span>

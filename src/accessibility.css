@@ -1,0 +1,193 @@
+/* Shared readability, focus, contrast, and reflow rules for the application-owned UI. */
+:root {
+  font-size: 16px;
+  --control-border: #81877d;
+  --focus: #f3ac8f;
+  --header-height: 0px;
+}
+
+#app { line-height: 1.6; }
+#app :is(h1, h2, h3, h4, p, dd, li, .source-file):not(:where(.observation-map-canvas *)) { overflow-wrap: anywhere; }
+#app :is(h1, h2, h3, h4, p, figure, section, nav, div, span):not(:where(.observation-map-canvas *)) { min-width: 0; }
+#app :is([id], a, button, input, select, summary, [tabindex]):not(:where(.observation-map-canvas *)) {
+  scroll-margin-top: calc(var(--header-height) + 1rem);
+  scroll-margin-bottom: 1rem;
+}
+
+#app :is(a, button, input, select, summary, [tabindex]):not(:where(.observation-map-canvas *)):focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+#app :is(.species-card-link, .mycology-card > summary, .characteristic-filter-group > summary):focus-visible {
+  outline-offset: -3px;
+}
+#app .skip-link { top: -10rem; min-height: 44px; padding: 10px 16px; font-size: 16px; }
+#app .skip-link:focus { top: 12px; }
+
+#app button:not(:where(.observation-map-canvas button)),
+#app select:not(:where(.observation-map-canvas select)) {
+  min-width: 32px;
+  min-height: 36px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+#app input:not([type="checkbox"]):not(.observation-map-canvas input) { min-height: 36px; font-size: 16px; }
+#app input[type="checkbox"]:not(.observation-map-canvas input) { width: 24px; height: 24px; flex-shrink: 0; }
+#app a:where(:not(.brand, .footer-brand, .species-card-link, .card-family, .card-class, .observation-map-canvas a)) { font-size: 14px; }
+#app :is(.icon-button, .species-pagination a) { min-width: 44px; min-height: 44px; }
+#app :is(.button-outline, .filter-toggle, .filter-bar, .search-input, .taxonomy-find, .taxonomy-link, .scientific-search-field > div) {
+  border-color: var(--control-border);
+}
+#app select:not(:where(.observation-map-canvas select)) {
+  border: 1px solid var(--control-border);
+  border-radius: 3px;
+  padding: 6px 24px 6px 10px;
+  background-color: var(--surface);
+}
+#app .button-dark:hover { background: #a23d33; }
+
+/* Avoid tiny secondary text; brand wordmarks remain visually distinct. */
+#app :is(.eyebrow, .hero .eyebrow, .section-heading .eyebrow, .hero-stats span, .hero-photo figcaption span,
+  .hero-photo figcaption span:last-child, .count, .card-count, .footer-brand small, .brand small,
+  .taxonomy-section-title .eyebrow, .taxonomy-title .count, .taxonomy-link small,
+  .characteristic-filters-heading .eyebrow, .characteristic-filter-group summary small,
+  .characteristic-option > small, .characteristic-filter-note, .mycology-heading .eyebrow,
+  .mycology-variant-label > small, .mycology-evidence .mycology-source-title,
+  .mycology-key, .source-file, .source-label, .source-note, .media-caption,
+  .observation-map figcaption > small, .organism-filters small, .placeholder-note) {
+  font-size: 12px;
+  line-height: 1.6;
+}
+#app :is(.site-header nav, .site-footer p, .site-footer .project-links, .back-link, .species-authority,
+  .species-pagination, .section-heading > p, .filter-reset-bar > p, .taxonomy-browser-heading h3,
+  .taxonomy-browser-heading p, .taxonomy-heading-actions button, .taxonomy-heading-actions a,
+  .taxonomy-all, .taxonomy-link, .taxonomy-find input, .taxonomy-selected, .results-bar,
+  .collection-bottom, .end-note, .prototype-note, .scientific-text-search-body > p,
+  .scientific-search-tools > label, .scientific-search-field > label,
+  .characteristic-filter-help, .characteristic-filter-group strong, .characteristic-option,
+  .mycology-intro, .mycology-heading > span, .mycology-card-heading, .mycology-variant-label,
+  .is-unknown .mycology-variant-label, .mycology-evidence, .species-facts .small-heading,
+  .encounter-weather, .encounter-summary > p, .encounter-meta h4, .photography-notes h4,
+  .photography-notes li, .encounter-actions, .original-caption > summary,
+  .observation-map figcaption, .observation-map-help, .observation-map-status, .lightbox-controls) {
+  font-size: 14px;
+  line-height: 1.6;
+}
+#app .hero-explore { min-height: 44px; font-size: 14px; }
+#app :is(.hero-description, .species-intro, .taxonomy-list, .language-list li, .trait-card p,
+  .publication p, .encounter-meta p, .encounter-meta p.habitat, .about-dialog > p:not(.eyebrow)) {
+  font-size: 16px;
+  line-height: 1.75;
+}
+#app :is(.trait-card h3, .language-label, .small-heading, .organism-filters legend, .organism-filters label) {
+  font-size: 14px;
+  line-height: 1.6;
+}
+#app .brand small { letter-spacing: 2px; }
+#app .brand { min-width: 0; }
+#app .brand-wordmark { overflow-wrap: anywhere; }
+#app .section-heading { flex-wrap: wrap; align-items: center; }
+#app .species-heading > div { flex-wrap: wrap; }
+#app .mycology-heading > span { white-space: normal; }
+#app .source-file { max-width: 100%; white-space: normal; }
+#app .original-caption > p { white-space: pre-wrap; font-size: 14px; line-height: 1.8; overflow-wrap: anywhere; }
+#app .hero-stats { flex-wrap: wrap; row-gap: 16px; }
+
+/* Translucent backplates retain text contrast even over a pure-white photograph. */
+#app .species-grid { grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); }
+#app :is(.card-taxonomy, .card-count, .card-caption > span) { text-shadow: 0 1px 2px #000, 0 0 2px #000; }
+#app .card-taxonomy { top: 2px; left: 2px; flex-wrap: nowrap; max-width: calc(100% - 4px); background: rgb(17 21 15 / 75%); }
+#app .card-taxonomy.has-encounter-count { max-width: calc(100% - 48px); }
+#app .card-count { top: 2px; right: 2px; padding: 2px; background: rgb(17 21 15 / 75%); }
+#app .species-card .card-taxonomy :is(.card-family, .card-class) { min-width: 24px; min-height: 24px; padding: 2px; font-size: 12px; line-height: 1.5; }
+#app .card-caption { padding: 32px 2px 2px; background: none; }
+#app .card-caption > span { max-width: calc(100% - 28px); padding: 2px; border-radius: 3px; background: rgb(11 13 10 / 75%); }
+#app .card-caption em { font-size: 21px; line-height: 1.25; }
+#app .card-caption small { margin-top: 0; font-size: 13px; line-height: 1.5; }
+#app .card-caption > svg { border-radius: 50%; padding: 3px; width: 24px; height: 24px; background: #0b0d0a; }
+#app .view-photo { background: #111; font-size: 14px; }
+#app .species-card-link { position: relative; }
+#app .species-card-link:focus-visible::after {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  z-index: 2;
+  pointer-events: none;
+  border: 3px solid var(--focus);
+  box-shadow: 0 0 0 3px #090909, inset 0 0 0 3px #090909;
+}
+#app .card-taxonomy a:focus-visible { outline-offset: -2px; box-shadow: 0 0 0 2px #090909; }
+
+#app .top-nine-slideshow::before { display: none; }
+#app .top-nine-controls { flex-wrap: wrap; row-gap: 8px; }
+#app .top-nine-years button { min-width: 44px; min-height: 36px; font-size: 12px; }
+#app .top-nine-control { width: 36px; height: 36px; }
+#app .top-nine-years button.selected { font-weight: 700; text-decoration: underline; text-underline-offset: 4px; }
+#app .hero-photo figcaption { flex-wrap: wrap; background: var(--background); }
+#app .photo-side-note { position: static; display: block; writing-mode: horizontal-tb; margin: 8px 4px 0; padding: 0; background: var(--background); font-size: 12px; letter-spacing: 1.5px; text-align: right; }
+
+/* Keep keyboard access manageable in long filter lists. */
+#app .taxonomy-links { padding: 6px; scroll-padding: 6px; }
+#app .taxonomy-link { min-height: 44px; }
+#app .taxonomy-link.is-selected { font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+#app .taxonomy-all { display: inline-flex; align-items: center; min-height: 32px; white-space: normal; }
+#app :is(.publication a, .gbif-link, .detail-sections a, .hashtag-list a, .site-footer .project-links a) { display: inline-flex; align-items: center; min-height: 32px; }
+#app :is(p a, .publication a, .gbif-link, .coordinates-link) { text-decoration: underline; text-underline-offset: 3px; }
+#app .detail-sections { flex-wrap: wrap; gap: 8px 16px; }
+#app .characteristic-option { min-height: 44px; }
+#app .characteristic-option.is-selected { font-weight: 600; }
+#app .alphabet { flex-wrap: wrap; overflow: visible; }
+#app .alphabet button { min-width: 32px; min-height: 36px; height: auto; }
+#app .alphabet button.selected { text-decoration: underline; text-underline-offset: 3px; font-weight: 700; }
+#app .results-bar { gap: 16px; flex-wrap: wrap; align-items: flex-start; }
+#app .results-summary { flex: 1; }
+#app .active-filters { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
+#app .tag-filter { margin: 4px 0; padding: 4px 6px; font-size: 13px; line-height: 1.5; }
+#app .tag-filter button { min-width: 24px; min-height: 24px; padding: 4px; }
+#app .clear-filters { margin-left: 0; }
+#app .photo-thumbnails { padding: 6px; scroll-padding: 6px; }
+#app .photo-thumbnails button.selected { outline: 2px solid var(--text); outline-offset: 2px; }
+#app .photo-thumbnails button:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; box-shadow: 0 0 0 6px #090909; }
+
+/* Native dialogs retain scrollable content and visible close controls at high zoom. */
+#app .about-dialog { max-height: calc(100dvh - 32px); overflow-y: auto; padding: clamp(24px, 4vw, 45px); }
+#app .lightbox { max-width: 100vw; max-height: 100dvh; }
+#app .lightbox > img { max-height: calc(100dvh - 130px); object-fit: contain; }
+#app .lightbox-controls { flex-wrap: wrap; justify-content: center; }
+#app .lightbox-close { position: fixed; top: 12px; right: 12px; z-index: 2; background: #111; }
+#app .header-inner { flex-wrap: wrap; }
+#app .site-header nav { flex-wrap: wrap; }
+#app .site-header nav a, #app .nav-button { display: inline-flex; align-items: center; min-height: 44px; }
+#app .seo-static-header { flex-wrap: wrap; padding-top: 24px; }
+#app .seo-static-footer { padding-bottom: 24px; }
+#app .seo-static-list { padding: 0; list-style: none; }
+
+@media (max-width: 1000px) {
+  #app .site-header nav { max-height: calc(100dvh - var(--header-height)); overflow-y: auto; }
+}
+@media (max-width: 600px) {
+  #app .header-inner { flex-wrap: nowrap; gap: 12px; }
+  #app .species-grid { grid-template-columns: minmax(0, 1fr); }
+  #app .card-caption { position: static; padding: 2px; background: #0b0d0a; }
+  #app .card-taxonomy { flex-wrap: wrap; }
+  #app .species-card .card-taxonomy :is(.card-family, .card-class) { flex-shrink: 0; }
+  #app .card-caption em { font-size: 24px; }
+  #app .card-caption small { font-size: 14px; }
+  #app .photo-side-note { display: none; }
+  #app .collection-filters > .select-filters label { align-items: stretch; flex-direction: column; gap: 6px; }
+  #app .collection-filters > .select-filters select { flex: auto; width: 100%; max-width: 100%; }
+  #app select:not(.observation-map-canvas select) { font-size: 16px; }
+  #app .search-input .search-scope { font-size: 14px; }
+  #app .taxonomy-tools { flex-wrap: wrap; gap: 8px; }
+  #app .taxonomy-find { flex-basis: 100%; }
+  #app .collection-bottom, #app .footer-top, #app .filter-reset-bar { flex-wrap: wrap; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; }
+}
+@media (forced-colors: active) {
+  #app :is(a, button, input, select, summary, [tabindex]):focus-visible { outline-color: Highlight; }
+  #app :is(.button, .card-taxonomy, .card-caption > span, .card-count) { border: 1px solid CanvasText; }
+  #app .species-card-link:focus-visible::after { border-color: Highlight; outline: 3px solid Canvas; outline-offset: 0; }
+}

@@ -30,11 +30,11 @@ function link(name = '') {
     <div class="taxonomy-filter-body">
       <div class="taxonomy-tools">
         <label class="taxonomy-find"><Search :size="13" /><input v-model="find" type="text" :aria-label="`Find a ${singular}`" :placeholder="`Find ${title.toLowerCase()}…`" autocomplete="off" /><button v-if="find" type="button" :aria-label="`Clear ${singular} list search`" @click="find = ''"><X :size="12" /></button></label>
-        <RouterLink :to="link()" class="taxonomy-all" :aria-current="!selected ? 'true' : undefined" :aria-label="selected ? `Clear ${singular} filter` : `All ${title.toLowerCase()}`">{{ selected ? 'Clear filter' : `All ${title.toLowerCase()}` }}</RouterLink>
+        <RouterLink :to="link()" class="taxonomy-all" :aria-current="!selected ? 'true' : undefined" :aria-label="selected ? `Clear filter: ${singular}` : `All ${title.toLowerCase()}`">{{ selected ? 'Clear filter' : `All ${title.toLowerCase()}` }}</RouterLink>
       </div>
       <nav class="taxonomy-links" :aria-label="`${title} quick filters`" tabindex="0">
-        <RouterLink v-for="item in shown" :key="item.name" :to="link(item.name)" class="taxonomy-link" :class="{ 'is-selected': selected === item.name }" :aria-current="selected === item.name ? 'true' : undefined" :aria-label="`Show ${singular} ${item.name} (${item.count} taxa)`">
-          <span :class="{ 'genus-name': isGenus }">{{ item.name }}</span><small>{{ item.count }}</small>
+        <RouterLink v-for="item in shown" :key="item.name" :to="link(item.name)" class="taxonomy-link" :class="{ 'is-selected': selected === item.name }" :aria-current="selected === item.name ? 'true' : undefined">
+          <span class="sr-only">Show {{ singular }} </span><span :class="{ 'genus-name': isGenus }">{{ item.name }}</span> <small>{{ item.count }}<span class="sr-only"> {{ item.count === 1 ? 'taxon' : 'taxa' }}</span></small>
         </RouterLink>
         <p v-if="!shown.length" class="taxonomy-no-matches">No {{ title.toLowerCase() }} match “{{ find }}”.</p>
       </nav>

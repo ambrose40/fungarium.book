@@ -13,6 +13,7 @@ import { readCharacteristicSelections, setCharacteristicSelection, clearCharacte
 import { readScientificSearches, setScientificSearch, clearScientificSearches } from '../lib/scientific-search.mjs'
 import { ORGANISM_GROUPS, readOrganismSelections, setOrganismSelections } from '../lib/organism-groups.mjs'
 import { hashtagText } from '../lib/hashtags.mjs'
+import { focusElement } from '../lib/focus.mjs'
 
 const route = useRoute()
 const router = useRouter()
@@ -23,6 +24,7 @@ async function explore() {
   photos?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' })
 }
 const filtersOpen = ref(false)
+const loadAnnouncement = ref('')
 const canonicalQuery = computed(() => normalizeTaxonomyQuery(route.query))
 watch(() => route.query, query => {
   if (TAXONOMY_FIELDS.filter(field => Array.isArray(query[field]) ? query[field][0] : query[field]).length > 1) router.replace({ query: normalizeTaxonomyQuery(query) })
@@ -80,16 +82,28 @@ const filtered = computed(() => {
 const visible = computed(() => filtered.value.slice(0, limit.value))
 const hasFilters = computed(() => search.value || scope.value !== 'all' || genus.value || family.value || taxonomicClass.value || year.value || letter.value || tag.value || activeCharacteristics.value.length || activeScientificSearches.value.length || organismFilterActive.value)
 const filterCount = computed(() => [genus.value, family.value, taxonomicClass.value, year.value, letter.value, tag.value].filter(Boolean).length + activeCharacteristics.value.length + activeScientificSearches.value.length + Number(organismFilterActive.value))
-watch(() => route.fullPath, () => { limit.value = 36 })
-function reset() { resetVersion.value++; router.replace({ query: {} }) }
+watch(() => route.fullPath, () => { limit.value = 36; loadAnnouncement.value = '' })
+async function replaceAndFocus(query, selector = '.filter-toggle') {
+  await router.replace({ query })
+  await nextTick()
+  focusElement(document.querySelector(selector))
+}
+function reset() { resetVersion.value++; return replaceAndFocus({}, '#species-search') }
 function clearTaxonomy() {
   const query = { ...canonicalQuery.value }
   for (const field of TAXONOMY_FIELDS) delete query[field]
-  router.replace({ query })
+  return replaceAndFocus(query, '#family')
 }
-function changeCharacteristic(id, values) { router.replace({ query: setCharacteristicSelection(canonicalQuery.value, id, values) }) }
+function changeCharacteristic(id, values) { return router.replace({ query: setCharacteristicSelection(canonicalQuery.value, id, values) }) }
 function clearCharacteristics() { router.replace({ query: clearCharacteristicSelections(canonicalQuery.value) }) }
-function removeCharacteristic(id, value) { changeCharacteristic(id, characteristics.value[id].filter(item => item !== value)) }
+function removeCharacteristic(id, value) { return replaceAndFocus(setCharacteristicSelection(canonicalQuery.value, id, characteristics.value[id].filter(item => item !== value))) }
+function removeTaxonomy(field) { return replaceAndFocus(setTaxonomyFilter(canonicalQuery.value, field, '')) }
+function removeDescriptionSearch(id) { return replaceAndFocus(setScientificSearch(canonicalQuery.value, id, '')) }
+function removeHashtag() {
+  const query = { ...canonicalQuery.value }
+  delete query.tag
+  return replaceAndFocus(query)
+}
 function taxonomyLink(field, name) { return { name: 'gallery', query: setTaxonomyFilter(canonicalQuery.value, field, name) } }
 function changeScientificSearch(id, text) { router.replace({ query: setScientificSearch(canonicalQuery.value, id, text) }) }
 function clearDescriptionSearches() { router.replace({ query: clearScientificSearches(canonicalQuery.value) }) }
@@ -98,7 +112,15 @@ function changeOrganism(id, checked) {
   if (checked) selected.push(id)
   router.replace({ query: setOrganismSelections(canonicalQuery.value, selected) })
 }
-function clearOrganismFilter() { router.replace({ query: setOrganismSelections(canonicalQuery.value, ORGANISM_GROUPS.map(group => group.id)) }) }
+function clearOrganismFilter() { return replaceAndFocus(setOrganismSelections(canonicalQuery.value, ORGANISM_GROUPS.map(group => group.id))) }
+async function loadMore() {
+  const previous = visible.value.length
+  limit.value += 36
+  await nextTick()
+  loadAnnouncement.value = `Showing ${visible.value.length} of ${filtered.value.length} species and taxa.`
+  focusElement(document.querySelectorAll('.species-card-link')[previous])
+}
+function skipTaxonomyLinks() { focusElement(document.querySelector('.scientific-text-search > summary')) }
 function cover(item) { return item.observations.find(post => post.photos.length)?.photos[0] }
 </script>
 
@@ -107,7 +129,7 @@ function cover(item) { return item.observations.find(post => post.photos.length)
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero-copy">
         <p class="eyebrow"><span class="status-dot"></span> A PHOTOGRAPHIC ENCYCLOPEDIA OF FUNGI</p>
-        <h1 id="hero-title">A closer look at<br />the <em>fungal world.</em></h1>
+        <h1 id="hero-title" tabindex="-1">A closer look at<br />the <em>fungal world.</em></h1>
         <p class="hero-description">Small wonders, carefully observed. A growing collection of fungi, field notes, and macro photography — one woodland encounter at a time.</p>
         <a class="hero-explore" href="#collection-photos" @click.prevent="explore">Explore the collection <ArrowDown :size="17" /></a>
         <div class="hero-stats">
@@ -136,7 +158,7 @@ function cover(item) { return item.observations.find(post => post.photos.length)
         <div class="select-filters"><label for="family">Family <select id="family" v-model="family" aria-label="Filter by family"><option value="">All families</option><option v-for="item in families" :key="item">{{ item }}</option></select></label><label for="taxonomic-class">Taxonomy class <select id="taxonomic-class" v-model="taxonomicClass" aria-label="Filter by taxonomy class"><option value="">All classes</option><option v-for="item in classes" :key="item">{{ item }}</option></select></label><label for="year">Observation year <select id="year" v-model="year" aria-label="Filter by observation year"><option value="">All years</option><option v-for="item in years" :key="item">{{ item }}</option></select></label></div>
         <div class="filter-reset-bar"><p>Choose a genus, family, <em>or</em> class, then add characteristics to refine your results.</p><button class="button button-outline filter-reset-button" type="button" :disabled="!hasFilters" @click="reset">Clear all filters <X :size="14" /></button></div>
         <section class="taxonomy-browser" aria-labelledby="taxonomy-heading">
-          <div class="taxonomy-browser-heading"><h3 id="taxonomy-heading">Quick taxonomic filters</h3><div class="taxonomy-heading-actions"><p>Genus, family, and class selections replace one another</p><button type="button" class="text-button" :disabled="!genus && !family && !taxonomicClass" @click="clearTaxonomy">Clear taxonomy <X :size="12" /></button></div></div>
+          <div class="taxonomy-browser-heading"><h3 id="taxonomy-heading">Quick taxonomic filters</h3><div class="taxonomy-heading-actions"><p>Genus, family, and class selections replace one another</p><a class="text-link" href="#scientific-search-filters" @click.prevent="skipTaxonomyLinks">Skip taxonomic quick links</a><button type="button" class="text-button" :disabled="!genus && !family && !taxonomicClass" @click="clearTaxonomy">Clear taxonomy <X :size="12" /></button></div></div>
           <div class="taxonomy-browser-sections">
             <TaxonomyFilter :key="`genus-${resetVersion}`" field="genus" :entries="taxonomy.genera" :selected="genus" />
             <TaxonomyFilter :key="`family-${resetVersion}`" field="family" :entries="taxonomy.families" :selected="family" />
@@ -144,31 +166,33 @@ function cover(item) { return item.observations.find(post => post.photos.length)
         </section>
         <ScientificSearchFilters :key="`scientific-search-${resetVersion}`" :fields="scientificSearchFields" :searches="scientificSearches" @change="changeScientificSearch" @clear="clearDescriptionSearches" />
         <CharacteristicFilters :key="`characteristics-${resetVersion}`" :groups="characteristicFilters" :selections="characteristics" :counts="characteristicCounts" @change="changeCharacteristic" @clear="clearCharacteristics" />
-        <div class="alphabet" aria-label="Filter species by initial letter"><button :class="{ selected: !letter }" @click="letter = ''">All</button><button v-for="initial in letters" :key="initial" :class="{ selected: letter === initial }" :aria-pressed="letter === initial" @click="letter = initial">{{ initial }}</button></div>
+        <div class="alphabet" role="group" aria-label="Filter species by initial letter"><button :class="{ selected: !letter }" :aria-pressed="!letter" @click="letter = ''">All</button><button v-for="initial in letters" :key="initial" :class="{ selected: letter === initial }" :aria-pressed="letter === initial" @click="letter = initial">{{ initial }}</button></div>
         <div class="filter-panel-footer"><button class="button button-dark" type="button" @click="filtersOpen = false; explore()">Show {{ filtered.length }} {{ filtered.length === 1 ? 'species' : 'species & taxa' }} <ArrowDown :size="16" /></button></div>
       </div>
       <div class="results-bar">
-        <p aria-live="polite">
-          {{ filtered.length }} {{ filtered.length === 1 ? 'species' : 'species & taxa' }}
+        <div class="results-summary">
+          <p id="catalog-result-count" class="results-count" role="status" aria-live="polite" aria-atomic="true">{{ filtered.length }} {{ filtered.length === 1 ? 'species' : 'species & taxa' }}</p>
+          <div class="active-filters" role="group" aria-label="Active filters">
           <span v-if="organismFilterActive" class="tag-filter organism-active-chip">{{ organismFilterLabel }}<button aria-label="Remove organism group filter" @click="clearOrganismFilter"><X :size="12" /></button></span>
-          <span v-for="field in activeScientificSearches" :key="field.id" class="tag-filter scientific-search-chip"><span>{{ field.label }}: {{ scientificSearches[field.id] }}</span><button :aria-label="`Remove ${field.label} description search`" @click="changeScientificSearch(field.id, '')"><X :size="12" /></button></span>
-          <span v-if="genus" class="tag-filter taxonomy-active-chip">Genus: <em>{{ genus }}</em><button aria-label="Remove genus filter" @click="genus = ''"><X :size="12" /></button></span>
-          <span v-if="family" class="tag-filter taxonomy-active-chip">Family: {{ family }}<button aria-label="Remove family filter" @click="family = ''"><X :size="12" /></button></span>
-          <span v-if="taxonomicClass" class="tag-filter taxonomy-active-chip">Class: {{ taxonomicClass }}<button aria-label="Remove class filter" @click="taxonomicClass = ''"><X :size="12" /></button></span>
+          <span v-for="field in activeScientificSearches" :key="field.id" class="tag-filter scientific-search-chip"><span>{{ field.label }}: {{ scientificSearches[field.id] }}</span><button :aria-label="`Remove ${field.label} description search`" @click="removeDescriptionSearch(field.id)"><X :size="12" /></button></span>
+          <span v-if="genus" class="tag-filter taxonomy-active-chip">Genus: <em>{{ genus }}</em><button aria-label="Remove genus filter" @click="removeTaxonomy('genus')"><X :size="12" /></button></span>
+          <span v-if="family" class="tag-filter taxonomy-active-chip">Family: {{ family }}<button aria-label="Remove family filter" @click="removeTaxonomy('family')"><X :size="12" /></button></span>
+          <span v-if="taxonomicClass" class="tag-filter taxonomy-active-chip">Class: {{ taxonomicClass }}<button aria-label="Remove class filter" @click="removeTaxonomy('class')"><X :size="12" /></button></span>
           <span v-for="item in activeCharacteristics" :key="`${item.group}:${item.value}`" class="tag-filter characteristic-active-chip"><span>{{ item.title }}: {{ item.label }}</span><button :aria-label="`Remove ${item.title} ${item.label} filter`" @click="removeCharacteristic(item.group, item.value)"><X :size="12" /></button></span>
-          <span v-if="tag" class="tag-filter">#{{ hashtagText(tag) }} <button aria-label="Remove hashtag filter" @click="tag = ''"><X :size="12" /></button></span>
+          <span v-if="tag" class="tag-filter">#{{ hashtagText(tag) }} <button aria-label="Remove hashtag filter" @click="removeHashtag"><X :size="12" /></button></span>
           <button v-if="hasFilters" class="text-button clear-filters" @click="reset">Clear filters <X :size="12" /></button>
-        </p>
+          </div>
+        </div>
         <label>Sort by <select v-model="sort" aria-label="Sort species"><option value="name">Latin name, A–Z</option><option value="newest">Latest encounter</option><option value="observations">Most encounters</option></select></label>
       </div>
-      <div id="collection-photos" class="collection-photos" tabindex="-1" role="region" aria-label="Collection photos">
-        <div v-if="visible.length" class="species-grid">
-          <div v-for="item in visible" :key="item.id" class="species-card">
-            <RouterLink :to="{ name: 'detail', params: { id: item.id } }" class="species-card-link" :aria-label="`${item.latinName}, ${item.observations.length} observations`">
-              <MediaFrame :photo="cover(item)" :name="item.latinName" :seed="item.id" thumbnail>
-                <span v-if="item.observations.length > 1" class="card-count"><BookOpen :size="12" />{{ item.observations.length }}</span>
-                <div class="card-caption"><span><em>{{ item.latinName }}</em><small>{{ item.commonName || item.family || 'A closer look' }}</small></span><ArrowRight :size="17" /></div>
-              </MediaFrame>
+      <div id="collection-photos" class="collection-photos" tabindex="-1" role="region" aria-label="Collection photos" aria-describedby="catalog-result-count">
+        <div v-if="visible.length" class="species-grid" role="list">
+          <div v-for="item in visible" :key="item.id" class="species-card" role="listitem">
+            <RouterLink :to="{ name: 'detail', params: { id: item.id } }" class="species-card-link">
+              <MediaFrame :photo="cover(item)" :name="item.latinName" :seed="item.id" thumbnail decorative />
+              <div class="card-caption"><span><em>{{ item.latinName }}</em> <small>{{ item.commonName || item.family || 'A closer look' }}</small></span><ArrowRight :size="17" /></div>
+              <span v-if="item.observations.length > 1" class="card-count"><BookOpen :size="12" aria-hidden="true" />{{ item.observations.length }}<span class="sr-only"> observations</span></span>
+              <span v-else class="sr-only"> 1 observation</span>
             </RouterLink>
             <div class="card-taxonomy" :class="{ 'has-encounter-count': item.observations.length > 1 }">
               <RouterLink v-if="item.family" :to="taxonomyLink('family', item.family)" class="card-family" :aria-label="`Show family ${item.family}`" :title="`Filter collection by family ${item.family}`" :aria-current="family === item.family ? 'true' : undefined">{{ item.family }}</RouterLink>
@@ -180,7 +204,8 @@ function cover(item) { return item.observations.find(post => post.photos.length)
         </div>
         <div v-else class="empty-state"><Search :size="30" :stroke-width="1" /><h3>No discoveries here just yet.</h3><p>Try a different name, taxonomy, or characteristic combination.</p><button class="button button-dark" @click="reset">Reset filters</button></div>
       </div>
-      <div v-if="visible.length" class="collection-bottom"><p>Showing {{ visible.length }} of {{ filtered.length }} species</p><button v-if="visible.length < filtered.length" class="button button-outline" @click="limit += 36">More discoveries <ArrowDown :size="16" /></button><span v-else class="end-note">You’ve reached the edge of the collection.</span></div>
+      <div v-if="visible.length" class="collection-bottom"><p>Showing {{ visible.length }} of {{ filtered.length }} species</p><button v-if="visible.length < filtered.length" class="button button-outline" @click="loadMore">More discoveries <ArrowDown :size="16" /></button><span v-else class="end-note">You’ve reached the edge of the collection.</span></div>
+      <p class="sr-only" role="status" aria-live="polite" aria-atomic="true">{{ loadAnnouncement }}</p>
       <aside class="prototype-note"><Camera :size="18" /><p><strong>A growing encyclopedia.</strong> Original photographs, scientific descriptions, and field encounters — connected by curiosity. Profiles are drawn from the latest recorded captions.</p></aside>
     </section>
   </div>
