@@ -8,6 +8,7 @@ test('gallery search, filters, load-more, and species navigation', async ({ page
   await expect(page.locator('.species-card')).toHaveCount(36)
   await page.getByRole('button', { name: 'More discoveries' }).click()
   await expect(page.locator('.species-card')).toHaveCount(72)
+  await page.getByLabel('Search scope').selectOption('scientific')
   await page.getByRole('searchbox').fill('boletus edulis')
   await expect(page.locator('.species-card')).toHaveCount(1)
   await page.locator('.species-card').click()

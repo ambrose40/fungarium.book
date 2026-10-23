@@ -6,6 +6,8 @@ import { prepareBranding } from './prepare-branding.mjs'
 import { summarizeCharacteristics, buildCharacteristicFilterIndex } from '../src/lib/characteristic-filters.mjs'
 import { TOP_NINE_SLIDES } from '../src/lib/top-nine.mjs'
 import { root, instagramMetaDirectory } from './project-paths.mjs'
+import { buildScientificSearchFields, summarizeScientificText } from '../src/lib/scientific-search.mjs'
+import { classifyOrganism } from '../src/lib/organism-groups.mjs'
 
 export { root } from './project-paths.mjs'
 async function optionalJson(file, fallback) {
@@ -66,8 +68,13 @@ export async function buildContent() {
     }
     if (localPhotos.length) post.photos = localPhotos
   }
-  const species = groupSpecies(result).map(item => ({ ...item, characteristics: summarizeCharacteristics(item.science) }))
+  const species = groupSpecies(result).map(item => ({
+    ...item,
+    organismGroup: classifyOrganism(item.science.taxonomy, item.observations[0].caption),
+    characteristics: summarizeCharacteristics(item.science),
+  }))
   const characteristicFilters = buildCharacteristicFilterIndex(species)
+  const scientificSearchFields = buildScientificSearchFields(species)
   const content = {
     metadata: {
       username: 'fungarium.info',
@@ -94,12 +101,13 @@ export async function buildContent() {
   const index = species.map(item => ({
     id: item.id, latinName: item.latinName, identification: item.identification,
     genus: item.genus, family: item.family, commonName: item.commonName,
+    organismGroup: item.organismGroup,
     latestDate: item.latestDate, hashtags: item.hashtags,
     characteristics: item.characteristics,
-    science: { commonNames: item.science.commonNames },
+    science: { commonNames: item.science.commonNames, searchText: summarizeScientificText(item.science) },
     observations: item.observations.map(post => ({ date: post.date, location: post.location, photos: post.photos })),
   }))
-  await writeFile(path.join(root, 'src/data/index.json'), JSON.stringify({ metadata: content.metadata, species: index, characteristicFilters }))
+  await writeFile(path.join(root, 'src/data/index.json'), JSON.stringify({ metadata: content.metadata, species: index, characteristicFilters, scientificSearchFields }))
   console.info(`Content: ${content.metadata.postCount} fungi observations, ${content.metadata.speciesCount} species, ${content.metadata.photoCount} photos; ${unlinkedPosts} observations without Instagram IDs.`)
   return content
 }

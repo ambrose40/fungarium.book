@@ -2,6 +2,7 @@ import content from './data/index.json'
 export const species = content.species
 export const metadata = content.metadata
 export const characteristicFilters = content.characteristicFilters || []
+export const scientificSearchFields = content.scientificSearchFields || []
 const pages = import.meta.glob('./data/species/*.json')
 export async function loadSpecies(id) {
   if (!species.some(item => item.id === id)) return null

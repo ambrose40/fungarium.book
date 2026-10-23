@@ -26,6 +26,16 @@ follow `CONTRIBUTING.md`.
   badges are native filter links that preserve other selections; the photo and
   caption independently open the species page. Keep these links as siblings,
   never nested anchors.
+- **Scientific search:** generate fields and searchable category text from each
+  taxon's latest scientific traits. `scope=trait:<id>` selects one category for
+  the main search; `sc.<id>` adds independent description fields, combined with
+  AND. All-fields search includes descriptions; Scientific name stays name-only.
+  Category options include specialist structures and normalize label casing.
+- **Organism groups:** Fungi and Slime moulds are independent checkboxes, both
+  checked by default. `organisms=fungi|slime-moulds|none` restricts the collection;
+  omission means both. Recorded slime-mould taxonomy overrides historical mushroom
+  markers. Use the latest caption, without genus hardcoding or old-profile
+  backfilling. Unclassified taxa remain in the default both-groups view.
 - **Scientific source:** captions, text metadata, and local Bash helpers live in
   `instagram-meta/`, resolved through `scripts/project-paths.mjs`. The latest
   filename-dated caption supplies the entire taxon's scientific profile. Older
@@ -54,6 +64,47 @@ follow `CONTRIBUTING.md`.
   focused scope, and a body describing significant behavior and verification.
 
 ## Recent changesets
+
+### 2026-10-23 — Scientific category search and organism group filters
+
+- Added main-search scopes and optional independent text fields for categories
+  from the latest scientific profiles. The current generated list has 41 fields,
+  including all requested common categories and specialist structures such as
+  peridium, plasmodium, perithecia, and sporangia. Normalize category casing and
+  count distinct taxa with recorded text.
+- Put multi-field search under the collapsed Filters panel in its own disclosure:
+  choose a category, add a field, and combine its words and other categories with
+  AND. Added removable active chips, field/category clearing, active counts, and
+  URL-backed `sc.*` values. `scope=trait:<id>` selects a category for the main
+  search, and All fields now includes scientific description text. Scientific
+  name remains the dedicated name-only mode.
+- Added independent Fungi/Slime moulds checkboxes, both on by default, including
+  an explicit neither-selected empty state and reset controls. Source-based
+  classification finds 320 fungi and 7 slime moulds. Recorded Myxogastria and
+  Protosteliomycetes classifications correctly include older slime-mould captions
+  that use 🍄; unresolved classifications are retained in the default view.
+- Added `scientific-search.mjs`, `organism-groups.mjs`, and
+  `ScientificSearchFilters.vue`. Regenerated catalog JSON with latest category
+  text, field definitions/counts, and organism groups. Original captions and
+  scientific profile paragraphs were not edited.
+- New searches/group restrictions combine with taxonomy, characteristics, year,
+  letter, hashtags, and sort, preserving genus/family exclusivity and native
+  family-link history. Contextual characteristic counts include the new filters.
+- Added unit coverage for field boundaries, generated latest-only text, source
+  classification, query preservation/clearing, and unknown categories. Browser
+  coverage includes both search styles, specialist categories, every checkbox
+  combination, resets, reload/history, family links, and 320 px mobile layouts.
+  Reviewed the mobile search-controls screenshot and updated README behavior,
+  generated-data documentation, query examples, and test guidance.
+- **Verification:** `npm test` passed (65 tests), `npm run test:ui` passed
+  (34 tests), and `npx playwright test --config=playwright.subpath.config.js`
+  passed (8 tests). Root and `/encyclopedia/` production builds passed.
+  `git diff --check` passed. Catalog totals remain 388 observations, 327 taxa,
+  and 1,641 photos. Compared regenerated records with HEAD and confirmed all 327
+  existing scientific profiles and observation records are preserved alongside
+  the added search/group metadata.
+- **Build state:** `dist/` is currently configured for `/encyclopedia/`.
+- **Unresolved follow-ups:** none identified.
 
 ### 2026-10-23 — Consolidate local Instagram metadata in instagram-meta
 

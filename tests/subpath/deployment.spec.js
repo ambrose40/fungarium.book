@@ -107,6 +107,20 @@ test('one species map pins all observations under the encyclopedia deployment ba
   await expect(page).toHaveURL('http://127.0.0.1:4174/encyclopedia/#/fungi/boletus-edulis')
 })
 
+test('scientific description searches and organism groups persist under the deployment base', async ({ page }) => {
+  await page.goto('./#/?organisms=slime-moulds&sc.plasmodium-phase=watery&q=ceratiomyxa&scope=scientific')
+  await expect(page.locator('.species-card')).toHaveCount(1)
+  await expect(page.locator('.scientific-search-chip')).toContainText('Plasmodium phase: watery')
+  await expect(page.locator('.organism-active-chip')).toContainText('Slime moulds only')
+  await page.reload()
+  await expect(page.locator('.species-card')).toHaveCount(1)
+  await page.getByRole('button', { name: /^Filters/ }).click()
+  await expect(page.getByRole('checkbox', { name: 'Show fungi', exact: true })).not.toBeChecked()
+  await expect(page.getByRole('checkbox', { name: 'Show slime moulds', exact: true })).toBeChecked()
+  await page.getByRole('link', { name: /^Ceratiomyxa fruticulosa,/ }).click()
+  await expect(page).toHaveURL('http://127.0.0.1:4174/encyclopedia/#/fungi/ceratiomyxa-fruticulosa')
+})
+
 test('all annual TopNine slides load inside the encyclopedia deployment folder', async ({ page }) => {
   await page.goto('./#/')
   const carousel = page.getByRole('region', { name: 'TopNine annual photo collections' })

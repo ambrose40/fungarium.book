@@ -106,6 +106,13 @@ select option { color: var(--text); background: var(--surface); }
 .collection-filters > .select-filters label { display: flex; align-items: center; gap: 12px; font-size: 11px; color: var(--muted); }
 .collection-filters > .select-filters select { max-width: 220px; min-height: 44px; }
 .collection-filters .alphabet { margin-bottom: 0; }
+.organism-filters { display: flex; align-items: center; flex-wrap: wrap; gap: 10px 20px; margin: 0 0 16px; padding: 0; border: 0; min-width: 0; }
+.organism-filters legend { margin-bottom: 8px; padding: 0; font-size: 11px; color: var(--text-secondary); }
+.organism-filters label { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 8px 12px; border: 1px solid var(--line); border-radius: 3px; font-size: 12px; cursor: pointer; }
+.organism-filters input { width: 16px; height: 16px; margin: 0; accent-color: #bb6856; }
+.organism-filters small { font-size: 10px; color: var(--muted); }
+.scientific-search-chip { max-width: 100%; min-width: 0; }
+.scientific-search-chip > span { min-width: 0; overflow-wrap: anywhere; }
 .filter-panel-footer { display: flex; justify-content: flex-end; padding-top: 18px; }
 .collection-photos { scroll-margin-top: 110px; }
 .collection-photos:focus { outline: none; }
