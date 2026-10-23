@@ -79,6 +79,17 @@ test('downloaded thumbnails, original photos and the lightbox use the deployment
   await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
 })
 
+test('thumbnail family links filter within the encyclopedia deployment folder', async ({ page }) => {
+  await page.goto('./#/?genus=Boletus&sort=newest')
+  const badge = page.locator('.species-card a.card-family').first()
+  await expect(badge).toHaveJSProperty('href', 'http://127.0.0.1:4174/encyclopedia/#/?sort=newest&family=Boletaceae')
+  await badge.click()
+  await expect(page).toHaveURL('http://127.0.0.1:4174/encyclopedia/#/?sort=newest&family=Boletaceae')
+  await expect(page.getByRole('button', { name: 'Remove family filter' })).toBeVisible()
+  await expect(page.getByRole('button', { name: 'Remove genus filter' })).toHaveCount(0)
+  for (const name of await page.locator('.card-family').allTextContents()) expect(name).toBe('Boletaceae')
+})
+
 test('all annual TopNine slides load inside the encyclopedia deployment folder', async ({ page }) => {
   await page.goto('./#/')
   const carousel = page.getByRole('region', { name: 'TopNine annual photo collections' })

@@ -11,6 +11,7 @@ A Vue 3 + Vite photographic encyclopedia built from the original `*.txt` Instagr
 - **3:2 landscape** gallery cards, encounter thumbnails, photo-selection strips, and featured-photo frames; full-image viewing with keyboard navigation.
 - Scientific-name and multilingual search, plus year, initial-letter, hashtag, and sort controls.
 - Automatically generated genus and family quick-link lists with counts and local list finders. Genus and family selections are mutually exclusive.
+- Clickable family badges on gallery thumbnails for filtering directly from the photos.
 - Additive mycological filters across all twelve illustrated characteristic categories, with contextual counts and individual, group, taxonomy-only, and global clear controls.
 - Latest-record scientific profiles, original captions, multilingual names, GBIF/publication references, weather, habitat, and photography notes.
 - Google Maps links that pin the encounter coordinates.
@@ -110,6 +111,8 @@ Do not edit generated JSON by hand: update the source captions and run `npm run 
 The collection has one main search field and a **Search scope** selector. **Scientific name** searches only the recorded Latin name and scientific identification/authorship; **All fields** also searches multilingual common names, places, families, genera, and hashtags. Search is case-insensitive, tolerates repeated spaces and diacritics, and supports partial names and multiple terms.
 
 Advanced controls are in the **Filters** panel beside search, collapsed by default on all screen sizes. Open it for family/year dropdowns, genus/family quick links, mycological characteristics, and the initial-letter selector. The button's badge counts selected taxonomy, year, letter, hashtag, and characteristic filters. Closing the panel preserves selections; results, active chips, sorting, and **Clear filters** remain outside it. **Show … species** closes the panel and moves directly to the matching photos. Filtering takes effect immediately.
+
+The family name over each gallery thumbnail is also a filter link: click, tap, or focus it and press **Enter** to select that family without opening the advanced panel. This replaces an active genus selection while preserving search, year, characteristics, and other non-taxonomic selections, including sorting. The URL and active family chip update immediately; remove the chip to clear that family. These are ordinary links that can be copied or opened in a new tab. The rest of the photo and its caption open the species page. If a taxon has no recorded family, **Field discovery** remains a plain label.
 
 Two separate **Genera** and **Families** sections list all recorded taxa alphabetically. They are constructed from the species data, deduplicated, and show counts of distinct named taxa rather than photographs or observations. Each section has its own list finder, scrollable links, an “All” link, and a collapsible heading.
 
@@ -428,7 +431,7 @@ npm run test:ui
 
 The Node.js suite checks real caption extraction, latest-profile selection, taxonomy exclusivity, search, additive characteristic logic/counts, coordinate formats, and downloader/image handling. Downloader restriction and resume tests use mocked requests rather than contacting Instagram.
 
-Browser checks cover desktop/mobile layouts, scientific search, taxonomic links, characteristic selection, clear controls, URL persistence/back/forward navigation, maps links, branding, and illustrated profiles. Playwright launches installed Chrome and starts a production preview on `http://127.0.0.1:4173`; that port must be available. Screenshots are written to `test-results/`.
+Browser checks cover desktop/mobile layouts, scientific search, taxonomic links, thumbnail family filtering with keyboard and touch, characteristic selection, clear controls, URL persistence/back/forward navigation, maps links, branding, and illustrated profiles. Playwright launches installed Chrome and starts a production preview on `http://127.0.0.1:4173`; that port must be available. Screenshots are written to `test-results/`.
 
 For a subdirectory deployment, also run:
 

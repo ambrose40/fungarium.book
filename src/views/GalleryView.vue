@@ -79,6 +79,7 @@ function clearTaxonomy() {
 function changeCharacteristic(id, values) { router.replace({ query: setCharacteristicSelection(canonicalQuery.value, id, values) }) }
 function clearCharacteristics() { router.replace({ query: clearCharacteristicSelections(canonicalQuery.value) }) }
 function removeCharacteristic(id, value) { changeCharacteristic(id, characteristics.value[id].filter(item => item !== value)) }
+function familyLink(name) { return { name: 'gallery', query: setTaxonomyFilter(canonicalQuery.value, 'family', name) } }
 function cover(item) { return item.observations.find(post => post.photos.length)?.photos[0] }
 </script>
 
@@ -138,13 +139,16 @@ function cover(item) { return item.observations.find(post => post.photos.length)
       </div>
       <div id="collection-photos" class="collection-photos" tabindex="-1" role="region" aria-label="Collection photos">
         <div v-if="visible.length" class="species-grid">
-          <RouterLink v-for="item in visible" :key="item.id" :to="{ name: 'detail', params: { id: item.id } }" class="species-card" :aria-label="`${item.latinName}, ${item.observations.length} observations`">
-            <MediaFrame :photo="cover(item)" :name="item.latinName" :seed="item.id" thumbnail>
-              <span class="card-family">{{ item.family || 'Field discovery' }}</span>
-              <span v-if="item.observations.length > 1" class="card-count"><BookOpen :size="12" />{{ item.observations.length }}</span>
-              <div class="card-caption"><span><em>{{ item.latinName }}</em><small>{{ item.commonName || item.family || 'A closer look' }}</small></span><ArrowRight :size="17" /></div>
-            </MediaFrame>
-          </RouterLink>
+          <div v-for="item in visible" :key="item.id" class="species-card">
+            <RouterLink :to="{ name: 'detail', params: { id: item.id } }" class="species-card-link" :aria-label="`${item.latinName}, ${item.observations.length} observations`">
+              <MediaFrame :photo="cover(item)" :name="item.latinName" :seed="item.id" thumbnail>
+                <span v-if="item.observations.length > 1" class="card-count"><BookOpen :size="12" />{{ item.observations.length }}</span>
+                <div class="card-caption"><span><em>{{ item.latinName }}</em><small>{{ item.commonName || item.family || 'A closer look' }}</small></span><ArrowRight :size="17" /></div>
+              </MediaFrame>
+            </RouterLink>
+            <RouterLink v-if="item.family" :to="familyLink(item.family)" class="card-family" :aria-label="`Show family ${item.family}`" :title="`Filter collection by family ${item.family}`" :aria-current="family === item.family ? 'true' : undefined">{{ item.family }}</RouterLink>
+            <span v-else class="card-family">Field discovery</span>
+          </div>
         </div>
         <div v-else class="empty-state"><Search :size="30" :stroke-width="1" /><h3>No discoveries here just yet.</h3><p>Try a different name, taxonomy, or characteristic combination.</p><button class="button button-dark" @click="reset">Reset filters</button></div>
       </div>
