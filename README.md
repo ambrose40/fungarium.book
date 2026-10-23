@@ -477,3 +477,9 @@ https://fungarium.info/encyclopedia/#/fungi/amanita-muscaria
 The server must serve `encyclopedia/index.html` as that directory's index and allow access to its static files. Because routes follow `#`, no Vue-specific rewrite rule is needed. Use the output of `build:encyclopedia` for this deployment so its compiled asset paths match the hosting folder.
 
 The site is static after generation: deploying new captions, images, or generated filter options requires a new build. The application does not need the Chrome profile, downloader state, or original caption files on the public web server.
+
+## License
+
+Licensed under the [MIT License](LICENSE).
+
+Copyright (c) 2026 Boriss Melikjan.
