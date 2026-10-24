@@ -9,6 +9,7 @@ import { root, instagramMetaDirectory } from './project-paths.mjs'
 import { buildScientificSearchFields, summarizeScientificText } from '../src/lib/scientific-search.mjs'
 import { classifyOrganism } from '../src/lib/organism-groups.mjs'
 import { recordedTaxonomicClass } from '../src/lib/catalog.mjs'
+import { prepareMycologyArt } from './mycology-artwork.mjs'
 
 export { root } from './project-paths.mjs'
 async function optionalJson(file, fallback) {
@@ -18,6 +19,7 @@ async function optionalJson(file, fallback) {
 
 export async function buildContent() {
   await prepareBranding(root)
+  await prepareMycologyArt()
   const captionDirectory = instagramMetaDirectory()
   const entries = await readdir(captionDirectory)
   const posts = new Map()

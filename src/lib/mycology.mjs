@@ -1,5 +1,6 @@
 // A conservative visual index of the latest scientific JSON, not a taxonomic lookup.
 // Every classification carries its source wording; omitted features are never assumed absent.
+import { recordedSeasonality } from './seasonality.mjs'
 const definition = (id, label, pattern, icon = id) => ({ id, label, pattern, icon })
 function isAbsent(text, structure) {
   if (/^\s*(?:n\/?a\b|not applicable\b|absent\b|not distinctly separate\b)/iu.test(text)) return true
@@ -233,18 +234,40 @@ export function getMycologicalCharacteristics(science) {
   const sporeMass = /spore mass/iu.test(sporeText) && !/spore print/iu.test(sporeText)
   if (sporeMass) sporeItems = sporeItems.map(item => item.color ? { ...item, icon: 'spore-mass' } : item)
 
-  const fleshRows = find(/^flesh$/iu)
+  const fleshRows = evidence(science, row => /^flesh$/iu.test(row.label) || /chemical reactions/iu.test(row.label) && /\bflesh\b/iu.test(row.text) && /\b(?:cut|bruised)\b/iu.test(row.text))
   const fleshItems = select([
-    definition('blue', 'Blue staining', /\b(?:bluing|blues|blue staining|(?:turn(?:s|ing)?|stain(?:s|ing)?|becom(?:es|ing)) (?:\w+ ){0,3}blue)\b/iu, 'flesh-blue'),
-    definition('red', 'Red / pink staining', /\b(?:redden(?:s|ing)?|(?:turn(?:s|ing)?|stain(?:s|ing)?|becom(?:es|ing)) (?:\w+ ){0,3}(?:red|pink(?:ish)?|reddish))\b/iu, 'flesh-red'),
+    definition('blue', 'Blue staining', /\b(?:blu(?:e)?ing|blues|blue staining|blue(?= when (?:cut|bruised))|(?:turn(?:s|ing)?|stain(?:s|ing)?|becom(?:es|ing)) (?:\w+ ){0,3}blue)\b/iu, 'flesh-blue'),
+    definition('red', 'Red / pink staining', /\b(?:redden(?:s|ing)?|(?:turn(?:s|ing)?|stain(?:s|ing)?|becom(?:es|ing)) (?:\w+ ){0,3}(?:red|pink(?:ish)?|reddish|salmon[- ]pink))\b/iu, 'flesh-red'),
     definition('yellow', 'Yellow staining', /\b(?:yellowing|turn(?:s|ing)? yellow|stain(?:s|ing)? yellow)\b/iu, 'flesh-yellow'),
     definition('black', 'Blackening', /\b(?:blacken(?:s|ing)?|turn(?:s|ing)? black)\b/iu, 'flesh-black'),
     definition('green', 'Green staining', /\b(?:green(?:s|ing)|turn(?:s|ing)? green)\b/iu, 'flesh-green'),
+    definition('violet', 'Violet / lilac staining', /\b(?:stain(?:s|ing)?|turn(?:s|ing)?) (?:\w+ ){0,2}(?:lilac|violet|purple)\b/iu, 'flesh-violet'),
     definition('unchanging', 'Unchanging', /\b(?:unchanging|unchanged|does not (?:change|stain)|no (?:colou?r change|staining))\b/iu, 'flesh-unchanging'),
   ], join(fleshRows))
   // A flesh colour by itself does not establish a bruising reaction.
   const reactionText = join(fleshRows)
   const filteredFlesh = /\b(?:cut|bruis|stain|turn|redden|bluing|blacken|yellowing|green(?:s|ing)|unchang)/iu.test(reactionText) ? fleshItems : []
+
+  const macroRows = evidence(science, row => /^(?:cap|hymenium|stipe|flesh|body|fruit(?:ing)? body|description|overview)$/iu.test(row.label))
+  const maturationRows = macroRows.filter(row => /deliquesc|blacken|turn(?:s|ing)? black|becom(?:e|es|ing) black/iu.test(row.text))
+  const maturationItems = select([
+    definition('blackening', 'Blackening with age / handling', /\b(?:blacken(?:s|ed|ing)?|turn(?:s|ing)? black|becom(?:e|es|ing) black)\b/iu, 'maturation-blackening'),
+    definition('inking', 'Deliquescence / turning to ink', /\b(?:deliquesc\w*|(?:dissolv\w*|turn\w*) (?:\w+ ){0,3}(?:black )?ink)\b/iu, 'maturation-inking'),
+  ], join(maturationRows))
+  const exudateRows = macroRows.filter(row => /\b(?:latex|milky juice|guttation|exud\w*|droplets?|(?:juice|sap|liquid) when (?:cut|broken|injured))\b/iu.test(row.text))
+  const exudateItems = select([
+    definition('latex', 'Latex / milky fluid', /\b(?:latex|milky (?:juice|liquid))\b/iu, 'exudate-latex'),
+    definition('cut-juice', 'Juice / sap on injury', /\b(?:liquid|sap|juice)[^.;]{0,25}when (?:cut|broken|injured)\b/iu, 'exudate-juice'),
+    definition('droplets', 'Surface droplets / guttation', /\b(?:guttation|(?:exud\w*[^.;]{0,35})?droplets?)\b/iu, 'exudate-guttation'),
+  ], join(exudateRows))
+  for (const item of exudateItems) {
+    const relevant = exudateRows.filter(row => item.id === 'latex' ? /latex|milky (?:juice|liquid)/iu.test(row.text) : item.id === 'droplets' ? /droplets?|guttation/iu.test(row.text) : /\b(?:liquid|sap|juice)\b/iu.test(row.text)).map(row => row.text).join('; ')
+    const colour = relevant.match(/\b(blood[- ]red|blood[- ]like|reddish[- ]purple|dark reddish[- ]purple|carrot[- ]colou?red|orange|milky[- ]white|white|clear)[\w -]{0,16}\b(?:droplets?|latex|liquid|sap|juice)\b/iu)?.[1]?.toLowerCase()
+    if (colour) item.icon += /purple/u.test(colour) ? '-purple' : /orange|carrot/u.test(colour) ? '-orange' : /blood|red$/u.test(colour) ? '-red' : /white/u.test(colour) ? '-white' : ''
+  }
+  const dyeRows = evidence(science, row => /\b(?:dye|dyeing|dyestuff)\b/iu.test(row.text))
+  const dyeItems = select([definition('natural-dye', 'Recorded natural dye use', /\b(?:dye (?:fungus|mushroom)|dyeing|dyestuffs?|(?:used|useful|valued)[^.;]{0,35}(?:natural )?dyes?)\b/iu, 'use-dye')], join(dyeRows))
+  const seasonality = recordedSeasonality(science)
 
   const microscopyRows = find(/microscop|^spores?$/iu)
   const sporeMorphology = microscopyRows.flatMap(row => {
@@ -276,6 +299,10 @@ export function getMycologicalCharacteristics(science) {
     category('ecology', 'Ecology', ecologyRows, ecologyItems, true),
     category('edibility', 'Edibility', edibilityRows, edibilityItems(join(edibilityRows)), true),
     category('flesh', 'Flesh reaction', filteredFlesh.length ? fleshRows : [], filteredFlesh),
+    category('maturation', 'Maturation changes', maturationItems.length ? maturationRows : [], maturationItems),
+    category('exudates', 'Droplets & exudates', exudateItems.length ? exudateRows : [], exudateItems),
+    category('uses', 'Natural dyes', dyeItems.length ? dyeRows : [], dyeItems),
     category('microscopy', 'Spores under the microscope', microscopyItems.length ? microscopyRows : [], microscopyItems),
+    ...(seasonality ? [{ id: 'seasonality', title: 'Recorded seasonality', evidence: seasonality.evidence, timeline: seasonality, items: [] }] : []),
   ].filter(Boolean).filter(item => !['body', 'surface'].includes(item.id) || item.items[0].id !== 'unknown')
 }

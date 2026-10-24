@@ -13,6 +13,7 @@
     "content": "node scripts/build-content.mjs",
     "audit:metadata": "node scripts/audit-metadata.mjs",
     "audit:bundle": "node scripts/bundle-report.mjs",
+    "audit:characteristics": "node scripts/audit-characteristics.mjs",
     "import:instagram": "node scripts/import-instagram.mjs",
     "photos:instagram": "node scripts/fetch-instagram-photos.mjs",
     "test": "node --test tests/*.test.mjs",

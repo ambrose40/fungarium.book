@@ -129,9 +129,10 @@ Open the local URL printed by Vite (normally `http://127.0.0.1:5173`).
 | Command | Purpose |
 | --- | --- |
 | `npm run dev` | Regenerate content and branding assets, then start Vite on `127.0.0.1` |
-| `npm run content` | Regenerate species pages, the gallery index, scientific search fields, organism groups, characteristic filter options/counts, and branding assets |
+| `npm run content` | Regenerate species pages, shared/search/filter indexes, characteristic options/counts, branding, and field-guide illustration assets |
 | `npm run audit:metadata` | Read generated content and report hashtag coverage/variants and missing profile/encounter source fields |
 | `npm run audit:bundle` | Inspect the latest production build's JavaScript sizes, gzip estimates, module composition, and 500 kB chunk budget; exit nonzero for oversized chunks |
+| `npm run audit:characteristics -- <options>` | Report latest-profile visual coverage and illustration assets; `--details` lists source candidates, `--compare-head` checks source-record preservation against Git HEAD |
 | `npm run build` | Regenerate content and create client assets, static species HTML, and SEO files in `dist/` |
 | `npm run build:encyclopedia` | Build production assets for hosting at `/encyclopedia/` |
 | `npm run preview` | Serve the existing production build locally; run `build` first |
@@ -176,6 +177,7 @@ The generator writes:
 | `src/data/filter-index.json` | Mycological filter definitions/counts, per-taxon characteristic keys, and scientific search field definitions/counts |
 | `src/data/species/<species-id>.json` | Individual species pages, loaded on demand |
 | `public/branding/` and `public/icons/` | Selected logo/favicon assets copied from `fungi-support/` |
+| `public/illustrations/mycology/*.webp` | Original field-guide raster schematics generated from `scripts/mycology-artwork.mjs` |
 
 Do not edit generated JSON by hand: update the source captions and run `npm run content`. The gallery does not need to download every full caption to search or apply characteristic filters.
 
@@ -276,7 +278,9 @@ Repeating a characteristic parameter selects multiple alternatives in that categ
 
 ## Illustrated mycological characteristics
 
-Each species’ scientific profile includes an interactive visual characteristics panel. The illustrations are original SVG clipart, with different geometry selected from the **latest scientific JSON traits**, rather than a fixed icon for each paragraph or a hardcoded species lookup.
+Each species’ scientific profile includes an interactive visual characteristics panel selected from the **latest scientific JSON traits**. The field guide uses **110 original raster schematics** with fine contours, muted washes, and a light paper background. These are concept illustrations; labels and the expandable source descriptions supply the specimen's recorded features. Cards flow down responsive columns, with a single column on narrow phones and a full-width seasonality band.
+
+Artwork is authored as SVG geometry in `scripts/mycology-artwork.mjs` and rendered by the existing Sharp dependency into 480 × 396 WebP files in `public/illustrations/mycology/`. `npm run content`, `dev`, and `build` regenerate the illustrations; unchanged files are retained byte-for-byte. The component loads individual images lazily. Spore colours use a **plain filled circle** with a thin boundary, while unknown/unavailable states retain small vector marks. Visible labels and source evidence remain available independently of the decorative images.
 
 Supported characteristics include:
 
@@ -288,11 +292,17 @@ Supported characteristics include:
 - **Spore print/mass:** named colour swatches, including compound olive-brown, purple-brown, rust-brown, chocolate-brown, cream, pink, and white. A spore mass is labelled separately from a spore print.
 - **Ecology:** mycorrhizal, saprotrophic, parasitic, fungus/slime-mould-parasitic, insect-parasitic, lichenized, moss-associated, and explicit deadwood substrates.
 - **Edibility:** choice edible, edible, conditionally edible, inedible/not consumed, poisonous, deadly poisonous, psychoactive, and uncertain.
-- **Other structures:** coral, cup, saddle, bracket, puffball, earthstar, jelly, crust, honeycombed, club, mould, and sporangial forms; flesh-staining reactions; microscopic spore shapes and ornamentation.
+- **Other structures:** coral, cup, saddle, bracket, puffball, earthstar, jelly, crust, honeycombed, club, mould, and sporangial forms; microscopic spore shapes and ornamentation.
+- **Flesh reactions:** before/after schematics for blue, red/pink, yellow, green, violet/lilac, blackening, and unchanging flesh. Explicit cut/bruising descriptions in chemical-reaction rows also qualify; reagent-only colours do not establish a spontaneous flesh reaction.
+- **Maturation and exudates:** separate blackening and deliquescence/inking diagrams, plus close-up surface-droplet and cut-juice/latex illustrations. Supported fluid-colour wording selects the corresponding illustration; microscopic oil droplets and a host fungus's decay do not establish these features.
+- **Natural dyes:** a dye-bath and yarn schematic where the latest profile explicitly records dye use. The current source records this for **Cortinarius sanguineus**; a common name alone does not establish dye use for another taxon.
+- **Seasonality:** a labelled seasonal or monthly strip based on recorded periods, including ranges across winter. Named seasons stay seasons; exact month names stay months. Year-round presence/persistence is labelled separately, and qualifiers remain in the source text. Encounter dates, incidental winter habitat, and unsupported life-cycle references do not supply a fruiting period.
 
 Multiple icons can appear for one characteristic when the description records multiple stages or alternatives. Qualified wording such as “probably” or “sometimes” is marked. Omitted/unmatched characteristics stay unspecified or point to the description; they are not inferred from names, taxonomy, photographs, or hashtags. Negated traits are excluded, and historical consumption does not override a poisonous description.
 
-**Open any tile to read its exact source text.** The full scientific paragraphs remain below the panel. Classification rules are in `src/lib/mycology.mjs`, illustrations in `src/components/MycologyGlyph.vue`, and the panel in `src/components/MycologicalCharacteristics.vue`.
+**Open any tile to read its exact source text.** The full scientific paragraphs remain below the panel. Classification rules are in `src/lib/mycology.mjs`, season parsing in `src/lib/seasonality.mjs`, the artwork inventory in `src/lib/mycology-art-index.mjs`, and rendering in `MycologyGlyph.vue` / `MycologicalCharacteristics.vue`. The existing twelve gallery-filter categories also use the new artwork; maturation, exudates, dye use, and seasonality are profile presentations.
+
+After generation, run `npm run audit:characteristics` for coverage and artwork checks. Add `-- --details` to inspect broad source candidates or `-- --compare-head` to compare the current corpus with Git HEAD while allowing derived characteristic-key changes. The latter exits nonzero if source records differ; comparisons are meaningful against the intended baseline commit. [The Chapter 4 review](docs/reviews/chapter-4-characteristics.md) records findings, examples, verification, and source limitations.
 
 ## Images and thumbnails
 
@@ -496,6 +506,7 @@ src/
 public/
   images/posts/<post-id>/      Full photographs
   thumbs/posts/<post-id>/      WebP thumbnails
+  illustrations/mycology/     Generated original field-guide WebP artwork
   branding/                   Generated logo copy
   icons/                      Generated browser/device icons
   site.webmanifest            Site identity and dark install-screen colours
@@ -515,6 +526,8 @@ dist/                         Generated static website
 | `scripts/audit-content.mjs` | Standalone caption audit; reports missing descriptions, taxonomy, references, photography details, and genus-level identifications |
 | `scripts/audit-metadata.mjs` | Read-only generated-content audit for hashtag coverage/variants and source-data omissions |
 | `scripts/bundle-report.mjs` | Build plugin writing final chunk/module size diagnostics; CLI for the latest build's bundle report and budget check |
+| `scripts/mycology-artwork.mjs` | Original schematic geometry and reproducible Sharp/WebP illustration generation |
+| `scripts/audit-characteristics.mjs` | Latest-profile visual coverage, artwork inventory, source-candidate review, and optional Git HEAD preservation check |
 | `scripts/seo-pages.mjs` | Vite plugin generating metadata, readable static HTML, clean profile pages, sitemap, and robots template |
 | `scripts/prepare-branding.mjs` | Branding asset-copy helper called by the content builder |
 | `scripts/maps-config.mjs` | Read the Maps browser key from the environment or ignored local key file for Vite |
@@ -530,6 +543,8 @@ Relevant application modules:
 - `src/lib/organism-groups.mjs`: source-based Fungi/Slime moulds classification and organism-selection URL helpers.
 - `src/lib/characteristic-filters.mjs`: generated characteristic options, compact species keys, contextual counts, and `mc.*` URL selection helpers.
 - `src/lib/mycology.mjs`: evidence-based characteristic classification used by both species illustrations and gallery filters.
+- `src/lib/seasonality.mjs`: conservative named-season/month parsing, range handling, and original evidence for profile infographics.
+- `src/lib/mycology-art-index.mjs`: shared inventory of supported raster schematics; spore swatches and unknown states are rendered directly.
 - `src/lib/coordinates.mjs`: coordinate normalization and pinned Google Maps URLs.
 - `src/lib/google-maps.mjs`: shared lazy Maps JavaScript loader, timeout, and authentication-failure handling; `src/components/ObservationMap.vue` renders the species-level map with all observation pins.
 - `src/lib/asset-urls.mjs`: resolve generated image/logo paths against Vite's deployment base.
@@ -660,7 +675,7 @@ The site is static after generation: deploying new captions, images, or generate
 
 ## Follow-ups and TODOs
 
-Chapters 1, 2, and 5 implementations are approved by the user; human assistive-technology follow-ups for Chapter 2 remain open. Chapters 3, 4, 6, and 7 remain pending and await further instruction. Complete one chapter at a time, report the result, and wait for the user's green flag before committing or continuing. Record findings, fixes, and verification results in `PROJECT_MEMORY.md`.
+Chapters 1, 2, 4, and 5 implementations are approved by the user; human assistive-technology follow-ups for Chapter 2 remain open. Chapters 3, 6, and 7 remain pending and await further instruction. Complete one chapter at a time, report the result, and wait for the user's green flag before committing or continuing. Record findings, fixes, and verification results in `PROJECT_MEMORY.md`.
 
 1. **Page metadata and other missing supporting data**
    - [x] Audit gallery/species page metadata and miscellaneous missing data; provide factual metadata fallbacks and document source omissions in [the Chapter 1 report](docs/reviews/chapter-1-metadata.md).
@@ -678,12 +693,13 @@ Chapters 1, 2, and 5 implementations are approved by the user; human assistive-t
    - [ ] Save reports and record Performance, Accessibility, Best Practices, and SEO results with the tested URLs, build, and audit conditions.
    - [ ] Prioritize findings, implement improvements, and rerun the affected audits to confirm results.
 4. **Mycological characteristics: artwork and information review**
-   - [ ] Review the whole characteristics area for visual, informational, and interaction improvements. Replace the current chunky, unappealing glyphs with clearer, more polished schematic illustrations; evaluate raster schematic pictures where they work better.
-   - [ ] Represent spore-print colour with a simple filled coloured circle instead of the current image.
-   - [ ] Add better illustrations for blackening, deliquescence/turning to ink, guttation droplets, juice/latex exuded after cutting, and flesh turning blue.
-   - [ ] Add illustrations for fungi used as natural dyes.
-   - [ ] Explore a seasonal strip or infographic for recorded fruiting periods, such as summer to autumn.
-   - [ ] Keep trait, dye-use, and fruiting-period claims grounded in the latest source caption; leave unrecorded information unspecified and preserve accessible text alternatives.
+   - [x] Replace chunky glyphs with finer original raster schematics, improve the responsive card layout, and retain keyboard-openable source evidence; see [the Chapter 4 report](docs/reviews/chapter-4-characteristics.md).
+   - [x] Use plain filled spore-colour circles.
+   - [x] Add source-backed blackening/inking, guttation, juice/latex, and flesh-reaction diagrams, including missing cut/bruising descriptions.
+   - [x] Add a dye-use illustration for the explicitly recorded Cortinarius sanguineus profile.
+   - [x] Add seasonal/monthly infographics with source-precision and presence/persistence distinctions.
+   - [x] Verify latest-caption provenance, unknown/negative cases, accessible labels, responsive layouts, and regenerated derived keys.
+   - [x] User approved Chapter 4 and requested its Conventional Commit; starting another chapter awaits further instruction.
 5. **Production bundle size and chunking**
    - [x] Investigate the **500 kB minified chunk warning** and identify catalog data as the main contributor; record findings in [the Chapter 5 report](docs/reviews/chapter-5-bundles.md).
    - [x] Apply route-level dynamic imports, split generated shared/search/filter data, and use [`build.rollupOptions.output.manualChunks`](https://rollupjs.org/configuration-options/#output-manualchunks) for catalog and Vue chunk groups.

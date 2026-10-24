@@ -1,6 +1,15 @@
 import { test, expect } from '../helpers/browser.js'
 import { readFile } from 'node:fs/promises'
 
+test('field-guide raster art and spore swatches work under the deployment base', async ({ page }) => {
+  await page.goto('./fungi/hydnellum-peckii/')
+  const image = page.locator('img[data-variant="exudate-guttation-red"]')
+  await image.scrollIntoViewIfNeeded()
+  await expect(image).toHaveAttribute('src', '/encyclopedia/illustrations/mycology/exudate-guttation-red.webp')
+  await expect(image).toHaveJSProperty('naturalWidth', 480)
+  await page.goto('./fungi/boletus-edulis/')
+  await expect(page.locator('[data-variant="spore-print"] circle')).toHaveAttribute('fill', '#777344')
+})
 const content = JSON.parse(await readFile(new URL('../../src/data/index.json', import.meta.url), 'utf8'))
 const photographed = content.species.find(item => item.observations.some(post => post.photos.length))
 

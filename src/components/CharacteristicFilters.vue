@@ -78,7 +78,8 @@ function clearAll() {
 .characteristic-option{display:flex;align-items:center;gap:7px;padding:7px 5px;cursor:pointer;border-radius:3px;font-size:10px;line-height:1.4;color:var(--text-secondary)}
 .characteristic-option:hover,.characteristic-option.is-selected{background:#2b241f;color:#f1c5af}
 .characteristic-option input{margin:0;accent-color:#bb6856;flex-shrink:0;width:13px;height:13px}
-.characteristic-option .mycology-glyph{width:32px;height:27px;padding:1px;background:#deded0;border-radius:3px;flex-shrink:0}
+.characteristic-option .mycology-glyph{width:40px;height:33px;padding:0;object-fit:contain;border-radius:2px;flex-shrink:0}
+.characteristic-option .mycology-swatch,.characteristic-option .mycology-unknown{background:none}
 .characteristic-option>span{flex:1;min-width:0;overflow-wrap:anywhere}
 .characteristic-option>small{font-size:8px;flex-shrink:0;color:var(--muted)}
 .characteristic-option.has-no-matches:not(.is-selected){color:#97948c}

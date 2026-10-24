@@ -1,5 +1,13 @@
 import { test, expect } from '../helpers/browser.js'
 
+async function capturePanel(panel, path) {
+  await panel.locator('img').evaluateAll(async images => {
+    for (const image of images) image.loading = 'eager'
+    await Promise.all(images.map(image => image.decode()))
+  })
+  await panel.screenshot({ path, style: '.site-header,.skip-link{visibility:hidden!important}' })
+}
+
 test('illustrations change with actual species characteristics and expose the original evidence', async ({ page }) => {
   const errors = []
   page.on('pageerror', error => errors.push(error.message))
@@ -10,23 +18,51 @@ test('illustrations change with actual species characteristics and expose the or
   await expect(panel.locator('[data-characteristic="hymenium"] [data-value="gills"]')).toBeVisible()
   await expect(panel.locator('[data-value="ring-volva"]')).toBeVisible()
   await expect(panel.locator('[data-value="poisonous"]')).toBeVisible()
-  const round = await panel.locator('[data-variant="cap-hemispherical"] path').nth(1).getAttribute('d')
-  const flat = await panel.locator('[data-variant="cap-flat"] path').nth(1).getAttribute('d')
+  const round = await panel.locator('[data-variant="cap-hemispherical"]').getAttribute('src')
+  const flat = await panel.locator('[data-variant="cap-flat"]').getAttribute('src')
   expect(round).not.toBe(flat)
+  await expect(panel.locator('[data-variant="spore-print"] circle')).toHaveCount(1)
+  await expect(panel.locator('[data-variant="spore-print"] path')).toHaveCount(0)
   const cap = panel.locator('[data-characteristic="cap"]')
   await cap.locator('summary').focus()
   await page.keyboard.press('Enter')
   await expect(cap.locator('.mycology-evidence')).toContainText('Hemispherical to convex when young')
   await expect(cap).toHaveAttribute('open', '')
   await cap.locator('summary').click()
-  await panel.screenshot({ path: 'test-results/mycology-amanita-desktop.png' })
+  await capturePanel(panel, 'test-results/mycology-amanita-desktop.png')
   await page.goto('/#/fungi/boletus-edulis')
   await expect(panel.locator('[data-characteristic="hymenium"] [data-value="pores"]')).toBeVisible()
   await expect(panel.locator('[data-characteristic="hymenium"] [data-value="gills"]')).toHaveCount(0)
   await expect(panel.locator('[data-characteristic="spore-print"] [data-value="olive-brown"]')).toBeVisible()
   await expect(panel.locator('[data-characteristic="edibility"] [data-value="choice"]')).toBeVisible()
-  expect(await panel.locator('[data-variant="hymenium-pores"] circle').count()).toBeGreaterThan(20)
+  const poreImage = panel.locator('img[data-variant="hymenium-pores"]')
+  await expect(poreImage).toHaveJSProperty('naturalWidth', 480)
   expect(errors).toEqual([])
+})
+
+test('recorded maturation, droplets, cut juice, dye use, and seasonality have distinct evidence-backed visuals', async ({ page }) => {
+  const panel = page.getByRole('region', { name: 'Mycological characteristics' })
+  for (const [id, variant] of [['hygrocybe-conica', 'maturation-blackening'], ['coprinus-comatus', 'maturation-inking'], ['hydnellum-peckii', 'exudate-guttation-red'], ['mycena-haematopus', 'exudate-juice-red'], ['lactarius-deliciosus', 'exudate-latex-orange'], ['cortinarius-sanguineus', 'use-dye']]) {
+    await page.goto(`/fungi/${id}/`)
+    const image = panel.locator(`img[data-variant="${variant}"]`)
+    await image.scrollIntoViewIfNeeded()
+    await expect(image).toHaveJSProperty('naturalWidth', 480)
+    await expect(image).toHaveAttribute('alt', '')
+  }
+  await panel.locator('[data-characteristic="uses"] summary').click()
+  await expect(panel.locator('[data-characteristic="uses"] .mycology-evidence')).toContainText('yields red and reddish-brown shades')
+  await page.goto('/fungi/coprinellus-disseminatus/')
+  await expect(panel.locator('[data-variant="maturation-inking"]')).toHaveCount(0)
+  await page.goto('/fungi/boletus-edulis/')
+  const seasonal = panel.locator('[data-characteristic="seasonality"]')
+  await expect(seasonal.locator('[data-season="summer"]')).toHaveAttribute('data-active', 'true')
+  await expect(seasonal.locator('[data-season="autumn"]')).toHaveAttribute('data-active', 'true')
+  await expect(seasonal.locator('[data-season="winter"]')).toHaveAttribute('data-active', 'false')
+  await page.goto('/fungi/stropharia-caerulea/')
+  await expect(panel.locator('.mycology-season-strip')).toHaveClass(/is-monthly/)
+  await expect(panel.locator('[data-season="july"]')).toHaveAttribute('data-active', 'true')
+  await expect(panel.locator('[data-season="november"]')).toHaveAttribute('data-active', 'true')
+  await expect(panel.locator('[data-season="december"]')).toHaveAttribute('data-active', 'false')
 })
 
 test('nonstandard fungi and mobile cards render distinct structures without horizontal overflow', async ({ page }) => {
@@ -37,7 +73,7 @@ test('nonstandard fungi and mobile cards render distinct structures without hori
   await expect(panel.locator('[data-variant="hymenium-gleba"]')).toBeVisible()
   await expect(panel.locator('[data-variant="stipe-absent"]')).toBeVisible()
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
-  await panel.screenshot({ path: 'test-results/mycology-earthstar-mobile.png' })
+  await capturePanel(panel, 'test-results/mycology-earthstar-mobile.png')
   await page.goto('/#/fungi/cantharellus-cibarius')
   await expect(panel.locator('[data-variant="hymenium-ridges"]')).toBeVisible()
   await expect(panel.locator('[data-variant="attachment-decurrent"]')).toBeVisible()

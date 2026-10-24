@@ -91,6 +91,27 @@ test('axe audits profiles, expanded evidence/captions, and named dialogs', async
   await audit(page, 'about-dialog', testInfo)
 })
 
+test('field-guide reactions, dye evidence, and season/month graphics remain accessible', async ({ page }, testInfo) => {
+  for (const [id, category] of [['hydnellum-peckii', 'exudates'], ['cortinarius-sanguineus', 'uses'], ['coprinus-comatus', 'maturation'], ['stropharia-caerulea', 'seasonality']]) {
+    await page.goto(`./fungi/${id}/`)
+    const summary = page.locator(`[data-characteristic="${category}"] > summary`)
+    await summary.focus()
+    await page.keyboard.press('Enter')
+    await expect(summary).toBeFocused()
+    await expect(summary.locator('..')).toHaveAttribute('open', '')
+    await audit(page, `field-guide-${id}`, testInfo)
+  }
+  const timeline = page.locator('[data-characteristic="seasonality"]')
+  await expect(timeline.getByRole('img', { name: /July.*November/ })).toBeVisible()
+  await assertTextContrast(timeline.locator('.mycology-season.is-active').first())
+  await assertTextContrast(timeline.locator('.mycology-season:not(.is-active)').first())
+  await page.setViewportSize({ width: 320, height: 800 })
+  await page.addStyleTag({ content: '#app *:not(svg):not(svg *){line-height:1.5!important;letter-spacing:.12em!important;word-spacing:.16em!important}' })
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
+  await page.emulateMedia({ forcedColors: 'active' })
+  await expect(timeline.locator('.mycology-season.is-active').first()).toHaveCSS('text-decoration-line', 'underline')
+})
+
 test('skip links, route changes, and detail section links move focus below the sticky header', async ({ page }) => {
   await page.goto('./')
   await expect(page.locator('.species-card')).toHaveCount(36)

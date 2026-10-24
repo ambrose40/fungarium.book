@@ -2,6 +2,7 @@ import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { readFile } from 'node:fs/promises'
 import { getMycologicalCharacteristics } from '../src/lib/mycology.mjs'
+import { MYCOLOGY_ART_ICONS } from '../src/lib/mycology-art-index.mjs'
 
 const { species } = JSON.parse(await readFile(new URL('../src/data/posts.json', import.meta.url), 'utf8'))
 const profile = id => species.find(item => item.id === id).science
@@ -130,6 +131,39 @@ test('microscopic basidia or cystidia cannot supply a spore shape or ornamentati
   assert.deepEqual(values(items, 'microscopy'), ['ellipsoid', 'smooth'])
 })
 
+test('inking and blackening distinguish ageing from negation and a host fungus', () => {
+  for (const id of ['coprinellus-micaceus', 'coprinopsis-atramentaria', 'coprinopsis-lagopus', 'coprinus-comatus']) assert.ok(values(categories(id), 'maturation').includes('inking'), id)
+  for (const id of ['coprinellus-disseminatus', 'parasola-plicatilis', 'hygrocybe-acutoconica', 'asterophora-lycoperdoides']) assert.ok(!values(categories(id), 'maturation').includes('inking'), id)
+  assert.ok(values(categories('hygrocybe-conica'), 'maturation').includes('blackening'))
+  assert.deepEqual(values(categories('hygrocybe-acutoconica'), 'maturation'), [])
+  assert.deepEqual(values(categories('asterophora-lycoperdoides'), 'maturation'), [])
+})
+
+test('exudate illustrations follow recorded fluid type and colour, excluding microscopic oil droplets', () => {
+  assert.equal(category(categories('hydnellum-peckii'), 'exudates').items.find(item => item.id === 'droplets').icon, 'exudate-guttation-red')
+  assert.equal(category(categories('lactarius-deliciosus'), 'exudates').items.find(item => item.id === 'latex').icon, 'exudate-latex-orange')
+  assert.equal(category(categories('mycena-haematopus'), 'exudates').items.find(item => item.id === 'cut-juice').icon, 'exudate-juice-red')
+  assert.equal(category(categories('mycena-sanguinolenta'), 'exudates').items.find(item => item.id === 'cut-juice').icon, 'exudate-juice-purple')
+  assert.ok(values(categories('suillus-granulatus'), 'exudates').includes('droplets'))
+  assert.ok(!values(categories('suillus-luteus'), 'exudates').includes('cut-juice'))
+  assert.deepEqual(values(categories('discina-ancilis'), 'exudates'), [])
+  assert.deepEqual(values(getMycologicalCharacteristics(science([['Flesh', 'No latex and no guttation droplets.']])), 'exudates'), [])
+})
+
+test('dye use is source-backed, not inferred from common names or an unrelated pigment', () => {
+  assert.deepEqual(values(categories('cortinarius-sanguineus'), 'uses'), ['natural-dye'])
+  assert.deepEqual(values(categories('phaeolus-schweinitzii'), 'uses'), [])
+  assert.deepEqual(values(getMycologicalCharacteristics(science([['Uses', 'Not used for dyeing.']])), 'uses'), [])
+})
+
+test('flesh reactions include cut/bruising descriptions while excluding reagent-only and surface colours', () => {
+  for (const id of ['gyrodon-lividus', 'imleria-badia', 'rubroboletus-satanas', 'hortiboletus-rubellus']) assert.ok(values(categories(id), 'flesh').includes('blue'), id)
+  assert.ok(values(categories('lactarius-uvidus'), 'flesh').includes('violet'))
+  assert.ok(!values(categories('hygrophorus-persoonii'), 'flesh').includes('blue'))
+  assert.ok(!values(categories('infundibulicybe-geotropa'), 'flesh').includes('blue'))
+  assert.ok(!values(categories('boletus-edulis'), 'flesh').includes('blue'))
+})
+
 test('every illustrated claim is traceable to the current scientific JSON without mutating it', () => {
   const icons = new Set()
   let illustratedSpecies = 0
@@ -141,6 +175,7 @@ test('every illustrated claim is traceable to the current scientific JSON withou
       assert.equal(new Set(feature.items.map(value => value.id)).size, feature.items.length)
       for (const value of feature.items) {
         icons.add(value.icon)
+        assert.ok(MYCOLOGY_ART_ICONS.includes(value.icon) || ['unknown', 'spore-print', 'spore-mass', 'spore-none', 'edibility-unknown'].includes(value.icon), `${item.id}: missing artwork for ${value.icon}`)
         if (value.id !== 'unknown') assert.ok(feature.evidence.length, `${item.id}: ${feature.id} has no source`)
       }
       for (const source of feature.evidence) assert.ok(item.science.traits.some(row => row.label === source.label && row.text === source.text))
