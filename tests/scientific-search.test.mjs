@@ -7,8 +7,9 @@ import {
 } from '../src/lib/scientific-search.mjs'
 import { filterCatalog, setTaxonomyFilter } from '../src/lib/catalog.mjs'
 import { parseCaption, groupSpecies } from '../scripts/content-lib.mjs'
+import { readCatalog } from './helpers/catalog.mjs'
 
-const index = JSON.parse(await readFile(new URL('../src/data/index.json', import.meta.url), 'utf8'))
+const index = await readCatalog()
 const full = JSON.parse(await readFile(new URL('../src/data/posts.json', import.meta.url), 'utf8'))
 
 test('scientific fields merge label casing, count taxa once, and retain specialist and newly recorded categories', () => {

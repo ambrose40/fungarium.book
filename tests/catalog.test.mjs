@@ -2,8 +2,9 @@ import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { readFile } from 'node:fs/promises'
 import { normalizeSearch, buildTaxonomyIndex, filterCatalog, setTaxonomyFilter, normalizeTaxonomyQuery, recordedTaxonomicClass } from '../src/lib/catalog.mjs'
+import { readCatalog } from './helpers/catalog.mjs'
 
-const { species } = JSON.parse(await readFile(new URL('../src/data/index.json', import.meta.url), 'utf8'))
+const { species } = await readCatalog()
 
 test('scientific search supports case, repeated spaces, partial names and authorship accents', () => {
   assert.equal(normalizeSearch('  QUÉL.  '), 'quel.')
@@ -122,5 +123,19 @@ test('generated class labels come only from the latest scientific taxonomy', asy
     const expected = item.science.taxonomy.length >= 2 ? item.science.taxonomy.at(-1) : ''
     assert.equal(item.taxonomicClass, expected, item.id)
     assert.equal(species.find(record => record.id === item.id).taxonomicClass, expected, item.id)
+  }
+})
+
+test('shared metadata retains exact covers, encounter dates/places, names, and overview without full photo lists', async () => {
+  const full = JSON.parse(await readFile(new URL('../src/data/posts.json', import.meta.url), 'utf8'))
+  const index = JSON.parse(await readFile(new URL('../src/data/index.json', import.meta.url), 'utf8'))
+  assert.deepEqual(index.metadata, full.metadata)
+  for (const item of full.species) {
+    const record = index.species.find(candidate => candidate.id === item.id)
+    const originalCover = item.observations.find(post => post.photos.length)?.photos[0]
+    assert.deepEqual(record.observations.flatMap(post => post.photos), originalCover ? [originalCover] : [], item.id)
+    assert.deepEqual(record.observations.map(({ date, location }) => ({ date, location })), item.observations.map(({ date, location }) => ({ date, location })), item.id)
+    assert.deepEqual(record.science.commonNames, item.science.commonNames, item.id)
+    assert.equal(record.science.searchText.overview, species.find(candidate => candidate.id === item.id).science.searchText.overview, item.id)
   }
 })

@@ -102,14 +102,24 @@ starting the next chapter. Apply requested amendments to the active chapter firs
   requests via `tests/helpers/browser.js`.
 - **Commits:** Conventional Commits, imperative summary around 72 characters,
   focused scope, and a body describing significant behavior and verification.
+- **Production bundles:** retain the 500 kB minified JavaScript chunk budget.
+  `data/index.json` is shared metadata with names/hashtags/overview, encounter
+  dates/places, and one cover photo per taxon. `search-index.json` and
+  `filter-index.json` are gallery-only; assemble them by taxon ID with shared
+  overviews via `src/catalog-data.js`. Both routes are lazy; the full-record
+  registry lives in `src/species-data.js`. Wait for initial router readiness
+  before replacing the static reading view. Explicit manual chunks separate
+  catalog/search/filter/Vue data. Builds write `dist/.vite/bundle-report.json`;
+  `npm run audit:bundle` reports final sizes and fails on oversized chunks.
 
 ## Open follow-ups and TODOs
 
 Requested on 2026-10-23. Chapter 1 is implemented and approved by the user;
 verified source-content curation remains open. Chapter 2 implementation and
 browser verification are approved by the user for commit, with human assistive-technology
-checks still open. Chapters 3–7 remain pending. Chapters 4–7 were requested on
-2026-10-24 as follow-ups. Keep this list and the README's
+checks still open. The user selected Chapter 5 next and approved its implementation
+and verification for commit. Chapters 3, 4, 6, and 7 remain pending. Chapters 4–7 were
+requested on 2026-10-24 as follow-ups. Keep this list and the README's
 **Follow-ups and TODOs** section in sync as work progresses.
 
 1. **Page metadata and miscellaneous missing data**
@@ -158,14 +168,14 @@ checks still open. Chapters 3–7 remain pending. Chapters 4–7 were requested 
      caption; leave unrecorded information unspecified and keep accessible text
      alternatives.
 5. **Production bundle size and chunking**
-   - [ ] Investigate Vite's warning about chunks larger than 500 kB after
-     minification; inspect composition and identify useful splitting boundaries.
-   - [ ] Evaluate dynamic `import()` code splitting and
-     `build.rollupOptions.output.manualChunks`:
-     https://rollupjs.org/configuration-options/#output-manualchunks.
-   - [ ] Review `build.chunkSizeWarningLimit` against an intentional, documented
-     bundle-size budget. Measure before/after sizes and loading behavior; verify
-     root and `/encyclopedia/` builds after changes.
+   - [x] Identify the generated catalog as the main contributor to the 500 kB
+     minified warning; document findings in `docs/reviews/chapter-5-bundles.md`.
+   - [x] Apply route-level dynamic imports, split generated shared/search/filter
+     data, and use explicit `build.rollupOptions.output.manualChunks` groups.
+   - [x] Retain the 500 kB warning budget, add reports/budget checks, measure
+     before/after loading, and verify root and `/encyclopedia/` builds.
+   - [x] User approved Chapter 5 and requested its Conventional Commit.
+     Starting another chapter still requires an explicit instruction.
 6. **Code coverage tooling and reporting**
    - [ ] Add a coverage tool and reproducible reports; decide coverage scope for
      Node.js utilities and Vue/browser code.
@@ -180,6 +190,45 @@ checks still open. Chapters 3–7 remain pending. Chapters 4–7 were requested 
      and media while preserving existing Git exclusions.
 
 ## Recent changesets
+
+### 2026-10-24 — Chapter 5 approved for commit
+
+- The user approved the reviewed bundle optimization and requested a Conventional
+  Commit. Updated README, review status, and this memory in the same changeset.
+- **Verification:** reviewed status, implementation/generated-index packaging,
+  new helpers/tests, and recent commit style; `git diff --check` passed. Retain
+  the recorded 82/46/10/11 passing tests and root/subpath bundle/build checks;
+  runtime tests were not rerun for approval-only documentation updates.
+- Chapters 3, 4, 6, and 7 await further instruction. Publication was not requested.
+
+### 2026-10-24 — Chapter 5 bundle optimization implemented for review
+
+- The user selected Chapter 5 next. Traced the 1,298.59 kB minified entry mainly
+  to the 1,101 kB shared catalog JSON. Split gallery search/filter data from shared
+  SEO metadata and retain only each taxon's exact cover photo in the shared index.
+  Reuse overview text across metadata/search. Rebuilt generated indexes from source.
+- Lazy-load the gallery route and keep the full-record registry with detail code;
+  preserve the static reading view until the initial route is ready. Added explicit
+  catalog/search/filter/Vue chunks and retained the 500 kB warning threshold.
+- Added `npm run audit:bundle` and final-output size/module diagnostics in ignored
+  `dist/.vite/bundle-report.json`, with a failing exit code for oversized chunks.
+  Added actual deferred-route loading/budget browser coverage and a real-corpus
+  metadata-preservation test; test catalog consumers assemble all split indexes.
+- **Measurements:** largest chunk 1,298.59 → 476.83 kB; zero over-budget chunks
+  for root/subpath builds. Subpath static entry graph is 592.44 kB raw / 130.27 kB
+  gzip. Cold Chrome JS body bytes: gallery/filtered 283,576 → 247,494 (12.7% less);
+  Boletus edulis 305,225 → 166,667 (45.4% less). Request counts grow 1→7 / 3→6;
+  measurements cover local compressed JS bodies, not Lighthouse scores/timings.
+- **Verification:** 82 Node tests, 46 main browser tests, 10 subpath tests, and
+  11 accessibility tests passed. Root/subpath builds and bundle audits passed.
+  Full `posts.json` and all species JSON have no diff; 388 observations, 327 taxa,
+  and 1,641 photos remain. `git diff --check` passed. Updated README and the
+  Chapter 5 report with architecture, commands, measurements, and review status.
+  Metadata audit ran with known source omissions. A final Windows `ENOTEMPTY`
+  while clearing `dist/thumbs` resolved on an identical successful rebuild retry.
+- **Build/review state:** `dist/` targets `/encyclopedia/`. Awaiting user review;
+  no commit/push or other chapter started. Shared catalog is 476.83 kB, so keep
+  the budget checks active as content grows. Chapters 3, 4, 6, and 7 remain pending.
 
 ### 2026-10-24 — Record artwork, bundle-size, coverage, and CI follow-ups
 

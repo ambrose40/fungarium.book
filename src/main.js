@@ -1,7 +1,6 @@
 import { createApp } from 'vue'
 import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router'
 import App from './App.vue'
-import GalleryView from './views/GalleryView.vue'
 import { species } from './data'
 import { applyPageMetadata, pageMetadata } from './lib/seo.mjs'
 import './style.css'
@@ -21,7 +20,7 @@ if (!legacyHash) window.addEventListener('hashchange', () => {
 const router = createRouter({
   history: legacyHash ? createWebHashHistory(import.meta.env.BASE_URL) : createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    { path: '/', name: 'gallery', component: GalleryView },
+    { path: '/', name: 'gallery', component: () => import('./views/GalleryView.vue') },
     { path: legacyHash ? '/fungi/:id' : '/fungi/:id/', name: 'detail', component: () => import('./views/DetailView.vue') },
     { path: '/:pathMatch(.*)*', redirect: '/' },
   ],
@@ -36,4 +35,7 @@ router.afterEach(to => {
   applyPageMetadata(pageMetadata({ item, species, query: to.query, base: import.meta.env.BASE_URL, origin: import.meta.env.VITE_SITE_ORIGIN, error: to.name === 'detail' && !item ? 'not-found' : '' }))
 })
 
-createApp(App).use(router).mount('#app')
+// Keep the readable static page until the initial route's lazy modules are ready.
+const app = createApp(App)
+app.use(router)
+router.isReady().then(() => app.mount('#app'))

@@ -97,19 +97,29 @@ export async function buildContent() {
   await mkdir(path.join(root, 'public/images'), { recursive: true })
   await Promise.all(TOP_NINE_SLIDES.map(slide => copyFile(path.join(root, slide.source), path.join(root, 'public', slide.src.replace(/^\//u, '')))))
   await writeFile(path.join(root, 'src/data/posts.json'), JSON.stringify(content, null, 2) + '\n')
-  // The gallery loads only a compact index; full captions are loaded per species page.
+  // Shared metadata stays small; gallery-only search/filter data is split out.
   await mkdir(path.join(root, 'src/data/species'), { recursive: true })
   await Promise.all(species.map(item => writeFile(path.join(root, `src/data/species/${item.id}.json`), JSON.stringify(item))))
+  const searchIndex = Object.fromEntries(species.map(item => [item.id, summarizeScientificText(item.science)]))
   const index = species.map(item => ({
     id: item.id, latinName: item.latinName, identification: item.identification,
     genus: item.genus, family: item.family, taxonomicClass: item.taxonomicClass, commonName: item.commonName,
     organismGroup: item.organismGroup,
     latestDate: item.latestDate, hashtags: item.hashtags,
-    characteristics: item.characteristics,
-    science: { commonNames: item.science.commonNames, gbifUrl: item.science.gbifUrl, searchText: summarizeScientificText(item.science) },
-    observations: item.observations.map(post => ({ date: post.date, location: post.location, photos: post.photos })),
+    science: { commonNames: item.science.commonNames, gbifUrl: item.science.gbifUrl, searchText: searchIndex[item.id].overview ? { overview: searchIndex[item.id].overview } : {} },
+    observations: item.observations.map(post => ({
+      date: post.date, location: post.location,
+      photos: post === item.observations.find(encounter => encounter.photos.length) ? post.photos.slice(0, 1) : [],
+    })),
   }))
-  await writeFile(path.join(root, 'src/data/index.json'), JSON.stringify({ metadata: content.metadata, species: index, characteristicFilters, scientificSearchFields }))
+  await writeFile(path.join(root, 'src/data/index.json'), JSON.stringify({ metadata: content.metadata, species: index }))
+  // Overviews already live in shared metadata for page descriptions.
+  const descriptions = Object.fromEntries(Object.entries(searchIndex).map(([id, { overview, ...fields }]) => [id, fields]))
+  await writeFile(path.join(root, 'src/data/search-index.json'), JSON.stringify(descriptions))
+  await writeFile(path.join(root, 'src/data/filter-index.json'), JSON.stringify({
+    characteristicFilters, scientificSearchFields,
+    characteristics: Object.fromEntries(species.map(item => [item.id, item.characteristics])),
+  }))
   console.info(`Content: ${content.metadata.postCount} fungi observations, ${content.metadata.speciesCount} species, ${content.metadata.photoCount} photos; ${unlinkedPosts} observations without Instagram IDs.`)
   return content
 }

@@ -34,6 +34,7 @@ A Vue 3 + Vite photographic encyclopedia built from the original `*.txt` Instagr
 - [Instagram photo downloader](#download-photos-from-the-caption-post-ids)
 - [Account export and import](#account-export-and-import)
 - [Project structure and script reference](#project-structure-and-script-reference)
+- [Production bundles](#production-bundles)
 - [Verification and deployment](#verification-and-deployment)
 - [Follow-ups and TODOs](#follow-ups-and-todos)
 - [Project memory and contributing](#project-memory-and-contributing)
@@ -130,6 +131,7 @@ Open the local URL printed by Vite (normally `http://127.0.0.1:5173`).
 | `npm run dev` | Regenerate content and branding assets, then start Vite on `127.0.0.1` |
 | `npm run content` | Regenerate species pages, the gallery index, scientific search fields, organism groups, characteristic filter options/counts, and branding assets |
 | `npm run audit:metadata` | Read generated content and report hashtag coverage/variants and missing profile/encounter source fields |
+| `npm run audit:bundle` | Inspect the latest production build's JavaScript sizes, gzip estimates, module composition, and 500 kB chunk budget; exit nonzero for oversized chunks |
 | `npm run build` | Regenerate content and create client assets, static species HTML, and SEO files in `dist/` |
 | `npm run build:encyclopedia` | Build production assets for hosting at `/encyclopedia/` |
 | `npm run preview` | Serve the existing production build locally; run `build` first |
@@ -169,11 +171,15 @@ The generator writes:
 | Generated output | Contents |
 | --- | --- |
 | `src/data/posts.json` | Complete corpus, metadata, scientific profiles, taxonomy classes, encounters, organism groups, and compact characteristic keys |
-| `src/data/index.json` | Gallery records with taxonomy classes, latest-profile text grouped by scientific category, generated search fields/counts, organism groups, characteristic keys, and mycological filter options/counts |
+| `src/data/index.json` | Shared taxon/SEO metadata, names, taxonomy, hashtags, overview text, encounter dates/places/counts, and one cover-photo reference per taxon |
+| `src/data/search-index.json` | Latest-profile scientific search text keyed by taxon ID; overviews are reused from the shared index |
+| `src/data/filter-index.json` | Mycological filter definitions/counts, per-taxon characteristic keys, and scientific search field definitions/counts |
 | `src/data/species/<species-id>.json` | Individual species pages, loaded on demand |
 | `public/branding/` and `public/icons/` | Selected logo/favicon assets copied from `fungi-support/` |
 
 Do not edit generated JSON by hand: update the source captions and run `npm run content`. The gallery does not need to download every full caption to search or apply characteristic filters.
+
+The gallery joins the shared, search, and filter indexes through `src/catalog-data.js` and `src/lib/catalog-data.mjs`. The shared index retains the same first available cover photograph and every encounter's date/location; complete photo lists, scientific profiles, and original captions remain in `posts.json` and individual species JSON. Direct profiles use shared metadata and load their own full record through `src/species-data.js`.
 
 ## Search and taxonomic quick filters
 
@@ -480,7 +486,10 @@ src/
   views/                      Gallery and species-detail pages
   components/                 Media, taxonomy, characteristic, and coordinate UI
   lib/                        Search, filter, coordinate, and mycology rules
-  data/                       Generated gallery index and species JSON
+  data/                       Generated shared/search/filter indexes and species JSON
+  data.js                     Shared metadata and date formatting
+  catalog-data.js             Gallery-only assembly of search/filter data
+  species-data.js             On-demand full species-record loader
   branding.js                 Shared site name and logo URL
   dark-theme.css              Dark theme and layout overrides
   accessibility.css           Readability, contrast, keyboard focus, and reflow overrides
@@ -505,6 +514,7 @@ dist/                         Generated static website
 | `scripts/project-paths.mjs` | Shared project root and `instagram-meta/` source-directory resolution |
 | `scripts/audit-content.mjs` | Standalone caption audit; reports missing descriptions, taxonomy, references, photography details, and genus-level identifications |
 | `scripts/audit-metadata.mjs` | Read-only generated-content audit for hashtag coverage/variants and source-data omissions |
+| `scripts/bundle-report.mjs` | Build plugin writing final chunk/module size diagnostics; CLI for the latest build's bundle report and budget check |
 | `scripts/seo-pages.mjs` | Vite plugin generating metadata, readable static HTML, clean profile pages, sitemap, and robots template |
 | `scripts/prepare-branding.mjs` | Branding asset-copy helper called by the content builder |
 | `scripts/maps-config.mjs` | Read the Maps browser key from the environment or ignored local key file for Vite |
@@ -530,6 +540,26 @@ Relevant application modules:
 
 Local/private files include `instagram-meta/`, `secrets/`, `content/instagram-browser/`, `content/photo-download-state.json`, and `content/photo-download.lock`. They are Git-ignored and are not copied as folders to the static site. The configured browser Maps key is compiled into JavaScript as described above. Export JSON and legacy media manifests are also excluded from Git.
 
+## Production bundles
+
+Gallery and detail routes load with dynamic `import()`. The initial static reading view stays visible until the first route's code is ready. Entering the collection loads scientific-search and characteristic-filter data once; filtering then operates locally. A direct species visit loads its own record and shared metadata, deferring gallery search/filter data until collection navigation.
+
+`vite.config.js` assigns stable chunk groups for shared catalog metadata, gallery scientific-search data, gallery filter data, and Vue/Vue Router. Explicit manual chunks keep route-only dependencies lazy. The warning budget remains **500 kB per minified JavaScript chunk**. This is a per-file budget, distinct from the total JavaScript required by a page.
+
+Inspect either build with:
+
+```sh
+npm run build
+npm run audit:bundle
+# Or inspect the deployment build:
+npm run build:encyclopedia
+npm run audit:bundle
+```
+
+Each build writes **`dist/.vite/bundle-report.json`**, containing final JavaScript raw/gzip sizes, static and dynamic imports, and module composition. The CLI prints the deployment base, static entry graph, largest chunks, catalog-field sizes, and budget status; oversized chunks produce a nonzero exit code. Gzip values are estimates of compressed JavaScript bodies, not total page weight or load-time scores. The diagnostic report is generated inside ignored `dist/`.
+
+Chapter 5 reduced the largest `/encyclopedia/` chunk from **1,298.59 kB to 476.83 kB**. A local cold-browser comparison measured compressed JavaScript bodies at **283.58 → 247.49 kB** for the gallery/filtered collection and **305.23 → 166.67 kB** for Boletus edulis. Chunk counts increase to enable caching and route-specific loading. See [the Chapter 5 review](docs/reviews/chapter-5-bundles.md) for conditions, before/after measurements, and verification.
+
 ## Verification and deployment
 
 ### Automated checks
@@ -544,6 +574,8 @@ npm run test:ui
 The Node.js suite checks real caption extraction, latest-profile selection, generated scientific-category text/counts, combined field searches, recorded class extraction, taxonomic indexes/exclusivity, organism classification/selections, additive characteristic logic/counts, coordinate formats, Maps key configuration, hashtag fidelity/normalization, metadata generation/escaping, canonical URLs, structured data, sitemap content, source-language annotation fidelity, contrast calculations, and downloader/image handling. Downloader restriction and resume tests use mocked requests rather than contacting Instagram.
 
 Browser checks cover desktop/mobile layouts, scientific-name/category search, multiple description fields, organism checkboxes, taxonomic links, thumbnail family/class filtering with keyboard and touch, class dropdown selection, characteristic selection, clear controls, URL persistence/back/forward navigation, maps links, branding, and illustrated profiles. Playwright launches installed Chrome and starts a production preview on `http://127.0.0.1:4173`; that port must be available. Screenshots are written to `test-results/`.
+
+Bundle checks enforce the 500 kB minified chunk budget from the latest build report and verify that direct profiles defer gallery search/filter chunks, then load them successfully when returning to collection search. Node checks validate split search/filter data against latest scientific profiles and preserve shared cover-photo, encounter, and name metadata.
 
 SEO checks fetch every published species HTML response, verify sitemap and social metadata, read a profile with JavaScript disabled, exercise clean and legacy URL navigation, verify dynamic metadata resets/error handling, and check hashtag expansion and case-equivalent filtering. Lighthouse validation remains a separate pending chapter.
 
@@ -628,7 +660,7 @@ The site is static after generation: deploying new captions, images, or generate
 
 ## Follow-ups and TODOs
 
-Chapters 1 and 2 implementations are approved by the user; human assistive-technology follow-ups for Chapter 2 remain open. Chapters 3–7 are pending and await further instruction. Complete one chapter at a time, report the result, and wait for the user's green flag before committing or continuing. Record findings, fixes, and verification results in `PROJECT_MEMORY.md`.
+Chapters 1, 2, and 5 implementations are approved by the user; human assistive-technology follow-ups for Chapter 2 remain open. Chapters 3, 4, 6, and 7 remain pending and await further instruction. Complete one chapter at a time, report the result, and wait for the user's green flag before committing or continuing. Record findings, fixes, and verification results in `PROJECT_MEMORY.md`.
 
 1. **Page metadata and other missing supporting data**
    - [x] Audit gallery/species page metadata and miscellaneous missing data; provide factual metadata fallbacks and document source omissions in [the Chapter 1 report](docs/reviews/chapter-1-metadata.md).
@@ -653,9 +685,10 @@ Chapters 1 and 2 implementations are approved by the user; human assistive-techn
    - [ ] Explore a seasonal strip or infographic for recorded fruiting periods, such as summer to autumn.
    - [ ] Keep trait, dye-use, and fruiting-period claims grounded in the latest source caption; leave unrecorded information unspecified and preserve accessible text alternatives.
 5. **Production bundle size and chunking**
-   - [ ] Investigate the Vite warning that some chunks exceed **500 kB after minification**; inspect bundle composition and identify useful splitting boundaries.
-   - [ ] Evaluate dynamic `import()` for application code splitting and [`build.rollupOptions.output.manualChunks`](https://rollupjs.org/configuration-options/#output-manualchunks) for more deliberate chunking.
-   - [ ] Review `build.chunkSizeWarningLimit` against an intentional, documented bundle-size budget. Measure before/after bundle sizes and loading behavior, and verify root and `/encyclopedia/` builds after changes.
+   - [x] Investigate the **500 kB minified chunk warning** and identify catalog data as the main contributor; record findings in [the Chapter 5 report](docs/reviews/chapter-5-bundles.md).
+   - [x] Apply route-level dynamic imports, split generated shared/search/filter data, and use [`build.rollupOptions.output.manualChunks`](https://rollupjs.org/configuration-options/#output-manualchunks) for catalog and Vue chunk groups.
+   - [x] Retain the 500 kB `build.chunkSizeWarningLimit`, add build reports/budget checks, measure before/after page loading, and verify root and `/encyclopedia/` builds.
+   - [x] User approved Chapter 5 and requested its Conventional Commit; starting another chapter awaits further instruction.
 6. **Code coverage tooling and reporting**
    - [ ] Add a code coverage tool and reproducible report generation; decide coverage scope for Node.js utilities and Vue/browser code.
    - [ ] Consider a coverage summary or badge in the README and GitHub integration for reports, checks, or pull-request feedback.

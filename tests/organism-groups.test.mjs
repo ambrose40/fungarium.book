@@ -1,10 +1,10 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
-import { readFile } from 'node:fs/promises'
 import { classifyOrganism, readOrganismSelections, setOrganismSelections } from '../src/lib/organism-groups.mjs'
 import { filterCatalog } from '../src/lib/catalog.mjs'
+import { readCatalog } from './helpers/catalog.mjs'
 
-const { species } = JSON.parse(await readFile(new URL('../src/data/index.json', import.meta.url), 'utf8'))
+const { species } = await readCatalog()
 
 test('recorded slime-mould taxonomies take precedence over historical mushroom markers', () => {
   assert.equal(classifyOrganism(['Physaraceae', 'Myxogastria'], '🍄 Physaraceae / Myxogastria'), 'slime-moulds')

@@ -7,9 +7,10 @@ import {
   matchesCharacteristics, characteristicFacetCounts,
 } from '../src/lib/characteristic-filters.mjs'
 import { filterCatalog } from '../src/lib/catalog.mjs'
+import { readCatalog } from './helpers/catalog.mjs'
 
 const complete = JSON.parse(await readFile(new URL('../src/data/posts.json', import.meta.url), 'utf8'))
-const index = JSON.parse(await readFile(new URL('../src/data/index.json', import.meta.url), 'utf8'))
+const index = await readCatalog()
 const fixture = [
   { id: 'a', characteristics: { cap: ['convex'], 'spore-print': ['white'], ecology: ['saprotrophic'] } },
   { id: 'b', characteristics: { cap: ['flat'], 'spore-print': ['brown'], ecology: ['saprotrophic'] } },
