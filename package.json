@@ -4,7 +4,9 @@
   "license": "MIT",
   "private": true,
   "type": "module",
-  "engines": { "node": ">=22.15.0" },
+  "engines": {
+    "node": ">=22.19.0"
+  },
   "scripts": {
     "dev": "node scripts/build-content.mjs && vite --host 127.0.0.1",
     "build": "node scripts/build-content.mjs && vite build",
@@ -15,6 +17,7 @@
     "audit:metadata": "node scripts/audit-metadata.mjs",
     "audit:bundle": "node scripts/bundle-report.mjs",
     "audit:characteristics": "node scripts/audit-characteristics.mjs",
+    "audit:lighthouse": "node scripts/lighthouse/run.mjs",
     "import:instagram": "node scripts/import-instagram.mjs",
     "photos:instagram": "node scripts/fetch-instagram-photos.mjs",
     "test": "node --test tests/*.test.mjs",
@@ -27,6 +30,8 @@
     "test:subpath": "npm run build:encyclopedia && playwright test --config=playwright.subpath.config.js"
   },
   "dependencies": {
+    "@fontsource-variable/dm-sans": "^5.3.0",
+    "@fontsource/libre-caslon-display": "^5.3.0",
     "lucide-vue-next": "^0.468.0",
     "vue": "^3.5.22",
     "vue-router": "^4.5.1"
@@ -36,6 +41,8 @@
     "@playwright/test": "^1.64.1",
     "@vitejs/plugin-vue": "^6.0.1",
     "@vue/compiler-sfc": "^3.5.44",
+    "chrome-launcher": "^1.2.2",
+    "lighthouse": "^13.5.0",
     "monocart-coverage-reports": "^3.0.0",
     "sharp": "^0.35.5",
     "vite": "^7.1.9"

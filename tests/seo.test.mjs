@@ -73,6 +73,10 @@ test('metadata escapes source content and static HTML contains scientific conten
   assert.ok(body.includes('reticulate'))
   assert.ok(body.includes('Field encounters'))
   assert.ok(body.includes('/encyclopedia/?tag=boletusedulis'))
+  assert.match(body, /src="\/encyclopedia\/thumbs\/posts\/[^"]+\.cover-v1\.webp"[^>]+loading="eager" fetchpriority="high"/u)
+  assert.ok(renderMetadata(pageMetadata({ item, base: '/encyclopedia/' })).includes(`rel="preload" as="image" href="${pageMetadata({ item, base: '/encyclopedia/' }).preloadImage}"`))
+  assert.equal(pageMetadata({ base: '/encyclopedia/' }).preloadImage, '/encyclopedia/images/fungarium-2024.webp')
+  assert.equal(pageMetadata({ error: 'not-found' }).preloadImage, '')
   const template = '<head><!-- seo:head:start --><!-- seo:head:end --></head><div id="app"><!-- seo:body:start --><!-- seo:body:end --></div>'
   assert.ok(renderSeoPage(template, pageMetadata({ item }), body).includes('rel="canonical"'))
   const sitemap = sitemapXml(full.species, { base: '/encyclopedia/' })

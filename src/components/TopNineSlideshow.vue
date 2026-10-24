@@ -3,6 +3,7 @@ import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import { ChevronLeft, ChevronRight, Pause, Play } from 'lucide-vue-next'
 import { TOP_NINE_SLIDES as slides } from '../lib/top-nine.mjs'
 import { assetUrl } from '../lib/asset-urls.mjs'
+import { topNineWebpPath } from '../lib/image-delivery.mjs'
 
 const active = ref(0)
 const paused = ref(false)
@@ -62,7 +63,10 @@ onUnmounted(() => {
     <div class="top-nine-viewport" :aria-live="rotating ? 'off' : 'polite'" aria-atomic="true" @pointerdown="startSwipe" @pointerup="finishSwipe" @pointercancel="swipeStart = null">
       <div class="top-nine-track" :style="{ transform: `translateX(-${active * 100}%)` }">
         <div v-for="(slide, index) in slides" :key="slide.year" class="top-nine-slide" role="group" aria-roledescription="slide" :aria-label="`${slide.year}, slide ${index + 1} of ${slides.length}`" :aria-hidden="index !== active">
-          <img :src="assetUrl(slide.src)" :alt="slide.alt" :data-active="index === active" :fetchpriority="index === 0 ? 'high' : 'low'" decoding="async" draggable="false" />
+          <picture>
+            <source :srcset="assetUrl(topNineWebpPath(slide.src))" type="image/webp" />
+            <img :src="assetUrl(slide.src)" :alt="slide.alt" :data-active="index === active" :fetchpriority="index === 0 ? 'high' : 'low'" width="1000" height="1000" decoding="async" draggable="false" />
+          </picture>
         </div>
       </div>
     </div>
@@ -87,6 +91,7 @@ onUnmounted(() => {
 .top-nine-viewport{overflow:hidden;aspect-ratio:1;border:1px solid #3a3833;border-radius:4px;background:#050505;box-shadow:0 16px 45px #0008;touch-action:pan-y}
 .top-nine-track{display:flex;width:100%;height:100%;transition:transform .65s cubic-bezier(.22,.61,.36,1);will-change:transform}
 .top-nine-slide{flex:0 0 100%;width:100%;min-width:0;height:100%;overflow:hidden}
+.top-nine-slide picture{display:block;width:100%;height:100%}
 .top-nine-slide img{display:block;width:100%;height:100%;aspect-ratio:1;object-fit:contain;border:0;border-radius:0;box-shadow:none;transform:none;user-select:none}
 .top-nine-controls{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:12px 3px 0}
 .top-nine-years,.top-nine-playback{display:flex;align-items:center;gap:4px}

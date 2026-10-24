@@ -3,7 +3,7 @@ import { computed, nextTick, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { ArrowLeft, ArrowRight, ArrowUpRight, MapPin, CloudSun, Camera, CalendarDays, ChevronDown, BookOpen, Microscope, X, ChevronLeft, ChevronRight, Image, ExternalLink } from 'lucide-vue-next'
 import { species, formatDate } from '../data'
-import { loadSpecies } from '../species-data'
+import { cachedSpecies, loadSpecies } from '../species-data'
 import { applyPageMetadata, pageMetadata } from '../lib/seo.mjs'
 import { assetUrl } from '../lib/asset-urls.mjs'
 import MediaFrame from '../components/MediaFrame.vue'
@@ -14,8 +14,8 @@ import { containDialogFocus, focusMainContent, restoreFocus } from '../lib/focus
 import { captionLanguageRuns, languageTag } from '../lib/languages.mjs'
 
 const route = useRoute()
-const fungus = ref(null)
-const loading = ref(true)
+const fungus = ref(cachedSpecies(route.params.id))
+const loading = ref(!fungus.value)
 const loadError = ref(false)
 const lightbox = ref(null)
 let requestId = 0
@@ -25,6 +25,8 @@ watch(() => route.params.id, async id => {
   loading.value = true
   loadError.value = false
   lightbox.value?.close()
+  const cached = cachedSpecies(id)
+  if (cached) { fungus.value = cached; loading.value = false; return }
   try {
     const result = await loadSpecies(id)
     if (request === requestId) fungus.value = result
@@ -96,7 +98,7 @@ function scrollToSection(id) {
     <div class="species-overview">
       <div class="featured-media">
         <button class="featured-button" :disabled="!featured" :aria-label="`View photograph of ${fungus.latinName}`" @click="openLightbox(featured?.photos, activePhoto, $event.currentTarget)">
-          <MediaFrame :photo="featured?.photos[activePhoto]" :name="fungus.latinName" :seed="fungus.id" />
+          <MediaFrame :photo="featured?.photos[activePhoto]" :name="fungus.latinName" :seed="fungus.id" :preview="activePhoto === 0" priority />
           <span v-if="featured" class="view-photo"><Image :size="15" /> View photograph</span>
         </button>
         <div v-if="featured?.photos.length > 1" class="photo-thumbnails">

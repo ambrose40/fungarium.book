@@ -2,7 +2,7 @@
 import { nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { ArrowUpRight, House, Instagram, Menu, X } from 'lucide-vue-next'
-import { BRAND_MARK, SITE_NAME } from './branding'
+import { BRAND_MARK, BRAND_MARK_WEBP, SITE_NAME } from './branding'
 import { MAIN_SITE_URL, OTHER_PROJECTS } from './site-links'
 import { parentSitePath } from './lib/seo.mjs'
 import { containDialogFocus, focusElement, focusMainContent, restoreFocus } from './lib/focus.mjs'
@@ -57,7 +57,7 @@ onBeforeUnmount(() => {
   <header ref="header" class="site-header" @focusout="onHeaderFocusOut" @keydown.esc.prevent="closeMenu(true)">
     <div class="header-inner">
       <RouterLink to="/" class="brand" :aria-label="`${SITE_NAME} home`">
-        <img class="brand-artwork" :src="BRAND_MARK" alt="" width="52" height="52" />
+        <picture><source :srcset="BRAND_MARK_WEBP" type="image/webp" /><img class="brand-artwork" :src="BRAND_MARK" alt="" width="52" height="52" /></picture>
         <span class="brand-wordmark">Fungarium<span class="brand-domain">.INFO</span> <small>ENCYCLOPEDIA</small></span>
       </RouterLink>
       <button ref="menuButton" class="icon-button mobile-menu" :aria-expanded="menuOpen" aria-controls="main-navigation" aria-label="Toggle navigation" @click="menuOpen = !menuOpen"><X v-if="menuOpen" :size="22" /><Menu v-else :size="22" /></button>
@@ -73,7 +73,7 @@ onBeforeUnmount(() => {
   <main id="main" tabindex="-1"><RouterView /></main>
   <footer class="site-footer container">
     <div class="footer-top">
-      <div class="footer-identity"><RouterLink class="footer-brand" to="/" :aria-label="`${SITE_NAME} home`"><img :src="BRAND_MARK" alt="" width="38" height="38" /><span>Fungarium<span class="brand-domain">.INFO</span> <small>ENCYCLOPEDIA</small></span></RouterLink><p>A little curiosity. A closer look.</p></div>
+      <div class="footer-identity"><RouterLink class="footer-brand" to="/" :aria-label="`${SITE_NAME} home`"><picture><source :srcset="BRAND_MARK_WEBP" type="image/webp" /><img :src="BRAND_MARK" alt="" width="38" height="38" /></picture><span>Fungarium<span class="brand-domain">.INFO</span> <small>ENCYCLOPEDIA</small></span></RouterLink><p>A little curiosity. A closer look.</p></div>
       <p class="footer-credit">Photography & field notes by <a href="https://www.instagram.com/fungarium.info/" target="_blank" rel="noopener noreferrer">@fungarium.info <ArrowUpRight :size="13" /></a><br /><span>Made for the wonderfully overlooked.</span></p>
     </div>
     <section class="footer-projects" aria-labelledby="footer-projects-title">
@@ -88,7 +88,7 @@ onBeforeUnmount(() => {
   </footer>
   <dialog ref="about" class="about-dialog" aria-labelledby="about-title" aria-describedby="about-intro" @keydown.tab="containDialogFocus" @close="restoreFocus(aboutOpener, menuButton)" @click="event => { if (event.target === about) about.close() }">
     <button class="icon-button dialog-close" aria-label="Close about dialog" @click="about.close()"><X :size="22" /></button>
-    <img class="about-mark" :src="BRAND_MARK" alt="Fungarium mushroom artwork" width="80" height="80" /><p class="eyebrow">THE STORY BEHIND THE SPORES</p>
+    <picture><source :srcset="BRAND_MARK_WEBP" type="image/webp" /><img class="about-mark" :src="BRAND_MARK" alt="Fungarium mushroom artwork" width="80" height="80" /></picture><p class="eyebrow">THE STORY BEHIND THE SPORES</p>
     <h2 id="about-title">Fungarium.INFO<br /><em>Encyclopedia.</em></h2>
     <p id="about-intro">A photographic encyclopedia bringing together the fungi, slime moulds, and tiny woodland discoveries documented by <a href="https://www.instagram.com/fungarium.info/" target="_blank" rel="noopener noreferrer">@fungarium.info</a>.</p>
     <p>Each species has a scientific profile taken from its most recent dated caption, alongside a journal of individual encounters: where it grew, what the weather was like, and how the photograph was made.</p>

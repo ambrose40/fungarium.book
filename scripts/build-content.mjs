@@ -10,6 +10,10 @@ import { buildScientificSearchFields, summarizeScientificText } from '../src/lib
 import { classifyOrganism } from '../src/lib/organism-groups.mjs'
 import { recordedTaxonomicClass } from '../src/lib/catalog.mjs'
 import { prepareMycologyArt } from './mycology-artwork.mjs'
+import { prepareFonts } from './prepare-fonts.mjs'
+import { prepareCoverPreviews } from './prepare-previews.mjs'
+import { topNineWebpPath } from '../src/lib/image-delivery.mjs'
+import sharp from 'sharp'
 
 export { root } from './project-paths.mjs'
 async function optionalJson(file, fallback) {
@@ -19,6 +23,7 @@ async function optionalJson(file, fallback) {
 
 export async function buildContent() {
   await prepareBranding(root)
+  await prepareFonts(root)
   await prepareMycologyArt()
   const captionDirectory = instagramMetaDirectory()
   const entries = await readdir(captionDirectory)
@@ -78,6 +83,7 @@ export async function buildContent() {
     characteristics: summarizeCharacteristics(item.science),
   }))
   const characteristicFilters = buildCharacteristicFilterIndex(species)
+  await prepareCoverPreviews(species, root)
   const scientificSearchFields = buildScientificSearchFields(species)
   const content = {
     metadata: {
@@ -98,6 +104,7 @@ export async function buildContent() {
   await mkdir(path.join(root, 'src/data'), { recursive: true })
   await mkdir(path.join(root, 'public/images'), { recursive: true })
   await Promise.all(TOP_NINE_SLIDES.map(slide => copyFile(path.join(root, slide.source), path.join(root, 'public', slide.src.replace(/^\//u, '')))))
+  await Promise.all(TOP_NINE_SLIDES.map(slide => sharp(path.join(root, slide.source)).resize({ width: 1000, height: 1000, fit: 'inside', withoutEnlargement: true }).webp({ quality: 84 }).toFile(path.join(root, 'public', topNineWebpPath(slide.src).replace(/^\//u, '')))))
   await writeFile(path.join(root, 'src/data/posts.json'), JSON.stringify(content, null, 2) + '\n')
   // Shared metadata stays small; gallery-only search/filter data is split out.
   await mkdir(path.join(root, 'src/data/species'), { recursive: true })

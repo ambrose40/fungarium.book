@@ -2,17 +2,24 @@
 import { computed, ref, watch } from 'vue'
 import { Image } from 'lucide-vue-next'
 import { assetUrl } from '../lib/asset-urls.mjs'
+import { coverPreviewPath } from '../lib/image-delivery.mjs'
 
-const props = defineProps({ photo: Object, name: { type: String, default: '' }, thumbnail: Boolean, compact: Boolean, decorative: Boolean, seed: { type: String, default: '' } })
+const props = defineProps({ photo: Object, name: { type: String, default: '' }, thumbnail: Boolean, compact: Boolean, decorative: Boolean, preview: Boolean, priority: Boolean, seed: { type: String, default: '' } })
 const failed = ref(false)
-const src = computed(() => assetUrl(props.thumbnail ? props.photo?.thumb || props.photo?.src : props.photo?.src))
-watch(src, () => { failed.value = false })
+const original = ref(false)
+const requested = computed(() => assetUrl(props.thumbnail ? props.photo?.thumb || props.photo?.src : props.preview ? coverPreviewPath(props.photo) : props.photo?.src))
+const src = computed(() => original.value ? assetUrl(props.photo?.src) : requested.value)
+watch(requested, () => { failed.value = false; original.value = false })
+function onError() {
+  if (props.preview && src.value !== assetUrl(props.photo?.src)) original.value = true
+  else failed.value = true
+}
 const tone = computed(() => [...(props.seed || props.name)].reduce((sum, char) => sum + char.charCodeAt(0), 0) % 5)
 </script>
 
 <template>
   <div class="media-frame" :class="[`tone-${tone}`, { 'is-placeholder': !src || failed, compact }]">
-    <img v-if="src && !failed" :src="src" :alt="decorative ? '' : photo.alt || name" loading="lazy" decoding="async" @error="failed = true" />
+    <img v-if="src && !failed" :src="src" :alt="decorative ? '' : photo.alt || name" width="600" height="400" :loading="priority ? 'eager' : 'lazy'" :fetchpriority="priority ? 'high' : 'auto'" decoding="async" @error="onError" />
     <template v-else>
       <svg class="mushroom-sketch" viewBox="0 0 260 220" fill="none" aria-hidden="true">
         <g stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">

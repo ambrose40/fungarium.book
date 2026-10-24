@@ -37,6 +37,7 @@ A Vue 3 + Vite photographic encyclopedia built from the original `*.txt` Instagr
 - [Production bundles](#production-bundles)
 - [Verification and deployment](#verification-and-deployment)
 - [Code coverage](#code-coverage)
+- [Lighthouse validation](#lighthouse-validation)
 - [Follow-ups and TODOs](#follow-ups-and-todos)
 - [Project memory and contributing](#project-memory-and-contributing)
 
@@ -45,6 +46,8 @@ A Vue 3 + Vite photographic encyclopedia built from the original `*.txt` Instagr
 The black/charcoal theme takes its direction from [fungarium.info](https://fungarium.info/), with the original red mushroom logo and browser/device icons supplied in `fungi-support/favicon_package_v0.16/`. `npm run content`, `dev`, and `build` copy the selected artwork into `public/branding/` and `public/icons/`. Theme colours are centralized in `src/dark-theme.css`; the device manifest uses the same site identity and dark background.
 
 The gallery prioritizes photography. On phones (up to 600 px wide), the TopNine slideshow appears before the introduction and species cards use one full-width column with larger captions. **Explore the collection** moves directly to the photo grid below the sticky header and respects reduced-motion preferences.
+
+DM Sans and Libre Caslon Display are self-hosted WOFF2 fonts with system fallbacks and `font-display: swap`. The build copies them from the Fontsource dependencies into `public/fonts/`, together with their SIL Open Font License files. The Latin sans and display fonts are preloaded; extended Latin loads when needed. Browsing the site makes no Google Fonts requests. Original branding also has a lossless WebP delivery version with PNG fallback.
 
 Species pages combine all usable observation coordinates on one inline Google Map when a Maps JavaScript API key is configured. Each encounter also retains its own coordinate link. DMS, curly-prime, prefixed-hemisphere, and annotated-decimal formats are normalized by `src/lib/coordinates.mjs`; the original caption text is retained as the visible link. Unparseable coordinates stay plain text rather than linking to an unrelated place.
 
@@ -98,8 +101,8 @@ This is a browser API key and is included in the compiled client JavaScript. Con
 
 ### Requirements
 
-- **Node.js 22.15 or newer**; Node.js 24 is recommended, with npm installed. The minimum includes the Monocart 3 coverage tooling.
-- **Google Chrome** for the authenticated photo downloader and Playwright browser checks. Building and browsing the website do not require Chrome on the build machine.
+- **Node.js 22.19 or newer**; Node.js 24 is recommended, with npm installed. The minimum includes Lighthouse 13.5 and Monocart 3 tooling.
+- **Google Chrome** for the authenticated photo downloader, Playwright browser checks, and Lighthouse audits. Building and browsing the website do not require Chrome on the build machine.
 - The original caption files in `instagram-meta/`, plus the `TopNine/` collages and `fungi-support/` assets in the project root.
 - A configured Maps JavaScript API browser key for inline observation maps; coordinate links work without one.
 
@@ -130,10 +133,11 @@ Open the local URL printed by Vite (normally `http://127.0.0.1:5173`).
 | Command | Purpose |
 | --- | --- |
 | `npm run dev` | Regenerate content and branding assets, then start Vite on `127.0.0.1` |
-| `npm run content` | Regenerate species pages, shared/search/filter indexes, characteristic options/counts, branding, and field-guide illustration assets |
+| `npm run content` | Regenerate species data/indexes, characteristic options/counts, branding, local fonts, cover previews, TopNine delivery assets, and field-guide illustrations |
 | `npm run audit:metadata` | Read generated content and report hashtag coverage/variants and missing profile/encounter source fields |
 | `npm run audit:bundle` | Inspect the latest production build's JavaScript sizes, gzip estimates, module composition, and 500 kB chunk budget; exit nonzero for oversized chunks |
 | `npm run audit:characteristics -- <options>` | Report latest-profile visual coverage and illustration assets; `--details` lists source candidates, `--compare-head` checks source-record preservation against Git HEAD |
+| `npm run audit:lighthouse -- <options>` | Audit the existing `/encyclopedia/` production build on mobile/desktop; save HTML/JSON reports, settings, and repeated-run medians under ignored `lighthouse-results/` |
 | `npm run build` | Regenerate content and create client assets, static species HTML, and SEO files in `dist/` |
 | `npm run build:encyclopedia` | Build production assets for hosting at `/encyclopedia/` |
 | `npm run preview` | Serve the existing production build locally; run `build` first |
@@ -152,7 +156,7 @@ Open the local URL printed by Vite (normally `http://127.0.0.1:5173`).
 
 After editing captions or adding images, run `npm run content` to refresh a running development site. `dev` and `build` also regenerate content automatically when started.
 
-Generated clean routes work on ordinary static hosting with directory index files; legacy hash routes remain available. Deploy all of `dist/`, including the generated `fungi/` tree, after building. The interface uses locally bundled icons and system fallbacks for its optional Google Fonts.
+Generated clean routes work on ordinary static hosting with directory index files; legacy hash routes remain available. Deploy all of `dist/`, including the generated `fungi/` tree and `fonts/`, after building. Icons and fonts are served locally with system-font fallbacks.
 
 ## Content generation and source rules
 
@@ -182,6 +186,8 @@ The generator writes:
 | `src/data/filter-index.json` | Mycological filter definitions/counts, per-taxon characteristic keys, and scientific search field definitions/counts |
 | `src/data/species/<species-id>.json` | Individual species pages, loaded on demand |
 | `public/branding/` and `public/icons/` | Selected logo/favicon assets copied from `fungi-support/` |
+| `public/fonts/` | Self-hosted Fontsource WOFF2 fonts and redistribution licenses |
+| `public/thumbs/posts/<post-id>/*.cover-v1.webp` | Generated first-cover display previews; ignored with local thumbnails |
 | `public/illustrations/mycology/*.webp` | Original field-guide raster schematics generated from `scripts/mycology-artwork.mjs` |
 
 Do not edit generated JSON by hand: update the source captions and run `npm run content`. The gallery does not need to download every full caption to search or apply characteristic filters.
@@ -336,6 +342,8 @@ Supported formats: JPG, JPEG, PNG, WebP, AVIF. Photos are naturally ordered by f
 
 Gallery and encounter image slots, thumbnail strips, featured images, and their placeholders use a **3:2 landscape display ratio**. Photos fill those frames; original files are retained for the full-image viewer. WebP thumbnail generation preserves each image's own aspect ratio inside a maximum 600 × 600 bounding box, rather than forcing a square crop.
 
+Content generation also creates a display preview of each taxon's first available cover: **maximum 1200 × 1200, WebP quality 84**, rotated for orientation, without enlargement or cropping. A source such as `images/posts/<id>/01.jpg` produces `thumbs/posts/<id>/01.cover-v1.webp`. Unchanged previews are reused by source/output modification time. The featured first photo is eager/high-priority and preloaded from static HTML; the interactive frame falls back to its original if the preview is unavailable. Other selected featured photos and the full-image viewer retain original URLs. Rebuild after changing local photographs, and deploy the generated preview files with the thumbnails.
+
 Downloaded photographs and thumbnails under `public/images/posts/` and `public/thumbs/posts/` are excluded from Git. Make those folders available on the build machine when deploying with photographs; `npm run build` copies the public assets into `dist/`.
 
 ### TopNine slideshow
@@ -350,7 +358,7 @@ The homepage displays all three annual collages in the same introductory image s
 
 Slides advance every **five seconds** and loop through the years. Use the year buttons, previous/next controls, left/right arrow keys, or touch swipes to select a slide. Manual selection pauses rotation; the play button resumes it. Rotation is temporarily suspended while hovered or while the browser tab is hidden. Reduced-motion preferences start the slideshow paused.
 
-The original square collages are displayed in full, independently of the 3:2 species-photo slots. Their individual tiles are not assigned to species. Sources and slide descriptions are defined in `src/lib/top-nine.mjs`, and playback is implemented in `src/components/TopNineSlideshow.vue`. Content generation copies all three images; asset paths work for root and `/encyclopedia/` deployments.
+The original square collages are displayed in full, independently of the 3:2 species-photo slots. Their individual tiles are not assigned to species. Sources and slide descriptions are defined in `src/lib/top-nine.mjs`, and playback is implemented in `src/components/TopNineSlideshow.vue`. Content generation copies all three JPEGs and creates corresponding `fungarium-<year>.webp` delivery versions, bounded to 1000 × 1000 at quality 84 without enlargement. The slideshow uses WebP with JPEG fallback and preloads the initial 2024 collage. Asset paths work for root and `/encyclopedia/` deployments.
 
 ## Download photos from the caption post IDs
 
@@ -513,6 +521,7 @@ public/
   thumbs/posts/<post-id>/      WebP thumbnails
   illustrations/mycology/     Generated original field-guide WebP artwork
   branding/                   Generated logo copy
+  fonts/                      Local WOFF2 fonts and SIL OFL licenses
   icons/                      Generated browser/device icons
   site.webmanifest            Site identity and dark install-screen colours
 content/                      Local downloader state and optional account export
@@ -534,6 +543,9 @@ dist/                         Generated static website
 | `scripts/mycology-artwork.mjs` | Original schematic geometry and reproducible Sharp/WebP illustration generation |
 | `scripts/audit-characteristics.mjs` | Latest-profile visual coverage, artwork inventory, source-candidate review, and optional Git HEAD preservation check |
 | `scripts/coverage/` | Native V8 collection, Vue source mapping, report validation/export, coverage snapshots, and GitHub summary output |
+| `scripts/lighthouse/` | Production-preview audit runner, input validation, credential redaction, and mobile/desktop median summaries |
+| `scripts/prepare-fonts.mjs` | Copy self-hosted fonts and OFL licenses from installed Fontsource packages |
+| `scripts/prepare-previews.mjs` | Generate bounded cover-display WebP derivatives without modifying originals |
 | `scripts/seo-pages.mjs` | Vite plugin generating metadata, readable static HTML, clean profile pages, sitemap, and robots template |
 | `scripts/prepare-branding.mjs` | Branding asset-copy helper called by the content builder |
 | `scripts/maps-config.mjs` | Read the Maps browser key from the environment or ignored local key file for Vite |
@@ -563,7 +575,7 @@ Local/private files include `instagram-meta/`, `secrets/`, `content/instagram-br
 
 ## Production bundles
 
-Gallery and detail routes load with dynamic `import()`. The initial static reading view stays visible until the first route's code is ready. Entering the collection loads scientific-search and characteristic-filter data once; filtering then operates locally. A direct species visit loads its own record and shared metadata, deferring gallery search/filter data until collection navigation.
+Gallery and detail routes load with dynamic `import()`. The initial static reading view stays visible until the first route's code and, for a profile, its record are ready. Successful species records and in-flight requests are shared for the session, avoiding a profile loading-screen flash on first render or revisits. Entering the collection loads scientific-search and characteristic-filter data once; filtering then operates locally. A direct species visit loads its own record and shared metadata, deferring gallery search/filter data until collection navigation.
 
 `vite.config.js` assigns stable chunk groups for shared catalog metadata, gallery scientific-search data, gallery filter data, and Vue/Vue Router. Explicit manual chunks keep route-only dependencies lazy. The warning budget remains **500 kB per minified JavaScript chunk**. This is a per-file budget, distinct from the total JavaScript required by a page.
 
@@ -590,10 +602,10 @@ Chapter 5 reduced the largest `/encyclopedia/` chunk from **1,298.59 kB to 476.8
 <!-- coverage-summary:start -->
 | Scope | Lines | Statements | Functions | Branches | Files |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| Node utilities / scripts | 66.89% | 62.75% | 63.94% | 60.11% | 30 |
-| Browser application / Vue | 95.88% | 92.30% | 90.41% | 83.57% | 35 |
+| Node utilities / scripts | 66.03% | 62.48% | 65.56% | 59.87% | 35 |
+| Browser application / Vue | 96.00% | 92.61% | 91.05% | 83.54% | 36 |
 
-Measured 2026-10-24 with Node v24.4.1; Chrome 155.0.8059.85. Source fingerprint: `aca5abc0e6e9`.
+Measured 2026-10-24 with Node v24.4.1; Chrome 155.0.8059.85. Source fingerprint: `12bad032e603`.
 
 The scopes are separate measurements with overlapping shared utilities; percentages are not combined. Untested in-scope files count as zero. Regenerate this snapshot after code or test changes.
 <!-- coverage-summary:end -->
@@ -629,6 +641,21 @@ Browser collection uses `playwright.coverage.config.js`, port **4178**, and a se
 
 For GitHub integration, LCOV/Cobertura are ready for coverage consumers, and `npm run coverage` automatically appends its table when `GITHUB_STEP_SUMMARY` is available. `npm run coverage:summary -- --github` can append it explicitly. GitHub workflow scheduling and hosted report publication are Chapter 7 work. [The Chapter 6 review](docs/reviews/chapter-6-coverage.md) records methodology, baseline gaps, validation, and follow-ups.
 
+### Lighthouse validation
+
+Build the normal deployment output, then run the audit matrix with installed Chrome and port **4179** available:
+
+```sh
+npm run build:encyclopedia
+npm run audit:lighthouse -- --label=review --runs=3
+# Optional focused audit:
+npm run audit:lighthouse -- --label=profile-review --runs=3 --pages=boletus,amanita --devices=mobile
+```
+
+`--runs=1..5` defaults to one; devices default to `mobile,desktop`. Pages are `gallery`, `filtered` (Boletus + pores), `boletus`, and `amanita`. Each audit starts a fresh Chrome profile with standard Lighthouse simulated throttling. The runner serves the existing production build with normal external requests and normal Maps configuration. It saves redacted HTML/JSON reports plus URLs, timestamps, settings, versions, revision/dirty status, build-HTML hash, findings, and per-page/device medians in **`lighthouse-results/<label>/`**. Labels use lowercase letters, digits, and hyphens; reuse overwrites matching reports. Reports are local/ignored; the configured Maps key is redacted from saved report data. Runtime errors fail the command; category scores are measurements rather than arbitrary pass/fail thresholds.
+
+The Chapter 3 final matrix used **three runs per page/device (24 audits)**. Median Performance scores were **76 / 77 / 91 / 79 mobile** and **99 / 99 / 100 / 99 desktop**, respectively. Accessibility and Best Practices were **100** throughout. SEO was **100** for indexable pages and **66** for the intentionally `noindex, follow` filtered collection. Recorded CLS was **0 in all 24 runs**. Mobile gallery and Amanita LCP remain open optimization work; localhost lab scores do not establish deployed field performance. [The Chapter 3 review](docs/reviews/chapter-3-lighthouse.md) contains baseline comparisons, conditions, fixes, regressions, and remaining findings.
+
 ### Automated checks
 
 ```sh
@@ -644,7 +671,7 @@ Browser checks cover desktop/mobile layouts, scientific-name/category search, mu
 
 Bundle checks enforce the 500 kB minified chunk budget from the latest build report and verify that direct profiles defer gallery search/filter chunks, then load them successfully when returning to collection search. Node checks validate split search/filter data against latest scientific profiles and preserve shared cover-photo, encounter, and name metadata.
 
-SEO checks fetch every published species HTML response, verify sitemap and social metadata, read a profile with JavaScript disabled, exercise clean and legacy URL navigation, verify dynamic metadata resets/error handling, and check hashtag expansion and case-equivalent filtering. Lighthouse validation remains a separate pending chapter.
+SEO checks fetch every published species HTML response, verify sitemap and social metadata, read a profile with JavaScript disabled, exercise clean and legacy URL navigation, verify dynamic metadata resets/error handling, and check hashtag expansion and case-equivalent filtering. Image-delivery checks cover eager previews, original-image fallback/lightboxes, static reading while record loads, local fonts, and WebP delivery. Lighthouse measurements are documented separately above.
 
 Observation-map checks cover one map per species, lazy loading, exact current/historical pins, fitting all positions, single-location zoom, independence from encounter expansion, shared script loading, cleanup on navigation, mobile sizing, and network/authentication failure fallbacks. Browser suites intercept Maps JavaScript requests with a local test double, so automated checks make no live Maps API calls. Map-specific checks are skipped if the production build has no key; a nonempty dummy `GOOGLE_MAPS_API_KEY` at build time exercises these checks without a real key. Build with the actual browser key for deployment.
 
@@ -677,7 +704,7 @@ npm run build
 npm run preview
 ```
 
-Verify the local production preview, then upload the **contents of `dist/`** to the hosting root. Keep `index.html`, the generated `fungi/` pages, `assets/`, images, thumbnails, branding, icons, manifest, sitemap, and robots file together. Generated species routes have actual directory index files, so no SPA fallback rewrite is required for them. Keep the host's normal HTTP 404 behavior for missing directories. Legacy hash bookmarks continue to work in the browser.
+Verify the local production preview, then upload the **contents of `dist/`** to the hosting root. Keep `index.html`, the generated `fungi/` pages, `assets/`, images, thumbnails, fonts/licenses, branding, icons, manifest, sitemap, and robots file together. Generated species routes have actual directory index files, so no SPA fallback rewrite is required for them. Keep the host's normal HTTP 404 behavior for missing directories. Legacy hash bookmarks continue to work in the browser.
 
 ### Deploy at `/encyclopedia/`
 
@@ -707,6 +734,7 @@ public_html/
     fungi/<species-id>/index.html
     images/
     thumbs/
+    fonts/
     branding/
     icons/
     site.webmanifest
@@ -727,7 +755,7 @@ The site is static after generation: deploying new captions, images, or generate
 
 ## Follow-ups and TODOs
 
-Chapters 1, 2, 4, 5, and 6 implementations are approved by the user; human assistive-technology follow-ups for Chapter 2 remain open. Chapters 3 and 7 remain pending and await further instruction. Complete one chapter at a time, report the result, and wait for the user's green flag before committing or continuing. Record findings, fixes, and verification results in `PROJECT_MEMORY.md`.
+Chapters 1–6 implementations are approved by the user; human assistive-technology follow-ups for Chapter 2 and mobile performance follow-ups for Chapter 3 remain open. Chapter 7 remains pending. Complete one chapter at a time, report the result, and wait for the user's green flag before committing or continuing. Record findings, fixes, and verification results in `PROJECT_MEMORY.md`.
 
 1. **Page metadata and other missing supporting data**
    - [x] Audit gallery/species page metadata and miscellaneous missing data; provide factual metadata fallbacks and document source omissions in [the Chapter 1 report](docs/reviews/chapter-1-metadata.md).
@@ -739,11 +767,13 @@ Chapters 1, 2, 4, 5, and 6 implementations are approved by the user; human assis
    - [x] Improve and check styles/colours, text/control/photo-label contrast, font readability, CSS zoom/reflow, text spacing, and mobile layouts.
    - [x] Improve and check semantics, ARIA/labels, focus/return, targets, navigation, filters, dialogs/lightboxes, slideshow controls, map alternatives, and reduced motion; perform a separate live Maps smoke check.
    - [ ] Complete human screen-reader testing (NVDA/Chrome and VoiceOver/Safari), real browser zoom/device review, and remaining incomplete/third-party checks before claiming comprehensive conformance.
-   - [x] User approved the reviewed Chapter 2 implementation and requested its commit; starting Chapter 3 awaits further instruction.
+    - [x] User approved the reviewed Chapter 2 implementation and requested its commit.
 3. **Lighthouse validation**
-   - [ ] Run mobile and desktop Lighthouse audits against the production `/encyclopedia/` build for the gallery, a filtered collection, and representative species pages.
-   - [ ] Save reports and record Performance, Accessibility, Best Practices, and SEO results with the tested URLs, build, and audit conditions.
-   - [ ] Prioritize findings, implement improvements, and rerun the affected audits to confirm results.
+    - [x] Run mobile and desktop Lighthouse audits against the production `/encyclopedia/` build for the gallery, a filtered collection, and representative species pages.
+    - [x] Save reports and record Performance, Accessibility, Best Practices, and SEO results with URLs, build, conditions, and three-run final medians in [the Chapter 3 report](docs/reviews/chapter-3-lighthouse.md).
+    - [x] Prioritize findings, implement improvements, and rerun the affected audits to confirm results.
+    - [x] User approved Chapter 3 and requested its Conventional Commit; starting another chapter awaits further instruction.
+    - [ ] Consider further mobile LCP/image sizing and deployed cache/compression measurements as recorded in the report.
 4. **Mycological characteristics: artwork and information review**
    - [x] Replace chunky glyphs with finer original raster schematics, improve the responsive card layout, and retain keyboard-openable source evidence; see [the Chapter 4 report](docs/reviews/chapter-4-characteristics.md).
    - [x] Use plain filled spore-colour circles.

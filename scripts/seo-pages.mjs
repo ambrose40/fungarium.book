@@ -5,6 +5,7 @@ import { SITE_NAME } from '../src/branding.js'
 import { assetUrl } from '../src/lib/asset-urls.mjs'
 import { deploymentBase, metadataElements, pageMetadata, parentSitePath, siteOrigin, speciesPath } from '../src/lib/seo.mjs'
 import { languageTag } from '../src/lib/languages.mjs'
+import { coverPreviewPath } from '../src/lib/image-delivery.mjs'
 
 export function escapeHtml(value) {
   return String(value ?? '').replace(/[&<>"']/gu, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[character])
@@ -18,8 +19,8 @@ export function renderMetadata(metadata) {
   }).join('\n    ')
 }
 
-function photoHtml(photo, name, base) {
-  return photo ? `<img src="${escapeHtml(assetUrl(photo.thumb || photo.src, base))}" alt="${escapeHtml(photo.alt || name)}" loading="lazy" decoding="async" />` : ''
+function photoHtml(photo, name, base, featured = false) {
+  return photo ? `<img src="${escapeHtml(assetUrl(featured ? coverPreviewPath(photo) : photo.thumb || photo.src, base))}" alt="${escapeHtml(photo.alt || name)}" width="600" height="400" loading="${featured ? 'eager' : 'lazy'}" fetchpriority="${featured ? 'high' : 'auto'}" decoding="async" />` : ''
 }
 
 export function renderStaticContent({ item = null, species, base = '/', error = '' }) {
@@ -42,7 +43,7 @@ export function renderStaticContent({ item = null, species, base = '/', error = 
   const references = [...new Set(item.science.references)].map(url => `<li><a href="${escapeHtml(url)}">${escapeHtml(url)}</a></li>`).join('')
   const observations = item.observations.map(post => `<article><h3>${escapeHtml(post.observedAt || post.date)}</h3><p>${escapeHtml(post.location || 'Location not recorded')}</p>${post.habitat ? `<p>${escapeHtml(post.habitat)}</p>` : ''}${post.coordinates ? `<p>${escapeHtml(post.coordinates)}</p>` : ''}${post.weather ? `<p>${escapeHtml(post.weather)}</p>` : ''}${post.instagramUrl ? `<a href="${escapeHtml(post.instagramUrl)}">Original Instagram post</a>` : ''}</article>`).join('')
   const hashtags = item.hashtags.map(tag => `<a href="${escapeHtml(`${home}?tag=${encodeURIComponent(tag)}`)}">#${escapeHtml(tag)}</a>`).join(' ')
-  return `${start}<h1><em>${escapeHtml(item.latinName)}</em></h1>${item.commonName ? `<p>${escapeHtml(item.commonName)}</p>` : ''}<figure class="seo-static-photo">${photoHtml(photo, item.latinName, base)}</figure>${taxonomy}<section><h2>Names across languages</h2><ul>${names}</ul></section><section><h2>The scientific profile</h2><p>From the latest record: ${escapeHtml(item.scienceSource.date)}.</p>${traits || '<p>This latest caption does not include a scientific description.</p>'}${item.science.publication ? `<p>${escapeHtml(item.science.publication)}</p>` : ''}${references ? `<ul>${references}</ul>` : ''}</section><section><h2>Field encounters</h2>${observations}</section><section><h2>Source hashtags</h2><p>${hashtags || 'No hashtags recorded.'}</p></section></main>${footer}`
+  return `${start}<h1><em>${escapeHtml(item.latinName)}</em></h1>${item.commonName ? `<p>${escapeHtml(item.commonName)}</p>` : ''}<figure class="seo-static-photo">${photoHtml(photo, item.latinName, base, true)}</figure>${taxonomy}<section><h2>Names across languages</h2><ul>${names}</ul></section><section><h2>The scientific profile</h2><p>From the latest record: ${escapeHtml(item.scienceSource.date)}.</p>${traits || '<p>This latest caption does not include a scientific description.</p>'}${item.science.publication ? `<p>${escapeHtml(item.science.publication)}</p>` : ''}${references ? `<ul>${references}</ul>` : ''}</section><section><h2>Field encounters</h2>${observations}</section><section><h2>Source hashtags</h2><p>${hashtags || 'No hashtags recorded.'}</p></section></main>${footer}`
 }
 
 export function renderSeoPage(template, metadata, body) {

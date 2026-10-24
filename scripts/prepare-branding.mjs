@@ -1,5 +1,6 @@
 import { mkdir, copyFile } from 'node:fs/promises'
 import path from 'node:path'
+import sharp from 'sharp'
 
 export async function prepareBranding(root) {
   const source = path.join(root, 'fungi-support/favicon_package_v0.16')
@@ -13,4 +14,5 @@ export async function prepareBranding(root) {
       .map(file => copyFile(path.join(source, file), path.join(icons, file))),
     copyFile(path.join(source, 'android-chrome-192x192.png'), path.join(branding, 'fungarium-mark.png')),
   ])
+  await sharp(path.join(branding, 'fungarium-mark.png')).webp({ lossless: true }).toFile(path.join(branding, 'fungarium-mark.webp'))
 }

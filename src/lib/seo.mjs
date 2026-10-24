@@ -1,6 +1,8 @@
 import { SITE_NAME, BRAND_MARK_PATH } from '../branding.js'
 import { scientificText } from './scientific-search.mjs'
 import { uniqueHashtags } from './hashtags.mjs'
+import { coverPreviewPath } from './image-delivery.mjs'
+import { assetUrl } from './asset-urls.mjs'
 
 export const DEFAULT_SITE_ORIGIN = 'https://fungarium.info'
 export const SITE_DESCRIPTION = 'Fungi and slime-mould photography, scientific profiles, multilingual names, and original field encounters by @fungarium.info.'
@@ -86,7 +88,8 @@ export function pageMetadata({ item = null, species = [], base = '/', origin = D
       graph[1].mainEntity = { '@type': 'ItemList', numberOfItems: species.length, itemListElement: species.map((record, index) => ({ '@type': 'ListItem', position: index + 1, name: record.latinName, url: new URL(speciesPath(record.id, base), siteOrigin(origin)).href })) }
     }
   }
-  return { title, description, canonical, image, imageAlt, robots, tags, type: item && !error ? 'article' : 'website', structuredData: error ? null : { '@context': 'https://schema.org', '@graph': graph } }
+  const preloadImage = error ? '' : assetUrl(photo ? coverPreviewPath(photo) : '/images/fungarium-2024.webp', base)
+  return { title, description, canonical, image, imageAlt, preloadImage, robots, tags, type: item && !error ? 'article' : 'website', structuredData: error ? null : { '@context': 'https://schema.org', '@graph': graph } }
 }
 
 export function metadataElements(metadata) {
@@ -111,6 +114,7 @@ export function metadataElements(metadata) {
     ['meta', { name: 'twitter:image:alt', content: metadata.imageAlt }],
   ]
   if (metadata.tags.length) elements.push(['meta', { name: 'keywords', content: metadata.tags.join(', ') }])
+  if (metadata.preloadImage) elements.push(['link', { rel: 'preload', as: 'image', href: metadata.preloadImage, fetchpriority: 'high' }])
   if (metadata.structuredData) elements.push(['script', { type: 'application/ld+json', id: 'page-structured-data' }, safeJson(metadata.structuredData)])
   return elements
 }

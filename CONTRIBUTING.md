@@ -73,6 +73,8 @@ npm run build
 npm run test:ui
 npm run test:subpath
 npm run coverage
+npm run build:encyclopedia
+npm run audit:lighthouse -- --label=review --runs=3
 ```
 
 The browser checks use installed Chrome. `test:subpath` creates a fresh build for
@@ -84,3 +86,9 @@ Coverage uses an isolated source-mapped build on port 4178 and writes reports
 under ignored `coverage/`. Use `npm run coverage:summary -- --update-readme` to
 refresh the tracked snapshot/badges after successful current-input runs. The
 README documents the separate Node/browser scopes and GitHub summary output.
+
+Lighthouse requires Node 22.19+ and installed Chrome. Its port 4179 preview audits
+the existing `/encyclopedia/` production build with fresh profiles and standard
+mobile/desktop simulated throttling. Keep raw reports under ignored
+`lighthouse-results/`; record conditions, medians, expected filtered-page noindex,
+and unresolved findings in the applicable review document.

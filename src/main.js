@@ -3,6 +3,7 @@ import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router
 import App from './App.vue'
 import { species } from './data'
 import { applyPageMetadata, pageMetadata } from './lib/seo.mjs'
+import './fonts.css'
 import './style.css'
 import './dark-theme.css'
 import './seo-fallback.css'
@@ -33,6 +34,12 @@ const router = createRouter({
 router.afterEach(to => {
   const item = to.name === 'detail' ? species.find(record => record.id === to.params.id) : null
   applyPageMetadata(pageMetadata({ item, species, query: to.query, base: import.meta.env.BASE_URL, origin: import.meta.env.VITE_SITE_ORIGIN, error: to.name === 'detail' && !item ? 'not-found' : '' }))
+})
+
+router.beforeResolve(async to => {
+  if (to.name !== 'detail') return
+  const { loadSpecies } = await import('./species-data')
+  try { await loadSpecies(to.params.id) } catch { /* Detail view provides the existing load-error state. */ }
 })
 
 // Keep the readable static page until the initial route's lazy modules are ready.
