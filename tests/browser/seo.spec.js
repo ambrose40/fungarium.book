@@ -26,11 +26,11 @@ test('all published species have static HTML metadata and appear at clean sitema
   }
 })
 
-test('species profiles and their metadata are readable without running JavaScript', async ({ browser }) => {
-  const context = await browser.newContext({ javaScriptEnabled: false })
+test('species profiles and their metadata are readable without running JavaScript', async ({ browser, baseURL }) => {
+  const context = await browser.newContext({ javaScriptEnabled: false, baseURL })
   try {
     const page = await context.newPage()
-    await page.goto('http://127.0.0.1:4173/fungi/boletus-edulis/')
+    await page.goto('/fungi/boletus-edulis/')
     await expect(page.getByRole('heading', { name: 'Boletus edulis', exact: true })).toBeVisible()
     await expect(page.locator('.seo-fallback')).toContainText('reticulate')
     await expect(page.getByRole('heading', { name: 'Field encounters', exact: true })).toBeVisible()

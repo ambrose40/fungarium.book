@@ -7,15 +7,18 @@ import { siteOrigin } from './src/lib/seo.mjs'
 import { bundleReportPlugin } from './scripts/bundle-report.mjs'
 
 export default defineConfig(({ mode }) => {
+  const coverage = mode === 'coverage'
   const environment = loadEnv(mode, fileURLToPath(new URL('.', import.meta.url)), ['GOOGLE_MAPS_', 'SITE_'])
   const origin = siteOrigin(environment.SITE_ORIGIN)
   return {
     plugins: [vue(), seoPagesPlugin({ origin }), bundleReportPlugin()],
     define: {
       'import.meta.env.VITE_SITE_ORIGIN': JSON.stringify(origin),
-      'import.meta.env.VITE_GOOGLE_MAPS_API_KEY': JSON.stringify(googleMapsApiKey({ environment })),
+      'import.meta.env.VITE_GOOGLE_MAPS_API_KEY': JSON.stringify(coverage ? 'coverage-maps-test-key' : googleMapsApiKey({ environment })),
     },
     build: {
+      outDir: coverage ? 'coverage/browser-build' : 'dist',
+      sourcemap: coverage ? 'hidden' : false,
       chunkSizeWarningLimit: 500,
       rollupOptions: {
         output: {

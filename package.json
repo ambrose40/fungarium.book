@@ -4,6 +4,7 @@
   "license": "MIT",
   "private": true,
   "type": "module",
+  "engines": { "node": ">=22.15.0" },
   "scripts": {
     "dev": "node scripts/build-content.mjs && vite --host 127.0.0.1",
     "build": "node scripts/build-content.mjs && vite build",
@@ -17,6 +18,10 @@
     "import:instagram": "node scripts/import-instagram.mjs",
     "photos:instagram": "node scripts/fetch-instagram-photos.mjs",
     "test": "node --test tests/*.test.mjs",
+    "coverage": "node scripts/coverage/run.mjs all",
+    "coverage:node": "node scripts/coverage/run.mjs node",
+    "coverage:ui": "node scripts/coverage/run.mjs browser",
+    "coverage:summary": "node scripts/coverage/summary.mjs",
     "test:ui": "playwright test",
     "test:a11y": "npm run build:encyclopedia && playwright test --config=playwright.accessibility.config.js",
     "test:subpath": "npm run build:encyclopedia && playwright test --config=playwright.subpath.config.js"
@@ -30,6 +35,8 @@
     "@axe-core/playwright": "^4.14.0",
     "@playwright/test": "^1.64.1",
     "@vitejs/plugin-vue": "^6.0.1",
+    "@vue/compiler-sfc": "^3.5.44",
+    "monocart-coverage-reports": "^3.0.0",
     "sharp": "^0.35.5",
     "vite": "^7.1.9"
   }

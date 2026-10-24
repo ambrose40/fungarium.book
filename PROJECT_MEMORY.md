@@ -120,6 +120,16 @@ starting the next chapter. Apply requested amendments to the active chapter firs
   `seasonality.mjs` preserves season/month precision and separates year-round
   presence from fruiting; never infer from encounter dates. `audit:characteristics`
   reports coverage/assets; `--compare-head` allows only derived-key differences.
+- **Coverage:** Node 22.15+ (24 recommended), Monocart 3 native V8, and explicit
+  Vue compiler development dependency. `npm run coverage` measures Node tests
+  separately from main UI + accessibility Chrome tests. Include all in-scope
+  untested files at zero; exclude generated data, dependencies, tests, and coverage
+  infrastructure. Browser code uses isolated minified `coverage/browser-build/`
+  with hidden maps/dummy Maps key on port 4178; production `dist/` has no maps.
+  HTML/JSON/LCOV/Cobertura, manifests, Markdown, and gap candidates live in ignored
+  `coverage/`. `coverage:summary -- --update-readme` refreshes tracked snapshots
+  and badges only for successful current-input fingerprints; `--github` appends
+  a job summary (automatic in `coverage` when its GitHub env is present).
 
 ## Open follow-ups and TODOs
 
@@ -128,7 +138,8 @@ verified source-content curation remains open. Chapter 2 implementation and
 browser verification are approved by the user for commit, with human assistive-technology
 checks still open. The user selected Chapter 5 next and approved its implementation
 and verification for commit. Chapter 4 is implemented and approved for commit.
-Chapters 3, 6, and 7 remain pending. Chapters 4–7 were
+Chapter 6 is implemented and approved for commit; chapters 3 and 7 remain pending.
+Chapters 4–7 were
 requested on 2026-10-24 as follow-ups. Keep this list and the README's
 **Follow-ups and TODOs** section in sync as work progresses.
 
@@ -185,10 +196,14 @@ requested on 2026-10-24 as follow-ups. Keep this list and the README's
    - [x] User approved Chapter 5 and requested its Conventional Commit.
      Starting another chapter still requires an explicit instruction.
 6. **Code coverage tooling and reporting**
-   - [ ] Add a coverage tool and reproducible reports; decide coverage scope for
-     Node.js utilities and Vue/browser code.
-   - [ ] Consider a README coverage summary/badge and GitHub integration for
-     reports, checks, or pull-request feedback.
+   - [x] Add Monocart/native V8 collection, separate complete Node/browser scopes,
+     Vue source mapping, and HTML/JSON/LCOV/Cobertura reports.
+   - [x] Add refreshable README snapshots/local badges and GitHub job-summary
+     output with portable consumer exports.
+   - [x] Verify unexecuted-file zero coverage, failed/empty/stale data handling,
+     isolated builds, original-source reports, and baseline gaps in Chapter 6 review.
+   - [x] User approved Chapter 6 and requested its Conventional Commit.
+     Starting another chapter still requires an explicit instruction.
 7. **GitHub continuous integration**
    - [ ] Choose/configure a free-to-use GitHub-compatible CI service; evaluate
      GitHub Actions first for the repository's visibility, plan, and runner choice.
@@ -198,6 +213,54 @@ requested on 2026-10-24 as follow-ups. Keep this list and the README's
      and media while preserving existing Git exclusions.
 
 ## Recent changesets
+
+### 2026-10-24 — Chapter 6 approved for commit
+
+- The user approved the reviewed coverage tooling/reports and requested a
+  Conventional Commit. Updated README, review status, and this memory together.
+- **Verification:** reviewed status, implementation/dependency diff, exclusions,
+  and recent commit style. Fresh coverage summary validation, unchanged-data/artwork
+  diff, and `git diff --check` passed. Retain the recorded 96 Node / 59 coverage
+  browser/accessibility checks and ordinary production-build regression results;
+  runtime tests were not repeated for approval-only documentation edits.
+- Chapters 3 and 7, coverage-driven test improvements, source curation, and human
+  AT follow-ups await instruction. Publication was not requested.
+
+### 2026-10-24 — Chapter 6 native coverage reports implemented for review
+
+- Added Monocart Coverage Reports 3 and explicit Vue compiler dev dependencies;
+  raised the documented/package minimum to Node 22.15 (24 recommended). Preserved
+  existing Node/Playwright engines and added `coverage`, `coverage:node`,
+  `coverage:ui`, and `coverage:summary` commands.
+- Scope Node shared `.mjs` libraries/product scripts separately from browser
+  handwritten JS/MJS/Vue. Include untested files at zero and reject omitted
+  sources, missing/empty data, failed tests, and stale source/test/config hashes.
+  Fixed synthetic coverage of unloaded macro-only Vue files and Windows export
+  separators; regression fixtures verify script/props-only/template-only zeros.
+- Collect 47 UI + 12 accessibility tests against a dedicated minified hidden-map
+  build in `coverage/browser-build/`, dummy Maps key, and Chrome port 4178. Normal
+  builds retain production configuration and no source maps. Generalized existing
+  test base/build paths for isolated collection. All diagnostic artifacts are ignored.
+- Emit HTML with original Vue source, standard JSON/LCOV/Cobertura, run manifests,
+  Markdown, and uncovered-file candidates. Added explicit safe README snapshot
+  and SVG badge refresh plus native GitHub job-summary append support; publication
+  workflows remain Chapter 7. Updated README/CONTRIBUTING and Chapter 6 report.
+- **Baseline:** Node 30 files: 66.89% lines, 62.75% statements, 63.94% functions,
+  60.11% branches. Browser 35 files: 95.88% / 92.30% / 90.41% / 83.57%. Scopes
+  overlap and are not averaged. Snapshot fingerprint `aca5abc0e6e9`, Node 24.4.1,
+  Chrome 155.0.8059.85. Gaps include build/artwork/legacy-import assertions and
+  selected browser fallback branches; policy establishes a baseline without
+  hiding those gaps behind exclusions.
+- **Verification:** full coverage passed 96 Node and 59 browser/accessibility
+  tests; seven tooling regressions included. Opened HTML/original Vue source,
+  checked portable exports, refreshed README/badges, and smoke-tested GitHub CLI
+  summary output. Ordinary root build/audit + 47 UI, subpath build/audit + 11
+  deployment + 12 accessibility tests passed. Install audit reported zero
+  vulnerabilities; unchanged-data/artwork diff and `git diff --check` passed.
+- **Build/review state:** production `dist/` is `/encyclopedia/`, diagnostic builds
+  and reports are separate. Awaiting user review; no commit/push or Chapter 7 work.
+  Corpus remains 388 observations, 327 taxa, 1,641 photos. CI publication and
+  coverage-driven follow-up tests remain open; Chapter 3 also awaits instruction.
 
 ### 2026-10-24 — Chapter 4 approved for commit
 

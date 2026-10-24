@@ -72,9 +72,15 @@ npm test
 npm run build
 npm run test:ui
 npm run test:subpath
+npm run coverage
 ```
 
 The browser checks use installed Chrome. `test:subpath` creates a fresh build for
 `/encyclopedia/`; use that output for the subdirectory deployment. Review the
 staged diff before committing and describe significant verification in the
 commit body. The README contains the complete setup and deployment instructions.
+
+Coverage uses an isolated source-mapped build on port 4178 and writes reports
+under ignored `coverage/`. Use `npm run coverage:summary -- --update-readme` to
+refresh the tracked snapshot/badges after successful current-input runs. The
+README documents the separate Node/browser scopes and GitHub summary output.

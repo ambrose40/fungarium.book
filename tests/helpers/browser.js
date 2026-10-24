@@ -3,6 +3,14 @@ import { test as base, expect } from '@playwright/test'
 export { expect }
 
 export const test = base.extend({
+  collectCoverage: [false, { option: true }],
+  _coverage: [async ({ page, browser, collectCoverage }, use, testInfo) => {
+    if (!collectCoverage) { await use(); return }
+    const { collectBrowserCoverage } = await import('../../scripts/coverage/browser.mjs')
+    await page.coverage.startJSCoverage({ resetOnNavigation: false })
+    try { await use() }
+    finally { await collectBrowserCoverage(await page.coverage.stopJSCoverage(), browser.version(), testInfo) }
+  }, { auto: true }],
   googleMapsResponse: ['success', { option: true }],
   _googleMaps: [async ({ context, googleMapsResponse }, use) => {
     await context.route(url => url.hostname === 'maps.googleapis.com' && url.pathname === '/maps/api/js', async route => {

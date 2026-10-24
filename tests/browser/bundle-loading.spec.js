@@ -1,8 +1,9 @@
 import { readFile } from 'node:fs/promises'
 import { test, expect } from '../helpers/browser.js'
 
-test('production JavaScript chunks stay within the 500 kB minified budget', async () => {
-  const report = JSON.parse(await readFile(new URL('../../dist/.vite/bundle-report.json', import.meta.url), 'utf8'))
+test('production JavaScript chunks stay within the 500 kB minified budget', async ({}, testInfo) => {
+  const build = testInfo.config.metadata?.buildDirectory || 'dist'
+  const report = JSON.parse(await readFile(new URL(`../../${build}/.vite/bundle-report.json`, import.meta.url), 'utf8'))
   expect(report.warningLimitBytes).toBe(500000)
   expect(report.chunks.length).toBeGreaterThan(0)
   for (const chunk of report.chunks) expect(chunk.bytes, chunk.file).toBeLessThanOrEqual(report.warningLimitBytes)

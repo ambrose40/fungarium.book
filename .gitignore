@@ -8,6 +8,7 @@ public/images/instagram/
 playwright-report/
 test-results/
 accessibility-results/
+/coverage/
 content/instagram-browser/
 content/photo-download-state.json*
 content/photo-download.lock

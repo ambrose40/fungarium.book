@@ -36,6 +36,7 @@ A Vue 3 + Vite photographic encyclopedia built from the original `*.txt` Instagr
 - [Project structure and script reference](#project-structure-and-script-reference)
 - [Production bundles](#production-bundles)
 - [Verification and deployment](#verification-and-deployment)
+- [Code coverage](#code-coverage)
 - [Follow-ups and TODOs](#follow-ups-and-todos)
 - [Project memory and contributing](#project-memory-and-contributing)
 
@@ -97,7 +98,7 @@ This is a browser API key and is included in the compiled client JavaScript. Con
 
 ### Requirements
 
-- **Node.js 22.12 or newer**; Node.js 24 is recommended, with npm installed.
+- **Node.js 22.15 or newer**; Node.js 24 is recommended, with npm installed. The minimum includes the Monocart 3 coverage tooling.
 - **Google Chrome** for the authenticated photo downloader and Playwright browser checks. Building and browsing the website do not require Chrome on the build machine.
 - The original caption files in `instagram-meta/`, plus the `TopNine/` collages and `fungi-support/` assets in the project root.
 - A configured Maps JavaScript API browser key for inline observation maps; coordinate links work without one.
@@ -138,6 +139,10 @@ Open the local URL printed by Vite (normally `http://127.0.0.1:5173`).
 | `npm run preview` | Serve the existing production build locally; run `build` first |
 | `npm run preview:encyclopedia` | Preview the subdirectory build at `/encyclopedia/` |
 | `npm test` | Run Node.js tests for content extraction, search, taxonomy, characteristic filters, coordinates, and downloader behavior |
+| `npm run coverage` | Refresh content, collect Node and browser/accessibility coverage, and generate both report scopes and a combined summary table |
+| `npm run coverage:node` | Collect the Node test suite's coverage of shared `.mjs` utilities and product scripts |
+| `npm run coverage:ui` | Build isolated source-mapped assets and collect Chrome coverage from the main UI and accessibility suites |
+| `npm run coverage:summary -- <options>` | Validate current successful reports and write Markdown; `--update-readme` refreshes the README snapshot/badges, `--github` appends a GitHub job summary |
 | `npm run test:ui` | Run Playwright browser checks against the existing production build using Chrome |
 | `npm run test:a11y` | Build for `/encyclopedia/` and run axe, keyboard, contrast, target-size, language, and reflow checks in Chrome |
 | `npm run test:subpath` | Build for `/encyclopedia/` and verify routing, assets, manifest, filters, and photo viewing in Chrome |
@@ -528,6 +533,7 @@ dist/                         Generated static website
 | `scripts/bundle-report.mjs` | Build plugin writing final chunk/module size diagnostics; CLI for the latest build's bundle report and budget check |
 | `scripts/mycology-artwork.mjs` | Original schematic geometry and reproducible Sharp/WebP illustration generation |
 | `scripts/audit-characteristics.mjs` | Latest-profile visual coverage, artwork inventory, source-candidate review, and optional Git HEAD preservation check |
+| `scripts/coverage/` | Native V8 collection, Vue source mapping, report validation/export, coverage snapshots, and GitHub summary output |
 | `scripts/seo-pages.mjs` | Vite plugin generating metadata, readable static HTML, clean profile pages, sitemap, and robots template |
 | `scripts/prepare-branding.mjs` | Branding asset-copy helper called by the content builder |
 | `scripts/maps-config.mjs` | Read the Maps browser key from the environment or ignored local key file for Vite |
@@ -576,6 +582,52 @@ Each build writes **`dist/.vite/bundle-report.json`**, containing final JavaScri
 Chapter 5 reduced the largest `/encyclopedia/` chunk from **1,298.59 kB to 476.83 kB**. A local cold-browser comparison measured compressed JavaScript bodies at **283.58 → 247.49 kB** for the gallery/filtered collection and **305.23 → 166.67 kB** for Boletus edulis. Chunk counts increase to enable caching and route-specific loading. See [the Chapter 5 review](docs/reviews/chapter-5-bundles.md) for conditions, before/after measurements, and verification.
 
 ## Verification and deployment
+
+### Code coverage
+
+![Node line coverage](docs/coverage/node-lines.svg) ![Browser line coverage](docs/coverage/browser-lines.svg)
+
+<!-- coverage-summary:start -->
+| Scope | Lines | Statements | Functions | Branches | Files |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Node utilities / scripts | 66.89% | 62.75% | 63.94% | 60.11% | 30 |
+| Browser application / Vue | 95.88% | 92.30% | 90.41% | 83.57% | 35 |
+
+Measured 2026-10-24 with Node v24.4.1; Chrome 155.0.8059.85. Source fingerprint: `aca5abc0e6e9`.
+
+The scopes are separate measurements with overlapping shared utilities; percentages are not combined. Untested in-scope files count as zero. Regenerate this snapshot after code or test changes.
+<!-- coverage-summary:end -->
+
+Coverage uses **Monocart Coverage Reports 3** with native V8 collection and standard Istanbul reports. Run:
+
+```sh
+npm run coverage
+npm run coverage:summary -- --update-readme
+```
+
+The second command explicitly updates the snapshot above and the two tracked badges. Both scopes must have passed against the current source/test/configuration fingerprint. Failed, empty, incomplete, or stale results cannot refresh the snapshot. README content outside the marked snapshot is preserved.
+
+| Scope | Inputs and denominator |
+| --- | --- |
+| Node utilities / scripts | The Node test suite; all `src/lib/**/*.mjs` and `scripts/**/*.mjs`, excluding the coverage collection infrastructure. Untested files contribute zero. |
+| Browser application / Vue | The main UI and accessibility suites in installed Chrome; all handwritten `src/**/*.js`, `.mjs`, and `.vue` application files. Generated JSON, dependencies, CSS, and test code are excluded. Unloaded files contribute zero. |
+
+The browser scope includes source-mapped Vue script and generated render-code execution. Numbers describe **mapped executable lines**, functions, statements, and branches, not every physical line of a Vue file or its visual appearance. Shared utilities overlap the two scopes; there is no single averaged percentage. The standalone Instagram browser-console exporter (`scripts/instagram-browser-export.js`) is outside these scopes.
+
+Each scope writes these Git-ignored artifacts:
+
+| Artifact | Location |
+| --- | --- |
+| Browsable HTML and original-source annotations | `coverage/node/index.html`, `coverage/browser/index.html` |
+| LCOV with portable repository-relative source paths | `coverage/<scope>/lcov.info` |
+| Cobertura XML | `coverage/<scope>/cobertura-coverage.xml` |
+| Per-file counters and summary | `coverage/<scope>/coverage-final.json`, `coverage-summary.json` |
+| Run status, versions, revision, and input fingerprint | `coverage/<scope>/run.json` |
+| Overall Markdown and uncovered-file candidates | `coverage/summary.md`, `coverage/gaps.md` |
+
+Browser collection uses `playwright.coverage.config.js`, port **4178**, and a separate minified build in **`coverage/browser-build/`** with hidden source maps and a dummy Maps key. Maps requests use the existing test double. Normal deployment commands build `dist/` with source maps disabled and the normal Maps configuration. Coverage artifacts belong to the diagnostic build, while `/encyclopedia/` deployment continues to use `npm run build:encyclopedia`.
+
+For GitHub integration, LCOV/Cobertura are ready for coverage consumers, and `npm run coverage` automatically appends its table when `GITHUB_STEP_SUMMARY` is available. `npm run coverage:summary -- --github` can append it explicitly. GitHub workflow scheduling and hosted report publication are Chapter 7 work. [The Chapter 6 review](docs/reviews/chapter-6-coverage.md) records methodology, baseline gaps, validation, and follow-ups.
 
 ### Automated checks
 
@@ -675,7 +727,7 @@ The site is static after generation: deploying new captions, images, or generate
 
 ## Follow-ups and TODOs
 
-Chapters 1, 2, 4, and 5 implementations are approved by the user; human assistive-technology follow-ups for Chapter 2 remain open. Chapters 3, 6, and 7 remain pending and await further instruction. Complete one chapter at a time, report the result, and wait for the user's green flag before committing or continuing. Record findings, fixes, and verification results in `PROJECT_MEMORY.md`.
+Chapters 1, 2, 4, 5, and 6 implementations are approved by the user; human assistive-technology follow-ups for Chapter 2 remain open. Chapters 3 and 7 remain pending and await further instruction. Complete one chapter at a time, report the result, and wait for the user's green flag before committing or continuing. Record findings, fixes, and verification results in `PROJECT_MEMORY.md`.
 
 1. **Page metadata and other missing supporting data**
    - [x] Audit gallery/species page metadata and miscellaneous missing data; provide factual metadata fallbacks and document source omissions in [the Chapter 1 report](docs/reviews/chapter-1-metadata.md).
@@ -706,8 +758,10 @@ Chapters 1, 2, 4, and 5 implementations are approved by the user; human assistiv
    - [x] Retain the 500 kB `build.chunkSizeWarningLimit`, add build reports/budget checks, measure before/after page loading, and verify root and `/encyclopedia/` builds.
    - [x] User approved Chapter 5 and requested its Conventional Commit; starting another chapter awaits further instruction.
 6. **Code coverage tooling and reporting**
-   - [ ] Add a code coverage tool and reproducible report generation; decide coverage scope for Node.js utilities and Vue/browser code.
-   - [ ] Consider a coverage summary or badge in the README and GitHub integration for reports, checks, or pull-request feedback.
+   - [x] Add native V8 collection with Monocart, separate complete Node/browser scopes, source-mapped Vue reports, and reproducible HTML/JSON/LCOV/Cobertura outputs.
+   - [x] Add refreshable README snapshots/local badges and GitHub job-summary output, with portable coverage-consumer exports.
+   - [x] Verify unloaded-file zero coverage, failed/empty/stale result handling, isolated coverage builds, source annotations, and baseline gaps in [the Chapter 6 report](docs/reviews/chapter-6-coverage.md).
+   - [x] User approved Chapter 6 and requested its Conventional Commit; starting another chapter awaits further instruction.
 7. **GitHub continuous integration**
    - [ ] Choose and configure a free-to-use GitHub-compatible CI service, with **GitHub Actions** as the first option to evaluate for the repository's visibility, plan, and runner choice.
    - [ ] Automate appropriate tests, production builds, and coverage reports on pushes and pull requests, with visible GitHub check results.
